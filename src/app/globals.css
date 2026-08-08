@@ -2,190 +2,167 @@
 @import "./animations.css";
 
 /*
- * 팔레트는 기존 테마(theme/main-page-v2.html)에서 뽑았다.
- * 따뜻한 크림 지면 + 코랄 강조 + 세이지 라벨. 손으로 그린 듯한 비대칭 라운드가
- * 이 디자인의 서명이라 --radius-hand 로 토큰화했다.
+ * 팔레트·치수는 라이브 테마 theme/custom-theme.xml 의 <b:skin> 에서 그대로 가져왔다.
+ * 민트 지면 위에 크림 시트가 얹히고, 강조는 코랄, 라벨은 세이지다.
  */
 :root {
-  --background: #fbfbf7;
-  --surface: #ffffff;
-  --foreground: #2f3a39;
-  --heading: #243130;
-
-  --accent: #c8443c;
-  --accent-tint: rgb(200 68 60 / 0.06);
-  --label: #93a97f;
   --mint: #83cfc9;
+  --mint-light: #c8e9e4;
+  --mint-pale: #eaf6f3;
+  --cream: #fbfbf7;
+  --ink: #2f3a39;
+  --ink-strong: #243130;
+  --accent: #c8443c;
+  --sage: #93a97f;
+  --muted: #9aa79e;
 
-  --border: rgb(47 58 57 / 0.28);
-  --border-soft: rgb(47 58 57 / 0.14);
-  --muted: #6b7472;
+  --line: rgb(47 58 57 / 0.28);
+  --line-soft: rgb(47 58 57 / 0.12);
 
   --code-bg: #282c34;
-}
 
-/*
- * 원본 테마에는 다크 모드가 없다. 크림 지면을 그냥 반전하면 탁해지므로,
- * 같은 색상 계열을 유지한 채 명도만 뒤집었다. 강조색은 어두운 배경에서
- * 대비가 모자라 한 단계 밝힌다.
- */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #1a201f;
-    --surface: #232b2a;
-    --foreground: #ddE3e1;
-    --heading: #f0f4f2;
-
-    --accent: #f08078;
-    --accent-tint: rgb(240 128 120 / 0.1);
-    --label: #a8bd95;
-    --mint: #5ba9a3;
-
-    --border: rgb(221 227 225 / 0.22);
-    --border-soft: rgb(221 227 225 / 0.1);
-    --muted: #9aa5a2;
-  }
+  /* 손으로 그린 듯 모서리를 조금씩 어긋나게. 테마 전반의 서명이다. */
+  --radius-hand: 18px 20px 17px 19px;
+  --radius-hand-sm: 10px 12px 9px 11px;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-surface: var(--surface);
-  --color-foreground: var(--foreground);
-  --color-heading: var(--heading);
-  --color-accent: var(--accent);
-  --color-accent-tint: var(--accent-tint);
-  --color-label: var(--label);
   --color-mint: var(--mint);
-  --color-border: var(--border);
-  --color-border-soft: var(--border-soft);
+  --color-mint-light: var(--mint-light);
+  --color-mint-pale: var(--mint-pale);
+  --color-cream: var(--cream);
+  --color-ink: var(--ink);
+  --color-ink-strong: var(--ink-strong);
+  --color-accent: var(--accent);
+  --color-sage: var(--sage);
   --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-line-soft: var(--line-soft);
 
   --font-sans: var(--font-sans), "Apple SD Gothic Neo", sans-serif;
-  --font-display: var(--font-display), var(--font-sans), sans-serif;
-  --font-label: var(--font-label), monospace;
   --font-mono: var(--font-geist-mono), monospace;
+}
 
-  /* 손으로 그린 듯 각 모서리를 살짝 다르게. 원본 테마 전반에서 쓰던 값이다. */
-  --radius-hand: 16px 17px 15px 17px;
-  --radius-hand-sm: 11px 12px 10px 12px;
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--mint);
   font-family: var(--font-sans);
-  line-height: 1.75;
+  color: var(--ink);
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--mint-light);
+  color: var(--ink);
+}
+
+/* 종이 질감. 화면 전체에 곱하기로 얹어 인쇄물 같은 결을 준다. */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+  opacity: 0.07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 /* ==========================================================================
    글 본문 (.post-body)
-   --------------------------------------------------------------------------
-   예전에는 발행 파이프라인이 태그마다 인라인 style을 주입했다. Blogger에서
-   외부 CSS 제어를 믿을 수 없었기 때문이다. 이제 규칙이 한 곳에 있으므로
-   글이 늘어도 모양이 갈라지지 않는다.
+   Blogger 시절엔 파이프라인이 태그마다 인라인 style 을 주입했다. 외부 CSS 제어를
+   믿을 수 없었기 때문이다. 이제 규칙이 한 곳에 있어 글이 늘어도 모양이 갈라지지 않는다.
    ========================================================================== */
 
 .post-body {
+  font-size: 17px;
+  line-height: 1.85;
+  color: var(--ink);
   overflow-wrap: break-word;
 }
 
-/* --- 헤딩 ---------------------------------------------------------------- */
 .post-body h2 {
-  font-family: var(--font-display);
-  font-size: 1.5rem;
+  font-size: 26px;
   line-height: 1.4;
-  letter-spacing: -0.02em;
-  color: var(--heading);
+  letter-spacing: -0.5px;
+  color: var(--ink-strong);
   margin: 3rem 0 1rem;
   padding-bottom: 0.5rem;
-  border-bottom: 1.5px solid var(--border-soft);
-  scroll-margin-top: 2rem; /* 목차 앵커로 점프했을 때 제목이 상단에 붙지 않게 */
+  border-bottom: 1.5px solid var(--line-soft);
+  scroll-margin-top: 5rem; /* 스티키 헤더에 제목이 가리지 않게 */
 }
 
 .post-body h3 {
-  font-family: var(--font-display);
-  font-size: 1.15rem;
-  color: var(--heading);
+  font-size: 20px;
+  color: var(--ink-strong);
   margin: 2rem 0 0.75rem;
-  scroll-margin-top: 2rem;
+  scroll-margin-top: 5rem;
 }
 
 .post-body h4 {
   font-weight: 700;
-  color: var(--heading);
+  color: var(--ink-strong);
   margin: 1.5rem 0 0.5rem;
 }
 
-/* --- 본문 ---------------------------------------------------------------- */
 .post-body p {
   margin: 1rem 0;
 }
 
 .post-body strong {
   font-weight: 700;
-  color: var(--heading);
+  color: var(--ink-strong);
 }
 
 .post-body a {
   color: var(--accent);
   text-decoration: underline;
   text-underline-offset: 3px;
-  text-decoration-thickness: 1px;
 }
 
 .post-body a:hover {
-  background: var(--accent-tint);
+  background: rgb(200 68 60 / 0.07);
 }
 
 .post-body hr {
   border: 0;
-  border-top: 1.5px solid var(--border-soft);
+  border-top: 1.5px solid var(--line-soft);
   margin: 2.5rem 0;
 }
 
-/* --- 리스트 -------------------------------------------------------------- */
-/* 항목 사이를 띄우는 건 원래 작성 규칙이었다(CLAUDE.md 리스트 항목). */
 .post-body ul,
 .post-body ol {
   margin: 1rem 0;
   padding-left: 1.5rem;
 }
-
 .post-body ul {
   list-style: disc;
 }
-
 .post-body ol {
   list-style: decimal;
 }
-
 .post-body li {
   margin: 0.5rem 0;
-  padding-left: 0.25rem;
 }
-
 .post-body li::marker {
   color: var(--accent);
 }
 
-.post-body li > ul,
-.post-body li > ol {
-  margin: 0.5rem 0;
-}
-
-/* --- 인용구 (콜아웃) ----------------------------------------------------- */
 .post-body blockquote {
   margin: 1.5rem 0;
   padding: 0.875rem 1.25rem;
   border-left: 3px solid var(--accent);
   border-radius: 0 12px 11px 0;
-  background: var(--accent-tint);
+  background: rgb(200 68 60 / 0.06);
 }
-
-.post-body blockquote p {
-  margin: 0.5rem 0;
-}
-
 .post-body blockquote p:first-child {
   margin-top: 0;
 }
@@ -193,32 +170,28 @@ body {
   margin-bottom: 0;
 }
 
-/* --- 코드 ---------------------------------------------------------------- */
-/* 인라인 코드는 pill 모양. 원래 파이프라인이 주던 인상을 유지한다. */
+/* 인라인 코드는 pill. 원래 파이프라인이 주던 인상 그대로다. */
 .post-body :not(pre) > code {
   font-family: var(--font-mono);
   font-size: 0.875em;
   padding: 0.15em 0.4em;
   border-radius: 6px;
-  background: var(--accent-tint);
+  background: rgb(200 68 60 / 0.07);
   color: var(--accent);
   word-break: break-all;
 }
 
-/*
- * 코드 블록. Shiki가 만든 <pre class="shiki">와, 본문에 직접 쓴 <pre>(접이식
- * 실행 결과)가 같은 톤을 갖도록 둘 다 여기서 잡는다.
- */
+/* Shiki 가 만든 <pre class="shiki"> 와 본문에 직접 쓴 <pre>(접이식 실행 결과)를
+   같은 톤으로 맞춘다. */
 .post-body pre {
   margin: 1.25rem 0;
   padding: 1rem 1.125rem;
-  border-radius: 10px 11px 9px 11px;
+  border-radius: var(--radius-hand-sm);
   overflow-x: auto;
   background: var(--code-bg) !important;
   color: #abb2bf;
-  font-size: 0.845rem;
+  font-size: 13.5px;
   line-height: 1.65;
-  border: 1px solid #21252b;
 }
 
 .post-body pre code {
@@ -228,8 +201,7 @@ body {
   color: inherit;
 }
 
-/* --- 표 ------------------------------------------------------------------ */
-/* 좁은 화면에서 표가 페이지를 밀지 않도록 표만 따로 스크롤된다. */
+/* 표는 컬럼이 많고 셀에 한글이 들어가 좁은 화면에서 본문을 민다. 표만 따로 스크롤. */
 .post-body .table-scroll {
   overflow-x: auto;
   margin: 1.25rem 0;
@@ -238,29 +210,28 @@ body {
 .post-body table {
   border-collapse: collapse;
   width: 100%;
-  font-size: 0.9rem;
+  font-size: 14.5px;
 }
 
 .post-body th,
 .post-body td {
-  border: 1px solid var(--border-soft);
+  border: 1px solid var(--line-soft);
   padding: 0.5rem 0.75rem;
   text-align: center;
 }
 
 .post-body th {
-  background: var(--accent-tint);
-  color: var(--heading);
+  background: var(--mint-light);
+  color: var(--ink-strong);
   font-weight: 700;
 }
 
-/* --- 접이식 실행 결과 ---------------------------------------------------- */
 .post-body details {
   margin: 1.25rem 0;
   padding: 0.5rem 0.875rem;
-  border: 1.5px solid var(--border-soft);
+  border: 1.5px solid var(--line-soft);
   border-radius: var(--radius-hand-sm);
-  background: var(--surface);
+  background: #fff;
 }
 
 .post-body summary {
@@ -278,9 +249,159 @@ body {
   margin-bottom: 0.5rem;
 }
 
-/* --- 이미지 -------------------------------------------------------------- */
 .post-body img {
   max-width: 100%;
   height: auto;
-  border-radius: var(--radius-hand-sm);
+  border-radius: 12px;
+}
+
+/* ==========================================================================
+   카드 그리드 · 검색 — theme/custom-theme.xml 의 치수를 그대로 옮겼다.
+   ========================================================================== */
+
+.post-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 26px;
+}
+
+@media (max-width: 900px) {
+  .post-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.post-card {
+  position: relative;
+  background: var(--cream);
+  border-radius: var(--radius-hand);
+  box-shadow: 0 16px 34px -22px rgb(47 58 57 / 0.4);
+}
+
+/* 테두리를 별도 레이어로 겹쳐서 흔든다. 필터를 카드 자체에 걸면 안의 글자까지 일그러진다. */
+.card-wobble {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  border: 1.5px solid rgb(47 58 57 / 0.42);
+  border-radius: var(--radius-hand);
+  filter: url(#rough2);
+}
+
+.card-thumb {
+  position: relative;
+  height: 168px;
+  overflow: hidden;
+  border-radius: 18px 20px 0 0;
+  background: radial-gradient(120% 140% at 40% 25%, var(--mint-light) 0%, var(--mint) 78%);
+}
+
+.thumb-note {
+  position: absolute;
+  bottom: 12px;
+  left: 14px;
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: var(--ink);
+  opacity: 0.45;
+}
+
+.card-body {
+  padding: 20px 22px 24px;
+}
+
+.card-badge {
+  display: inline-block;
+  margin: 0 6px 12px 0;
+  padding: 4px 12px;
+  border: 1.3px solid rgb(47 58 57 / 0.25);
+  border-radius: 20px;
+  background: var(--mint-light);
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.card-title {
+  margin: 0 0 10px;
+  font-size: 21px;
+  line-height: 1.35;
+  color: var(--ink-strong);
+}
+
+.card-title a {
+  color: var(--ink-strong);
+  text-decoration: none;
+}
+
+.card-snippet {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.75;
+  color: var(--ink);
+  opacity: 0.78;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.hdr-search {
+  padding: 9px 15px;
+  border: 1.5px solid rgb(47 58 57 / 0.3);
+  border-radius: 10px 12px 9px 11px;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.hdr-search:focus {
+  border-color: var(--accent);
+}
+
+.hdr-search::placeholder {
+  color: var(--ink);
+  opacity: 0.5;
+}
+
+/* ==========================================================================
+   단일 글 페이지
+   ========================================================================== */
+
+.single {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.single-badge {
+  display: inline-block;
+  margin: 0 6px 14px 0;
+  padding: 4px 14px;
+  border-radius: 20px;
+  background: var(--mint-light);
+  border: 1.3px solid rgb(47 58 57 / 0.25);
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.single-title {
+  margin: 0 0 10px;
+  font-size: clamp(28px, 4.5vw, 44px);
+  line-height: 1.25;
+  color: var(--ink-strong);
+}
+
+.single-meta {
+  margin: 0 0 26px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+  opacity: 0.6;
 }

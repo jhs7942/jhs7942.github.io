@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getLabels, labelFromSlug, getPostsByLabel } from "@/lib/content/labels";
-import { PostList } from "@/app/_components/PostList";
+import { getLabels, labelFromSlug, getPostsByLabel, labelSlug } from "@/lib/content/labels";
+import { PostGrid, type CardPost } from "@/app/_components/PostGrid";
 import { absoluteUrl } from "@/lib/site";
 
 export function generateStaticParams() {
@@ -11,7 +11,6 @@ export function generateStaticParams() {
 /**
  * Next는 비ASCII 동적 파라미터를 퍼센트 인코딩해서 넘긴다.
  * "서버-상태-관리" 는 "%EC%84%9C%EB%B2%84-..." 로 도착하므로 디코딩해야 조회된다.
- * ASCII 슬러그에는 아무 영향이 없다.
  *
  * 모든 slug는 generateStaticParams가 준 값이다. 조회에 실패하면 없는 페이지가
  * 아니라 우리 코드의 버그이므로 notFound()가 아니라 예외로 빌드를 세운다 —
@@ -36,21 +35,23 @@ export async function generateMetadata({ params }: PageProps<"/labels/[slug]">):
 export default async function LabelPage({ params }: PageProps<"/labels/[slug]">) {
   const { slug } = await params;
   const label = resolveLabel(slug);
-  const posts = getPostsByLabel(label);
+
+  const posts: CardPost[] = getPostsByLabel(label).map((p) => ({
+    slug: p.slug,
+    title: p.title,
+    description: p.description,
+    labels: [...p.labels],
+    labelHrefs: p.labels.map((l) => `/labels/${labelSlug(l)}/`),
+  }));
 
   return (
-    <main className="mx-auto w-full max-w-3xl px-6 py-14">
-      <header className="mb-8">
-        <Link href="/labels/" className="font-label text-[11px] tracking-widest text-label hover:text-accent">
-          ← ALL LABELS
+    <section className="relative border-t-[1.5px] border-line-soft bg-cream px-7 pt-14 pb-21">
+      <div className="mx-auto mb-6 max-w-[1120px]">
+        <Link href="/labels/" className="text-[13.5px] text-ink opacity-70 no-underline hover:text-accent">
+          ← 전체 라벨
         </Link>
-        <h1 className="mt-3 font-display text-2xl tracking-tight text-heading">{label}</h1>
-        <p className="mt-1 font-label text-xs tracking-widest text-label tabular-nums">
-          {posts.length} POSTS
-        </p>
-      </header>
-
-      <PostList posts={posts} />
-    </main>
+      </div>
+      <PostGrid posts={posts} heading={label} />
+    </section>
   );
 }

@@ -74,22 +74,6 @@
   }
 }
 
-/* ── 카드 호버 ─────────────────────────────────────────────────────────────
-   살짝 떠오르는 정도. 손그림 톤이라 과한 이징은 어울리지 않는다. */
-@media (prefers-reduced-motion: no-preference) {
-  .card-lift {
-    transition:
-      transform 180ms ease-out,
-      border-color 180ms ease-out,
-      box-shadow 180ms ease-out;
-  }
-
-  .card-lift:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 24px -14px rgb(47 58 57 / 0.45);
-  }
-}
-
 /* ── 목차 현재 위치 ────────────────────────────────────────────────────────
    스크롤 스파이가 붙이는 상태. 색만 바꾸면 어느 항목이 바뀌었는지 놓치기 쉬워
    왼쪽 번호가 함께 커진다. */
@@ -144,3 +128,38 @@
     scroll-behavior: smooth;
   }
 }
+
+/* ── 테마 고유 모션 (theme/custom-theme.xml) ──────────────────────────────
+   구름이 아주 느리게 흐르고, GARDEN 카드가 숨쉬듯 오르내린다.
+   전부 transform 만 건드려 레이아웃을 다시 계산하지 않는다. */
+@keyframes floaty {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes driftA {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(24px, -14px); }
+}
+@keyframes driftB {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-30px, 10px); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .floaty { animation: floaty 7s ease-in-out infinite; }
+  .drift-a { animation: driftA 16s ease-in-out infinite; }
+  .drift-b { animation: driftB 20s ease-in-out infinite; }
+
+  .post-card {
+    transition: transform 0.32s ease-out, box-shadow 0.32s ease-out;
+  }
+  .post-card:hover {
+    transform: translateY(-9px);
+    box-shadow: 0 34px 60px -26px rgb(47 58 57 / 0.42);
+  }
+}
+
+.nav-link { transition: color 0.2s ease; }
+.nav-link:hover { color: var(--accent); }
+.footer-link { transition: opacity 0.2s ease; }
+.footer-link:hover { opacity: 1; }

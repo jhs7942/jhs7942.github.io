@@ -15,7 +15,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps<"/posts/[slug]">): Promise<Metadata> {
   const { slug } = await params;
-  const post = getPost(slug);
+  const post = getPost(decodeURIComponent(slug));
   if (!post) return {};
 
   const url = absoluteUrl(`/posts/${post.slug}/`);
@@ -53,44 +53,38 @@ export default async function PostPage({ params }: PageProps<"/posts/[slug]">) {
   const { html, toc } = await renderMarkdown(post.body);
 
   return (
-    <article className="mx-auto w-full max-w-3xl px-6 py-14">
+    <section className="relative border-t-[1.5px] border-line-soft bg-cream px-7 pt-14 pb-21">
       {/* 스크롤 위치를 JS로 계산하지 않는다 — animation-timeline: scroll() 이 대신한다. */}
       <div className="reading-progress" aria-hidden />
-      <header className="mb-8">
-        <p className="font-label text-[11px] tracking-widest text-label">
-          <time dateTime={post.published_at}>{DATE.format(new Date(post.published_at))}</time>
-        </p>
-        <h1 className="mt-2 font-display text-3xl leading-snug tracking-tight text-balance text-heading">
-          {post.title}
-        </h1>
-        <ul className="mt-4 flex flex-wrap gap-2">
+
+      <article className="single">
+        <header>
           {post.labels.map((label) => (
-            <li key={label}>
-              <Link
-                href={`/labels/${labelSlug(label)}/`}
-                className="rounded-full border-[1.5px] border-border-soft px-3 py-1 text-xs text-muted hover:border-accent hover:text-accent"
-              >
-                {label}
-              </Link>
-            </li>
+            <Link key={label} href={`/labels/${labelSlug(label)}/`} className="single-badge">
+              {label}
+            </Link>
           ))}
-        </ul>
-      </header>
+          <h1 className="single-title">{post.title}</h1>
+          <p className="single-meta">
+            <time dateTime={post.published_at}>{DATE.format(new Date(post.published_at))}</time>
+          </p>
+        </header>
 
-      <p className="border-l-[3px] border-accent bg-accent-tint px-4 py-3 text-sm leading-relaxed">
-        {post.description}
-      </p>
+        <p className="border-l-[3px] border-accent bg-[rgb(200_68_60/0.06)] px-4 py-3 text-[15px] leading-relaxed">
+          {post.description}
+        </p>
 
-      <SeriesNav post={post} />
-      <Toc entries={toc} />
+        <SeriesNav post={post} />
+        <Toc entries={toc} />
 
-      {/*
-        렌더한 HTML을 그대로 넣는다. 원본이 우리 저장소의 마크다운이라
-        신뢰할 수 있는 입력이고, rehype-raw가 통과시키는 태그도 우리가 쓴 것뿐이다.
-      */}
-      <div className="post-body" dangerouslySetInnerHTML={{ __html: html }} />
+        {/*
+          렌더한 HTML을 그대로 넣는다. 원본이 우리 저장소의 마크다운이라
+          신뢰할 수 있는 입력이고, rehype-raw가 통과시키는 태그도 우리가 쓴 것뿐이다.
+        */}
+        <div className="post-body" dangerouslySetInnerHTML={{ __html: html }} />
 
-      <SeriesNav post={post} />
-    </article>
+        <SeriesNav post={post} />
+      </article>
+    </section>
   );
 }

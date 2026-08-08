@@ -13,26 +13,21 @@ export default function LabelsPage() {
   const labels = getLabels();
 
   return (
-    <main className="mx-auto w-full max-w-3xl px-6 py-14">
-      <h1 className="font-display text-2xl tracking-tight text-heading">라벨</h1>
-      <p className="mt-1 font-label text-xs tracking-widest text-label">
-        {labels.length} LABELS
-      </p>
+    <section className="relative border-t-[1.5px] border-line-soft bg-cream px-7 pt-14 pb-21">
+      <div className="mx-auto max-w-[1120px]">
+        <h1 className="m-0 text-[34px] tracking-[-0.5px] text-ink-strong">라벨</h1>
+        <p className="mt-1 text-[13.5px] text-ink opacity-70">{labels.length}개</p>
 
-      <ul className="mt-8 flex flex-wrap gap-2">
-        {labels.map(({ label, slug, count }) => (
-          <li key={slug}>
-            <Link
-              href={`/labels/${slug}/`}
-              className="inline-block border-[1.5px] border-border-soft bg-surface px-3 py-1.5 text-sm hover:border-accent hover:text-accent"
-              style={{ borderRadius: "var(--radius-hand-sm)" }}
-            >
-              {label}{" "}
-              <span className="font-label text-xs text-label tabular-nums">{count}</span>
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </main>
+        <ul className="mt-8 flex flex-wrap gap-2">
+          {labels.map(({ label, slug, count }) => (
+            <li key={slug}>
+              <Link href={`/labels/${slug}/`} className="card-badge">
+                {label} <span className="tabular-nums opacity-60">{count}</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
   );
 }
