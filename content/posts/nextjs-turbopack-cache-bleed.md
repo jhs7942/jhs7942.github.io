@@ -11,7 +11,6 @@ labels:
   - Next.js
 source: >-
   /Users/jeonghyeonseung/개발/how_many/.claude/study/2026-04-17/nextjs-turbopack-cache-bleed.md
-legacy_url: 'https://saver7942.blogspot.com/'
 draft: false
 ---
 

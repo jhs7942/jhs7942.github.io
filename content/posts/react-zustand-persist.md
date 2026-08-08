@@ -90,7 +90,7 @@ export const useCartStore = create<CartStore>()(
 
 - 직렬화·역직렬화·저장·복원이 자동입니다. 컴포넌트는 평소처럼 스토어를 쓰기만 하면 됩니다.
 
-- `create<CartStore>()(persist(...))` — [슬라이스 편](https://saver7942.blogspot.com/2026/07/zustand-statecreator.html)에서 본 `create<T>()`의 빈 괄호 형태가 여기서도 쓰입니다. `persist`는 `StateCreator`의 미들웨어 자리에 들어가는 미들웨어입니다.
+- `create<CartStore>()(persist(...))` — [슬라이스 편](/posts/react-zustand-slice-pattern/)에서 본 `create<T>()`의 빈 괄호 형태가 여기서도 쓰입니다. `persist`는 `StateCreator`의 미들웨어 자리에 들어가는 미들웨어입니다.
 
 ---
 
@@ -123,7 +123,7 @@ persist(
 
 ## ⚠️ 4. 주의사항
 
-- **persist는 형태를 검증하지 않습니다.** 저장·복원을 자동화할 뿐, 복원된 데이터가 현재 타입과 맞는지는 보장하지 않습니다. 예전 버전의 데이터가 남아 있으면 잘못된 모양으로 복원될 수 있습니다. 스키마가 바뀌면 `version`과 `migrate` 옵션으로 이전 데이터를 변환하고, 신뢰할 수 없는 값은 [타입 가드](https://saver7942.blogspot.com/2026/07/typescript-is-api.html)로 검증합니다.
+- **persist는 형태를 검증하지 않습니다.** 저장·복원을 자동화할 뿐, 복원된 데이터가 현재 타입과 맞는지는 보장하지 않습니다. 예전 버전의 데이터가 남아 있으면 잘못된 모양으로 복원될 수 있습니다. 스키마가 바뀌면 `version`과 `migrate` 옵션으로 이전 데이터를 변환하고, 신뢰할 수 없는 값은 [타입 가드](/posts/react-ts-type-guard/)로 검증합니다.
 
 - **함수는 저장되지 않습니다.** 액션 함수는 직렬화되지 않으며, 복원 시 스토어 생성 함수가 다시 만들어 줍니다. `partialize`로 상태만 저장하는 편이 명확합니다.
 
@@ -156,4 +156,4 @@ persist(
 
 - [Zustand 공식 문서 — persist 미들웨어](https://zustand.docs.pmnd.rs/integrations/persisting-store-data)
 
-- 관련 글: [TypeScript 타입 가드 (외부 데이터 검증)](https://saver7942.blogspot.com/2026/07/typescript-is-api.html)
+- 관련 글: [TypeScript 타입 가드 (외부 데이터 검증)](/posts/react-ts-type-guard/)

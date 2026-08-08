@@ -11,7 +11,6 @@ labels:
   - AI 코드리뷰
 source: >-
   /Users/jeonghyeonseung/개발/how_many/.claude/study/ai-review/2026-04-17/env-var-fallback-silent.md
-legacy_url: 'https://saver7942.blogspot.com/'
 draft: false
 ---
 

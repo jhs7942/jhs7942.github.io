@@ -19,7 +19,7 @@ series: react-compiler
 part: 4
 ---
 
-[이전 편](https://saver7942.blogspot.com/2026/07/react-compiler-local-mutation.html)까지 컴파일러가 무엇을 자동화하는지 봤습니다. 그러면 당연한 질문이 나옵니다. **"useMemo·useCallback은 이제 레거시인가요? 싹 지울까요?"**
+[이전 편](/posts/react-compiler-local-mutation/)까지 컴파일러가 무엇을 자동화하는지 봤습니다. 그러면 당연한 질문이 나옵니다. **"useMemo·useCallback은 이제 레거시인가요? 싹 지울까요?"**
 
 절반은 맞습니다. 습관적으로 뿌리던 `useMemo`·`useCallback`의 대부분은 이제 지워도 됩니다. 하지만 완전히 사라지진 않습니다. 이 훅들은 '잡부'에서 **'특수부대'로 승진**했습니다. 아무 데나 쓰이는 대신, 정말 필요한 곳에만 등장하는 정예 요원이 됐습니다. 컴파일러는 렌더링 **성능**을 책임지지만, 로직의 **정확성**과 참조 제어는 여전히 개발자의 몫이기 때문입니다.
 
@@ -69,7 +69,7 @@ part: 4
 
 컴파일러가 **닿지 않는** 곳에서는 여전히 수동으로 씁니다. 세 경계입니다.
 
-**① Bail-out된 컴포넌트(Escape Hatch)** — [2편](https://saver7942.blogspot.com/2026/07/react-compiler-4-rules-of-react.html)에서 봤듯, 규칙 위반이나 `"use no memo"`로 컴파일러가 최적화를 포기한 구간이 있습니다. 건드리기 무서운 레거시나 복잡한 변환 로직입니다. 여기선 무거운 연산을 사람이 방어합니다.
+**① Bail-out된 컴포넌트(Escape Hatch)** — [2편](/posts/react-compiler-pipeline-rules/)에서 봤듯, 규칙 위반이나 `"use no memo"`로 컴파일러가 최적화를 포기한 구간이 있습니다. 건드리기 무서운 레거시나 복잡한 변환 로직입니다. 여기선 무거운 연산을 사람이 방어합니다.
 
 ```jsx
 // 컴파일러가 손 뗀 컴포넌트 — 무거운 연산은 수동 useMemo로 방어
@@ -134,9 +134,9 @@ function MapComponent({ lat, lng }) {
 
 ## 🔗 참고 자료
 
-- 다음 편: [React Compiler 마이그레이션 — 레거시 라이브러리와 공존하는 3가지 전략](https://saver7942.blogspot.com/2026/07/react-compiler-3.html)
+- 다음 편: [React Compiler 마이그레이션 — 레거시 라이브러리와 공존하는 3가지 전략](/posts/react-compiler-legacy-migration/)
 
-- 이전 편: [React Compiler 규칙 실전 — 멱등성과 Local Mutation 안전지대](https://saver7942.blogspot.com/2026/07/react-compiler-local-mutation.html)
+- 이전 편: [React Compiler 규칙 실전 — 멱등성과 Local Mutation 안전지대](/posts/react-compiler-local-mutation/)
 
 - [React 공식 문서 — React Compiler](https://react.dev/learn/react-compiler)
 

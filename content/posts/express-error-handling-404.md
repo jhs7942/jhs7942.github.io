@@ -378,7 +378,7 @@ app.use((req, res, next) => {
 
 - `<%= url %>`에 `req.url` 값이 바인딩되어 잘못 입력한 주소를 사용자에게 그대로 보여줍니다.
 
-- EJS 뷰 엔진 설정은 `app.set("view engine", "ejs")`와 `app.set("views", path.join(__dirname, "views"))`가 필요합니다. (EJS 설정 자세한 내용은 [4편 참조](https://saver7942.blogspot.com/2026/07/ejs-46-ssrcsr.html))
+- EJS 뷰 엔진 설정은 `app.set("view engine", "ejs")`와 `app.set("views", path.join(__dirname, "views"))`가 필요합니다. (EJS 설정 자세한 내용은 [4편 참조](/posts/express-ejs-ssr-csr/))
 
 <details style="margin:10px 0 4px">
 <summary style="cursor:pointer;font-weight:700;color:#C8443C">실행 결과 보기</summary>

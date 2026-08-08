@@ -19,7 +19,7 @@ series: react-compiler
 part: 2
 ---
 
-[이전 편](https://saver7942.blogspot.com/2026/07/react-compiler-usememousecallback.html)에서 "최적화는 기계가 한다"고 했습니다. 그러면 당연히 의심이 듭니다. **"기계가 어떻게 내 코드의 의도를 알아채지? 엉뚱하게 건드려서 버그만 만드는 거 아냐?"** 이 편은 그 블랙박스를 열어 안을 봅니다. 그리고 컴파일러가 제 실력을 내도록 우리가 지켜야 할 규칙을 정리합니다.
+[이전 편](/posts/react-compiler-auto-memoization/)에서 "최적화는 기계가 한다"고 했습니다. 그러면 당연히 의심이 듭니다. **"기계가 어떻게 내 코드의 의도를 알아채지? 엉뚱하게 건드려서 버그만 만드는 거 아냐?"** 이 편은 그 블랙박스를 열어 안을 봅니다. 그리고 컴파일러가 제 실력을 내도록 우리가 지켜야 할 규칙을 정리합니다.
 
 ---
 
@@ -218,9 +218,9 @@ React Compiler: Mutating a value which was passed as a prop is not allowed.
 
 ## 🔗 참고 자료
 
-- 다음 편: [React Compiler 규칙 실전 — 멱등성과 Local Mutation 안전지대](https://saver7942.blogspot.com/2026/07/react-compiler-local-mutation.html)
+- 다음 편: [React Compiler 규칙 실전 — 멱등성과 Local Mutation 안전지대](/posts/react-compiler-local-mutation/)
 
-- 이전 편: [React Compiler — useMemo·useCallback을 폐지하는 자동 메모이제이션](https://saver7942.blogspot.com/2026/07/react-compiler-usememousecallback.html)
+- 이전 편: [React Compiler — useMemo·useCallback을 폐지하는 자동 메모이제이션](/posts/react-compiler-auto-memoization/)
 
 - [React 공식 문서 — Rules of React](https://react.dev/reference/rules)
 

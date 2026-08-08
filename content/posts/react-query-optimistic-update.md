@@ -20,7 +20,7 @@ series: react-query
 part: 7
 ---
 
-[이전 편](https://saver7942.blogspot.com/2026/07/usemutation.html)의 기본 리듬은 "쓰고 나서 무효화"였습니다. `mutate` → 서버 변경 → `invalidateQueries` → 재요청 → 화면 갱신. 안전하지만, 사용자는 요청이 끝날 때까지 결과를 못 봅니다. 1초 걸리면 1초를 기다립니다.
+[이전 편](/posts/react-query-usemutation-invalidate/)의 기본 리듬은 "쓰고 나서 무효화"였습니다. `mutate` → 서버 변경 → `invalidateQueries` → 재요청 → 화면 갱신. 안전하지만, 사용자는 요청이 끝날 때까지 결과를 못 봅니다. 1초 걸리면 1초를 기다립니다.
 
 **낙관적 업데이트**는 순서를 뒤집습니다. 서버가 성공할 것이라 낙관하고, 응답이 오기 전에 화면부터 바꿉니다. 좋아요 버튼을 누르면 서버 응답을 기다리지 않고 하트가 즉시 빨개지는 그 방식입니다. 체감 대기 시간이 0이 됩니다. 대신 "실패하면 되돌린다"는 안전장치를 직접 설계해야 합니다. 그 설계가 이 편의 전부입니다.
 
@@ -43,7 +43,7 @@ part: 7
 
 ## 🎬 2. 세 단계 설계 — onMutate · onError · onSettled
 
-`useMutation`의 콜백 세 개가 각자 역할을 맡습니다. 여기에 [이전 편](https://saver7942.blogspot.com/2026/07/usemutation.html)에서 안 쓰던 `onMutate`와 네 번째 제네릭 `TContext`가 등장합니다.
+`useMutation`의 콜백 세 개가 각자 역할을 맡습니다. 여기에 [이전 편](/posts/react-query-usemutation-invalidate/)에서 안 쓰던 `onMutate`와 네 번째 제네릭 `TContext`가 등장합니다.
 
 | 콜백 | 시점 | 역할 |
 | :---: | :---: | :---: |
@@ -163,15 +163,15 @@ mutate → onMutate(임시항목 즉시 표시) → 서버 거절
 
 - **`cancelQueries`와 롤백이 안전장치입니다.** 취소를 빠뜨리면 깜빡이고, 롤백을 빠뜨리면 유령 데이터가 남습니다. 둘 다 필수입니다.
 
-- **비용을 아는 채로 씁니다.** 강력하지만 롤백 설계라는 대가가 따릅니다. 성공률 높고 즉시성이 값진 곳에 쓰고, 그렇지 않은 곳은 [이전 편](https://saver7942.blogspot.com/2026/07/usemutation.html)의 기본 무효화로 충분합니다.
+- **비용을 아는 채로 씁니다.** 강력하지만 롤백 설계라는 대가가 따릅니다. 성공률 높고 즉시성이 값진 곳에 쓰고, 그렇지 않은 곳은 [이전 편](/posts/react-query-usemutation-invalidate/)의 기본 무효화로 충분합니다.
 
 ---
 
 ## 🔗 참고 자료
 
-- 다음 편: [무한 스크롤 — 수동 상태의 늪에서 useInfiniteQuery로](https://saver7942.blogspot.com/2026/07/useinfinitequery.html)
+- 다음 편: [무한 스크롤 — 수동 상태의 늪에서 useInfiniteQuery로](/posts/react-query-useinfinitequery-infinite-scroll/)
 
-- 이전 편: [useMutation으로 서버 바꾸기 — 성공 후 캐시를 무효화해 화면 맞추기](https://saver7942.blogspot.com/2026/07/usemutation.html)
+- 이전 편: [useMutation으로 서버 바꾸기 — 성공 후 캐시를 무효화해 화면 맞추기](/posts/react-query-usemutation-invalidate/)
 
 - [TanStack Query 공식 문서 — Optimistic Updates](https://tanstack.com/query/latest/docs/framework/react/guides/optimistic-updates)
 

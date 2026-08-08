@@ -12,7 +12,6 @@ labels:
   - Next.js
 source: >-
   /Users/jeonghyeonseung/개발/how_many/.claude/study/2026-04-19/vercel-runtime-basics.md
-legacy_url: 'https://saver7942.blogspot.com/'
 draft: false
 ---
 

@@ -20,11 +20,11 @@ legacy_url: 'https://saver7942.blogspot.com/2026/07/3-2-22.html'
 draft: false
 ---
 
-> 2편 시리즈입니다. [① 네트워크 편](https://saver7942.blogspot.com/2026/07/3-2-12.html) · **② 렌더링·로드 편(이 글)**
+> 2편 시리즈입니다. [① 네트워크 편](/posts/telepathy-perf-1-network/) · **② 렌더링·로드 편(이 글)**
 
 텔레파시는 15초마다 열리는 라운드에서 같은 단어를 고른 두 사람을 실시간으로 이어주는 매칭 서비스입니다. React 19 + Vite SPA, Express + Supabase 구성으로 만들었습니다.
 
-[1편](https://saver7942.blogspot.com/2026/07/3-2-12.html)에서는 Network 탭으로 중복 요청·연타·폴링 세 가지를 재고 TanStack Query 도입을 확정했습니다.
+[1편](/posts/telepathy-perf-1-network/)에서는 Network 탭으로 중복 요청·연타·폴링 세 가지를 재고 TanStack Query 도입을 확정했습니다.
 
 이번 편은 남은 두 가지입니다. **React DevTools Profiler**로 리렌더를 재고(1·2장), **Lighthouse**로 로드를 잽니다(3장). 여기서 도입 예정이던 라이브러리 하나가 취소되고, 계획에 없던 1순위가 새로 생깁니다.
 

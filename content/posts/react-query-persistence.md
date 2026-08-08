@@ -22,7 +22,7 @@ series: react-query
 part: 14
 ---
 
-[이전 편](https://saver7942.blogspot.com/2026/07/tanstack-query-paused.html)에서 기본 캐시가 휘발성 RAM에 있어 새로고침에 증발한다는 것을 봤습니다. 데이터(알맹이)를 새로고침 너머로 살리는 방법이 이번 편입니다.
+[이전 편](/posts/react-query-offline-paused/)에서 기본 캐시가 휘발성 RAM에 있어 새로고침에 증발한다는 것을 봤습니다. 데이터(알맹이)를 새로고침 너머로 살리는 방법이 이번 편입니다.
 
 핵심은 간단합니다. 메모리에만 있던 캐시를 `localStorage` 같은 영속 저장소에 **박제**해 두고, 앱이 다시 켜질 때 그것을 읽어 메모리를 채웁니다. 그러면 지하철에서 새로고침해도(앱 파일이 캐시돼 있다는 전제하에) 이전에 본 데이터가 즉시 뜹니다.
 
@@ -144,7 +144,7 @@ const { data, isPending, isPaused } = useQuery({
 
 ## ⚠️ 6. 주의사항
 
-- **공룡 게임은 여전히 나옵니다** — 지속성은 데이터(알맹이)를 살릴 뿐, 앱 파일(껍데기)은 못 살립니다([14편](https://saver7942.blogspot.com/2026/07/tanstack-query-paused.html)). 오프라인 새로고침에서 앱 자체가 실행되게 하려면 서비스 워커(PWA)가 앱 셸을 캐싱해야 합니다. 지속성과 PWA는 사는 대상이 다릅니다.
+- **공룡 게임은 여전히 나옵니다** — 지속성은 데이터(알맹이)를 살릴 뿐, 앱 파일(껍데기)은 못 살립니다([14편](/posts/react-query-offline-paused/)). 오프라인 새로고침에서 앱 자체가 실행되게 하려면 서비스 워커(PWA)가 앱 셸을 캐싱해야 합니다. 지속성과 PWA는 사는 대상이 다릅니다.
 
 - **`gcTime ≥ maxAge`를 지킵니다** — 이 관계가 깨지면 캐시가 저장되기 전에 메모리에서 사라져 지속성이 헛돕니다.
 
@@ -170,9 +170,9 @@ const { data, isPending, isPaused } = useQuery({
 
 ## 🔗 참고 자료
 
-- 다음 편: [벌크 뮤테이션 — N번의 요청을 한 번으로 묶어 네트워크 폭풍과 원자성 잡기](https://saver7942.blogspot.com/2026/07/n.html)
+- 다음 편: [벌크 뮤테이션 — N번의 요청을 한 번으로 묶어 네트워크 폭풍과 원자성 잡기](/posts/react-query-bulk-mutation/)
 
-- 이전 편: [오프라인과 TanStack Query — paused 상태와 휘발성 캐시의 실체](https://saver7942.blogspot.com/2026/07/tanstack-query-paused.html)
+- 이전 편: [오프라인과 TanStack Query — paused 상태와 휘발성 캐시의 실체](/posts/react-query-offline-paused/)
 
 - [TanStack Query 공식 문서 — Persistence](https://tanstack.com/query/latest/docs/framework/react/plugins/persistQueryClient)
 

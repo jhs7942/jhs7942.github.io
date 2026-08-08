@@ -127,6 +127,6 @@ export function DesignButton({ token, label }: DesignButtonProps) {
 
 ## 🔗 참고 자료
 
-- 선행 글: [React 컴포넌트에 타입 붙이기 (문자열 리터럴 유니온 포함)](https://saver7942.blogspot.com/2026/07/react-reactnodecomponentpropswithref.html)
+- 선행 글: [React 컴포넌트에 타입 붙이기 (문자열 리터럴 유니온 포함)](/posts/react-ts-component-prop-types/)
 
 - [TypeScript 공식 문서 — Template Literal Types](https://www.typescriptlang.org/docs/handbook/2/template-literal-types.html)

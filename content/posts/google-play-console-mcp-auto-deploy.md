@@ -12,7 +12,6 @@ labels:
   - Claude Code
 source: >-
   /Users/jeonghyeonseung/개발/how_many/.claude/study/2026-04-16/google-play-console-mcp-auto-deploy.md
-legacy_url: 'https://saver7942.blogspot.com/'
 draft: false
 ---
 

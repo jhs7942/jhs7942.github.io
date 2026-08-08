@@ -21,7 +21,7 @@ series: react-hook-form
 part: 1
 ---
 
-상태 관리(Zustand) 다음은 폼 관리입니다. 개수가 고정된 폼은 단순하지만, 경력·주소처럼 사용자가 항목을 추가·삭제하는 **동적 리스트 폼**은 까다롭습니다. `useState`로 배열을 직접 관리하면 삭제 시 인덱스가 밀리며 엉뚱한 칸의 값이 사라지거나 포커스가 튀곤 합니다. React Hook Form(RHF)의 **`useFieldArray`**는 이 문제를 배열 조작 메서드와 고유 `field.id`로 해결합니다. (이 글은 RHF의 `useForm`·`register` 기본을 안다고 가정합니다.) 앞선 [상태 관리 시리즈](https://saver7942.blogspot.com/2026/07/zustand-zustand.html)에 이어, 여기서부터는 폼을 다룹니다.
+상태 관리(Zustand) 다음은 폼 관리입니다. 개수가 고정된 폼은 단순하지만, 경력·주소처럼 사용자가 항목을 추가·삭제하는 **동적 리스트 폼**은 까다롭습니다. `useState`로 배열을 직접 관리하면 삭제 시 인덱스가 밀리며 엉뚱한 칸의 값이 사라지거나 포커스가 튀곤 합니다. React Hook Form(RHF)의 **`useFieldArray`**는 이 문제를 배열 조작 메서드와 고유 `field.id`로 해결합니다. (이 글은 RHF의 `useForm`·`register` 기본을 안다고 가정합니다.) 앞선 [상태 관리 시리즈](/posts/react-zustand-declarative-recap/)에 이어, 여기서부터는 폼을 다룹니다.
 
 ---
 
@@ -194,4 +194,4 @@ export function SmartDynamicForm() {
 
 - [React Hook Form 공식 문서 — useFieldArray](https://react-hook-form.com/docs/usefieldarray)
 
-- 이전 섹션: [Zustand 선언적 상태 관리 총정리](https://saver7942.blogspot.com/2026/07/zustand-zustand.html)
+- 이전 섹션: [Zustand 선언적 상태 관리 총정리](/posts/react-zustand-declarative-recap/)

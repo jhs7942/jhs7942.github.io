@@ -20,7 +20,7 @@ series: react-query
 part: 4
 ---
 
-[이전 편](https://saver7942.blogspot.com/2026/07/tanstack-query-freshstaleinactive.html)까지 `useQuery`가 돌려주는 `isPending`·`isFetching`·`error`를 컴포넌트 안에서 분기했습니다. 화면 하나마다 `if (isPending) return ...`, `if (error) return ...`가 데이터를 그리는 코드 위에 얹힙니다. 이건 "로딩이면 이걸 켜고, 에러면 저걸 켜라"는 **명령형** 방식입니다.
+[이전 편](/posts/react-query-data-lifecycle/)까지 `useQuery`가 돌려주는 `isPending`·`isFetching`·`error`를 컴포넌트 안에서 분기했습니다. 화면 하나마다 `if (isPending) return ...`, `if (error) return ...`가 데이터를 그리는 코드 위에 얹힙니다. 이건 "로딩이면 이걸 켜고, 에러면 저걸 켜라"는 **명령형** 방식입니다.
 
 이번 편은 그 분기를 컴포넌트 밖으로 들어냅니다. 컴포넌트는 "데이터가 있을 때 무엇을 그릴지"만 선언하고, 로딩과 에러라는 **상태 전환의 책임을 부모에게 위임**합니다. `useSuspenseQuery` + `Suspense` + `ErrorBoundary` 조합입니다.
 
@@ -158,7 +158,7 @@ export default function App() {
 | 데이터 접근 | `data?.name` | `data.name` |
 | 로딩·에러 UI 위치 | 컴포넌트마다 | 부모에 한 번 |
 
-경쟁 상태도 별도 방어가 필요 없습니다. 다만 그 이유는 "리액트가 렌더 타이밍을 조절해서"가 아니라, [2편](https://saver7942.blogspot.com/2026/07/tanstack-query.html)에서 본 것과 같습니다. `id`가 바뀌면 `queryKey`가 바뀌고, 늦게 도착한 이전 응답은 자기 키의 캐시에만 기록됩니다. 화면이 구독하는 것은 현재 키이므로 과거 데이터가 끼어들지 못합니다. 선언형으로 바꿔서 생긴 이점이 아니라, 처음부터 캐시 키가 주던 이점입니다.
+경쟁 상태도 별도 방어가 필요 없습니다. 다만 그 이유는 "리액트가 렌더 타이밍을 조절해서"가 아니라, [2편](/posts/react-tanstack-query-server-state-sync/)에서 본 것과 같습니다. `id`가 바뀌면 `queryKey`가 바뀌고, 늦게 도착한 이전 응답은 자기 키의 캐시에만 기록됩니다. 화면이 구독하는 것은 현재 키이므로 과거 데이터가 끼어들지 못합니다. 선언형으로 바꿔서 생긴 이점이 아니라, 처음부터 캐시 키가 주던 이점입니다.
 
 ---
 
@@ -190,9 +190,9 @@ export default function App() {
 
 ## 🔗 참고 자료
 
-- 다음 편: [useSuspenseQueries로 병렬 페칭 — Waterfall 함정 풀기](https://saver7942.blogspot.com/2026/07/usesuspensequeries-suspense-waterfall.html)
+- 다음 편: [useSuspenseQueries로 병렬 페칭 — Waterfall 함정 풀기](/posts/react-query-parallel-suspense-queries/)
 
-- 이전 편: [데이터 생애주기 — Fresh·Stale·Inactive와 isFetching](https://saver7942.blogspot.com/2026/07/tanstack-query-freshstaleinactive.html)
+- 이전 편: [데이터 생애주기 — Fresh·Stale·Inactive와 isFetching](/posts/react-query-data-lifecycle/)
 
 - [TanStack Query 공식 문서 — Suspense](https://tanstack.com/query/latest/docs/framework/react/guides/suspense)
 

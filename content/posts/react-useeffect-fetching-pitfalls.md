@@ -19,7 +19,7 @@ draft: false
 
 검색창에 '사과'를 치고 곧바로 '포도'로 바꿔 친 순간, 화면에 포도 결과가 떴다가 2초 뒤 사과 결과로 되돌아갑니다. 사용자는 아무것도 누르지 않았는데 화면이 과거로 돌아갑니다.
 
-`useEffect` 안에서 `fetch`하고 결과를 `useState`에 담는, 가장 먼저 떠올리게 되는 데이터 페칭 코드가 만들어내는 '유령 데이터' 버그입니다. 이 글은 그 코드가 무너지는 세 지점을 실제로 재현하는 실습 랩을 만들고, 각 문제의 원인을 코드 수준에서 확인합니다. 앞선 [폼 관리(React Hook Form) 시리즈](https://saver7942.blogspot.com/2026/07/react-hook-form.html)가 클라이언트 상태를 다뤘다면, 여기서부터는 서버 상태입니다.
+`useEffect` 안에서 `fetch`하고 결과를 `useState`에 담는, 가장 먼저 떠올리게 되는 데이터 페칭 코드가 만들어내는 '유령 데이터' 버그입니다. 이 글은 그 코드가 무너지는 세 지점을 실제로 재현하는 실습 랩을 만들고, 각 문제의 원인을 코드 수준에서 확인합니다. 앞선 [폼 관리(React Hook Form) 시리즈](/posts/react-hook-form-recap/)가 클라이언트 상태를 다뤘다면, 여기서부터는 서버 상태입니다.
 
 ---
 
@@ -309,15 +309,15 @@ useEffect(() => {
 
 - **세 문제의 뿌리는 하나입니다.** 서버에 있는 데이터를 컴포넌트의 지역 상태로 복사해 두고 각자 관리하기 때문입니다. 소유자가 여럿이면 캐시도, 취소도, 순서 보장도 각자 구현해야 합니다.
 
-- 그래서 다음 단계는 요청 취소·중복 제거·캐시를 기본으로 제공하는 서버 상태 전용 도구입니다. 위 코드를 직접 써 본 경험이 그 도구의 기본 동작을 읽는 기준이 됩니다. [다음 편](https://saver7942.blogspot.com/2026/07/tanstack-query.html)에서 같은 랩을 TanStack Query로 다시 씁니다.
+- 그래서 다음 단계는 요청 취소·중복 제거·캐시를 기본으로 제공하는 서버 상태 전용 도구입니다. 위 코드를 직접 써 본 경험이 그 도구의 기본 동작을 읽는 기준이 됩니다. [다음 편](/posts/react-tanstack-query-server-state-sync/)에서 같은 랩을 TanStack Query로 다시 씁니다.
 
 ---
 
 ## 🔗 참고 자료
 
-- 다음 편: [TanStack Query 입문 — 데이터를 가져오는 대신 서버와 동기화하기](https://saver7942.blogspot.com/2026/07/tanstack-query.html)
+- 다음 편: [TanStack Query 입문 — 데이터를 가져오는 대신 서버와 동기화하기](/posts/react-tanstack-query-server-state-sync/)
 
-- 이전 섹션: [React Hook Form 실무 총정리](https://saver7942.blogspot.com/2026/07/react-hook-form.html)
+- 이전 섹션: [React Hook Form 실무 총정리](/posts/react-hook-form-recap/)
 
 - [React 공식 문서 — 이펙트로 데이터 가져오기의 대안](https://react.dev/reference/react/useEffect#fetching-data-with-effects)
 

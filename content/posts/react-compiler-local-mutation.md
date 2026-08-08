@@ -19,7 +19,7 @@ series: react-compiler
 part: 3
 ---
 
-[이전 편](https://saver7942.blogspot.com/2026/07/react-compiler-4-rules-of-react.html)에서 Rules of React를 봤습니다. 이번엔 그 규칙을 실무 코드에 적용하며, 가장 헷갈리는 경계 하나를 확실히 합니다.
+[이전 편](/posts/react-compiler-pipeline-rules/)에서 Rules of React를 봤습니다. 이번엔 그 규칙을 실무 코드에 적용하며, 가장 헷갈리는 경계 하나를 확실히 합니다.
 
 과거엔 "`useMemo`에 빈 의존성 배열(`[]`)을 넣어 렌더링을 막는" 꼼수가 통했습니다. 컴파일러 시대엔 이런 **기교가 독**입니다. 컴파일러는 여러분의 꼼수를 이해하지 못하고, 안전을 위해 최적화를 포기(bail-out)합니다. 이제 성능을 얻는 길은 하나입니다 — **멍청할 정도로 정직하게 규칙을 지키는 것.**
 
@@ -111,7 +111,7 @@ function TagList({ tags }) {
 
 ## 🚫 4. 안티패턴 — Ref 남용과 전역 변수
 
-[2편](https://saver7942.blogspot.com/2026/07/react-compiler-4-rules-of-react.html)의 3규칙(mutation·side effect·조건부 훅)에 더해, 실무에서 자주 나오는 두 안티패턴입니다.
+[2편](/posts/react-compiler-pipeline-rules/)의 3규칙(mutation·side effect·조건부 훅)에 더해, 실무에서 자주 나오는 두 안티패턴입니다.
 
 **렌더링 중 Ref 읽고 쓰기** — `useRef`는 렌더링과 무관한 값을 담거나 DOM을 잡을 때 씁니다. 이걸 화면을 결정하는 렌더 로직에 끼우면 안 됩니다.
 
@@ -141,7 +141,7 @@ function Counter() {
 
 ## 🩺 5. 진단과 결론 — 코딩 스타일이 성능이다
 
-규칙을 다 외울 필요는 없습니다. React Compiler의 **ESLint 룰**이 경찰관 역할을 합니다([2편](https://saver7942.blogspot.com/2026/07/react-compiler-4-rules-of-react.html) 참고). 위반에 밑줄이 그이고, 메시지가 이유를 알려 줍니다.
+규칙을 다 외울 필요는 없습니다. React Compiler의 **ESLint 룰**이 경찰관 역할을 합니다([2편](/posts/react-compiler-pipeline-rules/) 참고). 위반에 밑줄이 그이고, 메시지가 이유를 알려 줍니다.
 
 ```
 Mutating a value which was passed as a prop is not allowed.
@@ -172,9 +172,9 @@ Hook is called conditionally...
 
 ## 🔗 참고 자료
 
-- 다음 편: [컴파일러 시대에도 훅이 필요한 이유 — 참조 안정성과 의도적 설계](https://saver7942.blogspot.com/2026/07/blog-post_27.html)
+- 다음 편: [컴파일러 시대에도 훅이 필요한 이유 — 참조 안정성과 의도적 설계](/posts/react-compiler-why-hooks-still-matter/)
 
-- 이전 편: [React Compiler 내부 해부 — 파이프라인 4단계와 Rules of React](https://saver7942.blogspot.com/2026/07/react-compiler-4-rules-of-react.html)
+- 이전 편: [React Compiler 내부 해부 — 파이프라인 4단계와 Rules of React](/posts/react-compiler-pipeline-rules/)
 
 - [React 공식 문서 — 컴포넌트를 순수하게 유지하기](https://react.dev/learn/keeping-components-pure)
 

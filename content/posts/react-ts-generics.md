@@ -18,7 +18,7 @@ series: react-ts
 part: 3
 ---
 
-유저 목록과 상품 목록은 담긴 데이터만 다를 뿐 "리스트를 그린다"는 구조는 똑같습니다. 타입마다 `UserList`, `ProductList`를 따로 만들면 같은 코드가 계속 늘어납니다. 그렇다고 `any`로 뭉뚱그리면 타입 안전성이 사라집니다. **제네릭(Generic)**은 이 사이에서, 구조는 하나로 두되 타입은 사용하는 쪽에서 주입받는 방법입니다. 이 글은 [선행 글(컴포넌트 타입)](https://saver7942.blogspot.com/2026/07/react-reactnodecomponentpropswithref.html)에 이어, 제네릭으로 재사용 컴포넌트를 만드는 과정을 정리합니다.
+유저 목록과 상품 목록은 담긴 데이터만 다를 뿐 "리스트를 그린다"는 구조는 똑같습니다. 타입마다 `UserList`, `ProductList`를 따로 만들면 같은 코드가 계속 늘어납니다. 그렇다고 `any`로 뭉뚱그리면 타입 안전성이 사라집니다. **제네릭(Generic)**은 이 사이에서, 구조는 하나로 두되 타입은 사용하는 쪽에서 주입받는 방법입니다. 이 글은 [선행 글(컴포넌트 타입)](/posts/react-ts-component-prop-types/)에 이어, 제네릭으로 재사용 컴포넌트를 만드는 과정을 정리합니다.
 
 ---
 
@@ -223,6 +223,6 @@ export default function App() {
 
 ## 🔗 참고 자료
 
-- 선행 글: [React 컴포넌트에 타입 붙이기 (기본 타입·구별된 공용체·ReactNode)](https://saver7942.blogspot.com/2026/07/react-reactnodecomponentpropswithref.html)
+- 선행 글: [React 컴포넌트에 타입 붙이기 (기본 타입·구별된 공용체·ReactNode)](/posts/react-ts-component-prop-types/)
 
 - [React 공식 문서 — TypeScript 사용하기](https://react.dev/learn/typescript)

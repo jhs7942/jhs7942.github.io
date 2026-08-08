@@ -19,7 +19,7 @@ series: react-query
 part: 15
 ---
 
-[이전 편](https://saver7942.blogspot.com/2026/07/persistqueryclient.html)까지는 읽기·쓰기의 개별 동작을 다뤘습니다. 이번엔 **대량 작업**입니다.
+[이전 편](/posts/react-query-persistence/)까지는 읽기·쓰기의 개별 동작을 다뤘습니다. 이번엔 **대량 작업**입니다.
 
 관리자 화면에서 유저 100명을 선택해 지운다고 합시다. 순진하게 만들면 `selectedIds.forEach(id => deleteMutation.mutate(id))`처럼 삭제 요청이 100번 나갑니다. 브라우저의 동시 연결 제한(6개)에 걸려 요청이 줄을 서고, 그중 몇 개가 실패하면 "일부만 지워진" 상태가 됩니다. 이 두 문제 — 네트워크 폭풍과 원자성 파괴 — 를 벌크 요청 하나로 잡습니다.
 
@@ -63,7 +63,7 @@ ID가 몇 개든 요청은 한 번입니다. 네트워크 왕복이 100회에서
 
 ## 🎯 3. useMutation — 배열을 통째로 넘긴다
 
-[7편](https://saver7942.blogspot.com/2026/07/usemutation.html)의 `useMutation`을 그대로 쓰되, `mutationFn`의 인자가 단일 ID가 아니라 **ID 배열**이라는 점만 다릅니다.
+[7편](/posts/react-query-usemutation-invalidate/)의 `useMutation`을 그대로 쓰되, `mutationFn`의 인자가 단일 ID가 아니라 **ID 배열**이라는 점만 다릅니다.
 
 ```tsx
 // src/hooks/useBulkDelete.ts
@@ -99,7 +99,7 @@ bulkDelete.mutate(selectedIds, {
 </button>
 ```
 
-핵심은 두 가지입니다. **요청이 한 번**이라 `isPending`도 하나로 관리되고, **무효화도 한 번**([3편](https://saver7942.blogspot.com/2026/07/query-key-factory.html)의 키로 `['users']` 무효화)이라 목록 갱신 연산이 100번 반복되지 않습니다.
+핵심은 두 가지입니다. **요청이 한 번**이라 `isPending`도 하나로 관리되고, **무효화도 한 번**([3편](/posts/react-query-key-factory/)의 키로 `['users']` 무효화)이라 목록 갱신 연산이 100번 반복되지 않습니다.
 
 ---
 
@@ -172,7 +172,7 @@ enableMocking().then(() => {
 
 - **한 번에 보내는 양에 상한을 둡니다** — ID 1만 개를 한 요청에 담으면 본문이 지나치게 커지고 서버 트랜잭션도 무거워집니다. 수백~수천 단위로 청크를 나눠 보내는 편이 안전합니다.
 
-- **낙관적 업데이트와 조합** — 삭제가 성공할 것이 확실하면 [8편](https://saver7942.blogspot.com/2026/07/onmutate-0-ux.html)의 낙관적 업데이트로 선택 항목을 즉시 화면에서 지우고, 실패 시 롤백할 수 있습니다.
+- **낙관적 업데이트와 조합** — 삭제가 성공할 것이 확실하면 [8편](/posts/react-query-optimistic-update/)의 낙관적 업데이트로 선택 항목을 즉시 화면에서 지우고, 실패 시 롤백할 수 있습니다.
 
 - **부분 성공 API라면 응답 처리를 다르게** — 서버가 "성공한 ID / 실패한 ID"를 나눠 돌려주는 설계라면, `onSuccess`에서 그 결과를 보고 UI를 부분 갱신해야 합니다. 원자적 all-or-nothing과는 다른 계약입니다.
 
@@ -192,7 +192,7 @@ enableMocking().then(() => {
 
 ## 🔗 참고 자료
 
-- 이전 편: [캐시 지속성 — persistQueryClient로 새로고침 너머 데이터 살리기](https://saver7942.blogspot.com/2026/07/persistqueryclient.html)
+- 이전 편: [캐시 지속성 — persistQueryClient로 새로고침 너머 데이터 살리기](/posts/react-query-persistence/)
 
 - [TanStack Query 공식 문서 — Mutations](https://tanstack.com/query/latest/docs/framework/react/guides/mutations)
 

@@ -20,7 +20,7 @@ series: react-query
 part: 10
 ---
 
-[이전 편](https://saver7942.blogspot.com/2026/07/ux-prefetchquery-intersectionobserver.html)이 "로딩을 안 보이게" 하는 이야기였다면, 이번엔 "이미 보이던 것을 안 사라지게" 하는 이야기입니다.
+[이전 편](/posts/react-query-prefetching/)이 "로딩을 안 보이게" 하는 이야기였다면, 이번엔 "이미 보이던 것을 안 사라지게" 하는 이야기입니다.
 
 검색창에 "안녕"을 한 글자씩 쳐 보면, 글자마다 리스트가 하얗게 비었다가 1초 뒤 팍 하고 다시 뜹니다. 그때마다 리스트가 차지하던 높이가 0이 되어 아래 푸터가 위로 홱 올라옵니다(레이아웃 이동, CLS). 이 깜빡임의 원인은 앞선 질문에서 짚었던 `queryKey` 동작에 있습니다. 원인을 정확히 보고, 두 가지 도구로 없앱니다.
 
@@ -88,7 +88,7 @@ const { data, isLoading, isPlaceholderData } = useQuery({
 
 이제 검색어를 바꿔도 리스트가 사라지지 않습니다. 이전 결과가 화면에 남아 있는 채로 뒤에서 새 요청이 나가고, 새 결과가 도착하면 스르륵 교체됩니다. 리스트 높이가 유지되니 푸터도 튀지 않습니다 — 레이아웃 이동이 사라집니다.
 
-`isLoading`(=`isPending`)도 달라집니다. 보여줄 이전 데이터가 있으므로 `isLoading`은 `false`로 유지되고, 새 요청이 진행 중임은 `isFetching`이 `true`로 알려줍니다([4편](https://saver7942.blogspot.com/2026/07/tanstack-query-freshstaleinactive.html)의 두 플래그 구분이 여기서 실전으로 쓰입니다).
+`isLoading`(=`isPending`)도 달라집니다. 보여줄 이전 데이터가 있으므로 `isLoading`은 `false`로 유지되고, 새 요청이 진행 중임은 `isFetching`이 `true`로 알려줍니다([4편](/posts/react-query-data-lifecycle/)의 두 플래그 구분이 여기서 실전으로 쓰입니다).
 
 > v4에서는 `keepPreviousData: true`라는 별도 옵션이었지만, v5에서 `placeholderData: keepPreviousData`(함수를 넘기는 형태)로 통합됐습니다.
 
@@ -178,9 +178,9 @@ const { data } = useQuery({
 
 ## 🔗 참고 자료
 
-- 다음 편: [select 옵션 — 서버 데이터를 컴포넌트에 맞게 변환하고 리렌더 줄이기](https://saver7942.blogspot.com/2026/07/select.html)
+- 다음 편: [select 옵션 — 서버 데이터를 컴포넌트에 맞게 변환하고 리렌더 줄이기](/posts/react-query-select-transform/)
 
-- 이전 편: [프리페칭으로 로딩 없는 UX — 호버 prefetchQuery와 IntersectionObserver](https://saver7942.blogspot.com/2026/07/ux-prefetchquery-intersectionobserver.html)
+- 이전 편: [프리페칭으로 로딩 없는 UX — 호버 prefetchQuery와 IntersectionObserver](/posts/react-query-prefetching/)
 
 - [TanStack Query 공식 문서 — Paginated / Lagged Queries (keepPreviousData)](https://tanstack.com/query/latest/docs/framework/react/guides/paginated-queries)
 

@@ -97,16 +97,16 @@ export function BootSystem({ rawConfig }: { rawConfig: unknown }) {
 
 | 주제 | 다룬 내용 |
 | :---: | :---: |
-| [interface·import type](https://saver7942.blogspot.com/2026/07/typescript-interfaceimport-type-react.html) | 데이터 규격 정의 · 타입만 가져오기 · as 단언 |
-| [컴포넌트에 타입 붙이기](https://saver7942.blogspot.com/2026/07/react-reactnodecomponentpropswithref.html) | 기본 타입 · 구별된 공용체 · ReactNode · ComponentProps |
-| [제네릭](https://saver7942.blogspot.com/2026/07/typescript-extends.html) | 재사용 컴포넌트 · extends 제약 |
-| [useReducer 타입](https://saver7942.blogspot.com/2026/07/typescript-usereducer-state.html) | State · 구별된 공용체 Action · Reducer |
-| [유틸리티 타입](https://saver7942.blogspot.com/2026/07/typescript-componentpropswithoutrefexte.html) | ComponentPropsWithoutRef · Pick · Omit · Partial |
-| [as의 함정](https://saver7942.blogspot.com/2026/07/typescript-api-as.html) | 컴파일 타임 vs 런타임 · 런타임 검증 |
-| [타입 가드](https://saver7942.blogspot.com/2026/07/typescript-is-api.html) | is 타입 술어 · 검증 · 우아한 실패 |
-| [템플릿 리터럴 타입](https://saver7942.blogspot.com/2026/07/typescript.html) | 디자인 토큰 · 유니온 조합 자동 생성 |
-| [Error Boundary](https://saver7942.blogspot.com/2026/07/react-error-boundary-unknown.html) | 클래스 컴포넌트 · unknown 에러 좁히기 |
-| [useRef·useId](https://saver7942.blogspot.com/2026/07/react-userefuseid.html) | DOM 참조 타입 · 폼 입력 검증 |
+| [interface·import type](/posts/typescript-interface-import-type-react-props/) | 데이터 규격 정의 · 타입만 가져오기 · as 단언 |
+| [컴포넌트에 타입 붙이기](/posts/react-ts-component-prop-types/) | 기본 타입 · 구별된 공용체 · ReactNode · ComponentProps |
+| [제네릭](/posts/react-ts-generics/) | 재사용 컴포넌트 · extends 제약 |
+| [useReducer 타입](/posts/react-ts-typed-usereducer/) | State · 구별된 공용체 Action · Reducer |
+| [유틸리티 타입](/posts/react-ts-utility-types/) | ComponentPropsWithoutRef · Pick · Omit · Partial |
+| [as의 함정](/posts/react-ts-runtime-validation/) | 컴파일 타임 vs 런타임 · 런타임 검증 |
+| [타입 가드](/posts/react-ts-type-guard/) | is 타입 술어 · 검증 · 우아한 실패 |
+| [템플릿 리터럴 타입](/posts/react-ts-template-literal-types/) | 디자인 토큰 · 유니온 조합 자동 생성 |
+| [Error Boundary](/posts/react-ts-error-boundary/) | 클래스 컴포넌트 · unknown 에러 좁히기 |
+| [useRef·useId](/posts/react-ts-useref-useid/) | DOM 참조 타입 · 폼 입력 검증 |
 
 ---
 

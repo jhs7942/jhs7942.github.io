@@ -20,7 +20,7 @@ series: react-query
 part: 5
 ---
 
-[이전 편](https://saver7942.blogspot.com/2026/07/usesuspensequery.html)에서 `useSuspenseQuery`가 로딩·에러를 부모로 위임한다고 했습니다. 편리한데, 한 컴포넌트에서 데이터를 **둘 이상** 가져올 때 조용히 성능을 갉아먹는 함정이 하나 숨어 있습니다.
+[이전 편](/posts/react-query-suspense-error-boundary/)에서 `useSuspenseQuery`가 로딩·에러를 부모로 위임한다고 했습니다. 편리한데, 한 컴포넌트에서 데이터를 **둘 이상** 가져올 때 조용히 성능을 갉아먹는 함정이 하나 숨어 있습니다.
 
 유저 정보와 게시글 목록을 각각 2초 걸려 가져온다고 합시다. 둘은 서로 무관하니 동시에 요청하면 2초면 됩니다. 그런데 `useSuspenseQuery`를 순진하게 두 번 쓰면 4초가 걸립니다. 스테이크가 다 구워진 뒤에야 파스타를 올리는 주방인 셈입니다. 이 편은 그 원인과 해법을 다룹니다.
 
@@ -88,7 +88,7 @@ export default function UserAndPosts({ id }: { id: number }) {
 
 ## 🧪 3. 실습 — 4초가 2초로
 
-[5편](https://saver7942.blogspot.com/2026/07/usesuspensequery.html)에서 만든 `Suspense` + `ErrorBoundary` 구조를 그대로 재사용합니다. 다만 에러를 즉시 보기 위해 `retry`를 끕니다.
+[5편](/posts/react-query-suspense-error-boundary/)에서 만든 `Suspense` + `ErrorBoundary` 구조를 그대로 재사용합니다. 다만 에러를 즉시 보기 위해 `retry`를 끕니다.
 
 ```tsx
 // src/App.tsx
@@ -163,9 +163,9 @@ posts ├████████┤                    (0~2s)  ← 같은 시�
 
 - **부분 로딩이 필요하면 Suspense를 나눕니다** — `useSuspenseQueries`는 묶인 요청이 전부 준비돼야 렌더됩니다. 유저는 먼저 보여주고 게시글만 나중에 채우고 싶다면, 두 컴포넌트로 나눠 각자 `Suspense`로 감쌉니다. 병렬성과 부분 표시는 별개의 선택입니다.
 
-- **경쟁 상태는 여기서도 캐시 키 덕분** — `id`를 빠르게 바꿔도 마지막 요청 결과가 남는 이유는 "리액트가 렌더 타이밍을 조절해서"가 아니라, 응답이 각자 `queryKey`의 캐시에만 기록되기 때문입니다([2편](https://saver7942.blogspot.com/2026/07/tanstack-query.html)과 같은 원리).
+- **경쟁 상태는 여기서도 캐시 키 덕분** — `id`를 빠르게 바꿔도 마지막 요청 결과가 남는 이유는 "리액트가 렌더 타이밍을 조절해서"가 아니라, 응답이 각자 `queryKey`의 캐시에만 기록되기 때문입니다([2편](/posts/react-tanstack-query-server-state-sync/)과 같은 원리).
 
-- **`FallbackComponent` vs `fallbackRender`** — 컴포넌트를 넘길 땐 `FallbackComponent`입니다. `fallbackRender`는 `(props) => ReactNode` 렌더 함수 자리입니다([5편](https://saver7942.blogspot.com/2026/07/usesuspensequery.html) 참고).
+- **`FallbackComponent` vs `fallbackRender`** — 컴포넌트를 넘길 땐 `FallbackComponent`입니다. `fallbackRender`는 `(props) => ReactNode` 렌더 함수 자리입니다([5편](/posts/react-query-suspense-error-boundary/) 참고).
 
 ---
 
@@ -183,9 +183,9 @@ posts ├████████┤                    (0~2s)  ← 같은 시�
 
 ## 🔗 참고 자료
 
-- 다음 편: [useMutation으로 서버 바꾸기 — 성공 후 캐시를 무효화해 화면 맞추기](https://saver7942.blogspot.com/2026/07/usemutation.html)
+- 다음 편: [useMutation으로 서버 바꾸기 — 성공 후 캐시를 무효화해 화면 맞추기](/posts/react-query-usemutation-invalidate/)
 
-- 이전 편: [선언적 데이터 페칭 — useSuspenseQuery로 로딩·에러를 컴포넌트 밖으로](https://saver7942.blogspot.com/2026/07/usesuspensequery.html)
+- 이전 편: [선언적 데이터 페칭 — useSuspenseQuery로 로딩·에러를 컴포넌트 밖으로](/posts/react-query-suspense-error-boundary/)
 
 - [TanStack Query 공식 문서 — useSuspenseQueries](https://tanstack.com/query/latest/docs/framework/react/reference/useSuspenseQueries)
 

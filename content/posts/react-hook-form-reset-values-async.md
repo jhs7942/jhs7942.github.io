@@ -21,7 +21,7 @@ series: react-hook-form
 part: 6
 ---
 
-지난 글에서 [dirtyFields로 변경분만 PATCH하는 법](https://saver7942.blogspot.com/2026/07/react-hook-form-dirtyfields-patch.html)을 다뤘습니다. 그 모든 것의 전제는 "기준점(`defaultValues`)이 올바르게 잡혀 있다"였습니다. 그런데 수정 페이지에서 서버 데이터가 비동기로 늦게 도착하면, 이 기준점부터 어긋납니다. 데이터를 불러왔는데 입력창이 비어 있는 버그가 대표적입니다. 폼에 데이터를 안전하게 채워 넣는 시작점을 `reset`·`resetField`·`values`로 정리합니다. 폼 관리 시리즈 네 번째 글입니다.
+지난 글에서 [dirtyFields로 변경분만 PATCH하는 법](/posts/react-hook-form-dirty-fields-patch/)을 다뤘습니다. 그 모든 것의 전제는 "기준점(`defaultValues`)이 올바르게 잡혀 있다"였습니다. 그런데 수정 페이지에서 서버 데이터가 비동기로 늦게 도착하면, 이 기준점부터 어긋납니다. 데이터를 불러왔는데 입력창이 비어 있는 버그가 대표적입니다. 폼에 데이터를 안전하게 채워 넣는 시작점을 `reset`·`resetField`·`values`로 정리합니다. 폼 관리 시리즈 네 번째 글입니다.
 
 ---
 

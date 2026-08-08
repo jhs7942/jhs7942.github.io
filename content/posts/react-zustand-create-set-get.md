@@ -19,7 +19,7 @@ series: zustand
 part: 1
 ---
 
-컴포넌트가 많아질수록 상태를 어디에 두고 어떻게 나눠 쓸지가 문제가 됩니다. Zustand는 상태를 React 트리 바깥에 두고, 그 값이 필요한 컴포넌트만 구독하게 하는 가벼운 라이브러리입니다. 이 글은 Zustand의 핵심인 `create`·`set`·`get` 세 함수의 동작과, React 바깥 상태가 어떻게 화면을 다시 그리게 하는지를 정리합니다. 타입 안전 설계를 다룬 [이전 시리즈](https://saver7942.blogspot.com/2026/07/react-typescript.html)에 이어, 여기서부터는 상태 관리를 다룹니다.
+컴포넌트가 많아질수록 상태를 어디에 두고 어떻게 나눠 쓸지가 문제가 됩니다. Zustand는 상태를 React 트리 바깥에 두고, 그 값이 필요한 컴포넌트만 구독하게 하는 가벼운 라이브러리입니다. 이 글은 Zustand의 핵심인 `create`·`set`·`get` 세 함수의 동작과, React 바깥 상태가 어떻게 화면을 다시 그리게 하는지를 정리합니다. 타입 안전 설계를 다룬 [이전 시리즈](/posts/react-ts-type-safety-recap/)에 이어, 여기서부터는 상태 관리를 다룹니다.
 
 ---
 
@@ -186,7 +186,7 @@ resetUser();
 
 ## 🔗 참고 자료
 
-- 이전 시리즈: [React·TypeScript 타입 안전 설계 총정리](https://saver7942.blogspot.com/2026/07/react-typescript.html)
+- 이전 시리즈: [React·TypeScript 타입 안전 설계 총정리](/posts/react-ts-type-safety-recap/)
 
 - [Zustand 공식 문서](https://zustand.docs.pmnd.rs/)
 

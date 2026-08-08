@@ -20,7 +20,7 @@ series: zustand
 part: 2
 ---
 
-[이전 글](https://saver7942.blogspot.com/2026/07/zustand-createsetget.html)에서 `create`·`set`·`get`으로 스토어의 기본 동작을 봤습니다. 상태가 커질수록 모든 로직을 한 파일에 몰아넣으면 수정이 어려워집니다. **슬라이스 패턴(Slice Pattern)**은 스토어를 도메인(관리 영역)별로 조각내어 각자 관리하고, 최종적으로 하나로 합치는 구조입니다. 이 글은 슬라이스 패턴을 타입과 함께 구성하는 과정을 정리합니다.
+[이전 글](/posts/react-zustand-create-set-get/)에서 `create`·`set`·`get`으로 스토어의 기본 동작을 봤습니다. 상태가 커질수록 모든 로직을 한 파일에 몰아넣으면 수정이 어려워집니다. **슬라이스 패턴(Slice Pattern)**은 스토어를 도메인(관리 영역)별로 조각내어 각자 관리하고, 최종적으로 하나로 합치는 구조입니다. 이 글은 슬라이스 패턴을 타입과 함께 구성하는 과정을 정리합니다.
 
 ---
 
@@ -215,8 +215,8 @@ export function App() {
 
 ## 🔗 참고 자료
 
-- 이전 글: [Zustand 상태 관리 입문 (create·set·get)](https://saver7942.blogspot.com/2026/07/zustand-createsetget.html)
+- 이전 글: [Zustand 상태 관리 입문 (create·set·get)](/posts/react-zustand-create-set-get/)
 
-- 이전 시리즈: [React·TypeScript 타입 안전 설계 총정리](https://saver7942.blogspot.com/2026/07/react-typescript.html)
+- 이전 시리즈: [React·TypeScript 타입 안전 설계 총정리](/posts/react-ts-type-safety-recap/)
 
 - [Zustand 공식 문서 — Slices Pattern](https://zustand.docs.pmnd.rs/guides/slices-pattern)

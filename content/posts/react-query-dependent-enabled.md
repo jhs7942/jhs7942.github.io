@@ -20,7 +20,7 @@ series: react-query
 part: 12
 ---
 
-[이전 편](https://saver7942.blogspot.com/2026/07/select.html)까지는 하나의 요청을 다루는 이야기였습니다. 이번엔 **요청 사이에 순서가 있는** 경우입니다.
+[이전 편](/posts/react-query-select-transform/)까지는 하나의 요청을 다루는 이야기였습니다. 이번엔 **요청 사이에 순서가 있는** 경우입니다.
 
 사용자 프로필을 먼저 가져와야 그 안의 `id`를 알 수 있고, 그 `id`가 있어야 사용자의 게시글을 요청할 수 있습니다. 두 요청을 동시에 보내면 두 번째는 `id`가 `undefined`인 채로 나가 서버 에러를 만납니다. 앞 요청이 끝날 때까지 뒤 요청을 붙잡아 둬야 합니다. 이 제어를 `enabled` 옵션으로 선언적으로 합니다.
 
@@ -120,7 +120,7 @@ const { data: posts } = useQuery({
 
 의존적 쿼리는 요청이 계단식으로 순차 실행되는 **워터폴**을 의도적으로 만듭니다. `fetchUser`(0.5초) → `fetchPosts`(0.5초)라면 총 1초가 걸립니다. 순서가 필요하니 어쩔 수 없지만, 워터폴 자체는 성능상 피하고 싶은 것이라는 점을 기억해야 합니다.
 
-- **정말 의존적일 때만 씁니다** — 두 데이터가 서로 무관하다면 병렬로 두는 게 빠릅니다([6편](https://saver7942.blogspot.com/2026/07/usesuspensequeries-suspense-waterfall.html)의 병렬 페칭). 습관적으로 `enabled` 체인을 만들면 불필요하게 느려집니다.
+- **정말 의존적일 때만 씁니다** — 두 데이터가 서로 무관하다면 병렬로 두는 게 빠릅니다([6편](/posts/react-query-parallel-suspense-queries/)의 병렬 페칭). 습관적으로 `enabled` 체인을 만들면 불필요하게 느려집니다.
 
 - **가능하면 서버에서 합칩니다** — "유저와 그 게시글"을 한 번에 주는 API가 있으면 왕복이 한 번으로 줄어듭니다. 프론트의 워터폴은 서버 응답 구조를 바꿀 수 없을 때의 차선책입니다.
 
@@ -154,9 +154,9 @@ const { data: posts } = useQuery({
 
 ## 🔗 참고 자료
 
-- 다음 편: [오프라인과 TanStack Query — paused 상태와 휘발성 캐시의 실체](https://saver7942.blogspot.com/2026/07/tanstack-query-paused.html)
+- 다음 편: [오프라인과 TanStack Query — paused 상태와 휘발성 캐시의 실체](/posts/react-query-offline-paused/)
 
-- 이전 편: [select 옵션 — 서버 데이터를 컴포넌트에 맞게 변환하고 리렌더 줄이기](https://saver7942.blogspot.com/2026/07/select.html)
+- 이전 편: [select 옵션 — 서버 데이터를 컴포넌트에 맞게 변환하고 리렌더 줄이기](/posts/react-query-select-transform/)
 
 - [TanStack Query 공식 문서 — Dependent Queries](https://tanstack.com/query/latest/docs/framework/react/guides/dependent-queries)
 

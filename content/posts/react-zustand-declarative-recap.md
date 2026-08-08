@@ -20,7 +20,7 @@ series: zustand
 part: 7
 ---
 
-상태 관리 파트에서 Zustand의 `create`·`set`·`get`, 슬라이스 패턴, `useReducer`와의 비교를 다뤘습니다. 이 글은 그 흐름을 **선언적 상태 변경**이라는 한 축으로 정리하는 결산입니다. 왜 Zustand가 간결한지 되짚고, 종합 예제와 각 주제로 가는 목록을 붙였습니다. 앞선 [타입 안전 시리즈](https://saver7942.blogspot.com/2026/07/react-typescript.html)에 이은 상태 관리 정리입니다.
+상태 관리 파트에서 Zustand의 `create`·`set`·`get`, 슬라이스 패턴, `useReducer`와의 비교를 다뤘습니다. 이 글은 그 흐름을 **선언적 상태 변경**이라는 한 축으로 정리하는 결산입니다. 왜 Zustand가 간결한지 되짚고, 종합 예제와 각 주제로 가는 목록을 붙였습니다. 앞선 [타입 안전 시리즈](/posts/react-ts-type-safety-recap/)에 이은 상태 관리 정리입니다.
 
 ---
 
@@ -106,12 +106,12 @@ export function SimpleCounter() {
 
 | 주제 | 다룬 내용 |
 | :---: | :---: |
-| [Zustand create·set·get](https://saver7942.blogspot.com/2026/07/zustand-createsetget.html) | 스토어 기본 · useSyncExternalStore 동작 원리 |
-| [슬라이스 패턴](https://saver7942.blogspot.com/2026/07/zustand-statecreator.html) | StateCreator · 도메인별 스토어 분리 |
-| [useReducer vs Zustand](https://saver7942.blogspot.com/2026/07/usereducer-vs-zustand.html) | 보일러플레이트 비교 · 선택 기준 |
-| [Zustand 셀렉터](https://saver7942.blogspot.com/2026/07/zustand.html) | 선택적 구독 · 불필요한 리렌더 방지 |
-| [Zustand persist](https://saver7942.blogspot.com/2026/07/zustand-persist-localstorage.html) | 상태 자동 저장 · localStorage 미들웨어 |
-| [하이드레이션 · SSR](https://saver7942.blogspot.com/2026/07/zustand-persist-ssr.html) | 복원 시점 · SSR 불일치 · 깜빡임 제어 |
+| [Zustand create·set·get](/posts/react-zustand-create-set-get/) | 스토어 기본 · useSyncExternalStore 동작 원리 |
+| [슬라이스 패턴](/posts/react-zustand-slice-pattern/) | StateCreator · 도메인별 스토어 분리 |
+| [useReducer vs Zustand](/posts/react-usereducer-vs-zustand/) | 보일러플레이트 비교 · 선택 기준 |
+| [Zustand 셀렉터](/posts/react-zustand-selector/) | 선택적 구독 · 불필요한 리렌더 방지 |
+| [Zustand persist](/posts/react-zustand-persist/) | 상태 자동 저장 · localStorage 미들웨어 |
+| [하이드레이션 · SSR](/posts/react-zustand-hydration/) | 복원 시점 · SSR 불일치 · 깜빡임 제어 |
 
 ---
 
@@ -135,8 +135,8 @@ export function SimpleCounter() {
 
 ## 🔗 참고 자료
 
-- 이전 시리즈: [React·TypeScript 타입 안전 설계 총정리](https://saver7942.blogspot.com/2026/07/react-typescript.html)
+- 이전 시리즈: [React·TypeScript 타입 안전 설계 총정리](/posts/react-ts-type-safety-recap/)
 
-- 다음 시리즈: [React Hook Form 폼 관리 총정리](https://saver7942.blogspot.com/2026/07/react-hook-form.html)
+- 다음 시리즈: [React Hook Form 폼 관리 총정리](/posts/react-hook-form-recap/)
 
 - [Zustand 공식 문서](https://zustand.docs.pmnd.rs/)

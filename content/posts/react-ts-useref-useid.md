@@ -18,7 +18,7 @@ series: react-ts
 part: 10
 ---
 
-폼 입력값도 API 응답만큼이나 신뢰할 수 없는 외부 데이터입니다. 이 글에서는 입력창을 `useRef`로 참조하고, `useId`로 label과 연결하며, 입력값을 타입 가드로 검증해 규격에 맞는 값만 통과시키는 컴포넌트를 만듭니다. 타입 가드와 `is` 타입 술어의 원리 자체는 [선행 글(10강)](https://saver7942.blogspot.com/2026/07/typescript-is-api.html)에서 다뤘으므로, 이 글은 React 훅의 타입과 실전 적용에 집중합니다.
+폼 입력값도 API 응답만큼이나 신뢰할 수 없는 외부 데이터입니다. 이 글에서는 입력창을 `useRef`로 참조하고, `useId`로 label과 연결하며, 입력값을 타입 가드로 검증해 규격에 맞는 값만 통과시키는 컴포넌트를 만듭니다. 타입 가드와 `is` 타입 술어의 원리 자체는 [선행 글(10강)](/posts/react-ts-type-guard/)에서 다뤘으므로, 이 글은 React 훅의 타입과 실전 적용에 집중합니다.
 
 ---
 
@@ -74,7 +74,7 @@ function NicknameField() {
 
 ## 🛡️ 3. 입력값을 타입 가드로 검증하기
 
-타입 가드는 `unknown` 데이터를 검사식에 통과시켜 타입을 좁히는 함수입니다(자세한 원리는 [10강](https://saver7942.blogspot.com/2026/07/typescript-is-api.html)). 입력값을 검증되지 않은 외부 데이터로 취급해, 규격을 통과한 값만 사용합니다.
+타입 가드는 `unknown` 데이터를 검사식에 통과시켜 타입을 좁히는 함수입니다(자세한 원리는 [10강](/posts/react-ts-type-guard/)). 입력값을 검증되지 않은 외부 데이터로 취급해, 규격을 통과한 값만 사용합니다.
 
 ```tsx
 // src/guards/userGuard.ts
@@ -179,7 +179,7 @@ export function UserSettings() {
 
 ## 🔗 참고 자료
 
-- 선행 글: [TypeScript 타입 가드 (is 타입 술어·좁히기)](https://saver7942.blogspot.com/2026/07/typescript-is-api.html)
+- 선행 글: [TypeScript 타입 가드 (is 타입 술어·좁히기)](/posts/react-ts-type-guard/)
 
 - [React 공식 문서 — useRef](https://react.dev/reference/react/useRef)
 

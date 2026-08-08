@@ -15,7 +15,6 @@ labels:
 source: >-
   C:/Users/jhs/OneDrive/바탕
   화면/개발/ai-quiz/.claude/fix/2026-03-24/quiz-sessions-insert-400/error-log.md
-legacy_url: 'https://saver7942.blogspot.com/'
 draft: false
 ---
 

@@ -22,7 +22,7 @@ series: react-query
 part: 8
 ---
 
-[이전 편](https://saver7942.blogspot.com/2026/07/onmutate-0-ux.html)까지 읽기·쓰기·낙관적 업데이트를 다뤘습니다. 이번엔 읽기의 특수한 형태 — **무한 스크롤**입니다.
+[이전 편](/posts/react-query-optimistic-update/)까지 읽기·쓰기·낙관적 업데이트를 다뤘습니다. 이번엔 읽기의 특수한 형태 — **무한 스크롤**입니다.
 
 무한 스크롤은 일반 페이지네이션과 성격이 다릅니다. 페이지네이션은 현재 페이지 데이터만 갈아 끼우면 되지만, 무한 스크롤은 **과거 데이터를 보존하면서 새 데이터를 이어 붙이는 누적형**입니다. 이 누적이 `useState`로 옮겨지는 순간 상태가 비대해지기 시작합니다. 이 편은 그 늪을 먼저 겪고, `useInfiniteQuery`로 빠져나옵니다.
 
@@ -220,13 +220,13 @@ export default function InfiniteScroll() {
 
 - **`getNextPageParam`은 마지막 페이지 기준으로 판단합니다** — 빈 배열이 올 때까지 요청하기보다, 페이지 크기(여기선 10) 미만이면 끝으로 간주하는 편이 헛요청을 줄입니다. 서버가 `nextCursor`를 준다면 그 값을 그대로 반환하는 커서 방식이 더 정확합니다.
 
-- **`staleTime`을 반드시 둡니다** — 무한 스크롤에서 이게 특히 중요합니다. `staleTime`이 기본값 `0`이면, 사용자가 다른 탭에 갔다 돌아오는 순간(윈도우 재포커스) 지금까지 쌓인 **모든 페이지가 한꺼번에** 재요청됩니다. 20~30페이지를 봤다면 그만큼의 요청이 동시에 나가 서버에 부담을 줍니다. 몇 분의 신선도를 부여해 이 재요청 폭풍을 막습니다([4편](https://saver7942.blogspot.com/2026/07/tanstack-query-freshstaleinactive.html)의 stale 트리거가 누적 페이지 전체에 적용되기 때문입니다).
+- **`staleTime`을 반드시 둡니다** — 무한 스크롤에서 이게 특히 중요합니다. `staleTime`이 기본값 `0`이면, 사용자가 다른 탭에 갔다 돌아오는 순간(윈도우 재포커스) 지금까지 쌓인 **모든 페이지가 한꺼번에** 재요청됩니다. 20~30페이지를 봤다면 그만큼의 요청이 동시에 나가 서버에 부담을 줍니다. 몇 분의 신선도를 부여해 이 재요청 폭풍을 막습니다([4편](/posts/react-query-data-lifecycle/)의 stale 트리거가 누적 페이지 전체에 적용되기 때문입니다).
 
 - **`maxPages`로 메모리 상한을 둡니다** — 사용자가 100페이지까지 내려가면 그만큼 `pages`가 메모리에 쌓입니다. `maxPages: 5`처럼 두면 최신 5페이지만 유지하고 오래된 페이지는 캐시에서 비웁니다. 화면에 실제로 그리는 항목만 남기는 가상 리스트(virtual list)와 함께 쓰면 메모리 점유를 크게 낮출 수 있습니다.
 
 - **버튼 대신 Intersection Observer** — 실서비스는 "더 보기" 버튼 대신 리스트 끝의 감시용 요소가 화면에 들어오면 `fetchNextPage`를 부릅니다. 이때도 데이터 로직은 `useInfiniteQuery`에 그대로 두고, `IntersectionObserver`는 트리거만 담당하게 분리합니다.
 
-- **개별 항목 수정은 setQueryData로** — 목록 중 하나를 고칠 때 수천 개 배열을 순회하는 대신, `setQueryData`로 해당 페이지의 그 항목만 바꾸거나 `invalidateQueries`로 다시 받습니다([7편](https://saver7942.blogspot.com/2026/07/usemutation.html) 참고).
+- **개별 항목 수정은 setQueryData로** — 목록 중 하나를 고칠 때 수천 개 배열을 순회하는 대신, `setQueryData`로 해당 페이지의 그 항목만 바꾸거나 `invalidateQueries`로 다시 받습니다([7편](/posts/react-query-usemutation-invalidate/) 참고).
 
 - **양방향·역방향** — 채팅처럼 위로도 불러와야 하면 `getPreviousPageParam`과 `fetchPreviousPage`가 대칭으로 있습니다.
 
@@ -246,9 +246,9 @@ export default function InfiniteScroll() {
 
 ## 🔗 참고 자료
 
-- 다음 편: [프리페칭으로 로딩 없는 UX — 호버 prefetchQuery와 IntersectionObserver](https://saver7942.blogspot.com/2026/07/ux-prefetchquery-intersectionobserver.html)
+- 다음 편: [프리페칭으로 로딩 없는 UX — 호버 prefetchQuery와 IntersectionObserver](/posts/react-query-prefetching/)
 
-- 이전 편: [낙관적 업데이트 — onMutate·롤백·최종 동기화로 0초 UX 만들기](https://saver7942.blogspot.com/2026/07/onmutate-0-ux.html)
+- 이전 편: [낙관적 업데이트 — onMutate·롤백·최종 동기화로 0초 UX 만들기](/posts/react-query-optimistic-update/)
 
 - [TanStack Query 공식 문서 — Infinite Queries](https://tanstack.com/query/latest/docs/framework/react/guides/infinite-queries)
 

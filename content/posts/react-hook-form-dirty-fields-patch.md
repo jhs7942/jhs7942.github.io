@@ -20,7 +20,7 @@ series: react-hook-form
 part: 5
 ---
 
-지난 글에서 [다단계 폼의 데이터를 지키는 법](https://saver7942.blogspot.com/2026/07/react-hook-form-formprovidershouldunreg.html)을 다뤘습니다. 이번엔 그렇게 채운 폼을 **서버로 보낼 때**의 이야기입니다. 수정 페이지에서 필드가 50개인데 사용자가 이름 하나만 고쳤다면, 50개를 전부 보내는 것은 네트워크와 서버 양쪽에 불필요한 부담입니다. React Hook Form은 무엇이 실제로 바뀌었는지 이미 알고 있습니다. `dirtyFields`를 활용해 변경분만 골라 보내는 패턴을 정리합니다. 폼 관리 시리즈 세 번째 글입니다.
+지난 글에서 [다단계 폼의 데이터를 지키는 법](/posts/react-hook-form-multi-step/)을 다뤘습니다. 이번엔 그렇게 채운 폼을 **서버로 보낼 때**의 이야기입니다. 수정 페이지에서 필드가 50개인데 사용자가 이름 하나만 고쳤다면, 50개를 전부 보내는 것은 네트워크와 서버 양쪽에 불필요한 부담입니다. React Hook Form은 무엇이 실제로 바뀌었는지 이미 알고 있습니다. `dirtyFields`를 활용해 변경분만 골라 보내는 패턴을 정리합니다. 폼 관리 시리즈 세 번째 글입니다.
 
 ---
 
@@ -111,7 +111,7 @@ export function getDirtyValues<T extends FieldValues>(
 
 ### 배열을 왜 통째로 보내는가
 
-원본 강의 자료의 유틸리티는 배열을 `!Array.isArray(currentField)` 조건으로 **제외**합니다. 그런데 이렇게 하면 배열 필드는 단일 값도 아니고 재귀 대상도 아니게 되어, **변경돼도 결과에서 조용히 누락됩니다.** 바로 이전 글에서 다룬 [useFieldArray](https://saver7942.blogspot.com/2026/07/react-hook-form-usefieldarray-fieldid.html) 같은 동적 리스트를 쓰는 폼이라면, 항목을 고쳐도 서버로 전송되지 않는 버그가 됩니다.
+원본 강의 자료의 유틸리티는 배열을 `!Array.isArray(currentField)` 조건으로 **제외**합니다. 그런데 이렇게 하면 배열 필드는 단일 값도 아니고 재귀 대상도 아니게 되어, **변경돼도 결과에서 조용히 누락됩니다.** 바로 이전 글에서 다룬 [useFieldArray](/posts/react-hook-form-usefieldarray/) 같은 동적 리스트를 쓰는 폼이라면, 항목을 고쳐도 서버로 전송되지 않는 버그가 됩니다.
 
 배열은 "3번째 원소의 이 필드만 바뀜"을 부분적으로 표기할 마땅한 방법이 없습니다. 인덱스가 밀리거나 순서가 바뀌면 부분 표기가 오히려 위험합니다. 그래서 **하나라도 dirty면 배열 전체를 담아** 서버가 통으로 교체하도록 하는 편이 안전합니다. 위 코드가 `Array.isArray(dirty)`를 단일 필드와 같은 갈래로 묶어 `values[key]` 전체를 담는 이유입니다.
 

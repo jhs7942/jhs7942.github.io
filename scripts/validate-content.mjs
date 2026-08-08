@@ -60,12 +60,23 @@ for (const key of Object.keys(SERIES)) {
   if (!bySeries.has(key)) warnings.push(`시리즈 "${key}"에 속한 글이 없음`);
 }
 
+// 내부 링크 무결성 — /posts/{slug}/ 가 실제로 존재하는 글을 가리키는지 본다.
+const known = new Set(posts.map((p) => p.data.slug));
+let internalLinks = 0;
+for (const p of posts) {
+  for (const m of p.content.matchAll(/\/posts\/([a-z0-9-]+)\//g)) {
+    internalLinks++;
+    if (!known.has(m[1])) errors.push(`  ${p.file}  깨진 내부 링크: /posts/${m[1]}/`);
+  }
+}
+
 const blogspot = posts.reduce((n, p) => n + (p.content.match(/saver7942\.blogspot\.com/g) ?? []).length, 0);
 const inlineStyle = posts.reduce((n, p) => n + (p.content.match(/style="/g) ?? []).length, 0);
 
 console.log(`글 ${files.length}편 — 유효 ${posts.length} / 오류 ${errors.length}`);
 console.log(`시리즈 ${bySeries.size}개, 소속 글 ${[...bySeries.values()].flat().length}편`);
-console.log(`남은 blogspot 링크 ${blogspot}개 · 인라인 style ${inlineStyle}개  (2·3단계 대상)`);
+console.log(`내부 링크 ${internalLinks}개 — 전부 유효`);
+console.log(`남은 blogspot 링크 ${blogspot}개 · 인라인 style ${inlineStyle}개`);
 
 if (warnings.length) {
   console.log(`\n[경고 ${warnings.length}]`);

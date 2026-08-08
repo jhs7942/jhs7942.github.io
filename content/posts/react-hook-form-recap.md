@@ -19,7 +19,7 @@ series: react-hook-form
 part: 7
 ---
 
-폼 관리 시리즈에서 동적 리스트, 다단계 데이터 보존, 변경분 전송, 비동기 초기화를 다뤘습니다. 이 글은 그 흐름을 **이벤트 중심 폼 설계**라는 한 축으로 정리하는 결산입니다. 여기에 실무에서 마지막으로 마주치는 두 관문 — 서버가 돌려준 에러를 화면에 되돌리는 `setError`, 서버 규격에 맞춰 데이터를 깎는 Transformer — 를 더합니다. 앞선 [상태 관리(Zustand) 시리즈](https://saver7942.blogspot.com/2026/07/zustand-zustand.html)에 이은 폼 관리 정리입니다.
+폼 관리 시리즈에서 동적 리스트, 다단계 데이터 보존, 변경분 전송, 비동기 초기화를 다뤘습니다. 이 글은 그 흐름을 **이벤트 중심 폼 설계**라는 한 축으로 정리하는 결산입니다. 여기에 실무에서 마지막으로 마주치는 두 관문 — 서버가 돌려준 에러를 화면에 되돌리는 `setError`, 서버 규격에 맞춰 데이터를 깎는 Transformer — 를 더합니다. 앞선 [상태 관리(Zustand) 시리즈](/posts/react-zustand-declarative-recap/)에 이은 폼 관리 정리입니다.
 
 ---
 
@@ -143,10 +143,10 @@ const onSubmit: SubmitHandler<FormInputs> = async (formData) => {
 
 | 주제 | 다룬 내용 |
 | :---: | :---: |
-| [useFieldArray](https://saver7942.blogspot.com/2026/07/react-hook-form-usefieldarray-fieldid.html) | 동적 리스트 폼 · `field.id`로 인덱스 버그 차단 |
-| [다단계 폼 · FormProvider](https://saver7942.blogspot.com/2026/07/react-hook-form-formprovidershouldunreg.html) | 언마운트 데이터 보존 · `shouldUnregister` |
-| [dirtyFields](https://saver7942.blogspot.com/2026/07/react-hook-form-dirtyfields-patch.html) | 변경분만 PATCH · `getDirtyValues` 재귀 |
-| [reset · values](https://saver7942.blogspot.com/2026/07/react-hook-form-resetvalues-reset-vs.html) | 비동기 서버 데이터 · `reset` vs `resetField` |
+| [useFieldArray](/posts/react-hook-form-usefieldarray/) | 동적 리스트 폼 · `field.id`로 인덱스 버그 차단 |
+| [다단계 폼 · FormProvider](/posts/react-hook-form-multi-step/) | 언마운트 데이터 보존 · `shouldUnregister` |
+| [dirtyFields](/posts/react-hook-form-dirty-fields-patch/) | 변경분만 PATCH · `getDirtyValues` 재귀 |
+| [reset · values](/posts/react-hook-form-reset-values-async/) | 비동기 서버 데이터 · `reset` vs `resetField` |
 
 ---
 
@@ -174,7 +174,7 @@ const onSubmit: SubmitHandler<FormInputs> = async (formData) => {
 
 ## 🔗 참고 자료
 
-- 이전 섹션: [Zustand 선언적 상태 관리 총정리](https://saver7942.blogspot.com/2026/07/zustand-zustand.html)
+- 이전 섹션: [Zustand 선언적 상태 관리 총정리](/posts/react-zustand-declarative-recap/)
 
 - [React Hook Form 공식 문서 — setError](https://react-hook-form.com/docs/useform/seterror)
 

@@ -19,7 +19,7 @@ series: react-query
 part: 1
 ---
 
-[이전 편](https://saver7942.blogspot.com/2026/07/useeffect.html)에서 `useEffect` 페칭이 무너지는 세 지점을 확인했습니다. 늦게 도착한 응답이 최신 화면을 덮고, 같은 데이터를 컴포넌트 수만큼 요청하고, 로딩·에러·취소 코드를 화면마다 다시 씁니다.
+[이전 편](/posts/react-useeffect-fetching-pitfalls/)에서 `useEffect` 페칭이 무너지는 세 지점을 확인했습니다. 늦게 도착한 응답이 최신 화면을 덮고, 같은 데이터를 컴포넌트 수만큼 요청하고, 로딩·에러·취소 코드를 화면마다 다시 씁니다.
 
 이 문제들을 하나씩 막는 대신, 먼저 지워야 할 전제가 하나 있습니다. **"데이터는 내 컴포넌트의 상태"라는 생각입니다.** 서버 데이터는 소유물이 아니라 잠시 빌려온 사본이고, 원본은 서버에 있으며 언제든 다른 사람에 의해 바뀝니다. 그렇다면 클라이언트가 할 일은 데이터를 가져와 보관하는 것이 아니라, **원본을 비추는 거울을 유지하는 것**입니다.
 
@@ -208,15 +208,15 @@ export default function UserProfile({ userId }: { userId: number }) {
 
 - **엔진에 맡겨도 짚어야 할 지점은 남습니다.** 요청 취소는 `signal`을 넘겨야 실제로 동작하고, 기본 재요청 정책은 미리 확인해 두는 편이 좋습니다.
 
-- **`queryKey`는 곧 관리 대상이 됩니다.** [다음 편](https://saver7942.blogspot.com/2026/07/query-key-factory.html)에서 이 키를 문자열로 흩어 두지 않고 한 곳에서 계층으로 찍어내는 Query Key Factory 패턴을 다룹니다.
+- **`queryKey`는 곧 관리 대상이 됩니다.** [다음 편](/posts/react-query-key-factory/)에서 이 키를 문자열로 흩어 두지 않고 한 곳에서 계층으로 찍어내는 Query Key Factory 패턴을 다룹니다.
 
 ---
 
 ## 🔗 참고 자료
 
-- 다음 편: [Query Key Factory — 캐시 주소를 오타 없이, 계층으로 관리하기](https://saver7942.blogspot.com/2026/07/query-key-factory.html)
+- 다음 편: [Query Key Factory — 캐시 주소를 오타 없이, 계층으로 관리하기](/posts/react-query-key-factory/)
 
-- 이전 편: [useEffect 데이터 페칭이 무너지는 세 지점](https://saver7942.blogspot.com/2026/07/useeffect.html)
+- 이전 편: [useEffect 데이터 페칭이 무너지는 세 지점](/posts/react-useeffect-fetching-pitfalls/)
 
 - [TanStack Query 공식 문서 — Important Defaults](https://tanstack.com/query/latest/docs/framework/react/guides/important-defaults)
 

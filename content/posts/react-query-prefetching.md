@@ -21,7 +21,7 @@ series: react-query
 part: 9
 ---
 
-[이전 편](https://saver7942.blogspot.com/2026/07/useinfinitequery.html)에서 무한 스크롤을 "더 보기" 버튼으로 만들면서, 실서비스에서는 버튼 대신 감시 요소로 `fetchNextPage`를 부른다고 예고했습니다. 이번 편이 그 구현이자, 한 걸음 더 나아간 이야기입니다.
+[이전 편](/posts/react-query-useinfinitequery-infinite-scroll/)에서 무한 스크롤을 "더 보기" 버튼으로 만들면서, 실서비스에서는 버튼 대신 감시 요소로 `fetchNextPage`를 부른다고 예고했습니다. 이번 편이 그 구현이자, 한 걸음 더 나아간 이야기입니다.
 
 유튜브나 인스타그램에서 로딩을 거의 느끼지 못하는 이유는, 지금 보는 콘텐츠 **바로 아래**의 데이터를 앱이 백그라운드에서 미리 받아 두기 때문입니다. 이 기법이 **프리페칭(prefetching)** 입니다. TanStack Query에서는 두 가지 트리거로 구현합니다 — 사용자의 행동(호버)에 반응하는 **명령형** 방식과, 요소가 화면에 보이는지를 감지하는 **가시성 기반** 방식입니다.
 
@@ -62,9 +62,9 @@ const handleMouseEnter = (id: number) => {
 
 - **`prefetchQuery`** — `useQuery`와 거의 같은 인자를 받지만, 화면에 값을 반환하지 않고 **캐시만 채웁니다.** 이미 그 키에 신선한 데이터가 있으면 요청조차 하지 않습니다.
 
-- **키가 상세 화면과 같아야 합니다** — `['post', id]`는 상세 컴포넌트의 `useQuery`가 쓸 키와 정확히 일치해야 합니다. 그래야 진입 시 이 캐시를 그대로 씁니다([3편](https://saver7942.blogspot.com/2026/07/query-key-factory.html)에서 키를 팩토리로 관리한 이유가 여기서도 살아납니다).
+- **키가 상세 화면과 같아야 합니다** — `['post', id]`는 상세 컴포넌트의 `useQuery`가 쓸 키와 정확히 일치해야 합니다. 그래야 진입 시 이 캐시를 그대로 씁니다([3편](/posts/react-query-key-factory/)에서 키를 팩토리로 관리한 이유가 여기서도 살아납니다).
 
-- **중복은 엔진이 합칩니다** — 프리페칭이 진행 중일 때 사용자가 클릭해도, 같은 키의 요청은 새로 나가지 않고 진행 중인 것을 재사용합니다([2편](https://saver7942.blogspot.com/2026/07/tanstack-query.html)의 중복 제거와 같은 동작).
+- **중복은 엔진이 합칩니다** — 프리페칭이 진행 중일 때 사용자가 클릭해도, 같은 키의 요청은 새로 나가지 않고 진행 중인 것을 재사용합니다([2편](/posts/react-tanstack-query-server-state-sync/)의 중복 제거와 같은 동작).
 
 ---
 
@@ -149,7 +149,7 @@ export default function PostDetail({ id }: { id: number }) {
 
 목록에서 이미 `['post', id]`로 캐시를 채웠다면, 이 `useQuery`는 캐시를 즉시 만나 `isPending`이 `false`가 됩니다. 로딩 화면을 거치지 않고 바로 그려집니다.
 
-여기서 [4편](https://saver7942.blogspot.com/2026/07/tanstack-query-freshstaleinactive.html)의 구분을 정확히 적용해야 합니다. **로딩 스피너가 사라지는 것은 캐시가 있기 때문(`gcTime`)이고, 진입 직후의 배경 재요청까지 없애는 것은 `staleTime` 덕분입니다.** 프리페칭에만 `staleTime`을 주고 상세 `useQuery`에는 주지 않으면, 화면은 즉시 뜨지만 진입하는 순간 데이터가 stale로 간주돼 배경 재요청이 한 번 더 나갑니다(스피너는 안 뜹니다). 두 곳의 `staleTime`을 맞춰야 재요청까지 완전히 없어집니다.
+여기서 [4편](/posts/react-query-data-lifecycle/)의 구분을 정확히 적용해야 합니다. **로딩 스피너가 사라지는 것은 캐시가 있기 때문(`gcTime`)이고, 진입 직후의 배경 재요청까지 없애는 것은 `staleTime` 덕분입니다.** 프리페칭에만 `staleTime`을 주고 상세 `useQuery`에는 주지 않으면, 화면은 즉시 뜨지만 진입하는 순간 데이터가 stale로 간주돼 배경 재요청이 한 번 더 나갑니다(스피너는 안 뜹니다). 두 곳의 `staleTime`을 맞춰야 재요청까지 완전히 없어집니다.
 
 ---
 
@@ -195,9 +195,9 @@ export default function PostDetail({ id }: { id: number }) {
 
 ## 🔗 참고 자료
 
-- 다음 편: [검색 UX 깜빡임 없애기 — keepPreviousData와 디바운스](https://saver7942.blogspot.com/2026/07/ux-keeppreviousdata.html)
+- 다음 편: [검색 UX 깜빡임 없애기 — keepPreviousData와 디바운스](/posts/react-query-keep-previous-data-search/)
 
-- 이전 편: [무한 스크롤 — 수동 상태의 늪에서 useInfiniteQuery로](https://saver7942.blogspot.com/2026/07/useinfinitequery.html)
+- 이전 편: [무한 스크롤 — 수동 상태의 늪에서 useInfiniteQuery로](/posts/react-query-useinfinitequery-infinite-scroll/)
 
 - [TanStack Query 공식 문서 — Prefetching](https://tanstack.com/query/latest/docs/framework/react/guides/prefetching)
 

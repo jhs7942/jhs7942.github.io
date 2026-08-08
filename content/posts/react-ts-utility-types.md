@@ -22,7 +22,7 @@ series: react-ts
 part: 5
 ---
 
-같은 구조의 타입을 매번 처음부터 다시 정의하면, 원본이 바뀔 때마다 사본까지 전부 고쳐야 합니다. TypeScript는 **기존 타입을 재료로 새 타입을 파생시키는** 도구를 제공합니다. HTML 요소의 속성 타입을 통째로 가져오고, 상속으로 확장하고, 필요한 키만 고르거나 빼고, 전부 선택적으로 바꾸는 방법을 실습과 함께 정리합니다. HTML 표준 속성 상속과 `Omit`의 기초는 [선행 글(컴포넌트 타입)](https://saver7942.blogspot.com/2026/07/react-reactnodecomponentpropswithref.html)에서 다뤘고, 이 글은 그 도구 상자를 넓힙니다.
+같은 구조의 타입을 매번 처음부터 다시 정의하면, 원본이 바뀔 때마다 사본까지 전부 고쳐야 합니다. TypeScript는 **기존 타입을 재료로 새 타입을 파생시키는** 도구를 제공합니다. HTML 요소의 속성 타입을 통째로 가져오고, 상속으로 확장하고, 필요한 키만 고르거나 빼고, 전부 선택적으로 바꾸는 방법을 실습과 함께 정리합니다. HTML 표준 속성 상속과 `Omit`의 기초는 [선행 글(컴포넌트 타입)](/posts/react-ts-component-prop-types/)에서 다뤘고, 이 글은 그 도구 상자를 넓힙니다.
 
 ---
 
@@ -40,7 +40,7 @@ type NativeButtonProps = React.ComponentPropsWithoutRef<'button'>;
 
 - 사용자가 `title`, `onBlur` 같은 속성을 커스텀 컴포넌트에 그대로 쓸 수 있습니다.
 
-**`WithoutRef`와 `WithRef`의 차이** — `ref`는 DOM에 직접 접근하는 특수 prop입니다. 컴포넌트가 `ref`를 내부 요소로 전달(forward)하지 않는다면 `ComponentPropsWithoutRef`가 안전한 기본값입니다. `ref`까지 넘겨야 하는 컴포넌트라면 [04강에서 다룬](https://saver7942.blogspot.com/2026/07/react-reactnodecomponentpropswithref.html) `ComponentPropsWithRef`를 씁니다.
+**`WithoutRef`와 `WithRef`의 차이** — `ref`는 DOM에 직접 접근하는 특수 prop입니다. 컴포넌트가 `ref`를 내부 요소로 전달(forward)하지 않는다면 `ComponentPropsWithoutRef`가 안전한 기본값입니다. `ref`까지 넘겨야 하는 컴포넌트라면 [04강에서 다룬](/posts/react-ts-component-prop-types/) `ComponentPropsWithRef`를 씁니다.
 
 ---
 
@@ -197,7 +197,7 @@ export function ProfileEditor() {
 
 - **`Partial`은 한 단계(shallow)만 적용됩니다.** 중첩 객체의 내부 속성까지 선택적으로 만들지는 않습니다. 깊은 구조에는 별도 처리가 필요합니다.
 
-- **상속 시 같은 이름의 속성 타입이 충돌하면 오류가 납니다.** 표준 속성과 의미가 겹치는 커스텀 속성을 넣으려면 `Omit`으로 먼저 제거한 뒤 재정의합니다([04강](https://saver7942.blogspot.com/2026/07/react-reactnodecomponentpropswithref.html) 참고).
+- **상속 시 같은 이름의 속성 타입이 충돌하면 오류가 납니다.** 표준 속성과 의미가 겹치는 커스텀 속성을 넣으려면 `Omit`으로 먼저 제거한 뒤 재정의합니다([04강](/posts/react-ts-component-prop-types/) 참고).
 
 ---
 
@@ -225,6 +225,6 @@ export function ProfileEditor() {
 
 ## 🔗 참고 자료
 
-- 선행 글: [React 컴포넌트에 타입 붙이기 (ComponentPropsWithRef·Omit 포함)](https://saver7942.blogspot.com/2026/07/react-reactnodecomponentpropswithref.html)
+- 선행 글: [React 컴포넌트에 타입 붙이기 (ComponentPropsWithRef·Omit 포함)](/posts/react-ts-component-prop-types/)
 
 - [TypeScript 공식 문서 — Utility Types](https://www.typescriptlang.org/docs/handbook/utility-types.html)

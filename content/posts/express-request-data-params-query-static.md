@@ -18,7 +18,7 @@ legacy_url: 'https://saver7942.blogspot.com/2026/07/express-33-bodyparamsquery.h
 draft: false
 ---
 
-[1편](https://saver7942.blogspot.com/2026/07/nodejs-http-13.html)에서 순수 http를, [2편](https://saver7942.blogspot.com/2026/07/express-23-http.html)에서 Express 라우팅과 미들웨어를 다뤘습니다. 마지막 편은 요청에서 **데이터를 꺼내는 방법**과 **정적 파일 제공**을 정리합니다. 클라이언트가 데이터를 실어 보내는 통로는 크게 본문(body)·경로 파라미터(params)·쿼리 스트링(query) 세 가지입니다.
+[1편](/posts/nodejs-http-module-server-basics/)에서 순수 http를, [2편](/posts/express-routing-middleware-basics/)에서 Express 라우팅과 미들웨어를 다뤘습니다. 마지막 편은 요청에서 **데이터를 꺼내는 방법**과 **정적 파일 제공**을 정리합니다. 클라이언트가 데이터를 실어 보내는 통로는 크게 본문(body)·경로 파라미터(params)·쿼리 스트링(query) 세 가지입니다.
 
 ## 📨 1. 본문 파싱 — express.json(), express.urlencoded()
 

@@ -21,7 +21,7 @@ series: react-hook-form
 part: 3
 ---
 
-여러 단계로 나뉜 위저드 폼에서 "다음" 버튼을 누르면 이전 단계의 입력들이 화면에서 사라집니다. 이때 입력했던 값까지 사라지면, 뒤로 돌아왔을 때 빈 칸만 남습니다. React Hook Form으로 다단계 폼을 만들 때 데이터를 지키는 패턴을 정리합니다. [이전 글(useFieldArray)](https://saver7942.blogspot.com/2026/07/react-hook-form-usefieldarray-fieldid.html)에 이어 폼 관리 두 번째 글입니다.
+여러 단계로 나뉜 위저드 폼에서 "다음" 버튼을 누르면 이전 단계의 입력들이 화면에서 사라집니다. 이때 입력했던 값까지 사라지면, 뒤로 돌아왔을 때 빈 칸만 남습니다. React Hook Form으로 다단계 폼을 만들 때 데이터를 지키는 패턴을 정리합니다. [이전 글(useFieldArray)](/posts/react-hook-form-usefieldarray/)에 이어 폼 관리 두 번째 글입니다.
 
 ---
 

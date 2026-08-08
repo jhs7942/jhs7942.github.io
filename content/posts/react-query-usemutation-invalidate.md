@@ -23,7 +23,7 @@ series: react-query
 part: 6
 ---
 
-[이전 편](https://saver7942.blogspot.com/2026/07/usesuspensequeries-suspense-waterfall.html)까지 여섯 편은 전부 **읽기**였습니다. `useQuery`도 `useSuspenseQuery`도 서버 데이터를 관찰해 화면에 비추는 도구입니다. 하지만 실제 앱은 데이터를 읽기만 하지 않습니다. 글을 쓰고, 고치고, 지웁니다.
+[이전 편](/posts/react-query-parallel-suspense-queries/)까지 여섯 편은 전부 **읽기**였습니다. `useQuery`도 `useSuspenseQuery`도 서버 데이터를 관찰해 화면에 비추는 도구입니다. 하지만 실제 앱은 데이터를 읽기만 하지 않습니다. 글을 쓰고, 고치고, 지웁니다.
 
 `useMutation`은 그 쓰기를 담당합니다. `useQuery`가 마운트되면 알아서 데이터를 가져오는 **관찰자**라면, `useMutation`은 버튼을 눌러야 비로소 움직이는 **행동 대장**입니다. 이 편은 그 사용법과 함께, 초보가 반드시 한 번은 부딪히는 지점 — "서버는 바꿨는데 화면이 그대로"인 상황을 풀어냅니다.
 
@@ -146,7 +146,7 @@ const { mutate, isPending } = useMutation<Post, Error, UpdatePostDto>({
 
 - **강제 새로고침** — `onSuccess`에서 `window.location.reload()`. 서버 값은 확실히 다시 받지만, 이미 받아 둔 JS·CSS·이미지를 전부 버리고 앱을 통째로 재부팅합니다. 스크롤 위치와 작성 중이던 입력이 사라지고 화면이 잠깐 하얘집니다. SPA의 이점을 스스로 반납하는 셈입니다.
 
-- **수동 `setState` 동기화** — 응답으로 관련 `useState`를 `map`으로 갈아끼웁니다. 그러나 이 데이터와 엮인 상태가 어디어디 있는지 전부 기억해야 하고(인지 부하), 하나라도 빠뜨리면 불일치, 여러 요청이 겹치면 경쟁 상태입니다. [1편](https://saver7942.blogspot.com/2026/07/useeffect.html)에서 벗어났던 그 지옥으로 되돌아갑니다.
+- **수동 `setState` 동기화** — 응답으로 관련 `useState`를 `map`으로 갈아끼웁니다. 그러나 이 데이터와 엮인 상태가 어디어디 있는지 전부 기억해야 하고(인지 부하), 하나라도 빠뜨리면 불일치, 여러 요청이 겹치면 경쟁 상태입니다. [1편](/posts/react-useeffect-fetching-pitfalls/)에서 벗어났던 그 지옥으로 되돌아갑니다.
 
 두 길 모두 캐시를 "내가 관리할 남의 문제"로 취급합니다. 하지만 그 캐시를 관리하는 주체는 이미 있습니다. 거기에 "낡았다"고 알리기만 하면 됩니다.
 
@@ -154,7 +154,7 @@ const { mutate, isPending } = useMutation<Post, Error, UpdatePostDto>({
 
 ## 🔄 5. invalidateQueries — 점수판을 다시 맞춘다
 
-맞추는 방법이 [3편](https://saver7942.blogspot.com/2026/07/query-key-factory.html)의 `invalidateQueries`입니다. 성공 직후, 영향받은 캐시를 무효화합니다.
+맞추는 방법이 [3편](/posts/react-query-key-factory/)의 `invalidateQueries`입니다. 성공 직후, 영향받은 캐시를 무효화합니다.
 
 ```tsx
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -177,9 +177,9 @@ export default function PostEditor() {
 }
 ```
 
-이 한 걸음이 앞의 두 편을 회수합니다. `invalidateQueries`는 해당 캐시를 [4편](https://saver7942.blogspot.com/2026/07/tanstack-query-freshstaleinactive.html)에서 본 **stale 상태로 만들고**, 그 쿼리를 지금 화면에서 쓰고 있다면 곧바로 배경 재요청을 트리거합니다. stale이 되는 트리거 네 가지 중 "수동 무효화"가 바로 이것입니다.
+이 한 걸음이 앞의 두 편을 회수합니다. `invalidateQueries`는 해당 캐시를 [4편](/posts/react-query-data-lifecycle/)에서 본 **stale 상태로 만들고**, 그 쿼리를 지금 화면에서 쓰고 있다면 곧바로 배경 재요청을 트리거합니다. stale이 되는 트리거 네 가지 중 "수동 무효화"가 바로 이것입니다.
 
-그리고 [3편](https://saver7942.blogspot.com/2026/07/query-key-factory.html)의 팩토리 키가 여기서 빛을 냅니다. `postKeys.lists()`처럼 계열 키 하나를 넘기면 부분 매칭으로 목록 관련 캐시가 한 번에 걸립니다. 문자열을 흩어 놨다면 무효화할 키를 일일이 찾아 적어야 했을 자리입니다.
+그리고 [3편](/posts/react-query-key-factory/)의 팩토리 키가 여기서 빛을 냅니다. `postKeys.lists()`처럼 계열 키 하나를 넘기면 부분 매칭으로 목록 관련 캐시가 한 번에 걸립니다. 문자열을 흩어 놨다면 무효화할 키를 일일이 찾아 적어야 했을 자리입니다.
 
 <details style="margin:10px 0 4px">
 <summary style="cursor:pointer;font-weight:700;color:#C8443C">수정 버튼을 누른 뒤의 전체 흐름</summary>
@@ -202,7 +202,7 @@ export default function PostEditor() {
 
 - **무효화 대신 직접 갱신도 가능** — `queryClient.setQueryData(key, 새값)`로 응답 데이터를 캐시에 곧장 써 넣으면 재요청 없이 즉시 반영됩니다. 다만 서버 계산 결과와 어긋날 위험이 있어, 확실할 때만 씁니다.
 
-- **낙관적 업데이트는 다음 단계** — 응답을 기다리지 않고 화면을 먼저 바꾸는 방식은 `onMutate`에서 캐시를 미리 고치고 `onError`에서 되돌리는 패턴입니다. 체감 속도를 크게 높이지만 롤백 설계가 필요해, 기본 리듬(무효화)에 익숙해진 뒤 적용합니다. [다음 편](https://saver7942.blogspot.com/2026/07/onmutate-0-ux.html)에서 이 패턴을 자세히 다룹니다.
+- **낙관적 업데이트는 다음 단계** — 응답을 기다리지 않고 화면을 먼저 바꾸는 방식은 `onMutate`에서 캐시를 미리 고치고 `onError`에서 되돌리는 패턴입니다. 체감 속도를 크게 높이지만 롤백 설계가 필요해, 기본 리듬(무효화)에 익숙해진 뒤 적용합니다. [다음 편](/posts/react-query-optimistic-update/)에서 이 패턴을 자세히 다룹니다.
 
 - **`isPending`으로 버튼을 잠급니다** — mutation의 `isPending`은 요청 진행 상태입니다. 결제·전송처럼 중복 실행이 치명적인 동작은 반드시 버튼을 `disabled`로 묶습니다.
 
@@ -222,9 +222,9 @@ export default function PostEditor() {
 
 ## 🔗 참고 자료
 
-- 다음 편: [낙관적 업데이트 — onMutate·롤백·최종 동기화로 0초 UX 만들기](https://saver7942.blogspot.com/2026/07/onmutate-0-ux.html)
+- 다음 편: [낙관적 업데이트 — onMutate·롤백·최종 동기화로 0초 UX 만들기](/posts/react-query-optimistic-update/)
 
-- 이전 편: [useSuspenseQueries로 병렬 페칭 — Waterfall 함정 풀기](https://saver7942.blogspot.com/2026/07/usesuspensequeries-suspense-waterfall.html)
+- 이전 편: [useSuspenseQueries로 병렬 페칭 — Waterfall 함정 풀기](/posts/react-query-parallel-suspense-queries/)
 
 - [TanStack Query 공식 문서 — Mutations](https://tanstack.com/query/latest/docs/framework/react/guides/mutations)
 

@@ -20,7 +20,7 @@ series: react-query
 part: 2
 ---
 
-[이전 편](https://saver7942.blogspot.com/2026/07/tanstack-query.html)에서 `queryKey`가 캐시의 주소라고 했습니다. 주소인데 매번 손으로 문자열을 적습니다. `['user', userId]`와 `['users', userId]`는 사람 눈엔 거의 같지만 캐시에겐 완전히 다른 번지수입니다. 's' 하나 차이로 한쪽은 캐시를 맞히고 다른 쪽은 빗나가, 데이터를 고쳐도 화면이 안 바뀌는 버그가 됩니다.
+[이전 편](/posts/react-tanstack-query-server-state-sync/)에서 `queryKey`가 캐시의 주소라고 했습니다. 주소인데 매번 손으로 문자열을 적습니다. `['user', userId]`와 `['users', userId]`는 사람 눈엔 거의 같지만 캐시에겐 완전히 다른 번지수입니다. 's' 하나 차이로 한쪽은 캐시를 맞히고 다른 쪽은 빗나가, 데이터를 고쳐도 화면이 안 바뀌는 버그가 됩니다.
 
 이 글은 키를 한 곳에서 찍어내는 **Query Key Factory** 패턴으로 오타를 원천 차단하고, 계층 구조를 세워 그 구조가 무효화(invalidation)에서 어떻게 힘을 발휘하는지까지 정리합니다.
 
@@ -198,9 +198,9 @@ Devtools 패널을 열면 캐시 목록에 `["users","detail",1]` 형태로 계�
 
 ## 🔗 참고 자료
 
-- 다음 편: [데이터 생애주기 — Fresh·Stale·Inactive와 isFetching](https://saver7942.blogspot.com/2026/07/tanstack-query-freshstaleinactive.html)
+- 다음 편: [데이터 생애주기 — Fresh·Stale·Inactive와 isFetching](/posts/react-query-data-lifecycle/)
 
-- 이전 편: [TanStack Query 입문 — 데이터를 가져오는 대신 서버와 동기화하기](https://saver7942.blogspot.com/2026/07/tanstack-query.html)
+- 이전 편: [TanStack Query 입문 — 데이터를 가져오는 대신 서버와 동기화하기](/posts/react-tanstack-query-server-state-sync/)
 
 - [TkDodo 블로그 — Effective React Query Keys](https://tkdodo.eu/blog/effective-react-query-keys)
 

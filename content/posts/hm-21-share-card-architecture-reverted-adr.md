@@ -13,7 +13,6 @@ labels:
   - 설계 결정
 source: >-
   /Users/jeonghyeonseung/개발/how_many/.claude/study/adr/2026-04-18/hm-21-share-card-architecture.md
-legacy_url: 'https://saver7942.blogspot.com/'
 draft: false
 ---
 

@@ -20,7 +20,7 @@ series: zustand
 part: 3
 ---
 
-[이전 글](https://saver7942.blogspot.com/2026/07/zustand-statecreator.html)에서 Zustand의 슬라이스 패턴을 봤습니다. Zustand가 등장하기 전부터 복잡한 상태에는 `useReducer`라는 React 내장 방법이 있었는데, 많은 팀이 전역 상태에서는 Zustand로 옮겨갑니다. 왜일까요? 이 글은 `useReducer`의 보일러플레이트를 짚고, 같은 기능을 Zustand로 대비한 뒤, 언제 무엇을 쓸지 정리합니다. `useReducer`에 타입을 입히는 방법 자체는 [선행 글(useReducer 타입)](https://saver7942.blogspot.com/2026/07/typescript-usereducer-state.html)에서 다뤘습니다.
+[이전 글](/posts/react-zustand-slice-pattern/)에서 Zustand의 슬라이스 패턴을 봤습니다. Zustand가 등장하기 전부터 복잡한 상태에는 `useReducer`라는 React 내장 방법이 있었는데, 많은 팀이 전역 상태에서는 Zustand로 옮겨갑니다. 왜일까요? 이 글은 `useReducer`의 보일러플레이트를 짚고, 같은 기능을 Zustand로 대비한 뒤, 언제 무엇을 쓸지 정리합니다. `useReducer`에 타입을 입히는 방법 자체는 [선행 글(useReducer 타입)](/posts/react-ts-typed-usereducer/)에서 다뤘습니다.
 
 ---
 
@@ -34,7 +34,7 @@ part: 3
 
 - **리듀서(reducer)** — 규정집을 보고 현재 상태와 액션으로 새 상태를 계산하는 함수.
 
-상태를 컴포넌트 바깥의 순수 함수(reducer)로 분리해, 변경 규칙을 한곳에 모으는 것이 핵심입니다. 타입을 입히는 방법은 [선행 글](https://saver7942.blogspot.com/2026/07/typescript-usereducer-state.html)에서 다뤘습니다.
+상태를 컴포넌트 바깥의 순수 함수(reducer)로 분리해, 변경 규칙을 한곳에 모으는 것이 핵심입니다. 타입을 입히는 방법은 [선행 글](/posts/react-ts-typed-usereducer/)에서 다뤘습니다.
 
 ---
 
@@ -168,9 +168,9 @@ function Counter() {
 
 ## 🔗 참고 자료
 
-- 선행 글: [TypeScript로 useReducer 타입 안전하게 쓰기](https://saver7942.blogspot.com/2026/07/typescript-usereducer-state.html)
+- 선행 글: [TypeScript로 useReducer 타입 안전하게 쓰기](/posts/react-ts-typed-usereducer/)
 
-- 이전 글: [Zustand 슬라이스 패턴으로 스토어 나누기](https://saver7942.blogspot.com/2026/07/zustand-statecreator.html)
+- 이전 글: [Zustand 슬라이스 패턴으로 스토어 나누기](/posts/react-zustand-slice-pattern/)
 
 - [Zustand 공식 문서](https://zustand.docs.pmnd.rs/)
 

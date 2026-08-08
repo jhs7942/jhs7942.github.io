@@ -142,7 +142,7 @@ const encryptedAccount = refund_account
 
 더 뼈아픈 지점은 따로 있었습니다. 이 하드코딩 폴백 키는 **처음 보는 결함이 아닙니다.**
 
-3개월 전 [출시 전 보안 감사](https://saver7942.blogspot.com/2026/04/express-socketio-critical-6_0374203151.html)에서 CRITICAL 6건을 잡았는데, 그중 하나가 정확히 이것이었습니다.
+3개월 전 [출시 전 보안 감사](/posts/security-audit-fix-express-socketio/)에서 CRITICAL 6건을 잡았는데, 그중 하나가 정확히 이것이었습니다.
 
 ```javascript
 // 2026-04 — CRITICAL로 지적된 코드
@@ -265,7 +265,7 @@ if (!ACCOUNT_SECRET_KEY || ACCOUNT_SECRET_KEY.length < MIN_ACCOUNT_KEY_LENGTH) {
 
 ## 🔗 참고 자료
 
-- 이전 글: [코드 리뷰가 터뜨린 보안 경보 — Express + Socket.IO 앱에서 발견한 CRITICAL 6건 처리기](https://saver7942.blogspot.com/2026/04/express-socketio-critical-6_0374203151.html)
+- 이전 글: [코드 리뷰가 터뜨린 보안 경보 — Express + Socket.IO 앱에서 발견한 CRITICAL 6건 처리기](/posts/security-audit-fix-express-socketio/)
 
 - [SonarQube 규칙 S5542 — 안전한 암호화 모드와 패딩](https://rules.sonarsource.com/javascript/RSPEC-5542/)
 

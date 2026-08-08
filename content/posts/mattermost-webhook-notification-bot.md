@@ -18,7 +18,7 @@ legacy_url: 'https://saver7942.blogspot.com/2026/07/mattermost-webhook-22.html'
 draft: false
 ---
 
-[1편](https://saver7942.blogspot.com/2026/04/github-actions-cron-mattermost-webhook.html)에서 "언제 실행할지"(GitHub Actions cron 스케줄링과 지연 특성)를 정리했습니다. 이번 편은 "무엇을 실행할지" — 실행된 봇이 Mattermost로 알림을 보내기까지의 구조를 정리합니다.
+[1편](/posts/github-actions-cron-webhook-basics/)에서 "언제 실행할지"(GitHub Actions cron 스케줄링과 지연 특성)를 정리했습니다. 이번 편은 "무엇을 실행할지" — 실행된 봇이 Mattermost로 알림을 보내기까지의 구조를 정리합니다.
 
 ## 📨 1. Mattermost Incoming Webhook
 
@@ -115,7 +115,7 @@ GitHub Actions (schedule: 50 23 * * 0)
 
 ## 🛠️ 3. 최종 워크플로우
 
-`.github/workflows/weekly-notify.yml` 전체 구성입니다. 스케줄(`50 23 * * 0`)이 이 시각인 이유는 [1편의 혼잡 슬롯 회피 설계](https://saver7942.blogspot.com/2026/04/github-actions-cron-mattermost-webhook.html)를 참고합니다.
+`.github/workflows/weekly-notify.yml` 전체 구성입니다. 스케줄(`50 23 * * 0`)이 이 시각인 이유는 [1편의 혼잡 슬롯 회피 설계](/posts/github-actions-cron-webhook-basics/)를 참고합니다.
 
 ```yaml
 name: Weekly Dev-Event Notify

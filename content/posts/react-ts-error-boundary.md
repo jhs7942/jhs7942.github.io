@@ -28,7 +28,7 @@ React에서는 하위 컴포넌트 하나가 렌더 도중 에러를 던지면, 
 
 하위 트리의 렌더 에러를 붙잡는 API는 두 생명주기 메서드 **`getDerivedStateFromError`**와 **`componentDidCatch`** 뿐인데, 이 둘은 클래스에만 존재하고 동등한 훅이 없습니다(React 19 기준). 그래서 이 컴포넌트 하나는 함수형이 주류인 지금도 예외적으로 클래스로 작성합니다.
 
-감쌀 대상인 `children`과 대체 UI인 `fallback`의 타입에는 `React.ReactNode`를 씁니다. `ReactNode`는 JSX·문자열·숫자·배열·`null` 등 React가 그릴 수 있는 모든 값을 포함하는 타입입니다([04강에서 정리](https://saver7942.blogspot.com/2026/07/react-reactnodecomponentpropswithref.html)).
+감쌀 대상인 `children`과 대체 UI인 `fallback`의 타입에는 `React.ReactNode`를 씁니다. `ReactNode`는 JSX·문자열·숫자·배열·`null` 등 React가 그릴 수 있는 모든 값을 포함하는 타입입니다([04강에서 정리](/posts/react-ts-component-prop-types/)).
 
 ---
 
@@ -47,7 +47,7 @@ function getMessage(error: unknown): string {
 }
 ```
 
-`instanceof Error`는 값이 표준 `Error` 객체인지 실행 중에 검사하고, 통과한 블록 안에서 타입을 `Error`로 좁혀 줍니다. [10강의 타입 가드](https://saver7942.blogspot.com/2026/07/typescript-is-api.html)와 같은 좁히기(narrowing) 원리이며, `instanceof`는 클래스 인스턴스를 확인하는 내장 타입 가드입니다.
+`instanceof Error`는 값이 표준 `Error` 객체인지 실행 중에 검사하고, 통과한 블록 안에서 타입을 `Error`로 좁혀 줍니다. [10강의 타입 가드](/posts/react-ts-type-guard/)와 같은 좁히기(narrowing) 원리이며, `instanceof`는 클래스 인스턴스를 확인하는 내장 타입 가드입니다.
 
 ---
 
@@ -185,8 +185,8 @@ export default function App() {
 
 ## 🔗 참고 자료
 
-- 선행 글: [React 컴포넌트에 타입 붙이기 (ReactNode 포함)](https://saver7942.blogspot.com/2026/07/react-reactnodecomponentpropswithref.html)
+- 선행 글: [React 컴포넌트에 타입 붙이기 (ReactNode 포함)](/posts/react-ts-component-prop-types/)
 
-- 선행 글: [TypeScript 타입 가드 (is 타입 술어·좁히기)](https://saver7942.blogspot.com/2026/07/typescript-is-api.html)
+- 선행 글: [TypeScript 타입 가드 (is 타입 술어·좁히기)](/posts/react-ts-type-guard/)
 
 - [React 공식 문서 — Error Boundary (Component.getDerivedStateFromError)](https://react.dev/reference/react/Component#static-getderivedstatefromerror)

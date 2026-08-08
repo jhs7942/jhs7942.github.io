@@ -178,4 +178,4 @@ methods.handleSubmit(data => console.log("최종 데이터:", data))
 
 ## 🔗 참고 자료
 
-- [React Hook Form: useWatch vs getValues](https://saver7942.blogspot.com/2026/07/react-hook-form-usewatch-vs-getvalues.html) — 이전 RHF 학습 정리: 구독(`useWatch`)과 스냅샷(`getValues`)의 차이와 리렌더링 전략
+- [React Hook Form: useWatch vs getValues](/posts/rhf-usewatch-vs-getvalues/) — 이전 RHF 학습 정리: 구독(`useWatch`)과 스냅샷(`getValues`)의 차이와 리렌더링 전략

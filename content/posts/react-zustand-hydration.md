@@ -19,7 +19,7 @@ series: zustand
 part: 6
 ---
 
-[이전 글](https://saver7942.blogspot.com/2026/07/zustand-persist-localstorage.html)에서 `persist`로 상태를 저장·복원하는 것을 봤습니다. 이 복원 과정을 **하이드레이션(hydration)**이라 합니다. 클라이언트에서만 도는 앱에서는 대개 문제없이 매끄럽지만, 서버 사이드 렌더링(SSR) 환경에서는 서버와 클라이언트의 초기 상태가 달라 문제가 생깁니다. 이 글은 하이드레이션의 동작과 SSR 대응을 정리합니다.
+[이전 글](/posts/react-zustand-persist/)에서 `persist`로 상태를 저장·복원하는 것을 봤습니다. 이 복원 과정을 **하이드레이션(hydration)**이라 합니다. 클라이언트에서만 도는 앱에서는 대개 문제없이 매끄럽지만, 서버 사이드 렌더링(SSR) 환경에서는 서버와 클라이언트의 초기 상태가 달라 문제가 생깁니다. 이 글은 하이드레이션의 동작과 SSR 대응을 정리합니다.
 
 ---
 
@@ -114,7 +114,7 @@ useAuthStore.persist.rehydrate();
 
 ## ⚠️ 4. 주의사항
 
-- **persist는 복원값의 형태를 검증하지 않습니다.** 하이드레이션은 저장된 문자열을 되살릴 뿐, 그 모양이 현재 타입과 맞는지 보장하지 않습니다([이전 글](https://saver7942.blogspot.com/2026/07/zustand-persist-localstorage.html) 참고). 스키마가 바뀌면 `version`·`migrate`로 변환하고, 신뢰할 수 없는 값은 타입 가드로 검증합니다.
+- **persist는 복원값의 형태를 검증하지 않습니다.** 하이드레이션은 저장된 문자열을 되살릴 뿐, 그 모양이 현재 타입과 맞는지 보장하지 않습니다([이전 글](/posts/react-zustand-persist/) 참고). 스키마가 바뀌면 `version`·`migrate`로 변환하고, 신뢰할 수 없는 값은 타입 가드로 검증합니다.
 
 - **하이드레이션 전 상태는 기본값입니다.** 첫 렌더는 기본값 기준이라는 점을 감안해, 복원값에 의존하는 UI는 `hasHydrated` 이후에 그립니다.
 
@@ -142,6 +142,6 @@ useAuthStore.persist.rehydrate();
 
 ## 🔗 참고 자료
 
-- 이전 글: [Zustand persist로 상태 자동 저장하기](https://saver7942.blogspot.com/2026/07/zustand-persist-localstorage.html)
+- 이전 글: [Zustand persist로 상태 자동 저장하기](/posts/react-zustand-persist/)
 
 - [Zustand 공식 문서 — Hydration and asynchronous storages](https://zustand.docs.pmnd.rs/integrations/persisting-store-data#hydration-and-asynchronous-storages)

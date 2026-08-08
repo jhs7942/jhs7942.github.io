@@ -17,7 +17,7 @@ legacy_url: 'https://saver7942.blogspot.com/2026/07/express-23-http.html'
 draft: false
 ---
 
-[1편](https://saver7942.blogspot.com/2026/07/nodejs-http-13.html)에서는 순수 `http` 모듈로 라우팅과 정적 파일 서빙을 직접 구현했습니다. 이번 편은 그 번거로움을 **Express**가 어떻게 줄이는지, 그리고 Express의 핵심 개념인 **미들웨어**를 정리합니다.
+[1편](/posts/nodejs-http-module-server-basics/)에서는 순수 `http` 모듈로 라우팅과 정적 파일 서빙을 직접 구현했습니다. 이번 편은 그 번거로움을 **Express**가 어떻게 줄이는지, 그리고 Express의 핵심 개념인 **미들웨어**를 정리합니다.
 
 ## 📦 1. 순수 http에서 Express로
 

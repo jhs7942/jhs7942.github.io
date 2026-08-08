@@ -18,7 +18,7 @@ series: react-ts
 part: 6
 ---
 
-`interface`로 데이터 타입을 아무리 정확히 정의해도, 서버가 약속과 다른 응답을 보내면 앱은 런타임에 빈 화면으로 멈출 수 있습니다. 원인은 TypeScript가 **컴파일 타임에만 존재하는 도구**이기 때문이고, `as`는 그 컴파일 타임 검사마저 꺼 버리기 때문입니다. 이 글은 왜 이런 일이 생기는지 짚고, 외부에서 들어오는 데이터를 안전하게 다루는 방법을 정리합니다. `as` 단언의 기초는 [선행 글(interface·import type)](https://saver7942.blogspot.com/2026/07/typescript-interfaceimport-type-react.html)에서 다뤘습니다.
+`interface`로 데이터 타입을 아무리 정확히 정의해도, 서버가 약속과 다른 응답을 보내면 앱은 런타임에 빈 화면으로 멈출 수 있습니다. 원인은 TypeScript가 **컴파일 타임에만 존재하는 도구**이기 때문이고, `as`는 그 컴파일 타임 검사마저 꺼 버리기 때문입니다. 이 글은 왜 이런 일이 생기는지 짚고, 외부에서 들어오는 데이터를 안전하게 다루는 방법을 정리합니다. `as` 단언의 기초는 [선행 글(interface·import type)](/posts/typescript-interface-import-type-react-props/)에서 다뤘습니다.
 
 ---
 
@@ -165,7 +165,7 @@ setProduct(json);
 
 ## 🔗 참고 자료
 
-- 선행 글: [TypeScript interface·import type으로 React 컴포넌트 타입 안전하게 만들기](https://saver7942.blogspot.com/2026/07/typescript-interfaceimport-type-react.html)
+- 선행 글: [TypeScript interface·import type으로 React 컴포넌트 타입 안전하게 만들기](/posts/typescript-interface-import-type-react-props/)
 
 - [TypeScript 공식 문서 — Narrowing (타입 가드)](https://www.typescriptlang.org/docs/handbook/2/narrowing.html)
 

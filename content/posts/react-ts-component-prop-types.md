@@ -20,7 +20,7 @@ series: react-ts
 part: 2
 ---
 
-React를 JavaScript로 작성하면 `<Welcome age="스물다섯" />`처럼 잘못된 타입을 넘겨도, 화면이 깨지고 나서야 원인을 알게 됩니다. TypeScript는 이 실수를 코드를 저장하는 순간 편집기에서 잡아냅니다. 이 글에서는 컴포넌트에 타입 "이름표"를 붙이는 도구들을 각각의 실습 컴포넌트와 함께 정리합니다. 컴포넌트 데이터 규격을 `interface`로 정의하는 기초는 [선행 글(interface·import type)](https://saver7942.blogspot.com/2026/07/typescript-interfaceimport-type-react.html)에서 다룹니다.
+React를 JavaScript로 작성하면 `<Welcome age="스물다섯" />`처럼 잘못된 타입을 넘겨도, 화면이 깨지고 나서야 원인을 알게 됩니다. TypeScript는 이 실수를 코드를 저장하는 순간 편집기에서 잡아냅니다. 이 글에서는 컴포넌트에 타입 "이름표"를 붙이는 도구들을 각각의 실습 컴포넌트와 함께 정리합니다. 컴포넌트 데이터 규격을 `interface`로 정의하는 기초는 [선행 글(interface·import type)](/posts/typescript-interface-import-type-react-props/)에서 다룹니다.
 
 ---
 
@@ -227,6 +227,6 @@ export function InputField() {
 
 ## 🔗 참고 자료
 
-- 선행 글: [TypeScript interface·import type으로 React 컴포넌트 타입 안전하게 만들기](https://saver7942.blogspot.com/2026/07/typescript-interfaceimport-type-react.html)
+- 선행 글: [TypeScript interface·import type으로 React 컴포넌트 타입 안전하게 만들기](/posts/typescript-interface-import-type-react-props/)
 
 - [React 공식 문서 — TypeScript 사용하기](https://react.dev/learn/typescript)

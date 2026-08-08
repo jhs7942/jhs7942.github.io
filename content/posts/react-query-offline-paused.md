@@ -20,7 +20,7 @@ series: react-query
 part: 13
 ---
 
-[이전 편](https://saver7942.blogspot.com/2026/07/enabled.html)까지 요청의 순서와 형태를 다뤘습니다. 그런데 개발자가 통제할 수 없는 거대한 변수가 하나 남아 있습니다. **사용자의 네트워크 연결**입니다.
+[이전 편](/posts/react-query-dependent-enabled/)까지 요청의 순서와 형태를 다뤘습니다. 그런데 개발자가 통제할 수 없는 거대한 변수가 하나 남아 있습니다. **사용자의 네트워크 연결**입니다.
 
 지하철 터널을 지나거나 와이파이가 끊기는 찰나, 아무리 잘 짠 코드도 멈춥니다. 이때 TanStack Query가 어떻게 반응하는지, 그리고 왜 새로고침 한 번에 모든 게 사라지는지를 정확히 아는 것이 오프라인 UX 설계의 출발점입니다. 이 편은 그 "고통"의 실체를 봅니다. 해결책(캐시 지속성)은 다음 편입니다.
 
@@ -144,9 +144,9 @@ RAM에 있다는 것은, 페이지를 새로고침하면 자바스크립트 실�
 
 ## 🔗 참고 자료
 
-- 다음 편: [캐시 지속성 — persistQueryClient로 새로고침 너머 데이터 살리기](https://saver7942.blogspot.com/2026/07/persistqueryclient.html)
+- 다음 편: [캐시 지속성 — persistQueryClient로 새로고침 너머 데이터 살리기](/posts/react-query-persistence/)
 
-- 이전 편: [의존적 쿼리 — enabled로 순서 있는 데이터 호출 제어하기](https://saver7942.blogspot.com/2026/07/enabled.html)
+- 이전 편: [의존적 쿼리 — enabled로 순서 있는 데이터 호출 제어하기](/posts/react-query-dependent-enabled/)
 
 - [TanStack Query 공식 문서 — Network Mode](https://tanstack.com/query/latest/docs/framework/react/guides/network-mode)
 

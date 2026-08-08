@@ -18,7 +18,7 @@ series: react-ts
 part: 7
 ---
 
-[선행 글(09강)](https://saver7942.blogspot.com/2026/07/typescript-api-as.html)에서 `as`로 검증을 건너뛴 데이터가 런타임에 앱을 멈추는 과정을 봤습니다. 그때 방어책으로 타입 가드를 짧게 소개했는데, 이 글에서는 그 핵심인 **`is` 타입 술어가 정확히 어떻게 동작하는지**와, 검증 실패를 화면 붕괴 없이 처리하는 컴포넌트까지 깊이 들여다봅니다.
+[선행 글(09강)](/posts/react-ts-runtime-validation/)에서 `as`로 검증을 건너뛴 데이터가 런타임에 앱을 멈추는 과정을 봤습니다. 그때 방어책으로 타입 가드를 짧게 소개했는데, 이 글에서는 그 핵심인 **`is` 타입 술어가 정확히 어떻게 동작하는지**와, 검증 실패를 화면 붕괴 없이 처리하는 컴포넌트까지 깊이 들여다봅니다.
 
 ---
 
@@ -167,7 +167,7 @@ export function ProductPage({ productId }: { productId: number }) {
 
 ## 🔗 참고 자료
 
-- 선행 글: [TypeScript가 API 응답을 지켜주지 못하는 이유 (as의 함정)](https://saver7942.blogspot.com/2026/07/typescript-api-as.html)
+- 선행 글: [TypeScript가 API 응답을 지켜주지 못하는 이유 (as의 함정)](/posts/react-ts-runtime-validation/)
 
 - [TypeScript 공식 문서 — Narrowing과 타입 술어](https://www.typescriptlang.org/docs/handbook/2/narrowing.html)
 

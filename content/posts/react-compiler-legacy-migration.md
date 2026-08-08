@@ -18,7 +18,7 @@ series: react-compiler
 part: 5
 ---
 
-[이전 편](https://saver7942.blogspot.com/2026/07/blog-post_27.html)까지 컴파일러가 무엇을 하고 무엇을 남기는지 봤습니다. 이번엔 실무의 현실 — **레거시와 공존**입니다.
+[이전 편](/posts/react-compiler-why-hooks-still-matter/)까지 컴파일러가 무엇을 하고 무엇을 남기는지 봤습니다. 이번엔 실무의 현실 — **레거시와 공존**입니다.
 
 컴파일러를 설치해도 `node_modules`의 수천 개 라이브러리가 갑자기 최적화되진 않습니다. 오히려 예전 방식(렌더 중 ref 조작, mutation)에 의존하는 구형 라이브러리와 **충돌**할 수 있습니다. 규칙을 잘 지키는 최신 라이브러리는 컴파일러와 잘 맞지만, 구형 드래그앤드롭·차트·jQuery 의존 플러그인은 내부에서 리액트 규칙을 어깁니다. 이 둘이 섞인 프로젝트에 컴파일러를 켜면 드래그가 튕기거나 화면이 멈출 수 있습니다. 이 지뢰밭을 건너는 세 전략입니다.
 
@@ -122,7 +122,7 @@ function SafeChartWrapper({ data, config }) {
 
 - **부모(Dashboard)** — 비즈니스 로직은 컴파일러가 자동 최적화합니다.
 
-- **다리(useMemo)** — 데이터가 넘어가는 경계를 수동으로 고정합니다. [4편](https://saver7942.blogspot.com/2026/07/blog-post_27.html)에서 본 "리액트 밖 라이브러리와의 민감한 interop" 자리입니다. 컴파일러는 개발자가 명시한 `useMemo`를 무시하지 않고 "건드리지 말라"는 신호로 존중합니다.
+- **다리(useMemo)** — 데이터가 넘어가는 경계를 수동으로 고정합니다. [4편](/posts/react-compiler-why-hooks-still-matter/)에서 본 "리액트 밖 라이브러리와의 민감한 interop" 자리입니다. 컴파일러는 개발자가 명시한 `useMemo`를 무시하지 않고 "건드리지 말라"는 신호로 존중합니다.
 
 - **래퍼(SafeChartWrapper)** — 구형 라이브러리는 `"use no memo"` 안에서만 놉니다.
 
@@ -158,7 +158,7 @@ function SafeChartWrapper({ data, config }) {
 
 ## 🔗 참고 자료
 
-- 이전 편: [컴파일러 시대에도 훅이 필요한 이유 — 참조 안정성과 의도적 설계](https://saver7942.blogspot.com/2026/07/blog-post_27.html)
+- 이전 편: [컴파일러 시대에도 훅이 필요한 이유 — 참조 안정성과 의도적 설계](/posts/react-compiler-why-hooks-still-matter/)
 
 - [React 공식 문서 — React Compiler 도입하기](https://react.dev/learn/react-compiler/incremental-adoption)
 

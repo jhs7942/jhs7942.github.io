@@ -19,7 +19,7 @@ series: react-query
 part: 11
 ---
 
-[이전 편](https://saver7942.blogspot.com/2026/07/ux-keeppreviousdata.html)까지 화면 깜빡임을 잡았습니다. 이제 코드 안쪽의 비효율을 봅니다.
+[이전 편](/posts/react-query-keep-previous-data-search/)까지 화면 깜빡임을 잡았습니다. 이제 코드 안쪽의 비효율을 봅니다.
 
 서버는 보통 범용적인 목적으로 **날것의 큰 객체**를 보냅니다. 유저 객체 하나에 이름·이메일·전화·주소가 다 들어 있지만, 정작 어떤 컴포넌트는 이름 목록만, 다른 컴포넌트는 활성 유저 수만 필요합니다. 이 변환을 컴포넌트 본문에서 `map`·`filter`로 하면 UI 로직이 지저분해지고 매 렌더마다 연산이 반복됩니다. `useQuery`의 `select` 옵션이 이 변환을 쿼리 레벨로 옮깁니다.
 
@@ -100,7 +100,7 @@ const { data: activeCount } = useQuery({
 });
 ```
 
-두 컴포넌트가 **같은 키 `['users']`** 를 쓰므로, `fetchUsers`는 **한 번만** 호출됩니다([2편](https://saver7942.blogspot.com/2026/07/tanstack-query.html)의 중복 제거). 하나의 캐시를 두고 A는 `string[]`으로, B는 `number`로 각자 필요한 모양만 뽑아 씁니다.
+두 컴포넌트가 **같은 키 `['users']`** 를 쓰므로, `fetchUsers`는 **한 번만** 호출됩니다([2편](/posts/react-tanstack-query-server-state-sync/)의 중복 제거). 하나의 캐시를 두고 A는 `string[]`으로, B는 `number`로 각자 필요한 모양만 뽑아 씁니다.
 
 > 원본 강의에서는 `['users', 'names']`와 `['users', 'active-count']`처럼 키를 **다르게** 뒀는데, 그러면 캐시가 둘로 나뉘어 `fetchUsers`가 두 번 호출됩니다. `select`의 이점(하나의 서버 데이터를 여러 뷰로 구독)을 살리려면 **키를 같게** 두어야 합니다. 뽑아내는 모양이 다를 뿐 출처는 같은 데이터이기 때문입니다.
 
@@ -169,9 +169,9 @@ const { data } = useQuery({
 
 ## 🔗 참고 자료
 
-- 다음 편: [의존적 쿼리 — enabled로 순서 있는 데이터 호출 제어하기](https://saver7942.blogspot.com/2026/07/enabled.html)
+- 다음 편: [의존적 쿼리 — enabled로 순서 있는 데이터 호출 제어하기](/posts/react-query-dependent-enabled/)
 
-- 이전 편: [검색 UX 깜빡임 없애기 — keepPreviousData와 디바운스](https://saver7942.blogspot.com/2026/07/ux-keeppreviousdata.html)
+- 이전 편: [검색 UX 깜빡임 없애기 — keepPreviousData와 디바운스](/posts/react-query-keep-previous-data-search/)
 
 - [TanStack Query 공식 문서 — select](https://tanstack.com/query/latest/docs/framework/react/guides/render-optimizations#select)
 

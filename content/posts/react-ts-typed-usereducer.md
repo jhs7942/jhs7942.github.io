@@ -19,7 +19,7 @@ series: react-ts
 part: 4
 ---
 
-`useReducer`를 JavaScript로 쓰면 `dispatch`에 어떤 객체든 넘길 수 있습니다. `type`에 오타를 내거나 `payload`에 문자열을 넣어도 편집기는 조용하고, 문제는 실행 중에야 터집니다. 상태(State)와 명령(Action)에 타입을 입히면, dispatch가 "정의된 명령"만 받도록 강제되고 reducer 내부에서 데이터 타입까지 자동으로 맞춰집니다. 이 글은 그 과정을 end-to-end로 정리합니다. 여기서 쓰는 기초 문법은 선행 글 [interface·import type](https://saver7942.blogspot.com/2026/07/typescript-interfaceimport-type-react.html)과 [구별된 공용체](https://saver7942.blogspot.com/2026/07/react-reactnodecomponentpropswithref.html)에서 다룹니다.
+`useReducer`를 JavaScript로 쓰면 `dispatch`에 어떤 객체든 넘길 수 있습니다. `type`에 오타를 내거나 `payload`에 문자열을 넣어도 편집기는 조용하고, 문제는 실행 중에야 터집니다. 상태(State)와 명령(Action)에 타입을 입히면, dispatch가 "정의된 명령"만 받도록 강제되고 reducer 내부에서 데이터 타입까지 자동으로 맞춰집니다. 이 글은 그 과정을 end-to-end로 정리합니다. 여기서 쓰는 기초 문법은 선행 글 [interface·import type](/posts/typescript-interface-import-type-react-props/)과 [구별된 공용체](/posts/react-ts-component-prop-types/)에서 다룹니다.
 
 ---
 
@@ -207,8 +207,8 @@ export default function App() {
 
 ## 🔗 참고 자료
 
-- 선행 글: [TypeScript interface·import type으로 React 컴포넌트 타입 안전하게 만들기](https://saver7942.blogspot.com/2026/07/typescript-interfaceimport-type-react.html)
+- 선행 글: [TypeScript interface·import type으로 React 컴포넌트 타입 안전하게 만들기](/posts/typescript-interface-import-type-react-props/)
 
-- 선행 글: [React 컴포넌트에 타입 붙이기 (구별된 공용체 포함)](https://saver7942.blogspot.com/2026/07/react-reactnodecomponentpropswithref.html)
+- 선행 글: [React 컴포넌트에 타입 붙이기 (구별된 공용체 포함)](/posts/react-ts-component-prop-types/)
 
 - [React 공식 문서 — useReducer](https://react.dev/reference/react/useReducer)

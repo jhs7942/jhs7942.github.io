@@ -19,7 +19,7 @@ series: react-compiler
 part: 1
 ---
 
-이 글은 서버 상태([TanStack Query 시리즈](https://saver7942.blogspot.com/2026/07/tanstack-query.html))와 별개인, React 자체의 **렌더링 최적화** 이야기입니다.
+이 글은 서버 상태([TanStack Query 시리즈](/posts/react-tanstack-query-server-state-sync/))와 별개인, React 자체의 **렌더링 최적화** 이야기입니다.
 
 React의 기본 규칙은 단순합니다. **부모가 리렌더되면 자식도 무조건 리렌더됩니다.** 대규모 앱에서 이 규칙은 가혹해서, 개발자는 `React.memo`·`useMemo`·`useCallback`으로 끝없이 방어 코드를 써 왔습니다. 이 방어 코드가 우리가 내던 '최적화 세금'입니다. React Compiler는 이 세금을 없앱니다.
 
@@ -234,9 +234,9 @@ TanStack Query의 `mutate`처럼, 잘 설계된 라이브러리는 함수 참조
 
 ## 🔗 참고 자료
 
-- 다음 편: [React Compiler 내부 해부 — 파이프라인 4단계와 Rules of React](https://saver7942.blogspot.com/2026/07/react-compiler-4-rules-of-react.html)
+- 다음 편: [React Compiler 내부 해부 — 파이프라인 4단계와 Rules of React](/posts/react-compiler-pipeline-rules/)
 
-- 관련 시리즈: [서버 상태 관리(TanStack Query) — useMutation 편](https://saver7942.blogspot.com/2026/07/usemutation.html)
+- 관련 시리즈: [서버 상태 관리(TanStack Query) — useMutation 편](/posts/react-query-usemutation-invalidate/)
 
 - [React 공식 문서 — React Compiler](https://react.dev/learn/react-compiler)
 
