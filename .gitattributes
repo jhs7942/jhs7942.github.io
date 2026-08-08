@@ -1,0 +1,12 @@
+# 줄바꿈은 LF로 고정한다.
+#
+# 원본 published/ 가 CRLF였고, 체크아웃 때 CRLF로 되돌아오면 마크다운을 다루는
+# 스크립트의 \n 기반 정규식이 조용히 매치에 실패한다(빈 줄 정리가 안 먹은 적 있음).
+# 작업 트리까지 LF로 통일해 스크립트와 파일이 같은 전제를 쓰게 한다.
+* text=auto eol=lf
+
+# 바이너리는 변환 대상이 아니다.
+*.png binary
+*.jpg binary
+*.ico binary
+*.woff2 binary
