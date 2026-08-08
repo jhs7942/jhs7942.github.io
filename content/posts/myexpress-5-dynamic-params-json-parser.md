@@ -23,18 +23,6 @@ draft: false
 
 Express의 `app.get("/users/:id", handler)`는 URL에서 숫자를 꺼내 `req.params.id`로 제공하고, `express.json()`은 POST 요청의 JSON 본문을 `req.body`에 담아 줍니다. 이 두 기능이 내부에서 어떻게 동작하는지, 순수 Node.js 코드로 직접 구현해 봅니다.
 
-<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 6px"><a style="text-decoration:none;font-size:13.5px;font-weight:500;padding:8px 14px;border-radius:11px 12px 10px 12px;border:1.5px solid #C8443C;background:#FBFBF7;color:#243130" href="https://saver7942.blogspot.com/2026/07/express-16-http.html">① 순수 http</a><span style="color:#93A97F">›</span><a style="text-decoration:none;font-size:13.5px;font-weight:500;padding:8px 14px;border-radius:11px 12px 10px 12px;border:1.5px solid #C8443C;background:#FBFBF7;color:#243130" href="https://saver7942.blogspot.com/2026/07/express-26.html">② 라우트 테이블</a><span style="color:#93A97F">›</span><a style="text-decoration:none;font-size:13.5px;font-weight:500;padding:8px 14px;border-radius:11px 12px 10px 12px;border:1.5px solid #C8443C;background:#FBFBF7;color:#243130" href="https://saver7942.blogspot.com/2026/07/express-36-next.html">③ 미들웨어 체인</a><span style="color:#93A97F">›</span><a style="text-decoration:none;font-size:13.5px;font-weight:500;padding:8px 14px;border-radius:11px 12px 10px 12px;border:1.5px solid #C8443C;background:#FBFBF7;color:#243130" href="https://saver7942.blogspot.com/2026/07/express-46.html">④ 에러·정적</a><span style="color:#93A97F">›</span><span style="font-size:13.5px;font-weight:500;padding:8px 14px;border-radius:11px 12px 10px 12px;border:1.5px solid #C8443C;background:#C8443C;color:#FBFBF7">⑤ 파라미터·파서 · 현재</span><span style="color:#93A97F">›</span><a style="text-decoration:none;font-size:13.5px;font-weight:500;padding:8px 14px;border-radius:11px 12px 10px 12px;border:1.5px solid #C8443C;background:#FBFBF7;color:#243130" href="https://saver7942.blogspot.com/2026/07/express-66-createrouter.html">⑥ 라우터 모듈화</a></div>
-
-#### 목차
-
-1. [배경](#1)
-2. [addRoute — 경로 패턴을 조각으로 저장하기](#2-addroute)
-3. [matchRoute — URL 매칭과 파라미터 추출](#3-matchroute-url)
-4. [HTTP 본문은 스트림이다](#4-http)
-5. [jsonParser 미들웨어 구현](#5-jsonparser)
-6. [주의사항](#6)
-7. [핵심 정리](#7)
-
 ## 🔍 1. 배경
 
 앞의 네 편에서는 `http` 모듈 위에 라우터 테이블, 미들웨어 체인, 응답 헬퍼를 단계적으로 구축했습니다. 라우터 테이블에 등록된 경로는 `/users`, `/products`처럼 고정 문자열이었습니다.
@@ -337,5 +325,3 @@ HTTP/1.1 404 Not Found
 - **파싱 실패는 즉시 400** — `JSON.parse` 예외가 발생하면 `next()`를 호출하지 않고 400 응답으로 체인을 중단합니다. 이후 미들웨어가 잘못된 상태를 처리하지 않도록 막아야 합니다.
 
 다음 편(6편)에서는 폼 파서(`application/x-www-form-urlencoded` 본문 처리)와 `createRouter`를 이용한 라우터 모듈화를 다룹니다.
-
-<div style="display:flex;gap:12px;flex-wrap:wrap;margin:6px 0 0;justify-content:space-between"><a style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;padding:12px 18px;border-radius:12px 13px 11px 13px;border:1.5px solid #C8443C;background:#FBFBF7;color:#243130;font-size:14px;font-weight:500;box-shadow:0 6px 14px -8px rgba(47,58,57,0.4)" href="https://saver7942.blogspot.com/2026/07/express-46.html"><span style="color:#C8443C;font-size:16px">←</span><span><span style="font-size:11.5px;color:#93A97F;display:block">이전 편</span>에러 처리·정적 파일 (4편)</span></a><a style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;padding:12px 18px;border-radius:12px 13px 11px 13px;border:1.5px solid #C8443C;background:#FBFBF7;color:#243130;font-size:14px;font-weight:500;box-shadow:0 6px 14px -8px rgba(47,58,57,0.4)" href="https://saver7942.blogspot.com/2026/07/express-66-createrouter.html"><span><span style="font-size:11.5px;color:#93A97F;display:block;text-align:right">다음 편</span>폼 파서·라우터 모듈화 (6편)</span><span style="color:#C8443C;font-size:16px">→</span></a></div>

@@ -16,27 +16,13 @@ labels:
 source: 사용자 학습 노트 (서버 상태 관리 — 의존적 쿼리 enabled·skipToken·status/fetchStatus)
 legacy_url: 'https://saver7942.blogspot.com/2026/07/enabled.html'
 draft: false
+series: react-query
+part: 12
 ---
 
 [이전 편](https://saver7942.blogspot.com/2026/07/select.html)까지는 하나의 요청을 다루는 이야기였습니다. 이번엔 **요청 사이에 순서가 있는** 경우입니다.
 
 사용자 프로필을 먼저 가져와야 그 안의 `id`를 알 수 있고, 그 `id`가 있어야 사용자의 게시글을 요청할 수 있습니다. 두 요청을 동시에 보내면 두 번째는 `id`가 `undefined`인 채로 나가 서버 에러를 만납니다. 앞 요청이 끝날 때까지 뒤 요청을 붙잡아 둬야 합니다. 이 제어를 `enabled` 옵션으로 선언적으로 합니다.
-
-#### 목차
-
-1. [순서가 있는 호출 — 의존적 쿼리](#1)
-
-2. [enabled — 실행을 여는 게이트](#2-enabled)
-
-3. [status와 fetchStatus — 왜 pending인데 로딩이 아닌가](#3-status-fetchstatus-pending)
-
-4. [타입 안전 — userId!와 skipToken](#4-userid-skiptoken)
-
-5. [의존적 쿼리는 워터폴이다](#5)
-
-6. [주의사항](#6)
-
-7. [핵심 정리](#7)
 
 ---
 

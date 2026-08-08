@@ -16,27 +16,13 @@ labels:
 source: 사용자 학습 노트 (서버 상태 관리 — Query Key Factory / as const 계층 구조·부분 매칭 무효화)
 legacy_url: 'https://saver7942.blogspot.com/2026/07/query-key-factory.html'
 draft: false
+series: react-query
+part: 2
 ---
 
 [이전 편](https://saver7942.blogspot.com/2026/07/tanstack-query.html)에서 `queryKey`가 캐시의 주소라고 했습니다. 주소인데 매번 손으로 문자열을 적습니다. `['user', userId]`와 `['users', userId]`는 사람 눈엔 거의 같지만 캐시에겐 완전히 다른 번지수입니다. 's' 하나 차이로 한쪽은 캐시를 맞히고 다른 쪽은 빗나가, 데이터를 고쳐도 화면이 안 바뀌는 버그가 됩니다.
 
 이 글은 키를 한 곳에서 찍어내는 **Query Key Factory** 패턴으로 오타를 원천 차단하고, 계층 구조를 세워 그 구조가 무효화(invalidation)에서 어떻게 힘을 발휘하는지까지 정리합니다.
-
-#### 목차
-
-1. [문자열 키의 두 위험 — 오타와 분산](#1)
-
-2. [Query Key Factory — 한 곳에서 찍어내는 바코드](#2-query-key-factory)
-
-3. [as const 계층 구조 — 뿌리·가지·잎](#3-as-const)
-
-4. [계층이 힘을 발휘하는 순간 — 부분 매칭 무효화](#4)
-
-5. [컴포넌트 적용과 Devtools 확인](#5-devtools)
-
-6. [주의사항](#6)
-
-7. [핵심 정리](#7)
 
 ---
 

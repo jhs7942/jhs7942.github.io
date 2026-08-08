@@ -18,27 +18,13 @@ source: >-
   persistQueryClient·PersistQueryClientProvider·gcTime/maxAge/buster)
 legacy_url: 'https://saver7942.blogspot.com/2026/07/persistqueryclient.html'
 draft: false
+series: react-query
+part: 14
 ---
 
 [이전 편](https://saver7942.blogspot.com/2026/07/tanstack-query-paused.html)에서 기본 캐시가 휘발성 RAM에 있어 새로고침에 증발한다는 것을 봤습니다. 데이터(알맹이)를 새로고침 너머로 살리는 방법이 이번 편입니다.
 
 핵심은 간단합니다. 메모리에만 있던 캐시를 `localStorage` 같은 영속 저장소에 **박제**해 두고, 앱이 다시 켜질 때 그것을 읽어 메모리를 채웁니다. 그러면 지하철에서 새로고침해도(앱 파일이 캐시돼 있다는 전제하에) 이전에 본 데이터가 즉시 뜹니다.
-
-#### 목차
-
-1. [지속성이란 — 캐시를 저장소에 박제](#1)
-
-2. [Persister 설치와 정의](#2-persister)
-
-3. [PersistQueryClientProvider — 하이드레이션까지 안전하게](#3-persistqueryclientprovider)
-
-4. [gcTime·maxAge·buster — 세 설정의 의미](#4-gctimemaxagebuster)
-
-5. [무엇을 박제하고, 무엇을 말 것인가](#5)
-
-6. [주의사항](#6)
-
-7. [핵심 정리](#7)
 
 ---
 

@@ -16,21 +16,11 @@ labels:
 source: 사용자 학습 노트 (React 상태관리 — useReducer 보일러플레이트 vs Zustand)
 legacy_url: 'https://saver7942.blogspot.com/2026/07/usereducer-vs-zustand.html'
 draft: false
+series: zustand
+part: 3
 ---
 
 [이전 글](https://saver7942.blogspot.com/2026/07/zustand-statecreator.html)에서 Zustand의 슬라이스 패턴을 봤습니다. Zustand가 등장하기 전부터 복잡한 상태에는 `useReducer`라는 React 내장 방법이 있었는데, 많은 팀이 전역 상태에서는 Zustand로 옮겨갑니다. 왜일까요? 이 글은 `useReducer`의 보일러플레이트를 짚고, 같은 기능을 Zustand로 대비한 뒤, 언제 무엇을 쓸지 정리합니다. `useReducer`에 타입을 입히는 방법 자체는 [선행 글(useReducer 타입)](https://saver7942.blogspot.com/2026/07/typescript-usereducer-state.html)에서 다뤘습니다.
-
-#### 목차
-
-1. [useReducer의 구조](#1-usereducer)
-
-2. [보일러플레이트의 실체](#2)
-
-3. [같은 기능을 Zustand로](#3-zustand)
-
-4. [언제 useReducer, 언제 Zustand](#4-usereducer-zustand)
-
-5. [핵심 정리](#5)
 
 ---
 
@@ -185,5 +175,3 @@ function Counter() {
 - [Zustand 공식 문서](https://zustand.docs.pmnd.rs/)
 
 - [React 공식 문서 — useReducer](https://react.dev/reference/react/useReducer)
-
-<p style="margin:24px 0 2px;padding:13px 18px;border:1.5px solid #C8443C;border-radius:14px 15px 13px 15px;background:rgba(200,68,60,0.06);text-align:center;font-size:14.5px;line-height:1.7;color:#2F3A39">🧩 <b>React 상태 관리(Zustand) 시리즈</b> &nbsp;·&nbsp; <a style="color:#C8443C;font-weight:700;text-decoration:none" href="https://saver7942.blogspot.com/2026/07/zustand-zustand.html">전체 정리 · 목차 보기 →</a></p>

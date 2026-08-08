@@ -16,27 +16,13 @@ labels:
 source: 사용자 학습 노트 (서버 상태 관리 — useSuspenseQuery·Suspense·ErrorBoundary 선언적 페칭)
 legacy_url: 'https://saver7942.blogspot.com/2026/07/usesuspensequery.html'
 draft: false
+series: react-query
+part: 4
 ---
 
 [이전 편](https://saver7942.blogspot.com/2026/07/tanstack-query-freshstaleinactive.html)까지 `useQuery`가 돌려주는 `isPending`·`isFetching`·`error`를 컴포넌트 안에서 분기했습니다. 화면 하나마다 `if (isPending) return ...`, `if (error) return ...`가 데이터를 그리는 코드 위에 얹힙니다. 이건 "로딩이면 이걸 켜고, 에러면 저걸 켜라"는 **명령형** 방식입니다.
 
 이번 편은 그 분기를 컴포넌트 밖으로 들어냅니다. 컴포넌트는 "데이터가 있을 때 무엇을 그릴지"만 선언하고, 로딩과 에러라는 **상태 전환의 책임을 부모에게 위임**합니다. `useSuspenseQuery` + `Suspense` + `ErrorBoundary` 조합입니다.
-
-#### 목차
-
-1. [명령형에서 선언형으로 — 무엇을 걷어내나](#1)
-
-2. [useSuspenseQuery — data가 항상 존재한다](#2-usesuspensequery-data)
-
-3. [Suspense — 로딩을 부모로 올린다](#3-suspense)
-
-4. [ErrorBoundary — 에러도 하나의 UI 시나리오](#4-errorboundary-ui)
-
-5. [무엇이 사라졌나 — before/after](#5-beforeafter)
-
-6. [주의사항 — 공짜가 아니다](#6)
-
-7. [핵심 정리](#7)
 
 ---
 

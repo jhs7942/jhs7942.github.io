@@ -14,21 +14,11 @@ labels:
 source: 사용자 학습 노트 (React+TS — useRef·useId·타입 가드 입력 검증)
 legacy_url: 'https://saver7942.blogspot.com/2026/07/react-userefuseid.html'
 draft: false
+series: react-ts
+part: 10
 ---
 
 폼 입력값도 API 응답만큼이나 신뢰할 수 없는 외부 데이터입니다. 이 글에서는 입력창을 `useRef`로 참조하고, `useId`로 label과 연결하며, 입력값을 타입 가드로 검증해 규격에 맞는 값만 통과시키는 컴포넌트를 만듭니다. 타입 가드와 `is` 타입 술어의 원리 자체는 [선행 글(10강)](https://saver7942.blogspot.com/2026/07/typescript-is-api.html)에서 다뤘으므로, 이 글은 React 훅의 타입과 실전 적용에 집중합니다.
-
-#### 목차
-
-1. [useRef로 DOM 요소 타입 안전하게 참조하기](#1-useref-dom)
-
-2. [useId로 label과 input 연결하기](#2-useid-label-input)
-
-3. [입력값을 타입 가드로 검증하기](#3)
-
-4. [주의사항](#4)
-
-5. [핵심 정리](#5)
 
 ---
 
@@ -194,5 +184,3 @@ export function UserSettings() {
 - [React 공식 문서 — useRef](https://react.dev/reference/react/useRef)
 
 - [React 공식 문서 — useId](https://react.dev/reference/react/useId)
-
-<p style="margin:24px 0 2px;padding:13px 18px;border:1.5px solid #C8443C;border-radius:14px 15px 13px 15px;background:rgba(200,68,60,0.06);text-align:center;font-size:14.5px;line-height:1.7;color:#2F3A39">📚 <b>React · TypeScript 타입 안전</b> 시리즈 &nbsp;·&nbsp; <a style="color:#C8443C;font-weight:700;text-decoration:none" href="https://saver7942.blogspot.com/2026/07/react-typescript.html">전체 목차 · 정리 보기 →</a></p>

@@ -15,25 +15,11 @@ labels:
 source: 사용자 학습 노트 (React 렌더링 최적화 — 컴파일러 파이프라인·HIR·SSA·Rules of React·정밀 반응성)
 legacy_url: 'https://saver7942.blogspot.com/2026/07/react-compiler-4-rules-of-react.html'
 draft: false
+series: react-compiler
+part: 2
 ---
 
 [이전 편](https://saver7942.blogspot.com/2026/07/react-compiler-usememousecallback.html)에서 "최적화는 기계가 한다"고 했습니다. 그러면 당연히 의심이 듭니다. **"기계가 어떻게 내 코드의 의도를 알아채지? 엉뚱하게 건드려서 버그만 만드는 거 아냐?"** 이 편은 그 블랙박스를 열어 안을 봅니다. 그리고 컴파일러가 제 실력을 내도록 우리가 지켜야 할 규칙을 정리합니다.
-
-#### 목차
-
-1. [4단계 파이프라인 — 코드를 씹는 과정](#1-4)
-
-2. [코드 해부 — _c 금고와 if 캐싱](#2-_c-if)
-
-3. [Rules of React — 컴파일러의 헌법](#3-rules-of-react)
-
-4. [TypeScript Readonly — 위반을 타입으로 예방](#4-typescript-readonly)
-
-5. ["정밀 반응성"의 정확한 정체](#5)
-
-6. [진단 — ESLint로 bail-out 잡기](#6-eslint-bail-out)
-
-7. [핵심 정리](#7)
 
 ---
 

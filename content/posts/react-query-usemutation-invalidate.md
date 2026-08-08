@@ -19,27 +19,13 @@ source: >-
   useMutation·onSuccess/onError/onSettled·invalidateQueries)
 legacy_url: 'https://saver7942.blogspot.com/2026/07/usemutation.html'
 draft: false
+series: react-query
+part: 6
 ---
 
 [이전 편](https://saver7942.blogspot.com/2026/07/usesuspensequeries-suspense-waterfall.html)까지 여섯 편은 전부 **읽기**였습니다. `useQuery`도 `useSuspenseQuery`도 서버 데이터를 관찰해 화면에 비추는 도구입니다. 하지만 실제 앱은 데이터를 읽기만 하지 않습니다. 글을 쓰고, 고치고, 지웁니다.
 
 `useMutation`은 그 쓰기를 담당합니다. `useQuery`가 마운트되면 알아서 데이터를 가져오는 **관찰자**라면, `useMutation`은 버튼을 눌러야 비로소 움직이는 **행동 대장**입니다. 이 편은 그 사용법과 함께, 초보가 반드시 한 번은 부딪히는 지점 — "서버는 바꿨는데 화면이 그대로"인 상황을 풀어냅니다.
-
-#### 목차
-
-1. [useQuery vs useMutation — 관찰자와 행동 대장](#1-usequery-vs-usemutation)
-
-2. [기본형 — mutate라는 방아쇠](#2-mutate)
-
-3. [콜백 트리오 — onSuccess · onError · onSettled](#3-onsuccess-onerror-onsettled)
-
-4. [함정 — 서버는 바꿨는데 화면이 그대로](#4)
-
-5. [invalidateQueries — 점수판을 다시 맞춘다](#5-invalidatequeries)
-
-6. [주의사항](#6)
-
-7. [핵심 정리](#7)
 
 ---
 

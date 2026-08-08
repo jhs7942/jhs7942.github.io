@@ -22,16 +22,6 @@ draft: false
 
 1편에서 확인한 if-else 라우팅의 핵심 문제는 **등록과 탐색이 한 덩어리**라는 점입니다. 라우트가 늘어날수록 `createServer` 콜백만 비대해지고, 라우팅 로직을 재사용하거나 분리하기 어렵습니다. 이 문제를 해결하는 열쇠는 라우팅 정보를 **자료구조**로 표현하는 것입니다. 등록과 탐색을 분리하면 `app.get("/", handler)` 스타일 인터페이스의 출발점이 됩니다.
 
-<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 6px"><a style="text-decoration:none;font-size:13.5px;font-weight:500;padding:8px 14px;border-radius:11px 12px 10px 12px;border:1.5px solid #C8443C;background:#FBFBF7;color:#243130" href="https://saver7942.blogspot.com/2026/07/express-16-http.html">① 순수 http</a><span style="color:#93A97F">›</span><span style="font-size:13.5px;font-weight:500;padding:8px 14px;border-radius:11px 12px 10px 12px;border:1.5px solid #C8443C;background:#C8443C;color:#FBFBF7">② 라우트 테이블 · 현재</span><span style="color:#93A97F">›</span><a style="text-decoration:none;font-size:13.5px;font-weight:500;padding:8px 14px;border-radius:11px 12px 10px 12px;border:1.5px solid #C8443C;background:#FBFBF7;color:#243130" href="https://saver7942.blogspot.com/2026/07/express-36-next.html">③ 미들웨어 체인</a><span style="color:#93A97F">›</span><a style="text-decoration:none;font-size:13.5px;font-weight:500;padding:8px 14px;border-radius:11px 12px 10px 12px;border:1.5px solid #C8443C;background:#FBFBF7;color:#243130" href="https://saver7942.blogspot.com/2026/07/express-46.html">④ 에러·정적</a><span style="color:#93A97F">›</span><a style="text-decoration:none;font-size:13.5px;font-weight:500;padding:8px 14px;border-radius:11px 12px 10px 12px;border:1.5px solid #C8443C;background:#FBFBF7;color:#243130" href="https://saver7942.blogspot.com/2026/07/express-56-json.html">⑤ 파라미터·파서</a><span style="color:#93A97F">›</span><a style="text-decoration:none;font-size:13.5px;font-weight:500;padding:8px 14px;border-radius:11px 12px 10px 12px;border:1.5px solid #C8443C;background:#FBFBF7;color:#243130" href="https://saver7942.blogspot.com/2026/07/express-66-createrouter.html">⑥ 라우터 모듈화</a></div>
-
-#### 목차
-
-1. [라우트 배열 등록과 find 탐색](#1-find)
-2. [중첩 객체 핸들러 맵과 안전 접근](#2)
-3. [두 방식 트레이드오프 비교](#3)
-4. [주의사항](#4)
-5. [핵심 정리](#5)
-
 ---
 
 ## 🏗️ 1. 라우트 배열 등록과 find 탐색
@@ -261,5 +251,3 @@ const handler = methodHandlers && methodHandlers[url];
 - **쿼리 스트링 주의** — 두 방식 모두 `req.url` 전체를 문자열 비교하므로, 쿼리 스트링이 포함된 요청은 매칭에 실패합니다. 실제 사용 시 pathname만 추출해야 합니다.
 
 3편에서는 `next()`를 매개로 핸들러를 체인으로 연결하는 미들웨어 구조를 직접 구현합니다.
-
-<div style="display:flex;gap:12px;flex-wrap:wrap;margin:6px 0 0;justify-content:space-between"><a style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;padding:12px 18px;border-radius:12px 13px 11px 13px;border:1.5px solid #C8443C;background:#FBFBF7;color:#243130;font-size:14px;font-weight:500;box-shadow:0 6px 14px -8px rgba(47,58,57,0.4)" href="https://saver7942.blogspot.com/2026/07/express-16-http.html"><span style="color:#C8443C;font-size:16px">←</span><span><span style="font-size:11.5px;color:#93A97F;display:block">이전 편</span>순수 HTTP 서버 (1편)</span></a><a style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;padding:12px 18px;border-radius:12px 13px 11px 13px;border:1.5px solid #C8443C;background:#FBFBF7;color:#243130;font-size:14px;font-weight:500;box-shadow:0 6px 14px -8px rgba(47,58,57,0.4)" href="https://saver7942.blogspot.com/2026/07/express-36-next.html"><span><span style="font-size:11.5px;color:#93A97F;display:block;text-align:right">다음 편</span>미들웨어 체인 (3편)</span><span style="color:#C8443C;font-size:16px">→</span></a></div>

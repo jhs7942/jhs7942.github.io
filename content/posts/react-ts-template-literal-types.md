@@ -14,21 +14,11 @@ labels:
 source: 사용자 학습 노트 (React+TS — type 별칭·템플릿 리터럴 타입·디자인 토큰)
 legacy_url: 'https://saver7942.blogspot.com/2026/07/typescript.html'
 draft: false
+series: react-ts
+part: 8
 ---
 
 버튼 클래스를 `btn-primary-100`, `btn-secondary-300`처럼 문자열로 조립하다 보면, `btn-primry-100` 같은 오타가 런타임까지 조용히 흘러갑니다. 템플릿 리터럴 타입은 허용되는 조합을 타입 수준에서 못박아, 정의되지 않은 토큰을 코드 작성 시점에 막습니다. 이 글에서는 유니온 타입을 조합해 디자인 토큰 타입을 자동 생성하고, 이를 컴포넌트에 강제하는 방법을 정리합니다.
-
-#### 목차
-
-1. [type 별칭과 유니온](#1-type)
-
-2. [템플릿 리터럴 타입](#2)
-
-3. [디자인 토큰 컴포넌트](#3)
-
-4. [주의사항](#4)
-
-5. [핵심 정리](#5)
 
 ---
 
@@ -140,5 +130,3 @@ export function DesignButton({ token, label }: DesignButtonProps) {
 - 선행 글: [React 컴포넌트에 타입 붙이기 (문자열 리터럴 유니온 포함)](https://saver7942.blogspot.com/2026/07/react-reactnodecomponentpropswithref.html)
 
 - [TypeScript 공식 문서 — Template Literal Types](https://www.typescriptlang.org/docs/handbook/2/template-literal-types.html)
-
-<p style="margin:24px 0 2px;padding:13px 18px;border:1.5px solid #C8443C;border-radius:14px 15px 13px 15px;background:rgba(200,68,60,0.06);text-align:center;font-size:14.5px;line-height:1.7;color:#2F3A39">📚 <b>React · TypeScript 타입 안전</b> 시리즈 &nbsp;·&nbsp; <a style="color:#C8443C;font-weight:700;text-decoration:none" href="https://saver7942.blogspot.com/2026/07/react-typescript.html">전체 목차 · 정리 보기 →</a></p>

@@ -15,21 +15,11 @@ labels:
 source: 사용자 학습 노트 (React 상태관리 — Zustand 셀렉터/선택적 구독)
 legacy_url: 'https://saver7942.blogspot.com/2026/07/zustand.html'
 draft: false
+series: zustand
+part: 4
 ---
 
 앞선 글들에서 셀렉터를 짧게 언급했는데, 이 글은 그 동작 원리와 렌더링 격리를 자세히 봅니다. 코드가 아무리 간결해도, 데이터 하나가 바뀔 때마다 상관없는 컴포넌트까지 다시 그려진다면 성능이 무너집니다. **셀렉터(selector)**는 스토어에서 필요한 조각만 골라 구독해, 그 조각이 바뀔 때만 컴포넌트를 리렌더하게 합니다.
-
-#### 목차
-
-1. [통째로 구독하면 다 리렌더된다](#1)
-
-2. [셀렉터의 동작 원리 — 엄격한 비교](#2)
-
-3. [실습: 렌더링 격리 확인](#3)
-
-4. [주의사항](#4)
-
-5. [핵심 정리](#5)
 
 ---
 
@@ -155,5 +145,3 @@ export function BearCounter() {
 - [Zustand 공식 문서 — Selecting multiple state slices (useShallow)](https://zustand.docs.pmnd.rs/guides/prevent-rerenders-with-use-shallow)
 
 - [Zustand 공식 문서](https://zustand.docs.pmnd.rs/)
-
-<p style="margin:24px 0 2px;padding:13px 18px;border:1.5px solid #C8443C;border-radius:14px 15px 13px 15px;background:rgba(200,68,60,0.06);text-align:center;font-size:14.5px;line-height:1.7;color:#2F3A39">🧩 <b>React 상태 관리(Zustand) 시리즈</b> &nbsp;·&nbsp; <a style="color:#C8443C;font-weight:700;text-decoration:none" href="https://saver7942.blogspot.com/2026/07/zustand-zustand.html">전체 정리 · 목차 보기 →</a></p>

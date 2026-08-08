@@ -14,25 +14,11 @@ labels:
 source: 사용자 학습 노트 (React+TS — 제네릭 심화)
 legacy_url: 'https://saver7942.blogspot.com/2026/07/typescript-extends.html'
 draft: false
+series: react-ts
+part: 3
 ---
 
 유저 목록과 상품 목록은 담긴 데이터만 다를 뿐 "리스트를 그린다"는 구조는 똑같습니다. 타입마다 `UserList`, `ProductList`를 따로 만들면 같은 코드가 계속 늘어납니다. 그렇다고 `any`로 뭉뚱그리면 타입 안전성이 사라집니다. **제네릭(Generic)**은 이 사이에서, 구조는 하나로 두되 타입은 사용하는 쪽에서 주입받는 방법입니다. 이 글은 [선행 글(컴포넌트 타입)](https://saver7942.blogspot.com/2026/07/react-reactnodecomponentpropswithref.html)에 이어, 제네릭으로 재사용 컴포넌트를 만드는 과정을 정리합니다.
-
-#### 목차
-
-1. [제네릭이란](#1)
-
-2. [any와 제네릭의 결정적 차이](#2-any)
-
-3. [제네릭 함수 만들기](#3)
-
-4. [extends로 제약 걸기](#4-extends)
-
-5. [하나의 컴포넌트, 여러 타입](#5)
-
-6. [주의사항](#6)
-
-7. [핵심 정리](#7)
 
 ---
 
@@ -240,5 +226,3 @@ export default function App() {
 - 선행 글: [React 컴포넌트에 타입 붙이기 (기본 타입·구별된 공용체·ReactNode)](https://saver7942.blogspot.com/2026/07/react-reactnodecomponentpropswithref.html)
 
 - [React 공식 문서 — TypeScript 사용하기](https://react.dev/learn/typescript)
-
-<p style="margin:24px 0 2px;padding:13px 18px;border:1.5px solid #C8443C;border-radius:14px 15px 13px 15px;background:rgba(200,68,60,0.06);text-align:center;font-size:14.5px;line-height:1.7;color:#2F3A39">📚 <b>React · TypeScript 타입 안전</b> 시리즈 &nbsp;·&nbsp; <a style="color:#C8443C;font-weight:700;text-decoration:none" href="https://saver7942.blogspot.com/2026/07/react-typescript.html">전체 목차 · 정리 보기 →</a></p>

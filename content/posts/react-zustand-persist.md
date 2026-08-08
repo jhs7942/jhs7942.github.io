@@ -16,21 +16,11 @@ labels:
 source: 사용자 학습 노트 (React 상태관리 — Zustand persist/localStorage)
 legacy_url: 'https://saver7942.blogspot.com/2026/07/zustand-persist-localstorage.html'
 draft: false
+series: zustand
+part: 5
 ---
 
 React 상태는 새로고침하면 초기화됩니다. 장바구니처럼 유지되어야 하는 값은 브라우저 저장소(`localStorage`)에 옮겨 두어야 하는데, 이를 손으로 하면 저장·복원 코드가 비즈니스 로직보다 길어집니다. Zustand의 **`persist` 미들웨어**는 상태를 저장소와 자동으로 동기화합니다. 먼저 수동 관리의 문제를 짚고, `persist`로 어떻게 줄어드는지 정리합니다.
-
-#### 목차
-
-1. [localStorage 수동 관리의 고통](#1-localstorage)
-
-2. [persist 미들웨어로 자동화](#2-persist)
-
-3. [저장소 선택과 부분 저장](#3)
-
-4. [주의사항](#4)
-
-5. [핵심 정리](#5)
 
 ---
 
@@ -167,5 +157,3 @@ persist(
 - [Zustand 공식 문서 — persist 미들웨어](https://zustand.docs.pmnd.rs/integrations/persisting-store-data)
 
 - 관련 글: [TypeScript 타입 가드 (외부 데이터 검증)](https://saver7942.blogspot.com/2026/07/typescript-is-api.html)
-
-<p style="margin:24px 0 2px;padding:13px 18px;border:1.5px solid #C8443C;border-radius:14px 15px 13px 15px;background:rgba(200,68,60,0.06);text-align:center;font-size:14.5px;line-height:1.7;color:#2F3A39">🧩 <b>React 상태 관리(Zustand) 시리즈</b> &nbsp;·&nbsp; <a style="color:#C8443C;font-weight:700;text-decoration:none" href="https://saver7942.blogspot.com/2026/07/zustand-zustand.html">전체 정리 · 목차 보기 →</a></p>

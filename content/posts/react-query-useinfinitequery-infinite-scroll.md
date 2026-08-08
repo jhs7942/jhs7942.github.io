@@ -18,27 +18,13 @@ source: >-
   useInfiniteQuery·pageParam·getNextPageParam)
 legacy_url: 'https://saver7942.blogspot.com/2026/07/useinfinitequery.html'
 draft: false
+series: react-query
+part: 8
 ---
 
 [이전 편](https://saver7942.blogspot.com/2026/07/onmutate-0-ux.html)까지 읽기·쓰기·낙관적 업데이트를 다뤘습니다. 이번엔 읽기의 특수한 형태 — **무한 스크롤**입니다.
 
 무한 스크롤은 일반 페이지네이션과 성격이 다릅니다. 페이지네이션은 현재 페이지 데이터만 갈아 끼우면 되지만, 무한 스크롤은 **과거 데이터를 보존하면서 새 데이터를 이어 붙이는 누적형**입니다. 이 누적이 `useState`로 옮겨지는 순간 상태가 비대해지기 시작합니다. 이 편은 그 늪을 먼저 겪고, `useInfiniteQuery`로 빠져나옵니다.
-
-#### 목차
-
-1. [누적형이라는 차이](#1)
-
-2. [수동 구현의 늪 — 네 개의 상태](#2)
-
-3. [useInfiniteQuery — pages와 네 옵션](#3-useinfinitequery-pages)
-
-4. [무엇이 사라졌나 — before/after](#4-beforeafter)
-
-5. [렌더링 — pages를 펼치기](#5-pages)
-
-6. [주의사항](#6)
-
-7. [핵심 정리](#7)
 
 ---
 

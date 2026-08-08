@@ -15,21 +15,11 @@ labels:
 source: 사용자 학습 노트 (React 폼 — RHF 결산/setError·Transformer·이벤트 중심 설계)
 legacy_url: 'https://saver7942.blogspot.com/2026/07/react-hook-form.html'
 draft: false
+series: react-hook-form
+part: 7
 ---
 
 폼 관리 시리즈에서 동적 리스트, 다단계 데이터 보존, 변경분 전송, 비동기 초기화를 다뤘습니다. 이 글은 그 흐름을 **이벤트 중심 폼 설계**라는 한 축으로 정리하는 결산입니다. 여기에 실무에서 마지막으로 마주치는 두 관문 — 서버가 돌려준 에러를 화면에 되돌리는 `setError`, 서버 규격에 맞춰 데이터를 깎는 Transformer — 를 더합니다. 앞선 [상태 관리(Zustand) 시리즈](https://saver7942.blogspot.com/2026/07/zustand-zustand.html)에 이은 폼 관리 정리입니다.
-
-#### 목차
-
-1. [이벤트 중심 폼 설계 — 시리즈가 관통한 원칙](#1)
-
-2. [서버 에러를 입력창에 매핑 — setError](#2-seterror)
-
-3. [데이터 정제 — 서버 규격으로 직렬화](#3)
-
-4. [폼 관리 시리즈 인덱스](#4)
-
-5. [핵심 정리](#5)
 
 ---
 

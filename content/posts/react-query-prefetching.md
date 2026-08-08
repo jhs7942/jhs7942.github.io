@@ -17,27 +17,13 @@ source: 사용자 학습 노트 (서버 상태 관리 — 프리페칭 prefetchQ
 legacy_url: >-
   https://saver7942.blogspot.com/2026/07/ux-prefetchquery-intersectionobserver.html
 draft: false
+series: react-query
+part: 9
 ---
 
 [이전 편](https://saver7942.blogspot.com/2026/07/useinfinitequery.html)에서 무한 스크롤을 "더 보기" 버튼으로 만들면서, 실서비스에서는 버튼 대신 감시 요소로 `fetchNextPage`를 부른다고 예고했습니다. 이번 편이 그 구현이자, 한 걸음 더 나아간 이야기입니다.
 
 유튜브나 인스타그램에서 로딩을 거의 느끼지 못하는 이유는, 지금 보는 콘텐츠 **바로 아래**의 데이터를 앱이 백그라운드에서 미리 받아 두기 때문입니다. 이 기법이 **프리페칭(prefetching)** 입니다. TanStack Query에서는 두 가지 트리거로 구현합니다 — 사용자의 행동(호버)에 반응하는 **명령형** 방식과, 요소가 화면에 보이는지를 감지하는 **가시성 기반** 방식입니다.
-
-#### 목차
-
-1. [프리페칭이란 — 로딩을 없애는 발상](#1)
-
-2. [호버 프리페칭 — 클릭 직전의 찰나를 산다](#2)
-
-3. [IntersectionObserver — 바닥에 닿기 전 미리 당긴다](#3-intersectionobserver)
-
-4. [캐시 히트 — 상세 진입 시 로딩이 사라진다](#4)
-
-5. [언제 프리페칭하나 — 의도를 읽는 설계](#5)
-
-6. [주의사항](#6)
-
-7. [핵심 정리](#7)
 
 ---
 

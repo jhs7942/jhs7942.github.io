@@ -17,23 +17,11 @@ source: 사용자 학습 노트 (React 폼 — RHF useFieldArray/동적 리스�
 legacy_url: >-
   https://saver7942.blogspot.com/2026/07/react-hook-form-usefieldarray-fieldid.html
 draft: false
+series: react-hook-form
+part: 1
 ---
 
 상태 관리(Zustand) 다음은 폼 관리입니다. 개수가 고정된 폼은 단순하지만, 경력·주소처럼 사용자가 항목을 추가·삭제하는 **동적 리스트 폼**은 까다롭습니다. `useState`로 배열을 직접 관리하면 삭제 시 인덱스가 밀리며 엉뚱한 칸의 값이 사라지거나 포커스가 튀곤 합니다. React Hook Form(RHF)의 **`useFieldArray`**는 이 문제를 배열 조작 메서드와 고유 `field.id`로 해결합니다. (이 글은 RHF의 `useForm`·`register` 기본을 안다고 가정합니다.) 앞선 [상태 관리 시리즈](https://saver7942.blogspot.com/2026/07/zustand-zustand.html)에 이어, 여기서부터는 폼을 다룹니다.
-
-#### 목차
-
-1. [왜 useFieldArray인가](#1-usefieldarray)
-
-2. [폼 설계: interface와 defaultValues](#2-interface-defaultvalues)
-
-3. [useFieldArray로 배열 조작](#3-usefieldarray)
-
-4. [field.id를 key로 — 인덱스 버그 차단](#4-fieldid-key)
-
-5. [주의사항](#5)
-
-6. [핵심 정리](#6)
 
 ---
 
@@ -207,5 +195,3 @@ export function SmartDynamicForm() {
 - [React Hook Form 공식 문서 — useFieldArray](https://react-hook-form.com/docs/usefieldarray)
 
 - 이전 섹션: [Zustand 선언적 상태 관리 총정리](https://saver7942.blogspot.com/2026/07/zustand-zustand.html)
-
-<p style="margin:24px 0 2px;padding:13px 18px;border:1.5px solid #C8443C;border-radius:14px 15px 13px 15px;background:rgba(200,68,60,0.06);text-align:center;font-size:14.5px;line-height:1.7;color:#2F3A39">🧩 <b>React Hook Form 폼 관리 시리즈</b> &nbsp;·&nbsp; <a style="color:#C8443C;font-weight:700;text-decoration:none" href="https://saver7942.blogspot.com/2026/07/react-hook-form.html">전체 정리 · 목차 보기 →</a></p>

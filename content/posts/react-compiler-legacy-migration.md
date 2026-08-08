@@ -14,25 +14,13 @@ labels:
 source: 사용자 학습 노트 (React 렌더링 최적화 — 컴파일러 마이그레이션·use no memo·sources 설정·Wrapper 패턴)
 legacy_url: 'https://saver7942.blogspot.com/2026/07/react-compiler-3.html'
 draft: false
+series: react-compiler
+part: 5
 ---
 
 [이전 편](https://saver7942.blogspot.com/2026/07/blog-post_27.html)까지 컴파일러가 무엇을 하고 무엇을 남기는지 봤습니다. 이번엔 실무의 현실 — **레거시와 공존**입니다.
 
 컴파일러를 설치해도 `node_modules`의 수천 개 라이브러리가 갑자기 최적화되진 않습니다. 오히려 예전 방식(렌더 중 ref 조작, mutation)에 의존하는 구형 라이브러리와 **충돌**할 수 있습니다. 규칙을 잘 지키는 최신 라이브러리는 컴파일러와 잘 맞지만, 구형 드래그앤드롭·차트·jQuery 의존 플러그인은 내부에서 리액트 규칙을 어깁니다. 이 둘이 섞인 프로젝트에 컴파일러를 켜면 드래그가 튕기거나 화면이 멈출 수 있습니다. 이 지뢰밭을 건너는 세 전략입니다.
-
-#### 목차
-
-1. [혼돈의 공존 — 모두가 컴파일러를 지원하진 않는다](#1)
-
-2. [전략 1 — "use no memo"로 격리](#2-1-use-no-memo)
-
-3. [전략 2 — sources 설정으로 광역 제외](#3-2-sources)
-
-4. [전략 3 — Wrapper 패턴으로 안전하게 연결](#4-3-wrapper)
-
-5. [디버깅 — 범인 색출 프로토콜](#5)
-
-6. [핵심 정리](#6)
 
 ---
 

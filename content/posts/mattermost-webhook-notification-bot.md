@@ -20,20 +20,6 @@ draft: false
 
 [1편](https://saver7942.blogspot.com/2026/04/github-actions-cron-mattermost-webhook.html)에서 "언제 실행할지"(GitHub Actions cron 스케줄링과 지연 특성)를 정리했습니다. 이번 편은 "무엇을 실행할지" — 실행된 봇이 Mattermost로 알림을 보내기까지의 구조를 정리합니다.
 
-> **시리즈**: ① [GitHub Actions cron 스케줄링](https://saver7942.blogspot.com/2026/04/github-actions-cron-mattermost-webhook.html) → **② Mattermost Webhook 알림 봇 구축 (이 글)**
-
-#### 목차
-
-1. [Mattermost Incoming Webhook](#1-mattermost-incoming-webhook)
-
-2. [알림 봇 아키텍처](#2)
-
-3. [최종 워크플로우](#3)
-
-4. [주의사항](#4)
-
-5. [핵심 정리](#5)
-
 ## 📨 1. Mattermost Incoming Webhook
 
 **Webhook** — 이벤트 발생 시 서버가 지정된 URL로 HTTP 요청을 보내는 "역방향 API"입니다.
@@ -211,8 +197,6 @@ jobs:
 - **레이어별 장애 허용도를 구분**하면 재시도할 곳(Fetcher, Sender)과 즉시 실패해야 할 곳(Parser, Formatter)이 명확해집니다.
 
 - **중복 방지 ID는 입력 정규화가 전제**입니다. URL 추적 파라미터·제목 수정이 ID를 바꿔 중복 전송을 일으킬 수 있습니다.
-
-> **시리즈 이전 편**: [GitHub Actions cron 스케줄링 정리 (1/2) — UTC 고정과 지연 특성 ←](https://saver7942.blogspot.com/2026/04/github-actions-cron-mattermost-webhook.html)
 
 ## 🔗 참고 자료
 

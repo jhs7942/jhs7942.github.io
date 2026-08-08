@@ -14,19 +14,11 @@ labels:
 source: 사용자 학습 노트 (React+TS — Section 결산/종합 정리)
 legacy_url: 'https://saver7942.blogspot.com/2026/07/react-typescript.html'
 draft: false
+series: react-ts
+part: 11
 ---
 
 지금까지 `interface`부터 타입 가드, Error Boundary, `useRef`까지 React에 타입을 입히는 여러 도구를 다뤘습니다. 이 글은 그 여정을 정리하는 결산입니다. 왜 타입을 입히는지 되짚고, 여러 기법을 하나로 합친 종합 예제를 본 뒤, 각 주제로 바로 갈 수 있는 목록을 붙였습니다.
-
-#### 목차
-
-1. [왜 React에 TypeScript를 입히는가](#1-react-typescript)
-
-2. [종합 예제: 한 컴포넌트에 담은 방어 설계](#2)
-
-3. [지금까지의 여정 — 시리즈 인덱스](#3)
-
-4. [핵심 정리](#4)
 
 ---
 

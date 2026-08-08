@@ -21,16 +21,6 @@ draft: false
 
 Express의 `app.get("/", handler)`는 한 줄이지만, 그 안에서 Node.js가 실제로 무엇을 하는지 알면 디버깅과 설계 판단이 훨씬 명확해집니다. 이 시리즈는 순수 `http` 모듈에서 출발해 Express와 유사한 구조를 단계적으로 직접 만들어 나갑니다.
 
-<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 6px"><span style="font-size:13.5px;font-weight:500;padding:8px 14px;border-radius:11px 12px 10px 12px;border:1.5px solid #C8443C;background:#C8443C;color:#FBFBF7">① 순수 http · 현재</span><span style="color:#93A97F">›</span><a style="text-decoration:none;font-size:13.5px;font-weight:500;padding:8px 14px;border-radius:11px 12px 10px 12px;border:1.5px solid #C8443C;background:#FBFBF7;color:#243130" href="https://saver7942.blogspot.com/2026/07/express-26.html">② 라우트 테이블</a><span style="color:#93A97F">›</span><a style="text-decoration:none;font-size:13.5px;font-weight:500;padding:8px 14px;border-radius:11px 12px 10px 12px;border:1.5px solid #C8443C;background:#FBFBF7;color:#243130" href="https://saver7942.blogspot.com/2026/07/express-36-next.html">③ 미들웨어 체인</a><span style="color:#93A97F">›</span><a style="text-decoration:none;font-size:13.5px;font-weight:500;padding:8px 14px;border-radius:11px 12px 10px 12px;border:1.5px solid #C8443C;background:#FBFBF7;color:#243130" href="https://saver7942.blogspot.com/2026/07/express-46.html">④ 에러·정적</a><span style="color:#93A97F">›</span><a style="text-decoration:none;font-size:13.5px;font-weight:500;padding:8px 14px;border-radius:11px 12px 10px 12px;border:1.5px solid #C8443C;background:#FBFBF7;color:#243130" href="https://saver7942.blogspot.com/2026/07/express-56-json.html">⑤ 파라미터·파서</a><span style="color:#93A97F">›</span><a style="text-decoration:none;font-size:13.5px;font-weight:500;padding:8px 14px;border-radius:11px 12px 10px 12px;border:1.5px solid #C8443C;background:#FBFBF7;color:#243130" href="https://saver7942.blogspot.com/2026/07/express-66-createrouter.html">⑥ 라우터 모듈화</a></div>
-
-#### 목차
-
-1. [Express 내부를 직접 구현하는 이유](#1-express)
-2. [http.createServer로 기본 서버 만들기](#2-httpcreateserver)
-3. [req.url·method로 라우팅하기](#3-requrlmethod)
-4. [if-else 라우팅의 한계](#4-if-else)
-5. [핵심 정리](#5)
-
 ## 🔍 1. Express 내부를 직접 구현하는 이유
 
 Express는 Node.js 내장 **`http`** 모듈 위에 구축된 웹 프레임워크입니다. Express가 제공하는 라우팅, 미들웨어, 응답 헬퍼는 결국 `http.createServer` 콜백 안에서 동작합니다.
@@ -174,5 +164,3 @@ app.post("/admin", adminHandler);
 - **if-else 라우팅의 한계** — 라우트가 늘어날수록 단일 콜백이 비대해지고, 동적 경로 처리가 어렵습니다.
 
 - **다음 편 예고** — 라우트를 테이블에 등록하고 탐색하는 방식으로 개선해 `app.get()` 스타일의 인터페이스를 직접 만듭니다.
-
-<div style="display:flex;gap:12px;flex-wrap:wrap;margin:6px 0 0"><a style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;padding:12px 18px;border-radius:12px 13px 11px 13px;border:1.5px solid #C8443C;background:#FBFBF7;color:#243130;font-size:14px;font-weight:500;box-shadow:0 6px 14px -8px rgba(47,58,57,0.4)" href="https://saver7942.blogspot.com/2026/07/express-26.html"><span><span style="font-size:11.5px;color:#93A97F;display:block;text-align:right">다음 편</span>라우트 테이블 (2편)</span><span style="color:#C8443C;font-size:16px">→</span></a></div>

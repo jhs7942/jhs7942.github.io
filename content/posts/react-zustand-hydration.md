@@ -15,21 +15,11 @@ labels:
 source: 사용자 학습 노트 (React 상태관리 — Zustand 하이드레이션/SSR)
 legacy_url: 'https://saver7942.blogspot.com/2026/07/zustand-persist-ssr.html'
 draft: false
+series: zustand
+part: 6
 ---
 
 [이전 글](https://saver7942.blogspot.com/2026/07/zustand-persist-localstorage.html)에서 `persist`로 상태를 저장·복원하는 것을 봤습니다. 이 복원 과정을 **하이드레이션(hydration)**이라 합니다. 클라이언트에서만 도는 앱에서는 대개 문제없이 매끄럽지만, 서버 사이드 렌더링(SSR) 환경에서는 서버와 클라이언트의 초기 상태가 달라 문제가 생깁니다. 이 글은 하이드레이션의 동작과 SSR 대응을 정리합니다.
-
-#### 목차
-
-1. [하이드레이션이란](#1)
-
-2. [SSR에서의 하이드레이션 불일치](#2-ssr)
-
-3. [하이드레이션 제어하기](#3)
-
-4. [주의사항](#4)
-
-5. [핵심 정리](#5)
 
 ---
 
@@ -155,5 +145,3 @@ useAuthStore.persist.rehydrate();
 - 이전 글: [Zustand persist로 상태 자동 저장하기](https://saver7942.blogspot.com/2026/07/zustand-persist-localstorage.html)
 
 - [Zustand 공식 문서 — Hydration and asynchronous storages](https://zustand.docs.pmnd.rs/integrations/persisting-store-data#hydration-and-asynchronous-storages)
-
-<p style="margin:24px 0 2px;padding:13px 18px;border:1.5px solid #C8443C;border-radius:14px 15px 13px 15px;background:rgba(200,68,60,0.06);text-align:center;font-size:14.5px;line-height:1.7;color:#2F3A39">🧩 <b>React 상태 관리(Zustand) 시리즈</b> &nbsp;·&nbsp; <a style="color:#C8443C;font-weight:700;text-decoration:none" href="https://saver7942.blogspot.com/2026/07/zustand-zustand.html">전체 정리 · 목차 보기 →</a></p>

@@ -21,17 +21,6 @@ draft: false
 
 `app.use(logger)`, `app.use(auth)`, `app.use(handler)` — Express로 서버를 작성하다 보면 `app.use`를 여러 번 호출하게 됩니다. 각 함수는 어떤 순서로, 어떻게 연결되어 실행될까요? 이번 편에서는 미들웨어 체인의 내부 구조를 순수 Node.js로 직접 구현하며 그 원리를 살펴봅니다.
 
-<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 6px"><a style="text-decoration:none;font-size:13.5px;font-weight:500;padding:8px 14px;border-radius:11px 12px 10px 12px;border:1.5px solid #C8443C;background:#FBFBF7;color:#243130" href="https://saver7942.blogspot.com/2026/07/express-16-http.html">① 순수 http</a><span style="color:#93A97F">›</span><a style="text-decoration:none;font-size:13.5px;font-weight:500;padding:8px 14px;border-radius:11px 12px 10px 12px;border:1.5px solid #C8443C;background:#FBFBF7;color:#243130" href="https://saver7942.blogspot.com/2026/07/express-26.html">② 라우트 테이블</a><span style="color:#93A97F">›</span><span style="font-size:13.5px;font-weight:500;padding:8px 14px;border-radius:11px 12px 10px 12px;border:1.5px solid #C8443C;background:#C8443C;color:#FBFBF7">③ 미들웨어 체인 · 현재</span><span style="color:#93A97F">›</span><a style="text-decoration:none;font-size:13.5px;font-weight:500;padding:8px 14px;border-radius:11px 12px 10px 12px;border:1.5px solid #C8443C;background:#FBFBF7;color:#243130" href="https://saver7942.blogspot.com/2026/07/express-46.html">④ 에러·정적</a><span style="color:#93A97F">›</span><a style="text-decoration:none;font-size:13.5px;font-weight:500;padding:8px 14px;border-radius:11px 12px 10px 12px;border:1.5px solid #C8443C;background:#FBFBF7;color:#243130" href="https://saver7942.blogspot.com/2026/07/express-56-json.html">⑤ 파라미터·파서</a><span style="color:#93A97F">›</span><a style="text-decoration:none;font-size:13.5px;font-weight:500;padding:8px 14px;border-radius:11px 12px 10px 12px;border:1.5px solid #C8443C;background:#FBFBF7;color:#243130" href="https://saver7942.blogspot.com/2026/07/express-66-createrouter.html">⑥ 라우터 모듈화</a></div>
-
-#### 목차
-
-1. [미들웨어란 무엇인가](#1)
-2. [미들웨어 배열 구성하기](#2)
-3. [runMiddlewares — next()의 재귀 구조](#3-runmiddlewares-next)
-4. [req 객체로 데이터 전달하기](#4-req)
-5. [응답을 보내는 미들웨어는 next()를 호출하지 않는다](#5-next)
-6. [핵심 정리](#6)
-
 ## 📦 1. 미들웨어란 무엇인가
 
 Express의 **미들웨어(middleware)**는 `(req, res, next)` 세 개의 매개변수를 받는 함수입니다. 미들웨어들은 배열 형태로 등록되어, 요청이 들어오면 등록된 순서대로 순차 실행됩니다.
@@ -208,5 +197,3 @@ const responseBody = {
 - **응답 후 `next()` 불필요** — `res.end()`로 응답을 전송한 미들웨어는 `next()`를 호출하지 않습니다. 체인이 그 자리에서 종료됩니다.
 
 4편에서는 에러 처리 미들웨어(`(err, req, res, next)` 4-인자 패턴)와 정적 파일 서빙을 직접 구현합니다.
-
-<div style="display:flex;gap:12px;flex-wrap:wrap;margin:6px 0 0;justify-content:space-between"><a style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;padding:12px 18px;border-radius:12px 13px 11px 13px;border:1.5px solid #C8443C;background:#FBFBF7;color:#243130;font-size:14px;font-weight:500;box-shadow:0 6px 14px -8px rgba(47,58,57,0.4)" href="https://saver7942.blogspot.com/2026/07/express-26.html"><span style="color:#C8443C;font-size:16px">←</span><span><span style="font-size:11.5px;color:#93A97F;display:block">이전 편</span>라우트 테이블 (2편)</span></a><a style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;padding:12px 18px;border-radius:12px 13px 11px 13px;border:1.5px solid #C8443C;background:#FBFBF7;color:#243130;font-size:14px;font-weight:500;box-shadow:0 6px 14px -8px rgba(47,58,57,0.4)" href="https://saver7942.blogspot.com/2026/07/express-46.html"><span><span style="font-size:11.5px;color:#93A97F;display:block;text-align:right">다음 편</span>에러 처리·정적 파일 (4편)</span><span style="color:#C8443C;font-size:16px">→</span></a></div>

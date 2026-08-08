@@ -15,27 +15,13 @@ labels:
 source: 사용자 학습 노트 (서버 상태 관리 — TanStack Query 도입 / queryKey·staleTime)
 legacy_url: 'https://saver7942.blogspot.com/2026/07/tanstack-query.html'
 draft: false
+series: react-query
+part: 1
 ---
 
 [이전 편](https://saver7942.blogspot.com/2026/07/useeffect.html)에서 `useEffect` 페칭이 무너지는 세 지점을 확인했습니다. 늦게 도착한 응답이 최신 화면을 덮고, 같은 데이터를 컴포넌트 수만큼 요청하고, 로딩·에러·취소 코드를 화면마다 다시 씁니다.
 
 이 문제들을 하나씩 막는 대신, 먼저 지워야 할 전제가 하나 있습니다. **"데이터는 내 컴포넌트의 상태"라는 생각입니다.** 서버 데이터는 소유물이 아니라 잠시 빌려온 사본이고, 원본은 서버에 있으며 언제든 다른 사람에 의해 바뀝니다. 그렇다면 클라이언트가 할 일은 데이터를 가져와 보관하는 것이 아니라, **원본을 비추는 거울을 유지하는 것**입니다.
-
-#### 목차
-
-1. [관점 전환 — 서버 상태는 클라이언트 상태가 아니다](#1)
-
-2. [엔진 설치 — QueryClient와 Provider](#2-queryclient-provider)
-
-3. [useQuery — queryKey와 queryFn](#3-usequery-querykey-queryfn)
-
-4. [staleTime과 gcTime — 캐시가 동작하는 조건](#4-staletime-gctime)
-
-5. [검증 — 세 재앙이 사라지는 지점](#5)
-
-6. [주의사항](#6)
-
-7. [핵심 정리](#7)
 
 ---
 

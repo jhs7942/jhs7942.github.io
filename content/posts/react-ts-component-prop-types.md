@@ -16,25 +16,11 @@ source: 사용자 학습 노트 (React+TS — 실전 타입 이름표)
 legacy_url: >-
   https://saver7942.blogspot.com/2026/07/react-reactnodecomponentpropswithref.html
 draft: false
+series: react-ts
+part: 2
 ---
 
 React를 JavaScript로 작성하면 `<Welcome age="스물다섯" />`처럼 잘못된 타입을 넘겨도, 화면이 깨지고 나서야 원인을 알게 됩니다. TypeScript는 이 실수를 코드를 저장하는 순간 편집기에서 잡아냅니다. 이 글에서는 컴포넌트에 타입 "이름표"를 붙이는 도구들을 각각의 실습 컴포넌트와 함께 정리합니다. 컴포넌트 데이터 규격을 `interface`로 정의하는 기초는 [선행 글(interface·import type)](https://saver7942.blogspot.com/2026/07/typescript-interfaceimport-type-react.html)에서 다룹니다.
-
-#### 목차
-
-1. [기본 타입과 선택적 속성](#1)
-
-2. [구별된 공용체로 모순 상태 차단](#2)
-
-3. [ReactNode — 렌더 가능한 모든 것](#3-reactnode)
-
-4. [ComponentPropsWithRef와 Omit](#4-componentpropswithref-omit)
-
-5. [이벤트와 스타일 타입](#5)
-
-6. [주의사항](#6)
-
-7. [핵심 정리](#7)
 
 ---
 
@@ -244,5 +230,3 @@ export function InputField() {
 - 선행 글: [TypeScript interface·import type으로 React 컴포넌트 타입 안전하게 만들기](https://saver7942.blogspot.com/2026/07/typescript-interfaceimport-type-react.html)
 
 - [React 공식 문서 — TypeScript 사용하기](https://react.dev/learn/typescript)
-
-<p style="margin:24px 0 2px;padding:13px 18px;border:1.5px solid #C8443C;border-radius:14px 15px 13px 15px;background:rgba(200,68,60,0.06);text-align:center;font-size:14.5px;line-height:1.7;color:#2F3A39">📚 <b>React · TypeScript 타입 안전</b> 시리즈 &nbsp;·&nbsp; <a style="color:#C8443C;font-weight:700;text-decoration:none" href="https://saver7942.blogspot.com/2026/07/react-typescript.html">전체 목차 · 정리 보기 →</a></p>

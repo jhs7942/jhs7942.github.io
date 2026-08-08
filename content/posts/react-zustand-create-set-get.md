@@ -15,25 +15,11 @@ labels:
 source: 사용자 학습 노트 (React 상태관리 — Zustand create·set·get)
 legacy_url: 'https://saver7942.blogspot.com/2026/07/zustand-createsetget.html'
 draft: false
+series: zustand
+part: 1
 ---
 
 컴포넌트가 많아질수록 상태를 어디에 두고 어떻게 나눠 쓸지가 문제가 됩니다. Zustand는 상태를 React 트리 바깥에 두고, 그 값이 필요한 컴포넌트만 구독하게 하는 가벼운 라이브러리입니다. 이 글은 Zustand의 핵심인 `create`·`set`·`get` 세 함수의 동작과, React 바깥 상태가 어떻게 화면을 다시 그리게 하는지를 정리합니다. 타입 안전 설계를 다룬 [이전 시리즈](https://saver7942.blogspot.com/2026/07/react-typescript.html)에 이어, 여기서부터는 상태 관리를 다룹니다.
-
-#### 목차
-
-1. [create — 스토어를 만드는 공장](#1-create)
-
-2. [구독과 useSyncExternalStore](#2-usesyncexternalstore)
-
-3. [set — 얕은 병합과 함수형 업데이트](#3-set)
-
-4. [get — 리렌더링 없이 값 읽기](#4-get)
-
-5. [실습: 타입 지정 스토어](#5)
-
-6. [주의사항](#6)
-
-7. [핵심 정리](#7)
 
 ---
 
@@ -205,5 +191,3 @@ resetUser();
 - [Zustand 공식 문서](https://zustand.docs.pmnd.rs/)
 
 - [React 공식 문서 — useSyncExternalStore](https://react.dev/reference/react/useSyncExternalStore)
-
-<p style="margin:24px 0 2px;padding:13px 18px;border:1.5px solid #C8443C;border-radius:14px 15px 13px 15px;background:rgba(200,68,60,0.06);text-align:center;font-size:14.5px;line-height:1.7;color:#2F3A39">🧩 <b>React 상태 관리(Zustand) 시리즈</b> &nbsp;·&nbsp; <a style="color:#C8443C;font-weight:700;text-decoration:none" href="https://saver7942.blogspot.com/2026/07/zustand-zustand.html">전체 정리 · 목차 보기 →</a></p>

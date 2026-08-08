@@ -16,23 +16,11 @@ labels:
 source: 사용자 학습 노트 (React 폼 — RHF dirtyFields/PATCH 최적화)
 legacy_url: 'https://saver7942.blogspot.com/2026/07/react-hook-form-dirtyfields-patch.html'
 draft: false
+series: react-hook-form
+part: 5
 ---
 
 지난 글에서 [다단계 폼의 데이터를 지키는 법](https://saver7942.blogspot.com/2026/07/react-hook-form-formprovidershouldunreg.html)을 다뤘습니다. 이번엔 그렇게 채운 폼을 **서버로 보낼 때**의 이야기입니다. 수정 페이지에서 필드가 50개인데 사용자가 이름 하나만 고쳤다면, 50개를 전부 보내는 것은 네트워크와 서버 양쪽에 불필요한 부담입니다. React Hook Form은 무엇이 실제로 바뀌었는지 이미 알고 있습니다. `dirtyFields`를 활용해 변경분만 골라 보내는 패턴을 정리합니다. 폼 관리 시리즈 세 번째 글입니다.
-
-#### 목차
-
-1. [전체가 아니라 변경분만 — PUT과 PATCH](#1-put-patch)
-
-2. [dirtyFields — 무엇이 바뀌었는지 아는 상태](#2-dirtyfields)
-
-3. [getDirtyValues — 변경분만 추리는 재귀 유틸리티](#3-getdirtyvalues)
-
-4. [수정 페이지에 적용 — isDirty 가드에서 PATCH까지](#4-isdirty-patch)
-
-5. [주의사항](#5)
-
-6. [핵심 정리](#6)
 
 ---
 
@@ -243,5 +231,3 @@ export function EditProfile({ initialData }: { initialData: ProfileForm }) {
 - [React Hook Form 공식 문서 — formState (dirtyFields·isDirty)](https://react-hook-form.com/docs/useform/formstate)
 
 - [React Hook Form 공식 문서 — reset](https://react-hook-form.com/docs/useform/reset)
-
-<p style="margin:24px 0 2px;padding:13px 18px;border:1.5px solid #C8443C;border-radius:14px 15px 13px 15px;background:rgba(200,68,60,0.06);text-align:center;font-size:14.5px;line-height:1.7;color:#2F3A39">🧩 <b>React Hook Form 폼 관리 시리즈</b> &nbsp;·&nbsp; <a style="color:#C8443C;font-weight:700;text-decoration:none" href="https://saver7942.blogspot.com/2026/07/react-hook-form.html">전체 정리 · 목차 보기 →</a></p>

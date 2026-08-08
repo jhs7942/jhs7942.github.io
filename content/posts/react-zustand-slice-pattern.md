@@ -16,25 +16,11 @@ labels:
 source: 사용자 학습 노트 (React 상태관리 — Zustand 슬라이스 패턴/StateCreator)
 legacy_url: 'https://saver7942.blogspot.com/2026/07/zustand-statecreator.html'
 draft: false
+series: zustand
+part: 2
 ---
 
 [이전 글](https://saver7942.blogspot.com/2026/07/zustand-createsetget.html)에서 `create`·`set`·`get`으로 스토어의 기본 동작을 봤습니다. 상태가 커질수록 모든 로직을 한 파일에 몰아넣으면 수정이 어려워집니다. **슬라이스 패턴(Slice Pattern)**은 스토어를 도메인(관리 영역)별로 조각내어 각자 관리하고, 최종적으로 하나로 합치는 구조입니다. 이 글은 슬라이스 패턴을 타입과 함께 구성하는 과정을 정리합니다.
-
-#### 목차
-
-1. [슬라이스 패턴이란](#1)
-
-2. [슬라이스 타입 설계](#2)
-
-3. [StateCreator로 슬라이스 구현](#3-statecreator)
-
-4. [슬라이스 합쳐 스토어 만들기](#4)
-
-5. [컴포넌트에서 셀렉터로 쓰기](#5)
-
-6. [주의사항](#6)
-
-7. [핵심 정리](#7)
 
 ---
 
@@ -234,5 +220,3 @@ export function App() {
 - 이전 시리즈: [React·TypeScript 타입 안전 설계 총정리](https://saver7942.blogspot.com/2026/07/react-typescript.html)
 
 - [Zustand 공식 문서 — Slices Pattern](https://zustand.docs.pmnd.rs/guides/slices-pattern)
-
-<p style="margin:24px 0 2px;padding:13px 18px;border:1.5px solid #C8443C;border-radius:14px 15px 13px 15px;background:rgba(200,68,60,0.06);text-align:center;font-size:14.5px;line-height:1.7;color:#2F3A39">🧩 <b>React 상태 관리(Zustand) 시리즈</b> &nbsp;·&nbsp; <a style="color:#C8443C;font-weight:700;text-decoration:none" href="https://saver7942.blogspot.com/2026/07/zustand-zustand.html">전체 정리 · 목차 보기 →</a></p>

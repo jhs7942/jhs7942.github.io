@@ -16,27 +16,13 @@ labels:
 source: 사용자 학습 노트 (서버 상태 관리 — 검색 깜빡임/데이터 공백기 → keepPreviousData·디바운스)
 legacy_url: 'https://saver7942.blogspot.com/2026/07/ux-keeppreviousdata.html'
 draft: false
+series: react-query
+part: 10
 ---
 
 [이전 편](https://saver7942.blogspot.com/2026/07/ux-prefetchquery-intersectionobserver.html)이 "로딩을 안 보이게" 하는 이야기였다면, 이번엔 "이미 보이던 것을 안 사라지게" 하는 이야기입니다.
 
 검색창에 "안녕"을 한 글자씩 쳐 보면, 글자마다 리스트가 하얗게 비었다가 1초 뒤 팍 하고 다시 뜹니다. 그때마다 리스트가 차지하던 높이가 0이 되어 아래 푸터가 위로 홱 올라옵니다(레이아웃 이동, CLS). 이 깜빡임의 원인은 앞선 질문에서 짚었던 `queryKey` 동작에 있습니다. 원인을 정확히 보고, 두 가지 도구로 없앱니다.
-
-#### 목차
-
-1. [데이터 공백기 — 왜 리스트가 사라지나](#1)
-
-2. [queryKey 변경이 곧 다른 쿼리다](#2-querykey)
-
-3. [keepPreviousData — 전환 중 이전 결과를 유지](#3-keeppreviousdata)
-
-4. [isPlaceholderData — 낡은 결과임을 표시](#4-isplaceholderdata)
-
-5. [디바운스 — 키 변경 자체를 줄인다](#5)
-
-6. [주의사항](#6)
-
-7. [핵심 정리](#7)
 
 ---
 

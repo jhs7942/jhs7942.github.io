@@ -32,8 +32,6 @@ draft: false
 
 ---
 
-<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 6px"><a style="text-decoration:none;font-size:13.5px;font-weight:500;padding:8px 14px;border-radius:11px 12px 10px 12px;border:1.5px solid #C8443C;background:#FBFBF7;color:#243130" href="https://saver7942.blogspot.com/2026/07/3-2-12.html">① 네트워크 편</a><span style="color:#93A97F">›</span><span style="font-size:13.5px;font-weight:500;padding:8px 14px;border-radius:11px 12px 10px 12px;border:1.5px solid #C8443C;background:#C8443C;color:#FBFBF7">② 렌더링·로드 편 · 현재</span></div>
-
 ## 글자당 리렌더 1.0회 — 예상대로였지만, 예상과 달랐던 지점
 
 모든 폼이 **제어 컴포넌트**(controlled component)입니다. `useState` + `onChange`로 관리하는 방식으로, 사용자가 글자를 입력할 때마다 state가 바뀌고 리렌더가 발생합니다. 12글자를 입력하면 **commit**(React가 DOM에 변경을 적용하며 화면을 다시 그린 횟수) 12회, 정확히 1:1이었습니다. 여기까진 예상대로였습니다.
@@ -152,5 +150,3 @@ before 측정은 이제 있습니다. 다음은 개선을 하나 적용할 때�
 - Vite 빌드 로그의 gzip 수치는 예상치입니다. **실제 압축은 서버 몫**이며, `compression` 미들웨어가 없으면 압축률은 0%입니다.
 
 - "측정해보니 문제가 없어서 안 넣었다"도 결론입니다. 도구의 가치를 말하려면 도입 전 숫자가 필요하고, 그 숫자가 괜찮다는 결론도 측정 없이는 낼 수 없습니다.
-
-<div style="display:flex;gap:12px;flex-wrap:wrap;margin:6px 0 0"><a style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;padding:12px 18px;border-radius:12px 13px 11px 13px;border:1.5px solid #C8443C;background:#FBFBF7;color:#243130;font-size:14px;font-weight:500;box-shadow:0 6px 14px -8px rgba(47,58,57,0.4)" href="https://saver7942.blogspot.com/2026/07/3-2-12.html"><span style="color:#C8443C;font-size:16px">←</span><span><span style="font-size:11.5px;color:#93A97F;display:block">이전 편</span>네트워크 편 (1/2)</span></a></div>

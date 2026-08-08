@@ -17,21 +17,13 @@ source: >-
 legacy_url: >-
   https://saver7942.blogspot.com/2026/07/react-hook-form-formprovideruseformcont.html
 draft: false
+series: react-hook-form
+part: 4
 ---
 
 다단계 폼(마법사 UI)을 구현할 때 흔히 맞닥뜨리는 문제가 있습니다. 1단계에서 이메일을 입력하고 2단계로 이동하면, 1단계 컴포넌트가 DOM에서 사라지면서 입력값도 함께 사라집니다. 최종 제출 시 모든 단계의 데이터를 하나로 모으려면 어떻게 해야 할까요?
 
 React Hook Form은 이 문제를 **FormProvider + useFormContext + shouldUnregister** 조합으로 해결합니다.
-
-#### 목차
-
-1. [FormProvider와 useFormContext](#1-formprovider-useformcontext)
-2. [메인 엔진 설정과 defaultValues 설계](#2-defaultvalues)
-3. [하위 단계에서 데이터 접속](#3)
-4. [시스템 검증: 데이터 영속성 확인](#4)
-5. [수동 백업 vs shouldUnregister 비교](#5-vs-shouldunregister)
-6. [주의사항](#6)
-7. [핵심 정리](#7)
 
 ## 📦 1. FormProvider와 useFormContext
 

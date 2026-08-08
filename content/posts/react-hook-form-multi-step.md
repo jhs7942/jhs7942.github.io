@@ -17,23 +17,11 @@ source: 사용자 학습 노트 (React 폼 — RHF 다단계 폼/shouldUnregiste
 legacy_url: >-
   https://saver7942.blogspot.com/2026/07/react-hook-form-formprovidershouldunreg.html
 draft: false
+series: react-hook-form
+part: 3
 ---
 
 여러 단계로 나뉜 위저드 폼에서 "다음" 버튼을 누르면 이전 단계의 입력들이 화면에서 사라집니다. 이때 입력했던 값까지 사라지면, 뒤로 돌아왔을 때 빈 칸만 남습니다. React Hook Form으로 다단계 폼을 만들 때 데이터를 지키는 패턴을 정리합니다. [이전 글(useFieldArray)](https://saver7942.blogspot.com/2026/07/react-hook-form-usefieldarray-fieldid.html)에 이어 폼 관리 두 번째 글입니다.
-
-#### 목차
-
-1. [다단계 폼에서 데이터가 사라진다](#1)
-
-2. [원인: 언마운트와 unregister](#2-unregister)
-
-3. [shouldUnregister로 유지 여부 제어](#3-shouldunregister)
-
-4. [FormProvider와 useFormContext](#4-formprovider-useformcontext)
-
-5. [주의사항](#5)
-
-6. [핵심 정리](#6)
 
 ---
 
@@ -194,5 +182,3 @@ export function Step1() {
 - [React Hook Form 공식 문서 — useFormContext](https://react-hook-form.com/docs/useformcontext)
 
 - [React Hook Form 공식 문서 — useForm의 shouldUnregister](https://react-hook-form.com/docs/useform#shouldUnregister)
-
-<p style="margin:24px 0 2px;padding:13px 18px;border:1.5px solid #C8443C;border-radius:14px 15px 13px 15px;background:rgba(200,68,60,0.06);text-align:center;font-size:14.5px;line-height:1.7;color:#2F3A39">🧩 <b>React Hook Form 폼 관리 시리즈</b> &nbsp;·&nbsp; <a style="color:#C8443C;font-weight:700;text-decoration:none" href="https://saver7942.blogspot.com/2026/07/react-hook-form.html">전체 정리 · 목차 보기 →</a></p>

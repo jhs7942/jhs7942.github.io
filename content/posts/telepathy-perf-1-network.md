@@ -19,11 +19,6 @@ legacy_url: 'https://saver7942.blogspot.com/2026/07/3-2-12.html'
 draft: false
 ---
 
-<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 6px"><span style="font-size:13.5px;font-weight:500;padding:8px 14px;border-radius:11px 12px 10px 12px;border:1.5px solid #C8443C;background:#C8443C;color:#FBFBF7">① 네트워크 편 · 현재</span><span style="color:#93A97F">›</span><a style="text-decoration:none;font-size:13.5px;font-weight:500;padding:8px 14px;border-radius:11px 12px 10px 12px;border:1.5px solid #C8443C;background:#FBFBF7;color:#243130" href="https://saver7942.blogspot.com/2026/07/3-2-22.html">② 렌더링·로드 편</a></div>
-
-
----
-
 > 2편 시리즈입니다. **(1/2) 네트워크 편(이 글)** · (2/2) 렌더링·로드 편
 
 텔레파시는 **15초마다 열리는 라운드에서 같은 단어를 고른 두 사람을 이어주는 실시간 매칭 서비스**입니다. React 19 + Vite SPA 프런트엔드와 Express + Supabase 백엔드로 구성한 사이드 프로젝트입니다.
@@ -133,5 +128,3 @@ React에는 데이터 캐시가 없습니다. 컴포넌트가 마운트될 때�
 - **한 번에 하나씩 바꾸고 매번 재측정해야 합니다.** 동시에 여러 변경을 적용하면 무엇이 효과였는지 분리할 수 없습니다.
 
 2편에서는 React DevTools Profiler로 리렌더를 측정합니다. 거기서 **도입 예정이던 라이브러리 하나가 취소**되고, Lighthouse에서 **계획에 없던 진짜 범인**을 마주하게 됩니다.
-
-<div style="display:flex;gap:12px;flex-wrap:wrap;margin:6px 0 0"><a style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;padding:12px 18px;border-radius:12px 13px 11px 13px;border:1.5px solid #C8443C;background:#FBFBF7;color:#243130;font-size:14px;font-weight:500;box-shadow:0 6px 14px -8px rgba(47,58,57,0.4)" href="https://saver7942.blogspot.com/2026/07/3-2-22.html"><span><span style="font-size:11.5px;color:#93A97F;display:block;text-align:right">다음 편</span>렌더링·로드 편 (2/2)</span><span style="color:#C8443C;font-size:16px">→</span></a></div>

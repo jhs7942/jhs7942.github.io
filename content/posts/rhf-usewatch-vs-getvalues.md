@@ -15,20 +15,11 @@ source: >-
 legacy_url: >-
   https://saver7942.blogspot.com/2026/07/react-hook-form-usewatch-vs-getvalues.html
 draft: false
+series: react-hook-form
+part: 2
 ---
 
 폼 필드 값을 실시간으로 화면에 반영해야 할 때, `useState`나 `watch`를 사용하면 글자 하나 입력할 때마다 폼 전체가 리렌더링됩니다. react-hook-form은 이 문제를 해결하는 두 가지 방식을 제공합니다. 필드 단위 구독 기반 훅인 `useWatch`와, 렌더링을 전혀 유발하지 않는 스냅샷 함수 `getValues`입니다. 두 방식의 동작 원리와 적절한 사용 시점을 RenderCounter 실습과 함께 살펴봅니다.
-
-#### 목차
-
-1. [useWatch — 필드 단위 구독](#1-usewatch)
-2. [useWatch 기본 사용법](#2-usewatch)
-3. [getValues — 렌더링 없는 스냅샷](#3-getvalues)
-4. [getValues 기본 사용법](#4-getvalues)
-5. [useWatch vs getValues 비교](#5-usewatch-vs-getvalues)
-6. [실습: 구독 vs 스냅샷 리렌더링 대조](#6-vs)
-7. [주의사항](#7)
-8. [핵심 정리](#8)
 
 ## 📦 1. useWatch — 필드 단위 구독
 

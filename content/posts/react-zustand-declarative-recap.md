@@ -16,19 +16,11 @@ labels:
 source: 사용자 학습 노트 (React 상태관리 — 선언적 방식/Section 2 결산)
 legacy_url: 'https://saver7942.blogspot.com/2026/07/zustand-zustand.html'
 draft: false
+series: zustand
+part: 7
 ---
 
 상태 관리 파트에서 Zustand의 `create`·`set`·`get`, 슬라이스 패턴, `useReducer`와의 비교를 다뤘습니다. 이 글은 그 흐름을 **선언적 상태 변경**이라는 한 축으로 정리하는 결산입니다. 왜 Zustand가 간결한지 되짚고, 종합 예제와 각 주제로 가는 목록을 붙였습니다. 앞선 [타입 안전 시리즈](https://saver7942.blogspot.com/2026/07/react-typescript.html)에 이은 상태 관리 정리입니다.
-
-#### 목차
-
-1. [왜 Zustand인가 — 선언적 상태 변경](#1-zustand)
-
-2. [종합 예제: 선언적 스토어](#2)
-
-3. [상태 관리 시리즈 인덱스](#3)
-
-4. [핵심 정리](#4)
 
 ---
 

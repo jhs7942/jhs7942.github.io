@@ -14,23 +14,11 @@ labels:
 source: '사용자 학습 노트 (React+TS — 컴파일 타임 vs 런타임, as, 런타임 검증)'
 legacy_url: 'https://saver7942.blogspot.com/2026/07/typescript-api-as.html'
 draft: false
+series: react-ts
+part: 6
 ---
 
 `interface`로 데이터 타입을 아무리 정확히 정의해도, 서버가 약속과 다른 응답을 보내면 앱은 런타임에 빈 화면으로 멈출 수 있습니다. 원인은 TypeScript가 **컴파일 타임에만 존재하는 도구**이기 때문이고, `as`는 그 컴파일 타임 검사마저 꺼 버리기 때문입니다. 이 글은 왜 이런 일이 생기는지 짚고, 외부에서 들어오는 데이터를 안전하게 다루는 방법을 정리합니다. `as` 단언의 기초는 [선행 글(interface·import type)](https://saver7942.blogspot.com/2026/07/typescript-interfaceimport-type-react.html)에서 다뤘습니다.
-
-#### 목차
-
-1. [데이터 계약과 컴파일 타임의 한계](#1)
-
-2. [as 타입 단언 — 검사를 끄는 스위치](#2-as)
-
-3. [API 명세가 바뀌면 무너지는 코드](#3-api)
-
-4. [런타임 검증으로 방어하기](#4)
-
-5. [주의사항](#5)
-
-6. [핵심 정리](#6)
 
 ---
 
@@ -182,5 +170,3 @@ setProduct(json);
 - [TypeScript 공식 문서 — Narrowing (타입 가드)](https://www.typescriptlang.org/docs/handbook/2/narrowing.html)
 
 - [Zod — 런타임 스키마 검증 라이브러리](https://zod.dev/)
-
-<p style="margin:24px 0 2px;padding:13px 18px;border:1.5px solid #C8443C;border-radius:14px 15px 13px 15px;background:rgba(200,68,60,0.06);text-align:center;font-size:14.5px;line-height:1.7;color:#2F3A39">📚 <b>React · TypeScript 타입 안전</b> 시리즈 &nbsp;·&nbsp; <a style="color:#C8443C;font-weight:700;text-decoration:none" href="https://saver7942.blogspot.com/2026/07/react-typescript.html">전체 목차 · 정리 보기 →</a></p>

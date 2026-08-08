@@ -15,25 +15,13 @@ labels:
 source: 사용자 학습 노트 (React 렌더링 최적화 — 멱등성·Local Mutation·안티패턴 Ref/전역변수)
 legacy_url: 'https://saver7942.blogspot.com/2026/07/react-compiler-local-mutation.html'
 draft: false
+series: react-compiler
+part: 3
 ---
 
 [이전 편](https://saver7942.blogspot.com/2026/07/react-compiler-4-rules-of-react.html)에서 Rules of React를 봤습니다. 이번엔 그 규칙을 실무 코드에 적용하며, 가장 헷갈리는 경계 하나를 확실히 합니다.
 
 과거엔 "`useMemo`에 빈 의존성 배열(`[]`)을 넣어 렌더링을 막는" 꼼수가 통했습니다. 컴파일러 시대엔 이런 **기교가 독**입니다. 컴파일러는 여러분의 꼼수를 이해하지 못하고, 안전을 위해 최적화를 포기(bail-out)합니다. 이제 성능을 얻는 길은 하나입니다 — **멍청할 정도로 정직하게 규칙을 지키는 것.**
-
-#### 목차
-
-1. [기교에서 준법으로](#1)
-
-2. [멱등성 — 같은 입력, 같은 출력](#2)
-
-3. [남의 것 vs 내 것 — Local Mutation 안전지대](#3-vs-local-mutation)
-
-4. [안티패턴 — Ref 남용과 전역 변수](#4-ref)
-
-5. [진단과 결론 — 코딩 스타일이 성능이다](#5)
-
-6. [핵심 정리](#6)
 
 ---
 

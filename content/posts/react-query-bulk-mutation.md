@@ -15,27 +15,13 @@ labels:
 source: 사용자 학습 노트 (서버 상태 관리 — 벌크 뮤테이션·bulk API·원자성·MSW 목킹)
 legacy_url: 'https://saver7942.blogspot.com/2026/07/n.html'
 draft: false
+series: react-query
+part: 15
 ---
 
 [이전 편](https://saver7942.blogspot.com/2026/07/persistqueryclient.html)까지는 읽기·쓰기의 개별 동작을 다뤘습니다. 이번엔 **대량 작업**입니다.
 
 관리자 화면에서 유저 100명을 선택해 지운다고 합시다. 순진하게 만들면 `selectedIds.forEach(id => deleteMutation.mutate(id))`처럼 삭제 요청이 100번 나갑니다. 브라우저의 동시 연결 제한(6개)에 걸려 요청이 줄을 서고, 그중 몇 개가 실패하면 "일부만 지워진" 상태가 됩니다. 이 두 문제 — 네트워크 폭풍과 원자성 파괴 — 를 벌크 요청 하나로 잡습니다.
-
-#### 목차
-
-1. [개별 처리의 두 재앙](#1)
-
-2. [벌크 API — 배열을 한 요청에](#2-api)
-
-3. [useMutation — 배열을 통째로 넘긴다](#3-usemutation)
-
-4. [원자성은 서버의 몫](#4)
-
-5. [MSW로 서버 없이 재현](#5-msw)
-
-6. [주의사항](#6)
-
-7. [핵심 정리](#7)
 
 ---
 

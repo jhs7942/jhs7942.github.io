@@ -22,10 +22,6 @@ draft: false
 
 2편까지의 세션 방식은 잘 동작하지만, 상태를 **서버가** 들고 있다는 특성이 있습니다. 서버가 한 대일 땐 문제없지만, 트래픽이 늘어 서버를 여러 대로 확장하면 "이 세션이 어느 서버에 있지?"를 관리해야 합니다. 이번 마지막 편은 상태를 서버에 두지 않는 **JWT 토큰 인증**입니다.
 
-<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 6px"><a style="text-decoration:none;font-size:13.5px;font-weight:500;padding:8px 14px;border-radius:11px 12px 10px 12px;border:1.5px solid #C8443C;background:#FBFBF7;color:#243130" href="https://saver7942.blogspot.com/2026/07/13-http.html">① 쿠키와 세션</a><span style="color:#93A97F">›</span><a style="text-decoration:none;font-size:13.5px;font-weight:500;padding:8px 14px;border-radius:11px 12px 10px 12px;border:1.5px solid #C8443C;background:#FBFBF7;color:#243130" href="https://saver7942.blogspot.com/2026/07/23-bcrypt.html">② 세션 로그인·암호화</a><span style="color:#93A97F">›</span><span style="font-size:13.5px;font-weight:500;padding:8px 14px;border-radius:11px 12px 10px 12px;border:1.5px solid #C8443C;background:#C8443C;color:#FBFBF7">③ JWT 토큰 · 현재</span></div>
-
-<div style="margin:14px 0 0"><div style="font-size:12px;font-weight:700;letter-spacing:1px;color:#93A97F;margin:0 0 10px">목차</div><div style="display:flex;flex-direction:column;gap:9px"><div style="display:flex;gap:10px;font-size:14.5px"><span style="color:#C8443C;font-weight:700;flex:none;width:16px">1</span><a style="text-decoration:none;color:#243130" href="#1-jwt">JWT란 — 무상태 토큰 인증</a></div><div style="display:flex;gap:10px;font-size:14.5px"><span style="color:#C8443C;font-weight:700;flex:none;width:16px">2</span><a style="text-decoration:none;color:#243130" href="#2-jwt">JWT의 구조 — 헤더·페이로드·서명</a></div><div style="display:flex;gap:10px;font-size:14.5px"><span style="color:#C8443C;font-weight:700;flex:none;width:16px">3</span><a style="text-decoration:none;color:#243130" href="#3-jsonwebtoken">jsonwebtoken 실전 — 발급과 검증</a></div><div style="display:flex;gap:10px;font-size:14.5px"><span style="color:#C8443C;font-weight:700;flex:none;width:16px">4</span><a style="text-decoration:none;color:#243130" href="#4-vs-jwt">세션 vs JWT</a></div><div style="display:flex;gap:10px;font-size:14.5px"><span style="color:#C8443C;font-weight:700;flex:none;width:16px">5</span><a style="text-decoration:none;color:#243130" href="#5">주의사항</a></div><div style="display:flex;gap:10px;font-size:14.5px"><span style="color:#C8443C;font-weight:700;flex:none;width:16px">6</span><a style="text-decoration:none;color:#243130" href="#6">핵심 정리</a></div></div></div>
-
 ## 🎫 1. JWT란 — 무상태 토큰 인증
 
 JWT(JSON Web Token)는 **토큰 기반 인증** 방식입니다. 세션은 서버가 상태를 저장하지만, JWT는 서버가 상태를 저장하지 않고 **서명된 토큰을 클라이언트에 넘깁니다.**
@@ -151,5 +147,3 @@ JWT는 확장성에 강하지만, 발급한 토큰을 **만료 전에 강제로 
 - **세션 vs JWT** — 세션은 즉시 무효화에, JWT는 확장성에 강합니다. 서비스 특성에 맞게 고릅니다.
 
 이것으로 쿠키에서 시작해 세션·로그인·암호화·JWT까지 이어진 Express 인증 3부작을 마칩니다.
-
-<div style="display:flex;gap:12px;flex-wrap:wrap;margin:6px 0 0"><a style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;padding:12px 18px;border-radius:12px 13px 11px 13px;border:1.5px solid #C8443C;background:#FBFBF7;color:#243130;font-size:14px;font-weight:500;box-shadow:0 6px 14px -8px rgba(47,58,57,0.4)" href="https://saver7942.blogspot.com/2026/07/23-bcrypt.html"><span style="color:#C8443C;font-size:16px">←</span><span><span style="font-size:11.5px;color:#93A97F;display:block">이전 편</span>세션 로그인과 비밀번호 암호화 (2편)</span></a></div>

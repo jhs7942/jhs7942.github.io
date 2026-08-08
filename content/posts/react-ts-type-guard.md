@@ -14,21 +14,11 @@ labels:
 source: 사용자 학습 노트 (React+TS — 타입 가드·is 타입 술어·방어 컴포넌트)
 legacy_url: 'https://saver7942.blogspot.com/2026/07/typescript-is-api.html'
 draft: false
+series: react-ts
+part: 7
 ---
 
 [선행 글(09강)](https://saver7942.blogspot.com/2026/07/typescript-api-as.html)에서 `as`로 검증을 건너뛴 데이터가 런타임에 앱을 멈추는 과정을 봤습니다. 그때 방어책으로 타입 가드를 짧게 소개했는데, 이 글에서는 그 핵심인 **`is` 타입 술어가 정확히 어떻게 동작하는지**와, 검증 실패를 화면 붕괴 없이 처리하는 컴포넌트까지 깊이 들여다봅니다.
-
-#### 목차
-
-1. [is 키워드 — boolean과 무엇이 다른가](#1-is-boolean)
-
-2. [타입 가드로 데이터 검문](#2)
-
-3. [검증 실패를 우아하게 처리하기](#3)
-
-4. [주의사항](#4)
-
-5. [핵심 정리](#5)
 
 ---
 
@@ -182,5 +172,3 @@ export function ProductPage({ productId }: { productId: number }) {
 - [TypeScript 공식 문서 — Narrowing과 타입 술어](https://www.typescriptlang.org/docs/handbook/2/narrowing.html)
 
 - [Zod — 런타임 스키마 검증 라이브러리](https://zod.dev/)
-
-<p style="margin:24px 0 2px;padding:13px 18px;border:1.5px solid #C8443C;border-radius:14px 15px 13px 15px;background:rgba(200,68,60,0.06);text-align:center;font-size:14.5px;line-height:1.7;color:#2F3A39">📚 <b>React · TypeScript 타입 안전</b> 시리즈 &nbsp;·&nbsp; <a style="color:#C8443C;font-weight:700;text-decoration:none" href="https://saver7942.blogspot.com/2026/07/react-typescript.html">전체 목차 · 정리 보기 →</a></p>

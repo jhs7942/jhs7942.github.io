@@ -14,23 +14,11 @@ labels:
 source: 사용자 학습 노트 (React+TS — Error Boundary·클래스 컴포넌트·unknown 에러)
 legacy_url: 'https://saver7942.blogspot.com/2026/07/react-error-boundary-unknown.html'
 draft: false
+series: react-ts
+part: 9
 ---
 
 React에서는 하위 컴포넌트 하나가 렌더 도중 에러를 던지면, 기본적으로 앱 전체가 언마운트되어 화면이 백지가 됩니다. **Error Boundary**는 그 에러를 특정 구역에서 붙잡아, 나머지 화면은 그대로 두고 그 구역만 대체 UI로 전환합니다. 전기의 차단기가 한 회로의 이상을 그 회로에서만 끊어 내는 것과 비슷합니다. 이 글은 Error Boundary를 TypeScript로 구현하면서, 왜 클래스로 만들어야 하는지와 잡은 에러를 안전하게 다루는 법을 정리합니다.
-
-#### 목차
-
-1. [왜 Error Boundary는 클래스 컴포넌트인가](#1-error-boundary)
-
-2. [unknown 에러를 instanceof로 좁히기](#2-unknown-instanceof)
-
-3. [Error Boundary 구현](#3-error-boundary)
-
-4. [에러를 격리해 보기](#4)
-
-5. [주의사항](#5)
-
-6. [핵심 정리](#6)
 
 ---
 
@@ -202,5 +190,3 @@ export default function App() {
 - 선행 글: [TypeScript 타입 가드 (is 타입 술어·좁히기)](https://saver7942.blogspot.com/2026/07/typescript-is-api.html)
 
 - [React 공식 문서 — Error Boundary (Component.getDerivedStateFromError)](https://react.dev/reference/react/Component#static-getderivedstatefromerror)
-
-<p style="margin:24px 0 2px;padding:13px 18px;border:1.5px solid #C8443C;border-radius:14px 15px 13px 15px;background:rgba(200,68,60,0.06);text-align:center;font-size:14.5px;line-height:1.7;color:#2F3A39">📚 <b>React · TypeScript 타입 안전</b> 시리즈 &nbsp;·&nbsp; <a style="color:#C8443C;font-weight:700;text-decoration:none" href="https://saver7942.blogspot.com/2026/07/react-typescript.html">전체 목차 · 정리 보기 →</a></p>

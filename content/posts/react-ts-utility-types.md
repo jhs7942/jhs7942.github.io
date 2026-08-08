@@ -18,23 +18,11 @@ source: 사용자 학습 노트 (React+TS — 유틸리티 타입/인터페이�
 legacy_url: >-
   https://saver7942.blogspot.com/2026/07/typescript-componentpropswithoutrefexte.html
 draft: false
+series: react-ts
+part: 5
 ---
 
 같은 구조의 타입을 매번 처음부터 다시 정의하면, 원본이 바뀔 때마다 사본까지 전부 고쳐야 합니다. TypeScript는 **기존 타입을 재료로 새 타입을 파생시키는** 도구를 제공합니다. HTML 요소의 속성 타입을 통째로 가져오고, 상속으로 확장하고, 필요한 키만 고르거나 빼고, 전부 선택적으로 바꾸는 방법을 실습과 함께 정리합니다. HTML 표준 속성 상속과 `Omit`의 기초는 [선행 글(컴포넌트 타입)](https://saver7942.blogspot.com/2026/07/react-reactnodecomponentpropswithref.html)에서 다뤘고, 이 글은 그 도구 상자를 넓힙니다.
-
-#### 목차
-
-1. [ComponentPropsWithoutRef — HTML 타입 추출](#1-componentpropswithoutref-html)
-
-2. [interface extends — 상속으로 확장](#2-interface-extends)
-
-3. [Pick·Omit — 고르고 빼기](#3-pickomit)
-
-4. [Partial — 전부 선택적으로](#4-partial)
-
-5. [주의사항](#5)
-
-6. [핵심 정리](#6)
 
 ---
 
@@ -240,5 +228,3 @@ export function ProfileEditor() {
 - 선행 글: [React 컴포넌트에 타입 붙이기 (ComponentPropsWithRef·Omit 포함)](https://saver7942.blogspot.com/2026/07/react-reactnodecomponentpropswithref.html)
 
 - [TypeScript 공식 문서 — Utility Types](https://www.typescriptlang.org/docs/handbook/utility-types.html)
-
-<p style="margin:24px 0 2px;padding:13px 18px;border:1.5px solid #C8443C;border-radius:14px 15px 13px 15px;background:rgba(200,68,60,0.06);text-align:center;font-size:14.5px;line-height:1.7;color:#2F3A39">📚 <b>React · TypeScript 타입 안전</b> 시리즈 &nbsp;·&nbsp; <a style="color:#C8443C;font-weight:700;text-decoration:none" href="https://saver7942.blogspot.com/2026/07/react-typescript.html">전체 목차 · 정리 보기 →</a></p>

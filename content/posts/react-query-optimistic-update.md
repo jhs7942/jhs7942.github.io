@@ -16,27 +16,13 @@ labels:
 source: 사용자 학습 노트 (서버 상태 관리 — 낙관적 업데이트 onMutate·cancelQueries·TContext 롤백·onSettled)
 legacy_url: 'https://saver7942.blogspot.com/2026/07/onmutate-0-ux.html'
 draft: false
+series: react-query
+part: 7
 ---
 
 [이전 편](https://saver7942.blogspot.com/2026/07/usemutation.html)의 기본 리듬은 "쓰고 나서 무효화"였습니다. `mutate` → 서버 변경 → `invalidateQueries` → 재요청 → 화면 갱신. 안전하지만, 사용자는 요청이 끝날 때까지 결과를 못 봅니다. 1초 걸리면 1초를 기다립니다.
 
 **낙관적 업데이트**는 순서를 뒤집습니다. 서버가 성공할 것이라 낙관하고, 응답이 오기 전에 화면부터 바꿉니다. 좋아요 버튼을 누르면 서버 응답을 기다리지 않고 하트가 즉시 빨개지는 그 방식입니다. 체감 대기 시간이 0이 됩니다. 대신 "실패하면 되돌린다"는 안전장치를 직접 설계해야 합니다. 그 설계가 이 편의 전부입니다.
-
-#### 목차
-
-1. [발상 — 응답을 기다리지 않는다](#1)
-
-2. [세 단계 설계 — onMutate · onError · onSettled](#2-onmutate-onerror-onsettled)
-
-3. [onMutate — 취소 · 스냅샷 · 선제 타격](#3-onmutate)
-
-4. [onError — TContext로 롤백](#4-onerror-tcontext)
-
-5. [onSettled — 서버와 최종 동기화](#5-onsettled)
-
-6. [주의사항 — 언제 쓰고 무엇을 조심하나](#6)
-
-7. [핵심 정리](#7)
 
 ---
 

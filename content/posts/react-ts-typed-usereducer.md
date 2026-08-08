@@ -15,25 +15,11 @@ labels:
 source: 사용자 학습 노트 (React+TS — TS 마이그레이션/Reducer)
 legacy_url: 'https://saver7942.blogspot.com/2026/07/typescript-usereducer-state.html'
 draft: false
+series: react-ts
+part: 4
 ---
 
 `useReducer`를 JavaScript로 쓰면 `dispatch`에 어떤 객체든 넘길 수 있습니다. `type`에 오타를 내거나 `payload`에 문자열을 넣어도 편집기는 조용하고, 문제는 실행 중에야 터집니다. 상태(State)와 명령(Action)에 타입을 입히면, dispatch가 "정의된 명령"만 받도록 강제되고 reducer 내부에서 데이터 타입까지 자동으로 맞춰집니다. 이 글은 그 과정을 end-to-end로 정리합니다. 여기서 쓰는 기초 문법은 선행 글 [interface·import type](https://saver7942.blogspot.com/2026/07/typescript-interfaceimport-type-react.html)과 [구별된 공용체](https://saver7942.blogspot.com/2026/07/react-reactnodecomponentpropswithref.html)에서 다룹니다.
-
-#### 목차
-
-1. [왜 useReducer에 타입이 필요한가](#1-usereducer)
-
-2. [State와 Action 규격 정의](#2-state-action)
-
-3. [타입 안전한 Reducer 작성](#3-reducer)
-
-4. [타입이 보장된 연산 유틸](#4)
-
-5. [useReducer로 통합하고 동작 확인](#5-usereducer)
-
-6. [주의사항](#6)
-
-7. [핵심 정리](#7)
 
 ---
 
@@ -226,5 +212,3 @@ export default function App() {
 - 선행 글: [React 컴포넌트에 타입 붙이기 (구별된 공용체 포함)](https://saver7942.blogspot.com/2026/07/react-reactnodecomponentpropswithref.html)
 
 - [React 공식 문서 — useReducer](https://react.dev/reference/react/useReducer)
-
-<p style="margin:24px 0 2px;padding:13px 18px;border:1.5px solid #C8443C;border-radius:14px 15px 13px 15px;background:rgba(200,68,60,0.06);text-align:center;font-size:14.5px;line-height:1.7;color:#2F3A39">📚 <b>React · TypeScript 타입 안전</b> 시리즈 &nbsp;·&nbsp; <a style="color:#C8443C;font-weight:700;text-decoration:none" href="https://saver7942.blogspot.com/2026/07/react-typescript.html">전체 목차 · 정리 보기 →</a></p>

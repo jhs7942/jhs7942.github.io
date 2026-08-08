@@ -22,18 +22,6 @@ draft: false
 
 미들웨어 체인이 완성되었다고 해도, 한 가지 질문이 남습니다. 체인 중간에서 예외가 터지면 어떻게 될까요? 그리고 `express.static("public")`처럼 설정 한 줄로 정적 파일을 서빙하는 코드는 내부적으로 어떻게 동작할까요? 4편에서는 에러를 일반 응답과 분리된 별도 경로로 흘리는 에러 미들웨어와, 팩토리 패턴을 활용한 정적 파일 서빙 미들웨어를 직접 구현합니다.
 
-<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 6px"><a style="text-decoration:none;font-size:13.5px;font-weight:500;padding:8px 14px;border-radius:11px 12px 10px 12px;border:1.5px solid #C8443C;background:#FBFBF7;color:#243130" href="https://saver7942.blogspot.com/2026/07/express-16-http.html">① 순수 http</a><span style="color:#93A97F">›</span><a style="text-decoration:none;font-size:13.5px;font-weight:500;padding:8px 14px;border-radius:11px 12px 10px 12px;border:1.5px solid #C8443C;background:#FBFBF7;color:#243130" href="https://saver7942.blogspot.com/2026/07/express-26.html">② 라우트 테이블</a><span style="color:#93A97F">›</span><a style="text-decoration:none;font-size:13.5px;font-weight:500;padding:8px 14px;border-radius:11px 12px 10px 12px;border:1.5px solid #C8443C;background:#FBFBF7;color:#243130" href="https://saver7942.blogspot.com/2026/07/express-36-next.html">③ 미들웨어 체인</a><span style="color:#93A97F">›</span><span style="font-size:13.5px;font-weight:500;padding:8px 14px;border-radius:11px 12px 10px 12px;border:1.5px solid #C8443C;background:#C8443C;color:#FBFBF7">④ 에러·정적 · 현재</span><span style="color:#93A97F">›</span><a style="text-decoration:none;font-size:13.5px;font-weight:500;padding:8px 14px;border-radius:11px 12px 10px 12px;border:1.5px solid #C8443C;background:#FBFBF7;color:#243130" href="https://saver7942.blogspot.com/2026/07/express-56-json.html">⑤ 파라미터·파서</a><span style="color:#93A97F">›</span><a style="text-decoration:none;font-size:13.5px;font-weight:500;padding:8px 14px;border-radius:11px 12px 10px 12px;border:1.5px solid #C8443C;background:#FBFBF7;color:#243130" href="https://saver7942.blogspot.com/2026/07/express-66-createrouter.html">⑥ 라우터 모듈화</a></div>
-
-#### 목차
-
-1. [에러 미들웨어: 4인자 시그니처의 의미](#1-4)
-2. [next(err)와 try/catch — 에러 전달 흐름 구현](#2-nexterr-trycatch)
-3. [조기 응답으로 체인 중단: /forbidden 패턴](#3-forbidden)
-4. [정적 파일 서빙: 팩토리 패턴 설계](#4)
-5. [파일 스트리밍과 MIME 타입 결정](#5-mime)
-6. [주의사항](#6)
-7. [핵심 정리](#7)
-
 ## 📦 1. 에러 미들웨어: 4인자 시그니처의 의미
 
 Express를 포함해 대부분의 Node.js 웹 프레임워크에서 **에러 처리 미들웨어**는 일반 미들웨어와 인자 수로 구별됩니다. 일반 미들웨어가 `(req, res, next)`를 받는 반면, 에러 미들웨어는 첫 번째 인자로 `err`를 추가해 4개를 받습니다.
@@ -303,5 +291,3 @@ $ curl http://localhost:3000/unknown.txt
 - **`createReadStream` + `pipe`** — 파일을 메모리에 올리지 않고 스트림으로 전송합니다. 대용량 파일도 일정한 메모리로 처리할 수 있습니다.
 
 다음 5편에서는 `/posts/:id`처럼 동적 URL 파라미터를 추출하는 라우터와, 요청 바디를 파싱하는 JSON 파서 미들웨어를 구현합니다.
-
-<div style="display:flex;gap:12px;flex-wrap:wrap;margin:6px 0 0;justify-content:space-between"><a style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;padding:12px 18px;border-radius:12px 13px 11px 13px;border:1.5px solid #C8443C;background:#FBFBF7;color:#243130;font-size:14px;font-weight:500;box-shadow:0 6px 14px -8px rgba(47,58,57,0.4)" href="https://saver7942.blogspot.com/2026/07/express-36-next.html"><span style="color:#C8443C;font-size:16px">←</span><span><span style="font-size:11.5px;color:#93A97F;display:block">이전 편</span>미들웨어 체인 (3편)</span></a><a style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;padding:12px 18px;border-radius:12px 13px 11px 13px;border:1.5px solid #C8443C;background:#FBFBF7;color:#243130;font-size:14px;font-weight:500;box-shadow:0 6px 14px -8px rgba(47,58,57,0.4)" href="https://saver7942.blogspot.com/2026/07/express-56-json.html"><span><span style="font-size:11.5px;color:#93A97F;display:block;text-align:right">다음 편</span>동적 파라미터·JSON 파서 (5편)</span><span style="color:#C8443C;font-size:16px">→</span></a></div>

@@ -22,10 +22,6 @@ draft: false
 
 > 이 시리즈는 [Express 기초 6부작](https://saver7942.blogspot.com/2026/07/66-expressrouter.html)에서 이어집니다. 라우팅·미들웨어·요청 데이터가 익숙하다는 전제로 진행합니다.
 
-<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 6px"><span style="font-size:13.5px;font-weight:500;padding:8px 14px;border-radius:11px 12px 10px 12px;border:1.5px solid #C8443C;background:#C8443C;color:#FBFBF7">① 쿠키와 세션 · 현재</span><span style="color:#93A97F">›</span><a style="text-decoration:none;font-size:13.5px;font-weight:500;padding:8px 14px;border-radius:11px 12px 10px 12px;border:1.5px solid #C8443C;background:#FBFBF7;color:#243130" href="https://saver7942.blogspot.com/2026/07/23-bcrypt.html">② 세션 로그인·암호화</a><span style="color:#93A97F">›</span><a style="text-decoration:none;font-size:13.5px;font-weight:500;padding:8px 14px;border-radius:11px 12px 10px 12px;border:1.5px solid #C8443C;background:#FBFBF7;color:#243130" href="https://saver7942.blogspot.com/2026/07/jwt-33.html">③ JWT 토큰</a></div>
-
-<div style="margin:14px 0 0"><div style="font-size:12px;font-weight:700;letter-spacing:1px;color:#93A97F;margin:0 0 10px">목차</div><div style="display:flex;flex-direction:column;gap:9px"><div style="display:flex;gap:10px;font-size:14.5px"><span style="color:#C8443C;font-weight:700;flex:none;width:16px">1</span><a style="text-decoration:none;color:#243130" href="#1-stateless-http">왜 상태 유지가 필요한가 — stateless HTTP</a></div><div style="display:flex;gap:10px;font-size:14.5px"><span style="color:#C8443C;font-weight:700;flex:none;width:16px">2</span><a style="text-decoration:none;color:#243130" href="#2">쿠키 — 브라우저에 저장하는 기억</a></div><div style="display:flex;gap:10px;font-size:14.5px"><span style="color:#C8443C;font-weight:700;flex:none;width:16px">3</span><a style="text-decoration:none;color:#243130" href="#3">세션 — 서버에 저장하는 기억</a></div><div style="display:flex;gap:10px;font-size:14.5px"><span style="color:#C8443C;font-weight:700;flex:none;width:16px">4</span><a style="text-decoration:none;color:#243130" href="#4-vs">쿠키 vs 세션</a></div><div style="display:flex;gap:10px;font-size:14.5px"><span style="color:#C8443C;font-weight:700;flex:none;width:16px">5</span><a style="text-decoration:none;color:#243130" href="#5">주의사항</a></div><div style="display:flex;gap:10px;font-size:14.5px"><span style="color:#C8443C;font-weight:700;flex:none;width:16px">6</span><a style="text-decoration:none;color:#243130" href="#6">핵심 정리</a></div></div></div>
-
 ## 🧠 1. 왜 상태 유지가 필요한가 — stateless HTTP
 
 HTTP는 **무상태(stateless)** 프로토콜입니다. 서버는 한 요청을 처리하고 나면 그 요청을 누가 보냈는지 바로 잊습니다.
@@ -177,5 +173,3 @@ Cookie: connect.sid=s%3A4FuY...zJm.Q7dN...
 - **세션** — 데이터는 서버에, 브라우저에는 `connect.sid`만. `express-session`의 `req.session`에 상태를 담습니다.
 
 - **관계** — 쿠키는 브라우저가, 세션은 서버가 기억하며, 세션 ID 전달에는 쿠키가 쓰입니다.
-
-<div style="display:flex;gap:12px;flex-wrap:wrap;margin:6px 0 0;justify-content:flex-end"><a style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;padding:12px 18px;border-radius:12px 13px 11px 13px;border:1.5px solid #C8443C;background:#FBFBF7;color:#243130;font-size:14px;font-weight:500;box-shadow:0 6px 14px -8px rgba(47,58,57,0.4)" href="https://saver7942.blogspot.com/2026/07/23-bcrypt.html"><span><span style="font-size:11.5px;color:#93A97F;display:block;text-align:right">다음 편</span>세션 로그인과 비밀번호 암호화 (2편)</span><span style="color:#C8443C;font-size:16px">→</span></a></div>

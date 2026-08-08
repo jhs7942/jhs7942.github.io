@@ -21,17 +21,6 @@ draft: false
 
 HTML 폼의 `<input>` 값들이 `username=Alice&age=30` 꼴로 서버에 도착하는 것은 알지만, 서버가 그 문자열을 어떻게 자바스크립트 객체로 변환하는지는 `express.urlencoded()` 한 줄 뒤에 가려져 있습니다. 라우트가 여러 파일로 분리되는 과정도 마찬가지입니다. 이번 편에서는 두 가지를 직접 구현하며 그 안쪽을 확인합니다.
 
-<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 6px"><a style="text-decoration:none;font-size:13.5px;font-weight:500;padding:8px 14px;border-radius:11px 12px 10px 12px;border:1.5px solid #C8443C;background:#FBFBF7;color:#243130" href="https://saver7942.blogspot.com/2026/07/express-16-http.html">① 순수 http</a><span style="color:#93A97F">›</span><a style="text-decoration:none;font-size:13.5px;font-weight:500;padding:8px 14px;border-radius:11px 12px 10px 12px;border:1.5px solid #C8443C;background:#FBFBF7;color:#243130" href="https://saver7942.blogspot.com/2026/07/express-26.html">② 라우트 테이블</a><span style="color:#93A97F">›</span><a style="text-decoration:none;font-size:13.5px;font-weight:500;padding:8px 14px;border-radius:11px 12px 10px 12px;border:1.5px solid #C8443C;background:#FBFBF7;color:#243130" href="https://saver7942.blogspot.com/2026/07/express-36-next.html">③ 미들웨어 체인</a><span style="color:#93A97F">›</span><a style="text-decoration:none;font-size:13.5px;font-weight:500;padding:8px 14px;border-radius:11px 12px 10px 12px;border:1.5px solid #C8443C;background:#FBFBF7;color:#243130" href="https://saver7942.blogspot.com/2026/07/express-46.html">④ 에러·정적</a><span style="color:#93A97F">›</span><a style="text-decoration:none;font-size:13.5px;font-weight:500;padding:8px 14px;border-radius:11px 12px 10px 12px;border:1.5px solid #C8443C;background:#FBFBF7;color:#243130" href="https://saver7942.blogspot.com/2026/07/express-56-json.html">⑤ 파라미터·파서</a><span style="color:#93A97F">›</span><span style="font-size:13.5px;font-weight:500;padding:8px 14px;border-radius:11px 12px 10px 12px;border:1.5px solid #C8443C;background:#C8443C;color:#FBFBF7">⑥ 라우터 모듈화 · 현재</span></div>
-
-#### 목차
-
-1. [application/x-www-form-urlencoded 인코딩 원리](#1-applicationx-www-form-urlencoded)
-2. [urlEncodedParser 미들웨어 구현](#2-urlencodedparser)
-3. [createRouter 팩토리 구현](#3-createrouter)
-4. [라우터를 파일로 분리하기](#4)
-5. [주의사항](#5)
-6. [시리즈 전체 여정 정리](#6)
-
 ## 📦 1. application/x-www-form-urlencoded 인코딩 원리
 
 HTML `<form method="POST">`를 제출하면 브라우저는 입력값을 **`application/x-www-form-urlencoded`** 형식으로 인코딩합니다. 요청 헤더에 `Content-Type: application/x-www-form-urlencoded`가 설정되고, 본문(body)에 다음과 같은 문자열이 전달됩니다.
@@ -434,5 +423,3 @@ decodeURIComponent(value.replace(/\+/g, " ")) // "hello world"
 - 라우터 인스턴스는 `handle` 메서드 하나로 미들웨어 배열에 삽입됩니다. `server.js`가 라우트 내용을 알 필요가 없어집니다.
 
 - 미들웨어 체인의 `next()`는 제어 흐름 이동 수단입니다. 라우터의 `handle`도 이 인터페이스를 그대로 따르므로 라우터와 일반 미들웨어를 동일한 배열에 혼용할 수 있습니다.
-
-<div style="display:flex;gap:12px;flex-wrap:wrap;margin:6px 0 0"><a style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;padding:12px 18px;border-radius:12px 13px 11px 13px;border:1.5px solid #C8443C;background:#FBFBF7;color:#243130;font-size:14px;font-weight:500;box-shadow:0 6px 14px -8px rgba(47,58,57,0.4)" href="https://saver7942.blogspot.com/2026/07/express-56-json.html"><span style="color:#C8443C;font-size:16px">←</span><span><span style="font-size:11.5px;color:#93A97F;display:block">이전 편</span>동적 파라미터·JSON 파서 (5편)</span></a></div>

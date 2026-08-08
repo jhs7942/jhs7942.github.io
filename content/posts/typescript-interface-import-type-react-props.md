@@ -16,20 +16,11 @@ source: >-
 legacy_url: >-
   https://saver7942.blogspot.com/2026/07/typescript-interfaceimport-type-react.html
 draft: false
+series: react-ts
+part: 1
 ---
 
 JavaScript로 작성된 React 앱에서 컴포넌트에 잘못된 타입의 데이터가 들어가면 오류가 실행 도중에야 드러납니다. TypeScript는 코드 작성 시점에 이 문제를 미리 잡아냅니다. 이 글에서는 `interface`로 데이터 규격을 정의하고, `import type`으로 타입만 가져오며, React 컴포넌트 props에 타입을 적용하는 과정을 단계별로 정리합니다.
-
-#### 목차
-
-1. [왜 타입을 사용하는가](#1)
-2. [interface로 데이터 규격 정의](#2-interface)
-3. [import type — 타입만 가져오기](#3-import-type)
-4. [컴포넌트 props에 타입 적용](#4-props)
-5. [데이터 주입과 타입 고정](#5)
-6. [as 타입 단언](#6-as)
-7. [⚠️ 주의사항](#7)
-8. [✅ 핵심 정리](#8)
 
 ---
 
@@ -218,5 +209,3 @@ ReactDOM.createRoot(rootElement).render(
 | `src/components/UserProfile.tsx` | `import type` + props 타입 적용 |
 | `src/App.tsx` | 데이터 생성 및 컴포넌트 조합 |
 | `src/main.tsx` | 렌더링 엔트리, `as` 타입 단언 |
-
-<p style="margin:24px 0 2px;padding:13px 18px;border:1.5px solid #C8443C;border-radius:14px 15px 13px 15px;background:rgba(200,68,60,0.06);text-align:center;font-size:14.5px;line-height:1.7;color:#2F3A39">📚 <b>React · TypeScript 타입 안전</b> 시리즈 &nbsp;·&nbsp; <a style="color:#C8443C;font-weight:700;text-decoration:none" href="https://saver7942.blogspot.com/2026/07/react-typescript.html">전체 목차 · 정리 보기 →</a></p>

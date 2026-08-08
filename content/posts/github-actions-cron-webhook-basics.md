@@ -23,24 +23,6 @@ draft: false
 
 왜 3시간 25분이 늦었을까요? 어떻게 예약해야 목표 시각 ±5분 안에 도착할까요? 이 두 질문에 답하기 위해 GitHub Actions cron의 동작 원리와 예약 설계를 정리합니다.
 
-> **시리즈**: **① GitHub Actions cron 스케줄링 (이 글)** → ② [Mattermost Webhook 알림 봇 구축](https://saver7942.blogspot.com/2026/07/mattermost-webhook-22.html)
-
-#### 목차
-
-1. [GitHub Actions란?](#1-github-actions)
-
-2. [cron 표현식](#2-cron)
-
-3. [타임존 변환 (KST ↔ UTC)](#3-kst-utc)
-
-4. [GitHub Actions cron의 지연 특성](#4-github-actions-cron)
-
-5. [실제 적용 — off-peak 예약 설계](#5-off-peak)
-
-6. [주의사항](#6)
-
-7. [핵심 정리](#7)
-
 ## 📦 1. GitHub Actions란?
 
 **GitHub Actions** — GitHub 리포지토리에서 "조건 충족 시 자동으로 작업을 실행"하는 CI/CD 자동화 서비스입니다.
@@ -274,8 +256,6 @@ on:
 - **일(DOM) + 요일(DOW) 동시 지정은 OR 관계**가 됩니다. 의도치 않은 이중 실행이 발생할 수 있습니다.
 
 - **리포지토리 60일 비활성 시 schedule이 자동 정지**됩니다. 장기 운영 서비스는 별도 확인이 필요합니다.
-
-> **시리즈 다음 편**: [Mattermost Webhook 알림 봇 구축 (2/2) — 아키텍처와 최종 워크플로우 →](https://saver7942.blogspot.com/2026/07/mattermost-webhook-22.html)
 
 ## 🔗 참고 자료
 

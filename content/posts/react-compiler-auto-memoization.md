@@ -15,29 +15,13 @@ labels:
 source: 사용자 학습 노트 (React 렌더링 최적화 — React Compiler·빌드타임 정적분석·bail-out·참조 동일성)
 legacy_url: 'https://saver7942.blogspot.com/2026/07/react-compiler-usememousecallback.html'
 draft: false
+series: react-compiler
+part: 1
 ---
 
 이 글은 서버 상태([TanStack Query 시리즈](https://saver7942.blogspot.com/2026/07/tanstack-query.html))와 별개인, React 자체의 **렌더링 최적화** 이야기입니다.
 
 React의 기본 규칙은 단순합니다. **부모가 리렌더되면 자식도 무조건 리렌더됩니다.** 대규모 앱에서 이 규칙은 가혹해서, 개발자는 `React.memo`·`useMemo`·`useCallback`으로 끝없이 방어 코드를 써 왔습니다. 이 방어 코드가 우리가 내던 '최적화 세금'입니다. React Compiler는 이 세금을 없앱니다.
-
-#### 목차
-
-1. [최적화 세금 — 우리가 내던 비용](#1)
-
-2. [어떻게 자동인가 — 빌드타임 정적분석](#2)
-
-3. [설치와 설정 — Vite와 target](#3-vite-target)
-
-4. [새 문법은 없다 — 감지 규칙과 지시어](#4)
-
-5. [Before / After — 컴파일러가 보는 코드](#5-before-after)
-
-6. [Bail-out — 안전이 최우선이다](#6-bail-out)
-
-7. [참조 동일성 — 컴파일러 경계 밖의 함정](#7)
-
-8. [핵심 정리](#8)
 
 ---
 

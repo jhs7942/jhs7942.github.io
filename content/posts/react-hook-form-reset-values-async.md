@@ -17,25 +17,11 @@ source: 사용자 학습 노트 (React 폼 — RHF reset/resetField/values·비�
 legacy_url: >-
   https://saver7942.blogspot.com/2026/07/react-hook-form-resetvalues-reset-vs.html
 draft: false
+series: react-hook-form
+part: 6
 ---
 
 지난 글에서 [dirtyFields로 변경분만 PATCH하는 법](https://saver7942.blogspot.com/2026/07/react-hook-form-dirtyfields-patch.html)을 다뤘습니다. 그 모든 것의 전제는 "기준점(`defaultValues`)이 올바르게 잡혀 있다"였습니다. 그런데 수정 페이지에서 서버 데이터가 비동기로 늦게 도착하면, 이 기준점부터 어긋납니다. 데이터를 불러왔는데 입력창이 비어 있는 버그가 대표적입니다. 폼에 데이터를 안전하게 채워 넣는 시작점을 `reset`·`resetField`·`values`로 정리합니다. 폼 관리 시리즈 네 번째 글입니다.
-
-#### 목차
-
-1. [defaultValues에 서버 데이터를 직접 넣으면 안 되는 이유](#1-defaultvalues)
-
-2. [reset — 비동기 로딩의 정석 패턴](#2-reset)
-
-3. [reset vs resetField — 전체 교체와 부분 교체](#3-reset-vs-resetfield)
-
-4. [values 속성 — 선언적 동기화 (v7.45+)](#4-values-v745)
-
-5. [reset 옵션으로 세밀하게 제어하기](#5-reset)
-
-6. [주의사항](#6)
-
-7. [핵심 정리](#7)
 
 ---
 
@@ -220,5 +206,3 @@ reset(userData, { keepDirtyValues: true, keepErrors: true });
 - [React Hook Form 공식 문서 — resetField](https://react-hook-form.com/docs/useform/resetfield)
 
 - [React Hook Form 공식 문서 — useForm의 values·resetOptions](https://react-hook-form.com/docs/useform)
-
-<p style="margin:24px 0 2px;padding:13px 18px;border:1.5px solid #C8443C;border-radius:14px 15px 13px 15px;background:rgba(200,68,60,0.06);text-align:center;font-size:14.5px;line-height:1.7;color:#2F3A39">🧩 <b>React Hook Form 폼 관리 시리즈</b> &nbsp;·&nbsp; <a style="color:#C8443C;font-weight:700;text-decoration:none" href="https://saver7942.blogspot.com/2026/07/react-hook-form.html">전체 정리 · 목차 보기 →</a></p>

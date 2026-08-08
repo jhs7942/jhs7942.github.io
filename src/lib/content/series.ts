@@ -29,6 +29,29 @@ export const SERIES = {
     title: "텔레파시 성능 측정",
     total: 2,
   },
+
+  // 아래 5개는 (n/m) 표기를 쓰지 않던 학습 시리즈다. 앞의 셋은 본문 상단 배너에서,
+  // 뒤의 둘은 본문 산문 링크에서 소속을 복원했다. part는 발행 순서로 부여한다.
+  "react-ts": {
+    title: "React · TypeScript 타입 안전",
+    total: 11,
+  },
+  "react-query": {
+    title: "서버 상태 관리 · TanStack Query",
+    total: 15,
+  },
+  "react-hook-form": {
+    title: "React Hook Form 폼 관리",
+    total: 7,
+  },
+  zustand: {
+    title: "React 상태 관리 · Zustand",
+    total: 7,
+  },
+  "react-compiler": {
+    title: "React Compiler",
+    total: 5,
+  },
 } as const;
 
 export type SeriesKey = keyof typeof SERIES;

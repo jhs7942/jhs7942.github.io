@@ -16,27 +16,13 @@ labels:
 source: 사용자 학습 노트 (서버 상태 관리 — 오프라인 fetchStatus paused·networkMode·휘발성 캐시)
 legacy_url: 'https://saver7942.blogspot.com/2026/07/tanstack-query-paused.html'
 draft: false
+series: react-query
+part: 13
 ---
 
 [이전 편](https://saver7942.blogspot.com/2026/07/enabled.html)까지 요청의 순서와 형태를 다뤘습니다. 그런데 개발자가 통제할 수 없는 거대한 변수가 하나 남아 있습니다. **사용자의 네트워크 연결**입니다.
 
 지하철 터널을 지나거나 와이파이가 끊기는 찰나, 아무리 잘 짠 코드도 멈춥니다. 이때 TanStack Query가 어떻게 반응하는지, 그리고 왜 새로고침 한 번에 모든 게 사라지는지를 정확히 아는 것이 오프라인 UX 설계의 출발점입니다. 이 편은 그 "고통"의 실체를 봅니다. 해결책(캐시 지속성)은 다음 편입니다.
-
-#### 목차
-
-1. [통제할 수 없는 변수 — 네트워크](#1)
-
-2. [paused — 오프라인에서 엔진이 멈춘다](#2-paused)
-
-3. [죽은 시간의 정체 — isPending·isFetching·isPaused](#3-ispendingisfetchingispaused)
-
-4. [휘발성 캐시 — 새로고침에 증발한다](#4)
-
-5. [공룡 게임 — 껍데기와 알맹이는 다르다](#5)
-
-6. [주의사항](#6)
-
-7. [핵심 정리](#7)
 
 ---
 

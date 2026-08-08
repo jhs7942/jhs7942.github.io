@@ -15,25 +15,13 @@ labels:
 source: 사용자 학습 노트 (React 렌더링 최적화 — 컴파일러 시대 useMemo/useCallback·참조 안정성·escape hatch)
 legacy_url: 'https://saver7942.blogspot.com/2026/07/blog-post_27.html'
 draft: false
+series: react-compiler
+part: 4
 ---
 
 [이전 편](https://saver7942.blogspot.com/2026/07/react-compiler-local-mutation.html)까지 컴파일러가 무엇을 자동화하는지 봤습니다. 그러면 당연한 질문이 나옵니다. **"useMemo·useCallback은 이제 레거시인가요? 싹 지울까요?"**
 
 절반은 맞습니다. 습관적으로 뿌리던 `useMemo`·`useCallback`의 대부분은 이제 지워도 됩니다. 하지만 완전히 사라지진 않습니다. 이 훅들은 '잡부'에서 **'특수부대'로 승진**했습니다. 아무 데나 쓰이는 대신, 정말 필요한 곳에만 등장하는 정예 요원이 됐습니다. 컴파일러는 렌더링 **성능**을 책임지지만, 로직의 **정확성**과 참조 제어는 여전히 개발자의 몫이기 때문입니다.
-
-#### 목차
-
-1. [훅은 은퇴가 아니라 승진했다](#1)
-
-2. [참조 안정성 — 훅의 새 본질](#2)
-
-3. [대부분은 컴파일러가 자동화한다](#3)
-
-4. [그래도 손이 필요한 경계](#4)
-
-5. [useMemo는 코드에 남기는 의도](#5-usememo)
-
-6. [핵심 정리](#6)
 
 ---
 

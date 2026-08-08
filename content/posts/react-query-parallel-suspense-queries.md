@@ -16,25 +16,13 @@ source: 사용자 학습 노트 (서버 상태 관리 — useSuspenseQueries 병
 legacy_url: >-
   https://saver7942.blogspot.com/2026/07/usesuspensequeries-suspense-waterfall.html
 draft: false
+series: react-query
+part: 5
 ---
 
 [이전 편](https://saver7942.blogspot.com/2026/07/usesuspensequery.html)에서 `useSuspenseQuery`가 로딩·에러를 부모로 위임한다고 했습니다. 편리한데, 한 컴포넌트에서 데이터를 **둘 이상** 가져올 때 조용히 성능을 갉아먹는 함정이 하나 숨어 있습니다.
 
 유저 정보와 게시글 목록을 각각 2초 걸려 가져온다고 합시다. 둘은 서로 무관하니 동시에 요청하면 2초면 됩니다. 그런데 `useSuspenseQuery`를 순진하게 두 번 쓰면 4초가 걸립니다. 스테이크가 다 구워진 뒤에야 파스타를 올리는 주방인 셈입니다. 이 편은 그 원인과 해법을 다룹니다.
-
-#### 목차
-
-1. [Waterfall — 왜 순차가 되나](#1-waterfall)
-
-2. [useSuspenseQueries — 배열로 묶어 병렬](#2-usesuspensequeries)
-
-3. [실습 — 4초가 2초로](#3-4-2)
-
-4. [검증 — Network 타임라인](#4-network)
-
-5. [주의사항](#5)
-
-6. [핵심 정리](#6)
 
 ---
 

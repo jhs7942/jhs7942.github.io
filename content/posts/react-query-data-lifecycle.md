@@ -18,27 +18,13 @@ source: >-
   isFetching·refetch 트리거)
 legacy_url: 'https://saver7942.blogspot.com/2026/07/tanstack-query-freshstaleinactive.html'
 draft: false
+series: react-query
+part: 3
 ---
 
 [이전 편](https://saver7942.blogspot.com/2026/07/query-key-factory.html)까지 캐시의 주소를 다뤘습니다. 이번엔 그 주소에 담긴 데이터가 시간에 따라 어떤 상태를 지나는지입니다.
 
 "`staleTime`이 지나면 데이터가 상한다"까지는 [2편](https://saver7942.blogspot.com/2026/07/tanstack-query.html)에서 값으로 정했습니다. 그런데 상한 다음이 문제입니다. 흔히 "상하면 엔진이 알아서 새로 가져온다"고 넘기는데, **stale이 됐다고 그 순간 재요청이 나가지는 않습니다.** 이 오해 하나가 "왜 갱신이 안 되지" 또는 반대로 "왜 요청이 이렇게 많지"를 만듭니다. 이 글은 데이터의 세 상태와, 갱신을 실제로 당기는 트리거가 무엇인지 실습으로 확인합니다.
-
-#### 목차
-
-1. [데이터의 세 상태 — Fresh · Stale · Inactive](#1-fresh-stale-inactive)
-
-2. [핵심 — stale은 '즉시 갱신'이 아니라 '갱신 자격'](#2-stale)
-
-3. [실습 랩 — 생애주기를 2초로 가속](#3-2)
-
-4. [isPending과 isFetching — 최초 로딩과 배경 갱신](#4-ispending-isfetching)
-
-5. [Devtools로 상태 전이 관찰](#5-devtools)
-
-6. [주의사항](#6)
-
-7. [핵심 정리](#7)
 
 ---
 
