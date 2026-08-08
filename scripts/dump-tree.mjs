@@ -12,7 +12,7 @@ import remarkRehype from "remark-rehype";
 import rehypeRaw from "rehype-raw";
 import rehypeSlug from "rehype-slug";
 import rehypeStringify from "rehype-stringify";
-import { rehypeEmojiSafeSlug } from "../src/lib/markdown/emoji-safe-slug.js";
+import { rehypeEmojiSafeSlug } from "../src/lib/markdown/emoji-safe-slug.ts";
 import { visit } from "unist-util-visit";
 import { toString } from "hast-util-to-string";
 
