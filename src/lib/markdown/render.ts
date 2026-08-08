@@ -4,6 +4,7 @@ import remarkGfm from "remark-gfm";
 import remarkRehype from "remark-rehype";
 import rehypeRaw from "rehype-raw";
 import rehypeStringify from "rehype-stringify";
+import rehypeShiki from "@shikijs/rehype";
 import { visit } from "unist-util-visit";
 import type { Root, Element } from "hast";
 import { rehypeEmojiSafeSlug, headingText } from "./emoji-safe-slug";
@@ -34,6 +35,31 @@ function rehypeCollectToc(sink: TocEntry[]) {
   };
 }
 
+/**
+ * 표를 스크롤 컨테이너로 감싼다.
+ *
+ * 이 블로그의 표는 컬럼이 많고(비교표가 대부분) 셀에 한글이 들어가 좁은 화면에서
+ * 쉽게 넘친다. 표만 따로 가로 스크롤되게 두면 본문이 밀리지 않는다.
+ */
+function rehypeWrapTables() {
+  return (tree: Root) => {
+    visit(tree, "element", (node: Element, index, parent) => {
+      if (node.tagName !== "table" || !parent || index === undefined) return;
+
+      // hast의 className은 문자열이 아니라 배열이다.
+      const parentClasses = parent.type === "element" ? parent.properties?.className : undefined;
+      if (Array.isArray(parentClasses) && parentClasses.includes("table-scroll")) return;
+
+      parent.children[index] = {
+        type: "element",
+        tagName: "div",
+        properties: { className: ["table-scroll"] },
+        children: [node],
+      };
+    });
+  };
+}
+
 export type RenderedPost = { html: string; toc: TocEntry[] };
 
 export async function renderMarkdown(markdown: string): Promise<RenderedPost> {
@@ -48,6 +74,11 @@ export async function renderMarkdown(markdown: string): Promise<RenderedPost> {
     .use(rehypeRaw)
     .use(rehypeEmojiSafeSlug)
     .use(rehypeCollectToc, toc)
+    .use(rehypeWrapTables)
+    // 예전 파이프라인은 Pygments(one-dark)를 인라인 스타일로 박았다. 다크 코드 블록이라는
+    // 결과는 같지만, 이제 색은 빌드 시점에 한 번 계산되고 마크다운에는 남지 않는다.
+    // 언어 표기가 없는 블록(<details> 안의 실행 결과 등)은 fallback으로 넘어가 CSS가 맡는다.
+    .use(rehypeShiki, { theme: "one-dark-pro", fallbackLanguage: "text" })
     .use(rehypeStringify, { allowDangerousHtml: true })
     .process(markdown);
 

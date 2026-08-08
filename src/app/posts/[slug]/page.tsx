@@ -53,18 +53,20 @@ export default async function PostPage({ params }: PageProps<"/posts/[slug]">) {
   const { html, toc } = await renderMarkdown(post.body);
 
   return (
-    <article className="mx-auto w-full max-w-3xl px-6 py-16">
+    <article className="mx-auto w-full max-w-3xl px-6 py-14">
       <header className="mb-8">
-        <h1 className="text-3xl font-bold tracking-tight text-balance">{post.title}</h1>
-        <p className="mt-3 text-sm text-muted">
+        <p className="font-label text-[11px] tracking-widest text-label">
           <time dateTime={post.published_at}>{DATE.format(new Date(post.published_at))}</time>
         </p>
+        <h1 className="mt-2 font-display text-3xl leading-snug tracking-tight text-balance text-heading">
+          {post.title}
+        </h1>
         <ul className="mt-4 flex flex-wrap gap-2">
           {post.labels.map((label) => (
             <li key={label}>
               <Link
                 href={`/labels/${labelSlug(label)}/`}
-                className="rounded-full border border-border px-3 py-1 text-xs text-muted hover:border-accent hover:text-accent"
+                className="rounded-full border-[1.5px] border-border-soft px-3 py-1 text-xs text-muted hover:border-accent hover:text-accent"
               >
                 {label}
               </Link>
@@ -73,7 +75,7 @@ export default async function PostPage({ params }: PageProps<"/posts/[slug]">) {
         </ul>
       </header>
 
-      <p className="border-l-2 border-accent pl-4 text-sm leading-relaxed text-muted">
+      <p className="border-l-[3px] border-accent bg-accent-tint px-4 py-3 text-sm leading-relaxed">
         {post.description}
       </p>
 

@@ -6,28 +6,38 @@ import { SITE } from "@/lib/site";
 
 export default function Home() {
   const posts = getAllPosts();
-  const labels = getLabels().slice(0, 12);
+  const labels = getLabels().slice(0, 10);
 
   return (
-    <main className="mx-auto w-full max-w-3xl px-6 py-16">
-      <header className="mb-10">
-        <h1 className="text-3xl font-bold tracking-tight">{SITE.title}</h1>
-        <p className="mt-2 text-muted">{SITE.description}</p>
+    <main className="mx-auto w-full max-w-3xl px-6 py-14">
+      <header className="mb-10 text-center">
+        <h1 className="font-display text-3xl leading-snug tracking-tight text-balance text-heading">
+          {SITE.description}
+        </h1>
+        <p className="mt-3 font-label text-xs tracking-widest text-label">
+          {posts.length} POSTS
+        </p>
       </header>
 
-      <nav aria-label="라벨" className="mb-10 flex flex-wrap gap-2">
-        {labels.map(({ label, slug, count }) => (
+      <nav aria-label="라벨" className="mb-10 flex flex-wrap justify-center gap-2">
+        {labels.map(({ label, slug }) => (
           <Link
             key={slug}
             href={`/labels/${slug}/`}
-            className="rounded-full border border-border px-3 py-1 text-xs text-muted hover:border-accent hover:text-accent"
+            className="border-[1.5px] border-border-soft bg-surface px-3 py-1 text-xs hover:border-accent hover:text-accent"
+            style={{ borderRadius: "999px" }}
           >
-            {label} <span className="tabular-nums opacity-60">{count}</span>
+            {label}
           </Link>
         ))}
+        <Link
+          href="/labels/"
+          className="px-3 py-1 text-xs text-accent hover:underline"
+        >
+          전체 →
+        </Link>
       </nav>
 
-      <p className="mb-2 text-xs text-muted tabular-nums">글 {posts.length}편</p>
       <PostList posts={posts} />
     </main>
   );

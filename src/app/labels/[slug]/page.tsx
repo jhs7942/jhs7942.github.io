@@ -39,13 +39,15 @@ export default async function LabelPage({ params }: PageProps<"/labels/[slug]">)
   const posts = getPostsByLabel(label);
 
   return (
-    <main className="mx-auto w-full max-w-3xl px-6 py-16">
+    <main className="mx-auto w-full max-w-3xl px-6 py-14">
       <header className="mb-8">
-        <Link href="/" className="text-sm text-muted hover:text-accent">
-          ← 전체 글
+        <Link href="/labels/" className="font-label text-[11px] tracking-widest text-label hover:text-accent">
+          ← ALL LABELS
         </Link>
-        <h1 className="mt-3 text-2xl font-bold tracking-tight">{label}</h1>
-        <p className="mt-1 text-sm text-muted tabular-nums">{posts.length}편</p>
+        <h1 className="mt-3 font-display text-2xl tracking-tight text-heading">{label}</h1>
+        <p className="mt-1 font-label text-xs tracking-widest text-label tabular-nums">
+          {posts.length} POSTS
+        </p>
       </header>
 
       <PostList posts={posts} />

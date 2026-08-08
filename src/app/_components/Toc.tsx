@@ -14,8 +14,12 @@ export function Toc({ entries }: { entries: TocEntry[] }) {
   if (top.length < 5) return null;
 
   return (
-    <nav aria-label="목차" className="my-8">
-      <p className="mb-3 text-xs font-bold tracking-widest text-muted uppercase">목차</p>
+    <nav
+      aria-label="목차"
+      className="my-8 border-[1.5px] border-border-soft bg-surface px-5 py-4"
+      style={{ borderRadius: "var(--radius-hand)" }}
+    >
+      <p className="mb-3 font-label text-[11px] tracking-widest text-label">목차</p>
       <ol className="space-y-2">
         {top.map((entry, i) => (
           <li key={entry.id} className="flex gap-3 text-sm">

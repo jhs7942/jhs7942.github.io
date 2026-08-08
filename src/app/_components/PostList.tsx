@@ -12,24 +12,30 @@ const DATE = new Intl.DateTimeFormat("ko-KR", {
 
 export function PostList({ posts }: { posts: PostDoc[] }) {
   return (
-    <ul className="divide-y divide-border">
+    <ul className="space-y-4">
       {posts.map((post) => (
-        <li key={post.slug} className="py-6">
-          <Link href={`/posts/${post.slug}/`} className="group block">
-            <div className="flex items-baseline gap-3">
-              <time dateTime={post.published_at} className="shrink-0 text-xs text-muted tabular-nums">
+        <li key={post.slug}>
+          <Link
+            href={`/posts/${post.slug}/`}
+            className="group block border-[1.5px] border-border-soft bg-surface p-5 transition-colors hover:border-accent"
+            style={{ borderRadius: "var(--radius-hand)" }}
+          >
+            {/* 메타 줄은 픽셀체. 원본 테마가 카테고리·날짜에 쓰던 처리다. */}
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1 font-label text-[10.5px] tracking-widest">
+              <time dateTime={post.published_at} className="text-label">
                 {DATE.format(new Date(post.published_at))}
               </time>
               {post.series && (
-                <span className="shrink-0 text-xs font-semibold text-accent">
-                  {getSeriesTitle(post.series as SeriesKey)} {post.part}
+                <span className="text-accent">
+                  {getSeriesTitle(post.series as SeriesKey)} #{post.part}
                 </span>
               )}
             </div>
-            <h2 className="mt-1 font-semibold text-balance group-hover:text-accent">
+
+            <h2 className="mt-2 font-display text-lg leading-snug text-balance text-heading group-hover:text-accent">
               {post.title}
             </h2>
-            <p className="mt-1 line-clamp-2 text-sm text-muted">{post.description}</p>
+            <p className="mt-2 line-clamp-2 text-sm text-muted">{post.description}</p>
           </Link>
         </li>
       ))}
