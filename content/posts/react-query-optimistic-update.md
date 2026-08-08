@@ -125,8 +125,8 @@ onSettled: () => {
 
 성공한 경우에도 이 무효화가 필요한 이유가 있습니다. 낙관적으로 넣은 값은 **가짜**이기 때문입니다. 위 예에서 `id: Date.now()`처럼 임시로 만든 값은 서버가 실제로 부여한 ID·타임스탬프와 다릅니다. `onSettled`의 `invalidateQueries`가 서버의 진짜 데이터를 다시 가져와 임시 값을 조용히 교체합니다. 낙관적 UI가 "거의 맞는 화면"을 즉시 보여주고, 최종 동기화가 "정확히 맞는 화면"으로 마무리하는 구조입니다.
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">성공 / 실패 두 시나리오</summary>
+<details>
+<summary>성공 / 실패 두 시나리오</summary>
 <pre><code>[성공]
 mutate → onMutate(임시항목 즉시 표시) → 서버 OK
        → onSettled invalidate → 진짜 ID로 교체

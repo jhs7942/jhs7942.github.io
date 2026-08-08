@@ -3,24 +3,70 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-}
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* 코랄 강조색. 본문 링크·접이식 요약·시리즈 pill이 쓰던 값을 그대로 승계한다.
+     원래는 글마다 style="color:#C8443C" 로 136번 반복돼 있었다. */
+  --accent: #c8443c;
+  --accent-tint: rgb(200 68 60 / 0.06);
+
+  --border: #e5e7eb;
+  --muted: #6b7280;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+
+    /* 어두운 배경에서 원래 코랄은 대비가 모자란다. 같은 색상 계열로 밝기만 올린다. */
+    --accent: #f08078;
+    --accent-tint: rgb(240 128 120 / 0.1);
+
+    --border: #262626;
+    --muted: #9ca3af;
   }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-accent: var(--accent);
+  --color-accent-tint: var(--accent-tint);
+  --color-border: var(--border);
+  --color-muted: var(--muted);
+
+  /* 한글 본문용 스택. 본격적인 웹폰트 선택은 테마 이식 단계에서 정한다. */
+  --font-sans:
+    "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+}
+
+/*
+ * 글 본문 (.post-body)
+ *
+ * 마크다운이 만들어내는 태그를 여기서 한 번에 꾸민다. 예전에는 발행 파이프라인이
+ * 태그마다 인라인 style을 주입했는데(Blogger가 외부 CSS 제어를 못 믿을 만해서),
+ * 이제는 그럴 이유가 없다. 규칙이 한 곳에 있으니 글이 늘어도 모양이 갈라지지 않는다.
+ *
+ * 코드 블록·표·인용구 등 나머지 요소는 테마 이식 단계에서 이어 붙인다.
+ */
+.post-body details {
+  margin: 10px 0 4px;
+}
+
+.post-body summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+/* <summary>에 화살표를 직접 넣지 않는다 — 네이티브 삼각형이 열림/닫힘에 따라 회전한다. */
+.post-body summary::marker {
+  color: var(--accent);
 }

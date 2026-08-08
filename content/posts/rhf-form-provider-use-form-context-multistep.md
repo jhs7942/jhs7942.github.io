@@ -133,8 +133,8 @@ function Step1Component() {
 methods.handleSubmit(data => console.log("최종 데이터:", data))
 ```
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">실행 결과 보기</summary>
+<details>
+<summary>실행 결과 보기</summary>
 <pre><code>// 콘솔 출력
 최종 데이터: {
   "step1": { "email": "user@example.com", "name": "홍길동" },

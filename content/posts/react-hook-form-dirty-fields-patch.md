@@ -115,8 +115,8 @@ export function getDirtyValues<T extends FieldValues>(
 
 배열은 "3번째 원소의 이 필드만 바뀜"을 부분적으로 표기할 마땅한 방법이 없습니다. 인덱스가 밀리거나 순서가 바뀌면 부분 표기가 오히려 위험합니다. 그래서 **하나라도 dirty면 배열 전체를 담아** 서버가 통으로 교체하도록 하는 편이 안전합니다. 위 코드가 `Array.isArray(dirty)`를 단일 필드와 같은 갈래로 묶어 `values[key]` 전체를 담는 이유입니다.
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">중첩 구조에서 실제로 뭐가 추려지나</summary>
+<details>
+<summary>중첩 구조에서 실제로 뭐가 추려지나</summary>
 <pre><code>// defaultValues (서버에서 받아온 초기값)
 { name: '홍길동', age: 30, address: { city: '서울', zip: '06000' } }
 

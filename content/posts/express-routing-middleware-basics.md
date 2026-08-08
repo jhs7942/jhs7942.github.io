@@ -162,8 +162,8 @@ app.get("/delivery", (req, res) => {
 });
 ```
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">실행 결과 보기</summary>
+<details>
+<summary>실행 결과 보기</summary>
 <pre><code>$ curl http://localhost:3000/delivery
 # 서버 콘솔 (등록 순서대로 출력)
 [1단계]: 상품이 도착했습니다.

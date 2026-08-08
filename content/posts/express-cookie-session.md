@@ -76,8 +76,8 @@ app.get("/clear-cookie", (req, res) => {
 
 - 한 번 저장된 쿠키는 이후 같은 도메인 요청에 자동으로 실려 갑니다.
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">실행 결과 보기</summary>
+<details>
+<summary>실행 결과 보기</summary>
 <pre><code>$ curl http://localhost:3000/set-cookie
 # 응답 헤더 — 서버가 브라우저에 쿠키를 심으라고 지시
 Set-Cookie: name=John%20Doe; Max-Age=900; HttpOnly; SameSite=Lax
@@ -131,8 +131,8 @@ app.get("/visit", (req, res) => {
 
 - 서버는 그 ID로 해당 사용자의 세션 데이터를 찾아냅니다.
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">실행 결과 보기</summary>
+<details>
+<summary>실행 결과 보기</summary>
 <pre><code># 첫 요청 — 서버가 세션 ID 쿠키를 발급
 Set-Cookie: connect.sid=s%3A4FuY...zJm.Q7dN...; HttpOnly
 

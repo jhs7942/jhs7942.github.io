@@ -132,8 +132,8 @@ export default function App() {
 
 `useSuspenseQuery`는 요청이 실패하면(기본 재시도까지 소진한 뒤) 에러를 **위로 던집니다.** 그러면 `ErrorBoundary`가 그것을 잡아, 에러가 난 자식을 치우고 `FallbackComponent`를 대신 그립니다. 에러가 특정 영역에 격리되어, 컴포넌트 하나가 실패해도 앱 전체가 흰 화면이 되지 않습니다.
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">id=0으로 에러를 유발했을 때의 흐름</summary>
+<details>
+<summary>id=0으로 에러를 유발했을 때의 흐름</summary>
 <pre><code>1. fetchUser(0)이 reject
 2. useSuspenseQuery가 에러를 감지해 위로 throw
 3. 가장 가까운 ErrorBoundary가 낚아챔

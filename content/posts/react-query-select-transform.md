@@ -112,8 +112,8 @@ const { data: activeCount } = useQuery({
 
 예를 들어 서버 데이터에서 어떤 유저의 `email`만 바뀌었다고 합시다.
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">email이 바뀌어도 이름 목록 컴포넌트가 안 그려지는 이유</summary>
+<details>
+<summary>email이 바뀌어도 이름 목록 컴포넌트가 안 그려지는 이유</summary>
 <pre><code>원본 User[]        : email 하나 바뀜 → 원본은 "변경됨"
 select 결과(names) : ['Gemini','React','TypeScript'] → 값 동일
 

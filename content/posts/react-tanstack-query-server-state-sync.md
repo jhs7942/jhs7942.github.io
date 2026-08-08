@@ -167,8 +167,8 @@ export default function UserProfile({ userId }: { userId: number }) {
 
 **중복 제거 테스트** — `App.tsx`에 같은 `userId`를 쓰는 `UserProfile`을 둘 배치하고 콘솔을 봅니다.
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">실행 결과 보기</summary>
+<details>
+<summary>실행 결과 보기</summary>
 <pre><code>📡 [Network Log] 유저 1 정보 요청
 
 // 컴포넌트 2개, 요청 1회.

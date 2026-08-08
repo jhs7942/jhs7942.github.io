@@ -81,8 +81,8 @@ export function wrapWithMetadata<T>(content: T) {
 
 - 반환 타입을 직접 적지 않아도 TypeScript가 `{ data: T; timestamp: number; id: string }`으로 추론합니다.
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">주입한 타입이 끝까지 추적될까?</summary>
+<details>
+<summary>주입한 타입이 끝까지 추적될까?</summary>
 <pre><code>const wrapped = wrapWithMetadata({ name: "React" });
 // wrapped.data 의 타입: { name: string }
 wrapped.data.name;   // 자동 완성 동작, 안전

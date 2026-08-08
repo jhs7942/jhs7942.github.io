@@ -117,8 +117,8 @@ useEffect(() => {
 
 - **의존성 `[hasNextPage, isFetchingNextPage, fetchNextPage]`** — 이 값들이 바뀌면 observer를 새로 만듭니다. 콜백은 만들어질 당시의 값을 **클로저로 붙잡기** 때문에, 값이 바뀌었는데 observer를 새로 안 만들면 콜백이 옛 값을 참조해 조건 판정이 어긋납니다.
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">스크롤에 따른 동작 흐름</summary>
+<details>
+<summary>스크롤에 따른 동작 흐름</summary>
 <pre><code>1. 리스트 렌더 → 맨 아래에 감시용 div 존재
 2. 사용자가 스크롤 → 감시 div가 화면에 10% 보임 → isIntersecting: true
 3. 다음 페이지 있고 로딩 중 아니면 → fetchNextPage()

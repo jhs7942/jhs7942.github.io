@@ -155,8 +155,8 @@ export default function LifecycleDemo() {
 
 핵심은 **stale 데이터를 배경에서 다시 가져올 때**입니다. 이때 캐시에는 (낡았지만) 값이 있으므로 `isPending`은 `false`이고, 요청은 진행 중이므로 `isFetching`만 `true`가 됩니다.
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">두 플래그의 시간축</summary>
+<details>
+<summary>두 플래그의 시간축</summary>
 <pre><code>t=0.0s  최초 마운트, 캐시 없음
         isPending = true,  isFetching = true   → 전체 로딩 화면
 t=1.0s  응답 도착, 캐시 채워짐 (Fresh)
@@ -187,8 +187,8 @@ t=?+1s  갱신 완료 → Fresh 복귀
 
 **Stale 테스트** — 2초가 지나 색이 노랑(Stale)으로 바뀐 것을 확인한 뒤, 다른 탭에 갔다 돌아옵니다.
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">실행 결과 보기</summary>
+<details>
+<summary>실행 결과 보기</summary>
 <pre><code>// 콘솔
 📡 [Network Log] 유저 1 동기화 시도   ← 최초
 📡 [Network Log] 유저 1 동기화 시도   ← 윈도우 재포커스로 배경 refetch

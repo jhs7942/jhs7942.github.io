@@ -154,8 +154,8 @@ export default function PerformanceDeepDive() {
 
 3. **동기적 일관성 확인** — 입력 직후 즉시 버튼을 클릭합니다. `getValues`는 다음 렌더 사이클을 기다리지 않고 호출 즉시 최신 값을 반환합니다.
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">실행 결과 보기</summary>
+<details>
+<summary>실행 결과 보기</summary>
 <pre><code># title 입력란에 글자 10자 입력 후
 Parent Render: 1   ← 변화 없음 (초기 마운트 1회)
 Child Render: 11   ← 마운트 1회 + 글자 입력 10회

@@ -79,8 +79,8 @@ app.get("/logout", (req, res) => {
 
 - 로그아웃은 `req.session.destroy()`로 세션을 지워 `connect.sid`를 무효화합니다.
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">로그인 흐름 보기</summary>
+<details>
+<summary>로그인 흐름 보기</summary>
 <pre><code>POST /login  (body: username=Tom)
   → req.session.user = "Tom" 저장, Set-Cookie: connect.sid=...
 
@@ -155,8 +155,8 @@ app.post("/login", async (req, res) => {
 
 - 비교에 성공하면 그때 `req.session.user`에 저장해 로그인 상태를 유지합니다.
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">저장 결과 보기</summary>
+<details>
+<summary>저장 결과 보기</summary>
 <pre><code># 회원가입 시 usersDB에 저장되는 값 (평문 아님)
 {
   username: "tom",

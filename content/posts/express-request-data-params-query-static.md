@@ -42,8 +42,8 @@ app.post("/api/users", (req, res) => {
 
 - `express.json()`을 `app.use()`로 등록하면 `Content-Type: application/json` 요청의 본문을 자동으로 파싱해 `req.body`에 저장합니다.
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">실행 결과 보기</summary>
+<details>
+<summary>실행 결과 보기</summary>
 <pre><code>$ curl -X POST http://localhost:3000/api/users \
     -H "Content-Type: application/json" \
     -d '{"name":"Alice","email":"alice@example.com"}'
@@ -68,8 +68,8 @@ app.post("/login", (req, res) => {
 
 - `extended: true` — 배열이나 중첩 객체까지 파싱할 수 있어 권장 설정입니다.
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">실행 결과 보기</summary>
+<details>
+<summary>실행 결과 보기</summary>
 <pre><code>$ curl -X POST http://localhost:3000/login \
     -d "username=Alice&password=1234"
 # 응답
@@ -142,8 +142,8 @@ app.get("/blogs/:userId", (req, res) => {
 
 - 콜백의 네 번째 인자 `id`에 실제 파라미터 값이 전달됩니다.
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">실행 결과 보기</summary>
+<details>
+<summary>실행 결과 보기</summary>
 <pre><code>$ curl http://localhost:3000/users/1
 # 존재하는 사용자 → app.param 통과 후 라우트 실행
 {"id":1,"name":"Alice","role":"Admin"}
@@ -190,8 +190,8 @@ app.get("/example/info/b", (req, res) => {
 
 - 같은 키 반복: `?tags=node&tags=express` → `req.query.tags`가 배열로 자동 변환
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">실행 결과 보기</summary>
+<details>
+<summary>실행 결과 보기</summary>
 <pre><code>$ curl "http://localhost:3000/example/info/b?tags=node&tags=express&tags=javascript"
 # 같은 키가 반복되면 배열로 파싱됩니다
 {"tags":["node","express","javascript"]}

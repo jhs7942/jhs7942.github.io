@@ -53,8 +53,8 @@ server.listen(3000);
 
 - 브라우저가 받는 순간 이미 데이터가 채워진 HTML입니다.
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">실행 결과 보기</summary>
+<details>
+<summary>실행 결과 보기</summary>
 <pre><code>$ curl http://localhost:3000
 # 브라우저가 받는 HTML — 데이터가 이미 들어 있음
 &lt;h1&gt;Server-Side Rendered Page&lt;/h1&gt;
@@ -87,8 +87,8 @@ server.listen(3000);
 
 - 서버가 보낸 최초 HTML에는 데이터가 없습니다. 자바스크립트가 실행되며 화면을 채웁니다.
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">실행 결과 보기</summary>
+<details>
+<summary>실행 결과 보기</summary>
 <pre><code># 처음 받은 HTML (JS 실행 전)
 &lt;div id="app"&gt;잠시만 기다려주세요...&lt;/div&gt;
 # 1초 뒤 (JS 실행 후 DOM)
@@ -146,8 +146,8 @@ app.listen(3000);
 
 - 뷰 안의 `<%= title %>` 자리에 전달한 `"Hello, EJS!"`가 들어갑니다.
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">실행 결과 보기</summary>
+<details>
+<summary>실행 결과 보기</summary>
 <pre><code>$ curl http://localhost:3000
 # 렌더링되어 완성된 HTML
 &lt;title&gt;Hello, EJS!&lt;/title&gt;
@@ -282,8 +282,8 @@ app.listen(3000);
 
 - 파셜(`head.ejs`)에서 `/styles.css`와 `/app.js`를 불러오는데, 이 파일들은 `public` 폴더에 있어 `express.static` 덕분에 URL로 바로 접근됩니다.
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">동작 흐름 보기</summary>
+<details>
+<summary>동작 흐름 보기</summary>
 <pre><code># 1) "우유 사기" 입력 후 제출
 POST /  (body: text=우유 사기)
 # 2) 서버: todos = [{ text: "우유 사기" }] 저장 후 리다이렉트

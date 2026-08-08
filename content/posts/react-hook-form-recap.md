@@ -119,8 +119,8 @@ const onSubmit: SubmitHandler<FormInputs> = async (formData) => {
 };
 ```
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">변환 전후 데이터</summary>
+<details>
+<summary>변환 전후 데이터</summary>
 <pre><code>// 폼 데이터 (FormInputs)
 { title: '첫 글', price: '15000', tags: ['React', 'TS'] }
 

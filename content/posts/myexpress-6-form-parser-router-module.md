@@ -177,8 +177,8 @@ server.listen(3000, () => {
 </html>
 ```
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">실행 결과 보기</summary>
+<details>
+<summary>실행 결과 보기</summary>
 <pre><code># 서버 콘솔
 [Request] Method: POST, URL: /register
 [Form Data]: { username: 'Alice', age: '30' }
@@ -348,8 +348,8 @@ server.listen(3000, () => {
 
 `apiRouter.handle`과 `adminRouter.handle`이 일반 미들웨어 함수처럼 배열에 들어갑니다. `server.js`는 라우트 내용을 전혀 알 필요 없이 조립만 담당합니다.
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">실행 결과 보기</summary>
+<details>
+<summary>실행 결과 보기</summary>
 <pre><code># GET /api/user
 사용자 정보 조회 (GET /api/user)
 

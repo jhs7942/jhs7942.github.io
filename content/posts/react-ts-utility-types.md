@@ -131,8 +131,8 @@ export function ProductDetail({ product }: { product: UserViewProduct }) {
 }
 ```
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">이 컴포넌트에서 민감 필드에 접근하면?</summary>
+<details>
+<summary>이 컴포넌트에서 민감 필드에 접근하면?</summary>
 <pre><code>// product의 타입은 UserViewProduct (adminNote·secretToken 없음)
 product.secretToken;
 // 컴파일 에러: 'secretToken' 속성이 'UserViewProduct'에 없음

@@ -106,8 +106,8 @@ queryClient.invalidateQueries({ queryKey: userKeys.all });
 
 마지막 한 줄이 계층의 보상입니다. `userKeys.all`(`['users']`)을 넘기면, 그 접두사로 시작하는 캐시가 전부 걸립니다.
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">invalidateQueries({ queryKey: ['users'] })가 매칭하는 캐시</summary>
+<details>
+<summary>invalidateQueries({ queryKey: ['users'] })가 매칭하는 캐시</summary>
 <pre><code>캐시에 담긴 키들:
   ['users', 'detail', 1]     ← 매칭 (users로 시작)
   ['users', 'detail', 2]     ← 매칭

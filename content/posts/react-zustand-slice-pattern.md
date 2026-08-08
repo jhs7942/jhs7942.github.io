@@ -109,8 +109,8 @@ export const createClothingSlice: StateCreator<DepartmentStore, [], [], Clothing
 });
 ```
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">화장품 슬라이스에서 셔츠 재고를 참조할 수 있을까?</summary>
+<details>
+<summary>화장품 슬라이스에서 셔츠 재고를 참조할 수 있을까?</summary>
 <pre><code>// StateCreator의 첫 인자가 DepartmentStore(전체)이므로 가능
 export const createCosmeticsSlice: StateCreator&lt;DepartmentStore, [], [], CosmeticsSlice&gt;
   = (set, get) =&gt; ({

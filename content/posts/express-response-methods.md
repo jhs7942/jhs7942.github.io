@@ -47,8 +47,8 @@ app.get("/json", (req, res) => {
 
 - API 응답이라면 `res.json`이 더 명확합니다.
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">실행 결과 보기</summary>
+<details>
+<summary>실행 결과 보기</summary>
 <pre><code>$ curl -i http://localhost:3000/json
 # 응답 헤더에 Content-Type이 자동 설정됨
 Content-Type: application/json; charset=utf-8
@@ -88,8 +88,8 @@ app.get("/new-page", (req, res) => {
 });
 ```
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">실행 결과 보기</summary>
+<details>
+<summary>실행 결과 보기</summary>
 <pre><code>$ curl -i http://localhost:3000/old-page
 # 301 응답 + 이동할 주소 안내
 HTTP/1.1 301 Moved Permanently

@@ -60,8 +60,8 @@ function PriceCalculator({ price, taxRate }) {
 
 컴파일러는 `useMemo`조차 무겁다고 보고, 더 원시적인 저수준 코드로 바꿉니다.
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">컴파일러가 생성하는 코드(개념)</summary>
+<details>
+<summary>컴파일러가 생성하는 코드(개념)</summary>
 <pre><code>import { c as _c } from "react/compiler-runtime";
 
 function PriceCalculator(t0) {          // t0 = props

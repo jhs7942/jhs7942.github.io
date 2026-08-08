@@ -103,8 +103,8 @@ function runMiddlewares(req, res, middlewares, errorMiddleware) {
 },
 ```
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">실행 결과 보기</summary>
+<details>
+<summary>실행 결과 보기</summary>
 <pre><code>$ curl http://localhost:3000/hello
 Internal Server Error: Something went wrong in Middleware 2!
 
@@ -141,8 +141,8 @@ Internal Server Error: Something went wrong in Middleware 2!
 
 - `return` — 함수 실행을 종료해 이후 `next()` 호출을 방지합니다.
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">실행 결과 보기</summary>
+<details>
+<summary>실행 결과 보기</summary>
 <pre><code>$ curl http://localhost:3000/forbidden
 Access Denied: You cannot access this resource.
 
@@ -252,8 +252,8 @@ function getContentType(filePath) {
 | `.svg` | `image/svg+xml` | 벡터 이미지 |
 | 그 외 | `application/octet-stream` | 범용 바이너리 (다운로드 처리) |
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">실행 결과 보기</summary>
+<details>
+<summary>실행 결과 보기</summary>
 <pre><code># public/style.css 가 존재하는 경우
 $ curl -I http://localhost:3000/style.css
 HTTP/1.1 200 OK

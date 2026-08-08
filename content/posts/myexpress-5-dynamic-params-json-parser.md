@@ -145,8 +145,8 @@ server.listen(3000, () => {
 });
 ```
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">실행 결과 보기</summary>
+<details>
+<summary>실행 결과 보기</summary>
 <pre><code>$ curl http://localhost:3000/users/123
 {"message":"User Detail for ID: 123"}
 
@@ -280,8 +280,8 @@ server.listen(3000, () => {
 });
 ```
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">실행 결과 보기</summary>
+<details>
+<summary>실행 결과 보기</summary>
 <pre><code># 정상 요청 — JSON 본문 파싱 후 201 응답
 $ curl -X POST http://localhost:3000/users \
   -H "Content-Type: application/json" \

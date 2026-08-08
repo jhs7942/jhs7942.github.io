@@ -96,8 +96,8 @@ export function BearCounter() {
 
 `FishCounter`도 같은 방식으로 `fish`만 구독합니다. 두 컴포넌트는 같은 스토어를 공유하지만, 서로의 변화에는 반응하지 않습니다.
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">물고기 버튼을 누르면 콘솔에 무엇이 찍힐까?</summary>
+<details>
+<summary>물고기 버튼을 누르면 콘솔에 무엇이 찍힐까?</summary>
 <pre><code>[물고기 추가 클릭]
 🐟 물고기 컴포넌트 리렌더
 // 🐻 곰 로그는 찍히지 않음

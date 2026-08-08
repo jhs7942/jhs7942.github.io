@@ -48,8 +48,8 @@ type DesignToken = `${Color}-${Level}`;
 
 `` `${Color}-${Level}` `` 는 "Color의 값 하나 + 하이픈 + Level의 값 하나"를 붙인 문자열을 뜻합니다. 색상 3종과 단계 5종을 손으로 15줄 적는 대신, 규칙 한 줄로 조합을 전부 만들어 냅니다. 재료가 늘면 조합도 자동으로 따라 늘어납니다.
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">DesignToken이 실제로 펼쳐지면?</summary>
+<details>
+<summary>DesignToken이 실제로 펼쳐지면?</summary>
 <pre><code>type DesignToken =
   | 'primary-100'   | 'primary-200'   | 'primary-300'   | 'primary-400'   | 'primary-500'
   | 'secondary-100' | 'secondary-200' | 'secondary-300' | 'secondary-400' | 'secondary-500'

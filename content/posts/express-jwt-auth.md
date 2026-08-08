@@ -103,8 +103,8 @@ app.get("/profile", (req, res) => {
 
 - 서버는 `jwt.verify`로 서명을 검증합니다. 위조되었거나 만료되면 오류가 납니다.
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">실행 결과 보기</summary>
+<details>
+<summary>실행 결과 보기</summary>
 <pre><code>$ curl -X POST http://localhost:3000/login -d "username=JohnDoe&password=password123"
 # 응답 — 토큰 발급
 {"message":"로그인 성공","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjox..."}

@@ -88,8 +88,8 @@ export function ProductPage({ productId }: { productId: number }) {
 
 `response as unknown as ProductDetail`은 `amount`만 있는 객체를 `ProductDetail`로 강제합니다. 컴파일러는 통과시키지만, 런타임에 `product.price`는 `undefined`이고 그 위에서 `toLocaleString()`을 호출하면 실행이 중단됩니다. 사용자에게는 빈 화면만 남습니다.
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">런타임에 실제로 뜨는 오류</summary>
+<details>
+<summary>런타임에 실제로 뜨는 오류</summary>
 <pre><code>Uncaught TypeError: Cannot read properties of undefined (reading 'toLocaleString')
 
 // product.price 가 undefined → 숫자 메서드 호출 불가 → 렌더 중단(빈 화면)</code></pre>

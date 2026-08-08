@@ -148,8 +148,8 @@ function UserProfile({ name, onEdit }) {
 
 컴파일러는 이 깨끗한 코드를 빌드 타임에 아래 개념으로 변환합니다.
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">컴파일러가 삽입하는 캐싱(개념도)</summary>
+<details>
+<summary>컴파일러가 삽입하는 캐싱(개념도)</summary>
 <pre><code>function UserProfile(t0) {
   const $ = useMemoCache(2);        // 캐시 슬롯 생성
   const { name, onEdit } = t0;

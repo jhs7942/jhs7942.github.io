@@ -125,8 +125,8 @@ export function ProductPage({ productId }: { productId: number }) {
 
 - 검증 실패 시 화면을 터뜨리는 대신 `error` 상태로 전환해 안내를 렌더링합니다. 잘못된 데이터를 빨리 걸러내고(fail fast), 사용자에게는 깨진 화면 대신 설명을 보여 주는 방식입니다.
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">서버가 price를 문자열로 보내면?</summary>
+<details>
+<summary>서버가 price를 문자열로 보내면?</summary>
 <pre><code>// 응답: { id: 101, title: "키보드", price: "89000" }  ← price가 문자열
 // validateProduct: typeof d.price === 'number' 실패 → false 반환
 

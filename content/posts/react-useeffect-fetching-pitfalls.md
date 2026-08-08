@@ -112,8 +112,8 @@ export default function RaceCondition() {
 
 1번 버튼을 누른 직후 2번 버튼을 누르면 이렇게 됩니다.
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">실행 결과 보기</summary>
+<details>
+<summary>실행 결과 보기</summary>
 <pre><code>// 클릭 순서: 1번 → 2번 (0.1초 간격)
 // 콘솔
 ✅ 데이터 도착: 포스트 2      (0.5초 후)
@@ -162,8 +162,8 @@ export default function DuplicateRequest() {
 }
 ```
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">실행 결과 보기 — 개발 모드 콘솔</summary>
+<details>
+<summary>실행 결과 보기 — 개발 모드 콘솔</summary>
 <pre><code>📡 [Network Log] 유저 정보 요청
 📡 [Network Log] 유저 정보 요청
 📡 [Network Log] 유저 정보 요청
@@ -269,8 +269,8 @@ useEffect(() => {
 
 마지막 `finally`의 가드가 핵심입니다. `postId`가 바뀌면 React는 **정리 함수를 먼저 실행하고 새 이펙트를 실행합니다.** 그래서 순서가 이렇게 됩니다.
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">가드가 없을 때의 실행 순서</summary>
+<details>
+<summary>가드가 없을 때의 실행 순서</summary>
 <pre><code>1. 정리 함수: controller1.abort()      → 요청 1 중단(거부는 다음 마이크로태스크)
 2. 새 이펙트: setIsLoading(true)       → 로딩 표시 켜짐
 3. 마이크로태스크: 요청 1의 AbortError → catch에서 조기 반환

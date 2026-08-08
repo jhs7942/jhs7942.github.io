@@ -138,8 +138,8 @@ export const fetchPosts = (id: number): Promise<Post[]> =>
 
 두 방식의 차이는 개발자 도구 Network 탭에서 가장 뚜렷합니다.
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">Waterfall vs Parallel 타임라인</summary>
+<details>
+<summary>Waterfall vs Parallel 타임라인</summary>
 <pre><code>// useSuspenseQuery 두 번 (Waterfall)
 user  ├████████┤                    (0~2s)
 posts           ├████████┤          (2~4s)  ← user가 끝나야 시작

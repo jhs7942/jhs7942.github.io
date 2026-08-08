@@ -134,8 +134,8 @@ export function UserSettings() {
 }
 ```
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">입력값에 따라 결과가?</summary>
+<details>
+<summary>입력값에 따라 결과가?</summary>
 <pre><code>입력 "리액트" → isUserProfile true  → "승인됨: 리액트님 환영합니다."
 입력 "A"      → length >= 2 실패    → "차단됨: 닉네임은 2자 이상..."
                (+ inputRef.current?.focus()로 입력창에 다시 포커스)</code></pre>

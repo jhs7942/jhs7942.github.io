@@ -181,8 +181,8 @@ export default function PostEditor() {
 
 그리고 [3편](/posts/react-query-key-factory/)의 팩토리 키가 여기서 빛을 냅니다. `postKeys.lists()`처럼 계열 키 하나를 넘기면 부분 매칭으로 목록 관련 캐시가 한 번에 걸립니다. 문자열을 흩어 놨다면 무효화할 키를 일일이 찾아 적어야 했을 자리입니다.
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">수정 버튼을 누른 뒤의 전체 흐름</summary>
+<details>
+<summary>수정 버튼을 누른 뒤의 전체 흐름</summary>
 <pre><code>1. mutate({ id:1, title:'새 제목', ... }) 호출
 2. mutationFn(updatePost) 실행 → 서버 값 변경 (2초)
 3. onSuccess 진입 → invalidateQueries({ queryKey: ['posts','detail',1] })

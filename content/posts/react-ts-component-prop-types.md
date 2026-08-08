@@ -66,8 +66,8 @@ export function Welcome({ name, age, isVIP }: WelcomeProps) {
 
 - `age`에 문자열을 넘기면 컴파일 타임에 곧바로 오류가 표시됩니다.
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">age에 문자열을 넣으면?</summary>
+<details>
+<summary>age에 문자열을 넣으면?</summary>
 <pre><code>&lt;Welcome name="리액트" age="스물다섯" /&gt;
 //                    ~~~
 // 컴파일 에러 (런타임 전):

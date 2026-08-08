@@ -98,8 +98,8 @@ export function productReducer(state: ProductState, action: ProductAction): Prod
 
 - `switch (action.type)` — `type`이 좁혀지면서 `SET_PRODUCT` 분기의 `action.payload`는 `number`임이 보장됩니다.
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">잘못된 명령을 dispatch하면?</summary>
+<details>
+<summary>잘못된 명령을 dispatch하면?</summary>
 <pre><code>dispatch({ type: 'UPDATE_PRICE', payload: '65000' });
 // 컴파일 에러: Type 'string' is not assignable to type 'number'.
 

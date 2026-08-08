@@ -84,8 +84,8 @@ server.listen(3000, () => {
 });
 ```
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">실행 결과 보기</summary>
+<details>
+<summary>실행 결과 보기</summary>
 <pre><code>$ curl http://localhost:3000/
 This is the Home Page
 
@@ -182,8 +182,8 @@ server.listen(3000, () => {
 });
 ```
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">실행 결과 보기</summary>
+<details>
+<summary>실행 결과 보기</summary>
 <pre><code>$ curl http://localhost:3000/
 # 콘솔: [Request] Method: GET, URL: /
 This is the Home Page

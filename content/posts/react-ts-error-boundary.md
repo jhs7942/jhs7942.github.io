@@ -136,8 +136,8 @@ export default function App() {
 }
 ```
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">Bomb이 터지면 화면은?</summary>
+<details>
+<summary>Bomb이 터지면 화면은?</summary>
 <pre><code>[바운더리 안]  "문제가 발생했습니다: 상품 데이터를 불러오지 못했습니다."
               + [다시 시도] 버튼 (fallback)
 

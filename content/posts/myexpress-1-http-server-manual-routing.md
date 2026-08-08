@@ -102,8 +102,8 @@ server.listen(3000, () => {
 
 - `else` 블록 — 어떤 조건에도 매칭되지 않는 요청에 대해 404 상태 코드를 반환합니다.
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">실행 결과 보기</summary>
+<details>
+<summary>실행 결과 보기</summary>
 <pre><code>$ curl http://localhost:3000/
 Welcome to Home Page
 

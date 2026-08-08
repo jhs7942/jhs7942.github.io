@@ -79,8 +79,8 @@ git worktree add ../telepathy-v2 origin/v2
 (Invoke-RestMethod "http://localhost:9000/api/issues/search?componentKeys=telepathy-v2&types=VULNERABILITY&ps=100" -Headers $H).issues
 ```
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">실행 결과 보기</summary>
+<details>
+<summary>실행 결과 보기</summary>
 <pre><code># v2를 D로 만든 범인은 딱 하나
 rule:    javascript:S5542  (CRITICAL)
 file:    server/src/routes/sp_payments.routes.js:19
@@ -206,8 +206,8 @@ if (!ACCOUNT_SECRET_KEY || ACCOUNT_SECRET_KEY.length < MIN_ACCOUNT_KEY_LENGTH) {
 }
 ```
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">부팅 거부가 실제로 동작하는지 검증</summary>
+<details>
+<summary>부팅 거부가 실제로 동작하는지 검증</summary>
 <pre><code># 키를 바꿔가며 모듈 로드를 시도한 결과
 [OK] 키 미설정              → 거부됨: ACCOUNT_SECRET_KEY 환경변수가 설정되지 않았거나 너무 짧습니다(최소 16자)...
 [OK] 약한 키 'telepathy-key'(13자) → 거부됨: ACCOUNT_SECRET_KEY 환경변수가 설정되지 않았거나 너무 짧습니다(최소 16자)...

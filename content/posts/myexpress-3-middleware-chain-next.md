@@ -121,8 +121,8 @@ server.listen(3000, () => {
 
 `next`는 `runMiddlewares` 내부에 정의된 함수이므로 **클로저(closure)**로 `idx`를 공유합니다. 미들웨어가 `next`를 인자로 받아 호출하면, 그 `next`가 `idx`를 올려 다음 미들웨어를 꺼내 실행하는 구조입니다.
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">실행 결과 보기</summary>
+<details>
+<summary>실행 결과 보기</summary>
 <pre><code>$ node index.js
 Server running at http://localhost:3000
 

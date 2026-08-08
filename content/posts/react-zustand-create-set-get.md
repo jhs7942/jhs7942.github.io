@@ -136,8 +136,8 @@ export const useUserStore = create<UserStore>((set, get) => ({
 }));
 ```
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">increasePoints(50) → resetUser() 실행하면?</summary>
+<details>
+<summary>increasePoints(50) → resetUser() 실행하면?</summary>
 <pre><code>increasePoints(50); // points: 100 → 150 (함수형 업데이트)
 resetUser();
 // get().points = 150 (> 0)

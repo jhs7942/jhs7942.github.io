@@ -103,8 +103,8 @@ export function UserProfile({ user }: UserProfileProps) {
 - `({ user }: UserProfileProps)`: 구조 분해 할당과 동시에 인자 전체에 타입을 지정합니다.
 - `user.displayName.toUpperCase()`: `displayName`이 문자열임이 보장되므로 문자열 메서드를 안전하게 호출할 수 있고, IDE 자동 완성도 동작합니다.
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">실행 결과 보기</summary>
+<details>
+<summary>실행 결과 보기</summary>
 <pre><code>// displayName이 string이므로 toUpperCase() 정상 동작
 // 렌더링 출력 예시:
 엔지니어 프로필
@@ -142,8 +142,8 @@ export default App;
 - `const currentUser: User`: `User` 인터페이스와 맞지 않는 객체를 할당하면 이 위치에서 컴파일 오류가 납니다.
 - `<UserProfile user={currentUser} />`: `UserProfile`이 요구하는 `UserProfileProps.user` 타입과 `currentUser`의 타입이 일치하므로 정상 결합됩니다.
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">displayName에 숫자를 넣으면?</summary>
+<details>
+<summary>displayName에 숫자를 넣으면?</summary>
 <pre><code>const currentUser: User = {
   id: 1004,
   displayName: 9999   // ← 숫자 할당 시도

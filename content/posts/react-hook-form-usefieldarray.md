@@ -145,8 +145,8 @@ export function SmartDynamicForm() {
 }
 ```
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">전송하면 데이터에 field.id가 들어갈까?</summary>
+<details>
+<summary>전송하면 데이터에 field.id가 들어갈까?</summary>
 <pre><code>// 추가·삭제·순서 변경 후 전송한 data:
 {
   careers: [

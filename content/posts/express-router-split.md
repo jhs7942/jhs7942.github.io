@@ -83,8 +83,8 @@ app.listen(3000, () => {
 
 - 라우터 파일 안에서는 `/users`를 반복해 쓸 필요 없이 **상대 경로**만 적습니다.
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">실행 결과 보기</summary>
+<details>
+<summary>실행 결과 보기</summary>
 <pre><code>$ curl http://localhost:3000/users
 User list
 $ curl http://localhost:3000/users/123
@@ -173,8 +173,8 @@ router.get("/", (req, res) => {
 
 - 인증 확인, 로깅처럼 "이 기능 영역 전체에 공통인 처리"를 모아 두기 좋습니다.
 
-<details style="margin:10px 0 4px">
-<summary style="cursor:pointer;font-weight:700;color:#C8443C">실행 결과 보기</summary>
+<details>
+<summary>실행 결과 보기</summary>
 <pre><code>$ curl http://localhost:3000/food
 # 응답
 식품 부서: 식품 목록
