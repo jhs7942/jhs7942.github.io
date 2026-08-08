@@ -54,6 +54,8 @@ export default async function PostPage({ params }: PageProps<"/posts/[slug]">) {
 
   return (
     <article className="mx-auto w-full max-w-3xl px-6 py-14">
+      {/* 스크롤 위치를 JS로 계산하지 않는다 — animation-timeline: scroll() 이 대신한다. */}
+      <div className="reading-progress" aria-hidden />
       <header className="mb-8">
         <p className="font-label text-[11px] tracking-widest text-label">
           <time dateTime={post.published_at}>{DATE.format(new Date(post.published_at))}</time>

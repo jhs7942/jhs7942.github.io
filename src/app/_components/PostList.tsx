@@ -17,7 +17,7 @@ export function PostList({ posts }: { posts: PostDoc[] }) {
         <li key={post.slug}>
           <Link
             href={`/posts/${post.slug}/`}
-            className="group block border-[1.5px] border-border-soft bg-surface p-5 transition-colors hover:border-accent"
+            className="card-lift reveal group block border-[1.5px] border-border-soft bg-surface p-5 hover:border-accent"
             style={{ borderRadius: "var(--radius-hand)" }}
           >
             {/* 메타 줄은 픽셀체. 원본 테마가 카테고리·날짜에 쓰던 처리다. */}

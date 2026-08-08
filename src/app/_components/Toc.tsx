@@ -1,4 +1,5 @@
 import type { TocEntry } from "@/lib/markdown/render";
+import { TocScrollSpy } from "./TocScrollSpy";
 
 /**
  * 목차.
@@ -22,15 +23,22 @@ export function Toc({ entries }: { entries: TocEntry[] }) {
       <p className="mb-3 font-label text-[11px] tracking-widest text-label">목차</p>
       <ol className="space-y-2">
         {top.map((entry, i) => (
-          <li key={entry.id} className="flex gap-3 text-sm">
-            <span className="shrink-0 font-bold text-accent tabular-nums">{i + 1}</span>
-            <a href={`#${entry.id}`} className="hover:text-accent hover:underline">
+          <li
+            key={entry.id}
+            className="toc-item flex gap-3 text-sm"
+            data-toc-for={entry.id}
+            data-active="false"
+          >
+            <span className="toc-num shrink-0 font-bold text-accent tabular-nums">{i + 1}</span>
+            <a href={`#${entry.id}`} className="toc-link hover:text-accent">
               {/* 헤딩 텍스트에 이미 "1." 같은 순번이 붙어 있으면 중복을 걷어낸다. */}
               {entry.text.replace(/^\d+\.\s*/, "")}
             </a>
           </li>
         ))}
       </ol>
+
+      <TocScrollSpy ids={top.map((e) => e.id)} />
     </nav>
   );
 }

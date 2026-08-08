@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./animations.css";
 
 /*
  * 팔레트는 기존 테마(theme/main-page-v2.html)에서 뽑았다.
