@@ -161,5 +161,11 @@
 
 .nav-link { transition: color 0.2s ease; }
 .nav-link:hover { color: var(--accent); }
+/* 포트폴리오 헤더 nav: 스크롤 스파이가 붙이는 현재 위치 표시 */
+.nav-link[data-active="true"] { color: var(--accent); font-weight: 700; }
+/* 좁은 화면에서 헤더 nav 항목이 넘치면 줄바꿈 대신 가로 스크롤. 스크롤바는 감춘다 —
+   기능은 살리되 얇은 헤더 안에서 막대가 보이면 산만하다 */
+.nav-scroll { scrollbar-width: none; -ms-overflow-style: none; }
+.nav-scroll::-webkit-scrollbar { display: none; }
 .footer-link { transition: opacity 0.2s ease; }
 .footer-link:hover { opacity: 1; }

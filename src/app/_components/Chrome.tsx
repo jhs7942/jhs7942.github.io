@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { SITE } from "@/lib/site";
 import { labelSlug } from "@/lib/content/labels";
+import { HeaderNav } from "./HeaderNav";
 
 /**
  * 손그림 테두리용 SVG 필터.
@@ -32,30 +33,35 @@ const NAV = [
   { href: "/portfolio/", label: "포트폴리오" },
 ];
 
+/**
+ * NAV(라벨 slug 계산이 필요)는 서버에서 만들어 HeaderNav 에 넘긴다.
+ * HeaderNav 를 통째로 "use client" 로 만든 이유는 /portfolio 에서만 nav를
+ * 5개 섹션 앵커로 바꿔야 하는데 그 판단(usePathname)이 클라이언트 전용이라서다.
+ * labelSlug 자체는 getAllPosts(node:fs) 를 물고 있어 클라이언트 번들에 들어가면
+ * 빌드가 깨진다 — 그래서 계산은 서버 쪽 이 컴포넌트가 하고, HeaderNav 에는
+ * 계산된 배열만 데이터로 내려준다.
+ */
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-100 border-b-[1.5px] border-line bg-[rgba(131,207,201,0.92)] backdrop-blur-[6px]">
       <div className="mx-auto flex max-w-[1120px] items-center justify-between gap-5 px-7 py-4">
-        <Link href="/" className="text-ink no-underline">
+        <Link href="/" className="shrink-0 text-ink no-underline">
           <span className="text-[22px] tracking-[-0.5px] whitespace-nowrap">{SITE.title}</span>
         </Link>
-        <nav className="flex items-center gap-4 sm:gap-[26px]">
-          {NAV.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="nav-link text-[15.5px] font-medium text-ink no-underline"
-            >
-              {item.label}
-            </Link>
-          ))}
+        {/* min-w-0 이 없으면 flex 아이템이 줄어들지 않아 overflow-x가 먹지 않고,
+            좁은 화면에서 한글 항목명이 글자 단위로 줄바꿈되는 문제(포트폴리오는
+            5개라 특히 심함)가 생긴다. nav만 스크롤시키고 BLOG 배지는 항상 보이게 뺐다. */}
+        <div className="flex min-w-0 items-center gap-4 sm:gap-[26px]">
+          <nav className="nav-scroll flex min-w-0 items-center gap-4 overflow-x-auto sm:gap-[26px]">
+            <HeaderNav items={NAV} />
+          </nav>
           <span
-            className="bg-accent px-[11px] py-1.5 text-[11px] tracking-[1px] text-cream"
+            className="shrink-0 bg-accent px-[11px] py-1.5 text-[11px] tracking-[1px] text-cream"
             style={{ borderRadius: "9px 10px 8px 10px", boxShadow: "0 5px 12px -6px rgba(47,58,57,0.5)" }}
           >
             BLOG
           </span>
-        </nav>
+        </div>
       </div>
     </header>
   );
