@@ -1,0 +1,847 @@
+/*
+ * 포트폴리오 전용 스타일.
+ *
+ * 원래 Blogger 페이지(content/pages/portfolio.html)의 <style> 블록을 그대로 옮겼다.
+ * 팔레트·치수는 globals.css 의 --mint/--cream/--ink 등과 같은 라이브 테마에서 나왔지만,
+ * 이 페이지는 손그림 모서리·표 기반 지표 등 자기 완결적인 규칙이 많아 별도 파일로 둔다.
+ * .ab 로 시작하는 클래스만 쓰므로 다른 페이지와 충돌하지 않는다.
+ *
+ * 드롭한 규칙 하나 — 원본의 `body > div[style*="min-height:100vh"]{overflow-x:clip}`.
+ * Blogger 테마가 body 안에 overflow-x:hidden 래퍼 div를 넣어 sticky 헤더를 무력화했던
+ * 것을 상쇄하는 우회였다. 이 Next.js 앱은 globals.css 에서 overflow-x:hidden 을 body
+ * 자신에 직접 건다 — 이 경우 브라우저가 그 값을 뷰포트로 전파해(overflow propagation)
+ * body 자체는 스크롤 컨테이너가 되지 않으므로, 래퍼 div가 없는 이 구조에선 필요 없다.
+ */
+.ab {
+  font-family: "Noto Sans KR", sans-serif;
+  color: #2f3a39;
+}
+.ab * {
+  box-sizing: border-box;
+}
+.ab a {
+  color: inherit;
+}
+.ab-hero {
+  position: relative;
+  background: linear-gradient(135deg, #83cfc9 0%, #9ad8d2 100%);
+  border: 1.5px solid rgba(47, 58, 57, 0.3);
+  border-radius: 22px 24px 20px 23px;
+  padding: 34px 36px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 30px;
+  align-items: center;
+  box-shadow: 0 16px 40px -22px rgba(47, 58, 57, 0.5);
+  overflow: hidden;
+  margin-bottom: 52px;
+}
+.ab-hero-photo {
+  position: relative;
+  z-index: 1;
+  order: -1;
+  display: block;
+  width: 172px;
+  height: auto;
+  border-radius: 16px 18px 14px 17px;
+  border: 1.5px solid rgba(47, 58, 57, 0.3);
+  box-shadow: 0 12px 30px -16px rgba(47, 58, 57, 0.65);
+}
+.ab-cloud {
+  position: absolute;
+  background: rgba(251, 251, 247, 0.4);
+  border-radius: 999px;
+  filter: blur(3px);
+  pointer-events: none;
+}
+.ab-cloud.a {
+  width: 280px;
+  height: 90px;
+  right: -40px;
+  top: 20px;
+}
+.ab-hero-txt {
+  position: relative;
+  z-index: 1;
+}
+.ab-eyebrow {
+  font-size: 12px;
+  letter-spacing: 2.5px;
+  color: #c8443c;
+  background: #fbfbf7;
+  display: inline-block;
+  padding: 6px 13px;
+  border-radius: 10px 11px 9px 11px;
+  border: 1.5px solid rgba(47, 58, 57, 0.35);
+  margin-bottom: 12px;
+}
+.ab-name {
+  font-size: 42px;
+  line-height: 1.15;
+  letter-spacing: -1px;
+  color: #243130;
+  margin: 0 0 6px;
+}
+.ab-role {
+  font-size: 17.5px;
+  font-weight: 700;
+  color: #2f3a39;
+  margin: 0 0 14px;
+  line-height: 1.6;
+}
+.ab-rolesub {
+  font-size: 14.5px;
+  font-weight: 500;
+  color: #2f3a39;
+  opacity: 0.88;
+  line-height: 1.8;
+  margin: 0 0 9px;
+}
+.ab-links {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+/* 앵커로 이동했을 때 sticky 헤더에 제목이 가리지 않도록 */
+.ab [id] {
+  scroll-margin-top: 80px;
+}
+.ab-lnk {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 10px 18px;
+  border-radius: 12px 13px 11px 13px;
+  box-shadow: 0 6px 14px -7px rgba(47, 58, 57, 0.5);
+  border: none;
+  cursor: pointer;
+}
+.ab-lnk .ab-ico {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+.ab-lnk.dark {
+  background: #243130;
+  color: #fbfbf7;
+  border: 1.5px solid rgba(47, 58, 57, 0.4);
+}
+.ab-lnk.ghost {
+  background: #fbfbf7;
+  color: #2f3a39;
+  border: 1.5px solid rgba(47, 58, 57, 0.45);
+}
+.ab-lnk.ab-copy {
+  cursor: pointer;
+}
+.ab-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 30px;
+  transform: translate(-50%, 10px);
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0;
+  background: #243130;
+  color: #fbfbf7;
+  font-weight: 700;
+  font-size: 13.5px;
+  letter-spacing: -0.1px;
+  padding: 11px 20px;
+  border-radius: 12px 13px 11px 13px;
+  box-shadow: 0 12px 26px -12px rgba(47, 58, 57, 0.8);
+  transition:
+    opacity 0.18s ease,
+    transform 0.18s ease;
+}
+.ab-toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+.ab-toast.warn {
+  background: #c8443c;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ab-toast {
+    transition: none;
+  }
+}
+.ab-linkrow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin: 0;
+}
+
+.ab-section {
+  margin-bottom: 50px;
+}
+.ab-section:last-child {
+  margin-bottom: 0;
+}
+.ab-sechead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+.ab-section h2 {
+  font-size: 28px;
+  letter-spacing: -0.5px;
+  color: #243130;
+  margin: 0;
+}
+.ab-sectag {
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  color: #5e7449;
+}
+
+/* 메인 프로젝트 */
+.ab-main {
+  background: #fff;
+  border: 1.5px solid rgba(47, 58, 57, 0.3);
+  border-radius: 18px 20px 16px 19px;
+  padding: 28px 30px;
+  box-shadow: 0 14px 32px -18px rgba(47, 58, 57, 0.5);
+}
+.ab-mtop {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+}
+.ab-mtop h3 {
+  font-size: 23px;
+  color: #243130;
+  margin: 0;
+}
+.ab-badge {
+  font-size: 10.5px;
+  letter-spacing: 1px;
+  background: #c8443c;
+  color: #fbfbf7;
+  padding: 4px 10px;
+  border-radius: 8px;
+}
+.ab-badge b {
+  font-weight: 400;
+  margin-right: 6px;
+}
+.ab-badge .me {
+  font-weight: 700;
+}
+.ab-badge .me .st {
+  color: #ffd54a;
+  margin-right: 3px;
+}
+.ab-badge.dev {
+  background: #35804c;
+}
+.ab a.ab-visit {
+  margin-left: auto;
+  flex-shrink: 0;
+  font-size: 12px;
+  font-weight: 700;
+  color: #c8443c;
+  background: #fbfbf7;
+  border: 1.3px solid rgba(200, 68, 60, 0.4);
+  border-radius: 14px;
+  padding: 5px 13px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.ab a.ab-visit:hover {
+  background: #c8443c;
+  color: #fbfbf7;
+  border-color: #c8443c;
+}
+.ab a.ab-visit.gh {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  align-self: center;
+  color: #fbfbf7;
+  background: #24292f;
+  border-color: #24292f;
+}
+.ab a.ab-visit.gh:hover {
+  background: #1b1f24;
+  border-color: #1b1f24;
+  color: #fbfbf7;
+}
+.ab-mlead {
+  font-size: 14.5px;
+  line-height: 1.85;
+  opacity: 0.9;
+  margin: 12px 0 20px;
+}
+.ab-mlead.grp {
+  margin-bottom: 0;
+}
+.ab-mlead + .ab-mlead {
+  margin-top: 24px;
+}
+/* 접이식 판단 단위(문제/해결/결과) */
+.ab-acts {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.ab-act {
+  background: #fbfbf7;
+  border: 1.4px solid rgba(47, 58, 57, 0.24);
+  border-radius: 14px 15px 13px 15px;
+  overflow: hidden;
+}
+.ab-act[open] {
+  background: #fff;
+  box-shadow: 0 8px 20px -16px rgba(47, 58, 57, 0.5);
+}
+.ab-actsum {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  flex-wrap: wrap;
+  padding: 15px 18px;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+.ab-actsum::-webkit-details-marker {
+  display: none;
+}
+.ab-actsum::marker {
+  content: "";
+}
+.ab-actsum:hover {
+  background: rgba(200, 68, 60, 0.05);
+}
+.ab-actnum {
+  flex-shrink: 0;
+  background: #243130;
+  color: #fbfbf7;
+  font-weight: 700;
+  font-size: 12.5px;
+  padding: 4px 10px;
+  border-radius: 8px 9px 7px 9px;
+}
+.ab-acttitle {
+  font-weight: 700;
+  font-size: 15.5px;
+  color: #243130;
+  line-height: 1.5;
+}
+.ab-actkey {
+  margin-left: auto;
+  flex-shrink: 0;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #c8443c;
+  background: #fbfbf7;
+  border: 1.2px solid rgba(200, 68, 60, 0.35);
+  border-radius: 14px;
+  padding: 3px 10px;
+}
+.ab-act[open] .ab-actkey {
+  background: #c8443c;
+  color: #fbfbf7;
+  border-color: #c8443c;
+}
+.ab-actarrow {
+  flex-shrink: 0;
+  margin-left: auto;
+  font-size: 11px;
+  color: #2f3a39;
+  opacity: 0.5;
+}
+.ab-actsum.bare {
+  justify-content: flex-end;
+  padding-top: 9px;
+  padding-bottom: 9px;
+}
+.ab-act[open] .ab-actarrow {
+  opacity: 0.8;
+}
+.ab-actbody {
+  padding: 14px 18px 18px;
+  border-top: 1.3px solid rgba(47, 58, 57, 0.14);
+}
+.ab-act h4 {
+  font-size: 17px;
+  color: #243130;
+  margin: 8px 0 9px;
+}
+.ab-act p {
+  font-size: 14px;
+  line-height: 1.85;
+  opacity: 0.9;
+  margin: 0 0 10px;
+}
+.ab-actbody p:last-child {
+  margin-bottom: 0;
+}
+.ab-actbody ul {
+  margin: 0 0 10px;
+  padding-left: 18px;
+}
+.ab-actbody li {
+  font-size: 14px;
+  line-height: 1.85;
+  opacity: 0.9;
+  margin-bottom: 5px;
+}
+.ab-actbody b {
+  color: #243130;
+}
+/* 문제 → 해결 → 결과 3단 */
+.ab-step {
+  display: grid;
+  grid-template-columns: 58px 1fr;
+  gap: 14px;
+  padding: 14px 0;
+  border-top: 1.2px solid rgba(47, 58, 57, 0.3);
+}
+.ab-step:first-of-type {
+  border-top: 0;
+  padding-top: 4px;
+}
+.ab-steplabel {
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  padding-top: 3px;
+}
+.ab-step.q .ab-steplabel {
+  color: #c8443c;
+}
+.ab-step.a .ab-steplabel {
+  color: #243130;
+}
+.ab-step.r .ab-steplabel {
+  color: #5e7449;
+}
+.ab-step ul {
+  margin: 0;
+  padding-left: 16px;
+}
+.ab-step li {
+  font-size: 13.5px;
+  line-height: 1.8;
+  opacity: 0.9;
+  margin-bottom: 4px;
+}
+.ab-step li:last-child {
+  margin-bottom: 0;
+}
+p.ab-subhead {
+  font-weight: 700;
+  font-size: 13.5px;
+  color: #243130;
+  margin: 18px 0 5px;
+}
+p.ab-subhead:first-child {
+  margin-top: 0;
+}
+.ab-main > p.ab-subhead {
+  font-size: 15px;
+}
+.ab-act.tight .ab-step li {
+  line-height: 1.62;
+  margin-bottom: 1px;
+}
+.ab-actbody code {
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Consolas,
+    monospace;
+  font-size: 0.88em;
+  background: #eaf3ee;
+  border: 1px solid rgba(47, 58, 57, 0.18);
+  border-radius: 5px;
+  padding: 1px 5px;
+  color: #243130;
+}
+.ab-act .num {
+  color: #c8443c;
+  font-weight: 700;
+}
+/* 지표 표 */
+.ab-rtable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  line-height: 1.7;
+  margin: 2px 0 0;
+}
+.ab-rtable tr {
+  border-bottom: 1px dashed rgba(47, 58, 57, 0.1);
+}
+.ab-rtable tr:last-child {
+  border-bottom: 0;
+}
+.ab-rtable th {
+  text-align: left;
+  padding: 7px 14px 7px 0;
+  font-weight: 600;
+  color: #2f3a39;
+  opacity: 0.72;
+  white-space: nowrap;
+  vertical-align: top;
+}
+.ab-rtable td {
+  padding: 7px 0;
+  color: #243130;
+  vertical-align: top;
+}
+.ab-rtable td ul {
+  margin: 0;
+  padding-left: 17px;
+}
+.ab-rtable td li {
+  margin-bottom: 3px;
+}
+.ab-rtable td li:last-child {
+  margin-bottom: 0;
+}
+.ab-rtable.metric th,
+.ab-rtable.metric td.v {
+  width: 1px;
+  white-space: nowrap;
+}
+.ab-rtable.metric td.v {
+  padding-right: 18px;
+}
+.ab-rtable.metric td.n {
+  color: #2f3a39;
+  opacity: 0.74;
+  font-size: 12.5px;
+}
+.ab-rfoot {
+  font-size: 11.5px;
+  line-height: 1.7;
+  color: #2f3a39;
+  opacity: 0.72;
+  margin: 9px 0 0;
+}
+.ab-aibox {
+  background: #eaf3ee;
+  border: 1.4px dashed rgba(47, 58, 57, 0.35);
+  border-radius: 13px 14px 12px 14px;
+  padding: 18px 22px;
+}
+.ab-aibox h4 {
+  font-size: 15.5px;
+  color: #243130;
+  margin: 0 0 10px;
+}
+.ab-aibox ul {
+  margin: 0;
+  padding-left: 18px;
+}
+.ab-aibox li {
+  font-size: 13.5px;
+  line-height: 1.9;
+  opacity: 0.9;
+}
+
+.ab-ptags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.ab-ptag {
+  font-size: 10.5px;
+  letter-spacing: 0.5px;
+  background: #eaf3ee;
+  color: #243130;
+  padding: 4px 9px;
+  border-radius: 7px;
+  border: 1px solid rgba(47, 58, 57, 0.22);
+}
+.ab-plink {
+  font-weight: 700;
+  font-size: 13.5px;
+  color: #c8443c;
+  text-decoration: none;
+}
+/* 근거 있는 기술 카드 — 스킬 섹션. 나열형 태그(.ab-ptag)와 달리 "무엇을 할 수
+   있는지" 문장 + 출처를 담는다. 근거 없는 기술까지 억지로 카드로 늘리지 않고
+   .ab-ptag 로 남겨둔다(skills.ts 주석 참고). */
+.ab-skills {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.ab-skill {
+  background: #fbfbf7;
+  border: 1.3px solid rgba(47, 58, 57, 0.18);
+  border-radius: 11px 12px 10px 12px;
+  padding: 12px 15px 13px;
+}
+.ab-skill-name {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #243130;
+  margin: 0 0 4px;
+}
+.ab-skill-desc {
+  font-size: 12.5px;
+  line-height: 1.75;
+  opacity: 0.88;
+  margin: 0;
+}
+.ab-skill-desc b {
+  color: #243130;
+  opacity: 1;
+}
+.ab-skill-src {
+  display: inline-block;
+  margin-top: 7px;
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #c8443c;
+  background: rgba(200, 68, 60, 0.08);
+  padding: 2px 8px;
+  border-radius: 20px;
+}
+/* 구조 다이어그램 */
+.ab-figs {
+  display: grid;
+  gap: 18px;
+  margin: 4px 0 20px;
+}
+.ab-fig {
+  background: #fbfbf7;
+  border: 1.4px solid rgba(47, 58, 57, 0.28);
+  border-radius: 14px 16px 12px 15px;
+  padding: 12px 12px 10px;
+  min-width: 0;
+}
+.ab-figbody {
+  overflow-x: auto;
+}
+.ab-figbody svg {
+  min-width: 640px;
+}
+.ab-figcap {
+  display: block;
+  margin: 0 0 10px;
+  font-weight: 700;
+  font-size: 13.5px;
+  line-height: 1.5;
+  letter-spacing: -0.1px;
+  color: #243130;
+}
+.ab-metrics {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+.ab-metric {
+  font-weight: 700;
+  font-size: 14px;
+  background: #fbfbf7;
+  border: 1.3px solid rgba(47, 58, 57, 0.28);
+  border-radius: 18px;
+  padding: 4px 12px;
+  color: #243130;
+}
+.ab-metric b {
+  color: #c8443c;
+}
+.ab-mnote {
+  background: #eaf3ee;
+  border: 1.3px dashed rgba(47, 58, 57, 0.32);
+  border-radius: 11px;
+  padding: 13px 16px;
+  font-size: 13.5px;
+  line-height: 1.8;
+  margin: 14px 0 0;
+}
+.ab-blist {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 5px;
+}
+.ab-blist li {
+  position: relative;
+  padding-left: 13px;
+  font-size: 13.5px;
+  line-height: 1.7;
+  opacity: 0.88;
+}
+.ab-blist li::before {
+  content: "\00B7";
+  position: absolute;
+  left: 3px;
+  top: -1px;
+  color: #c8443c;
+  font-weight: 700;
+}
+.ab-blist li b {
+  color: #243130;
+  opacity: 1;
+}
+.ab-minor {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 11px 15px;
+  background: rgba(251, 251, 247, 0.55);
+  border: 1.3px dashed rgba(47, 58, 57, 0.3);
+  border-radius: 12px 13px 11px 13px;
+}
+.ab-minor + .ab-minor {
+  margin-top: 8px;
+}
+.ab-minor.stack {
+  display: block;
+}
+.ab-minor.stack h4 {
+  margin: 0 0 6px;
+  white-space: normal;
+}
+.ab-minor h4 {
+  margin: 0;
+  font-size: 14px;
+  color: #243130;
+  white-space: nowrap;
+}
+.ab-minor span.d {
+  font-size: 13px;
+  line-height: 1.6;
+  opacity: 0.85;
+  flex: 1 1 200px;
+  min-width: 0;
+}
+.ab-minor a {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #c8443c;
+  text-decoration: none;
+}
+
+@media (max-width: 760px) {
+  .ab-hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .ab-hero-photo {
+    width: 140px;
+    margin: 0 auto 18px;
+  }
+  .ab-links {
+    justify-content: center;
+  }
+  .ab [id] {
+    scroll-margin-top: 96px;
+  }
+  .ab-main {
+    padding: 22px 20px;
+  }
+  .ab-actsum {
+    padding: 14px 15px;
+    gap: 9px;
+  }
+  .ab-acttitle {
+    font-size: 15px;
+  }
+  .ab-actkey {
+    margin-left: 0;
+    order: 3;
+  }
+  .ab-actarrow {
+    margin-left: auto;
+    order: 2;
+  }
+  .ab-actbody {
+    padding: 13px 15px 16px;
+  }
+  .ab-rtable th,
+  .ab-rtable td {
+    display: block;
+    white-space: normal;
+  }
+  .ab-rtable th {
+    padding: 8px 0 0;
+    font-size: 12px;
+  }
+  .ab-rtable td {
+    padding: 2px 0 8px;
+  }
+  .ab-rtable.metric th,
+  .ab-rtable.metric td.v,
+  .ab-rtable.metric td.n {
+    width: auto;
+    white-space: normal;
+  }
+  .ab-rtable.metric td.v {
+    padding: 2px 0 0;
+  }
+  .ab-rtable.metric td.n {
+    padding: 1px 0 8px;
+  }
+  .ab-rtable.metric td.n:empty {
+    display: none;
+  }
+}
+.ab-rtable.cmp thead th {
+  font-size: 11px;
+  font-weight: 700;
+  color: #2f3a39;
+  opacity: 0.5;
+  padding: 0 0 6px;
+}
+.ab-rtable.cmp thead th.r {
+  text-align: right;
+  width: 1px;
+  white-space: nowrap;
+  padding-right: 14px;
+}
+.ab-rtable.cmp tbody th {
+  white-space: normal;
+  padding-right: 12px;
+}
+.ab-rtable.cmp td.cb {
+  text-align: right;
+  white-space: nowrap;
+  color: #2f3a39;
+  opacity: 0.55;
+  width: 1px;
+  padding-right: 14px;
+}
+.ab-rtable.cmp td.ca {
+  text-align: right;
+  white-space: nowrap;
+  color: #c8443c;
+  font-weight: 700;
+  width: 1px;
+  padding-right: 14px;
+}
+.ab-rtable.cmp td.ci {
+  text-align: right;
+  white-space: nowrap;
+  color: #35804c;
+  font-weight: 700;
+  font-size: 12px;
+  width: 1px;
+}
+.ab-subsec {
+  margin-top: 22px;
+}
