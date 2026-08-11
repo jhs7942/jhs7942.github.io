@@ -14,11 +14,17 @@ type NavItem = { href: string; label: string };
  * 헤더 nav 자체를 이 5개 섹션 앵커로 바꾸고, 페이지 안의 목차는 없앴다.
  *
  * id 목록만 쓰므로(라벨 slug 계산 없음) 여기 하드코딩해도 안전하다.
+ *
+ * "ai"를 id로 쓰면 안 된다 — HTML의 named access on Window 스펙 때문에
+ * id가 있는 엘리먼트는 자동으로 window[id]가 되는데, Chrome이 실험적
+ * window.ai 내장 AI API를 이미 점유하고 있어 충돌하면서 하이드레이션이
+ * 깨진다(콘솔에는 "Hydration failed" 로만 찍혀 원인 추적이 어려웠다).
+ * "ai-work"처럼 접미사를 붙여 우회한다.
  */
 const PORTFOLIO_NAV = [
   { id: "about", label: "소개" },
   { id: "projects", label: "프로젝트" },
-  { id: "ai", label: "AI" },
+  { id: "ai-work", label: "AI" },
   { id: "skills", label: "스킬" },
   { id: "career", label: "경력" },
 ];
