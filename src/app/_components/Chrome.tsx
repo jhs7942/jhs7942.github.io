@@ -35,11 +35,10 @@ const NAV = [
 
 /**
  * NAV(라벨 slug 계산이 필요)는 서버에서 만들어 HeaderNav 에 넘긴다.
- * HeaderNav 를 통째로 "use client" 로 만든 이유는 /portfolio 에서만 nav를
- * 5개 섹션 앵커로 바꿔야 하는데 그 판단(usePathname)이 클라이언트 전용이라서다.
  * labelSlug 자체는 getAllPosts(node:fs) 를 물고 있어 클라이언트 번들에 들어가면
- * 빌드가 깨진다 — 그래서 계산은 서버 쪽 이 컴포넌트가 하고, HeaderNav 에는
- * 계산된 배열만 데이터로 내려준다.
+ * 빌드가 깨지므로, 계산은 이 서버 컴포넌트가 하고 HeaderNav 에는 계산된
+ * 배열만 데이터로 내려준다. /portfolio 에서는 이 헤더 자체가 RouteChrome 에
+ * 의해 렌더링되지 않는다(구름 테마 전용 Nav를 쓴다).
  */
 export function SiteHeader() {
   return (

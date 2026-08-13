@@ -3,6 +3,7 @@ import { Geist_Mono } from "next/font/google";
 import { notoSansKR } from "@/lib/fonts";
 import { SITE } from "@/lib/site";
 import { RoughFilters, SiteHeader, SiteFooter } from "./_components/Chrome";
+import { RouteChrome } from "./_components/RouteChrome";
 import "./globals.css";
 
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
@@ -19,9 +20,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body>
         <RoughFilters />
         <div className="grain" aria-hidden />
-        <SiteHeader />
+        <RouteChrome>
+          <SiteHeader />
+        </RouteChrome>
         {children}
-        <SiteFooter />
+        <RouteChrome>
+          <SiteFooter />
+        </RouteChrome>
       </body>
     </html>
   );

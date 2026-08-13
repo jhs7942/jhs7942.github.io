@@ -9,7 +9,7 @@ import { useEffect, useRef, useState } from "react";
  * 순서로 폴백했다. 같은 폴백을 리액트 상태로 옮겼다 — DOM을 직접 만들던 토스트 엘리먼트를
  * 컴포넌트 상태로 대체한 것 외에는 동작이 같다.
  */
-export function CopyEmailButton({ email }: { email: string }) {
+export function CopyEmailButton({ email, className }: { email: string; className: string }) {
   const [toast, setToast] = useState<{ message: string; warn: boolean } | null>(null);
   const labelRef = useRef<HTMLSpanElement>(null);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -81,19 +81,15 @@ export function CopyEmailButton({ email }: { email: string }) {
   return (
     <>
       <a
-        className="ab-lnk ghost ab-copy"
+        className={className}
         href={`mailto:${email}`}
         aria-label={`${email} 복사`}
         title="클릭하면 주소가 복사됩니다"
         onClick={handleClick}
       >
-        <svg className="ab-ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden="true">
-          <rect x="1.3" y="3.3" width="13.4" height="9.4" rx="1.6" />
-          <path d="M2 4.3l6 4.6 6-4.6" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
         <span ref={labelRef}>{email}</span>
       </a>
-      <div className={`ab-toast${toast ? " show" : ""}${toast?.warn ? " warn" : ""}`} role="status" aria-live="polite">
+      <div className={`cloud-toast${toast ? " show" : ""}${toast?.warn ? " warn" : ""}`} role="status" aria-live="polite">
         {toast?.message}
       </div>
     </>
