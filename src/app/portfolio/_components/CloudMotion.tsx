@@ -13,6 +13,14 @@ import { useEffect } from "react";
  * 첫 섹션(히어로)은 스크롤 위치 대신 마운트 후 경과 시간으로 진행도를 계산해,
  * 페이지를 열자마자(스크롤 없이도) 베일이 갈라지며 시작한다.
  */
+/**
+ * 스크롤에 맞춰 구름이 갈라지며 사라지는 효과 — 우선 비활성화.
+ * true로 두면 스크롤 리스너·rAF 루프를 아예 안 붙이고, paint()를 한 번만 호출해
+ * 모든 섹션을 처음부터 완전히 드러난 상태로 고정한다(isReduced()가 그 한 번의
+ * 호출에서 항상 p=1을 강제하도록 만든다). 다시 켜려면 false로 되돌리면 된다.
+ */
+const SCROLL_VEIL_DISABLED = true;
+
 export function CloudMotion() {
   useEffect(() => {
     const root = document.querySelector<HTMLElement>(".cloud");
@@ -24,7 +32,7 @@ export function CloudMotion() {
     let ticking = false;
 
     function isReduced() {
-      return reduceQuery.matches || document.visibilityState === "hidden";
+      return SCROLL_VEIL_DISABLED || reduceQuery.matches || document.visibilityState === "hidden";
     }
 
     function paint() {
@@ -65,6 +73,11 @@ export function CloudMotion() {
           c.style.filter = e > 0.92 ? "none" : `blur(${(1 - e) * 5}px)`;
         }
       });
+    }
+
+    if (SCROLL_VEIL_DISABLED) {
+      paint();
+      return;
     }
 
     function onScroll() {

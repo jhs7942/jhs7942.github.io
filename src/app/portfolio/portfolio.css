@@ -114,6 +114,376 @@
   animation-duration: 58s;
 }
 
+/* 마우스 포인터를 따라다니며 태어났다 사라지는 작은 구름들 — CloudCursorTrail.tsx
+   가 이 레이어 안에 .cloud-trail-puff 를 직접 붙였다 뗀다. 촘촘한 간격(작은
+   SPAWN_DISTANCE)으로 자주 낳고, 옅은 최고 불투명도(0.4)로 그려서 서로 겹치며
+   한 줄로 이어지는 연한 리본처럼 보이게 한다. */
+.cloud-trail-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  overflow: hidden;
+}
+.cloud-trail-puff {
+  position: absolute;
+  opacity: 0;
+  filter: drop-shadow(0 3px 6px rgba(47, 58, 57, 0.12));
+  animation: cloudTrailPuff 750ms ease-out forwards;
+}
+.cloud-trail-puff svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+@keyframes cloudTrailPuff {
+  0% {
+    opacity: 0;
+    transform: scale(0.4) translateY(0);
+  }
+  22% {
+    opacity: 0.4;
+    transform: scale(1) translateY(-1px);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.08) translateY(-10px);
+  }
+}
+
+/* ── 페이지 덱 ────────────────────────────────────────────────────────────
+   섹션을 세로로 잇지 않고 가로로 늘어놓은 뒤 현재 장만큼 밀어서 보여준다.
+   문서 스크롤은 잠그고, 한 장에 안 들어가는 긴 섹션만 그 장 안에서 세로로
+   스크롤된다 (PortfolioDeck.tsx 참고). */
+html.cloud-deck-lock,
+body.cloud-deck-lock {
+  height: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+.cloud-deck {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+}
+.cloud-deck-track {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  will-change: transform;
+  transition: transform 620ms cubic-bezier(0.76, 0, 0.24, 1);
+}
+.cloud-page {
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+/* 좌우 끝은 이동 영역이 차지하므로, 본문이 그 밑에 깔리지 않게 안쪽으로 민다.
+   (아래 .cloud-edge 의 width 보다 항상 크게 잡혀 있다) */
+.cloud-deck .cloud-section {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 104px clamp(64px, 7vw, 112px) 88px;
+}
+.cloud-deck .cloud-section.hero {
+  padding: 110px clamp(64px, 7vw, 112px) 90px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .cloud-deck-track {
+    transition-duration: 1ms;
+  }
+}
+
+/* ── 장 전환 구름 ─────────────────────────────────────────────────────────
+   장이 넘어갈 때(.cloud-deck-track의 620ms 전환과 같은 길이) 이동 방향으로
+   구름 무리가 함께 흘러간다 — 다음 장이면 오른쪽→왼쪽, 이전 장이면
+   왼쪽→오른쪽(DeckTransitionClouds.tsx 참고). */
+.cloud-gust-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 48;
+  pointer-events: none;
+  overflow: hidden;
+}
+.cloud-gust-puff {
+  position: absolute;
+  left: 0;
+  opacity: 0;
+  /* 개별 구름마다 다른 회전 · 상하 흔들림 · 최고 속도에서의 가로 늘어남 정도 —
+     DeckTransitionClouds.tsx 가 인라인으로 흩어 놓는다. 값이 없으면(=0으로
+     기본) 밋밋해지므로 항상 넘겨준다. */
+  --gust-rot: 10deg;
+  --gust-bob: 0px;
+  --gust-stretch: 1.3;
+  animation: cloudGustNext 620ms cubic-bezier(0.32, 0, 0.2, 1) both;
+}
+.cloud-gust-layer.prev .cloud-gust-puff {
+  animation-name: cloudGustPrev;
+}
+.cloud-gust-puff svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+/* 다음 장(왼쪽으로 흘러감) — 등장(살짝 눌린 채) → 최고 속도(회전 + 상하 흔들림 +
+   진행 방향으로 늘어나는 잔상감 + 흐림) → 퇴장(다시 또렷하게) 순으로 움직여
+   "구름이 바람에 휩쓸려 지나가는" 느낌을 낸다. */
+@keyframes cloudGustNext {
+  0% {
+    opacity: 0;
+    filter: blur(0) drop-shadow(0 8px 16px rgba(47, 58, 57, 0.2));
+    transform: translateX(8vw) translateY(0) rotate(0deg) scaleX(0.8) scaleY(1.12);
+  }
+  16% {
+    opacity: 0.92;
+    filter: blur(0.5px) drop-shadow(0 8px 16px rgba(47, 58, 57, 0.2));
+    transform: translateX(-6vw) translateY(calc(var(--gust-bob) * 0.25)) rotate(calc(var(--gust-rot) * 0.3)) scaleX(1.05)
+      scaleY(0.98);
+  }
+  48% {
+    opacity: 0.95;
+    filter: blur(2px) drop-shadow(0 10px 20px rgba(47, 58, 57, 0.22));
+    transform: translateX(-34vw) translateY(var(--gust-bob)) rotate(var(--gust-rot)) scaleX(var(--gust-stretch))
+      scaleY(calc(2 - var(--gust-stretch)));
+  }
+  78% {
+    opacity: 0.55;
+    filter: blur(0.8px) drop-shadow(0 8px 16px rgba(47, 58, 57, 0.18));
+    transform: translateX(-56vw) translateY(calc(var(--gust-bob) * 0.4)) rotate(calc(var(--gust-rot) * 1.3)) scaleX(1.1)
+      scaleY(0.94);
+  }
+  100% {
+    opacity: 0;
+    filter: blur(0) drop-shadow(0 8px 16px rgba(47, 58, 57, 0.2));
+    transform: translateX(-72vw) translateY(0) rotate(calc(var(--gust-rot) * 1.6)) scaleX(1) scaleY(1);
+  }
+}
+/* 이전 장(오른쪽으로 흘러감) — 위와 같은 리듬을 좌우만 뒤집는다 */
+@keyframes cloudGustPrev {
+  0% {
+    opacity: 0;
+    filter: blur(0) drop-shadow(0 8px 16px rgba(47, 58, 57, 0.2));
+    transform: translateX(-8vw) translateY(0) rotate(0deg) scaleX(0.8) scaleY(1.12);
+  }
+  16% {
+    opacity: 0.92;
+    filter: blur(0.5px) drop-shadow(0 8px 16px rgba(47, 58, 57, 0.2));
+    transform: translateX(6vw) translateY(calc(var(--gust-bob) * 0.25)) rotate(calc(var(--gust-rot) * -0.3)) scaleX(1.05)
+      scaleY(0.98);
+  }
+  48% {
+    opacity: 0.95;
+    filter: blur(2px) drop-shadow(0 10px 20px rgba(47, 58, 57, 0.22));
+    transform: translateX(34vw) translateY(var(--gust-bob)) rotate(calc(var(--gust-rot) * -1)) scaleX(var(--gust-stretch))
+      scaleY(calc(2 - var(--gust-stretch)));
+  }
+  78% {
+    opacity: 0.55;
+    filter: blur(0.8px) drop-shadow(0 8px 16px rgba(47, 58, 57, 0.18));
+    transform: translateX(56vw) translateY(calc(var(--gust-bob) * 0.4)) rotate(calc(var(--gust-rot) * -1.3)) scaleX(1.1)
+      scaleY(0.94);
+  }
+  100% {
+    opacity: 0;
+    filter: blur(0) drop-shadow(0 8px 16px rgba(47, 58, 57, 0.2));
+    transform: translateX(72vw) translateY(0) rotate(calc(var(--gust-rot) * -1.6)) scaleX(1) scaleY(1);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cloud-gust-puff {
+    animation: none;
+    opacity: 0;
+  }
+}
+
+/* ── 좌우 이동 영역 ───────────────────────────────────────────────────────
+   마우스를 올리면 원형 버튼이 뜨고 테두리 링이 1초간 차오른다. 다 차면 자동
+   이동, 그 전에 눌러도 즉시 이동 (DeckEdge.tsx 참고). */
+.cloud-edge {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  z-index: 45;
+  width: clamp(56px, 6vw, 96px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.cloud-edge.left {
+  left: 0;
+}
+.cloud-edge.right {
+  right: 0;
+}
+.cloud-edge:disabled {
+  cursor: default;
+  pointer-events: none;
+}
+.cloud-edge:disabled .cloud-edge-btn {
+  opacity: 0;
+}
+.cloud-edge-btn {
+  position: relative;
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #243130;
+  background: rgba(251, 251, 247, 0.94);
+  border: 1.5px solid rgba(47, 58, 57, 0.28);
+  box-shadow: 0 12px 26px -14px rgba(47, 58, 57, 0.85);
+  opacity: 0;
+  transform: scale(0.82);
+  transition:
+    opacity 220ms ease,
+    transform 220ms ease;
+}
+.cloud-edge:hover .cloud-edge-btn,
+.cloud-edge:focus-visible .cloud-edge-btn,
+.cloud-edge-btn.armed {
+  opacity: 1;
+  transform: scale(1);
+}
+.cloud-edge-arrow {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.cloud-edge-ring {
+  position: absolute;
+  top: -7px;
+  left: -7px;
+  width: calc(100% + 14px);
+  height: calc(100% + 14px);
+  /* 12시 방향에서 시작하도록 돌려 둔다 */
+  transform: rotate(-90deg);
+}
+.cloud-edge-ring-track,
+.cloud-edge-ring-fill {
+  fill: none;
+  stroke-width: 3;
+}
+.cloud-edge-ring-track {
+  stroke: rgba(47, 58, 57, 0.16);
+}
+.cloud-edge-ring-fill {
+  stroke: #c8443c;
+  stroke-linecap: round;
+  /* 2π × r(26) = 163.363 — 링 한 바퀴 길이 */
+  stroke-dasharray: 163.363;
+  stroke-dashoffset: 163.363;
+  animation: cloudEdgeRing 1s linear forwards;
+}
+@keyframes cloudEdgeRing {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+/* 터치 기기에는 hover 가 없다 — 대기 없이 바로 누르는 둥근 버튼으로 바꾼다 */
+@media (pointer: coarse) {
+  .cloud-edge {
+    top: auto;
+    bottom: 20px;
+    width: 74px;
+    height: 74px;
+  }
+  .cloud-edge-btn {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ── 첫 방문 안내 ─────────────────────────────────────────────────────────
+   토스트 + 가상 커서가 오른쪽 끝으로 움직여 이동 방식을 시연한다
+   (DeckOnboarding.tsx 참고). */
+.cloud-guide {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  pointer-events: none;
+}
+.cloud-guide-toast {
+  position: absolute;
+  left: 50%;
+  bottom: 42px;
+  transform: translateX(-50%);
+  margin: 0;
+  max-width: min(520px, calc(100vw - 48px));
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.75;
+  color: #fbfbf7;
+  background: rgba(36, 49, 48, 0.94);
+  backdrop-filter: blur(8px);
+  padding: 14px 24px;
+  border-radius: 14px 16px 13px 15px;
+  box-shadow: 0 18px 40px -18px rgba(47, 58, 57, 0.9);
+  animation: cloudGuideIn 420ms ease-out both;
+}
+.cloud-guide-toast b {
+  color: #a8ddd8;
+}
+.cloud-guide-toast span {
+  display: block;
+  font-size: 13px;
+  opacity: 0.78;
+}
+.cloud-guide-slot {
+  position: absolute;
+  top: 50%;
+  right: clamp(56px, 6vw, 96px);
+  transform: translate(50%, -50%);
+}
+.cloud-guide-ghost {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 26px;
+  height: 26px;
+  fill: #fbfbf7;
+  stroke: #243130;
+  stroke-width: 1.4;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 4px 10px rgba(47, 58, 57, 0.5));
+  transform: translate(0, -8px);
+  transition: transform 1100ms cubic-bezier(0.62, 0, 0.2, 1);
+  animation: cloudGuideIn 320ms ease-out both;
+}
+.cloud-guide-ghost.at-edge {
+  transform: translate(calc(50vw - clamp(78px, 6vw + 22px, 118px)), -8px);
+}
+.cloud-guide-toast.out,
+.cloud-guide-slot.out,
+.cloud-guide-ghost.out {
+  opacity: 0;
+  transition:
+    opacity 480ms ease,
+    transform 1100ms cubic-bezier(0.62, 0, 0.2, 1);
+}
+@keyframes cloudGuideIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 /* 상단 고정 내비게이션 — 화면 중앙에 뜬 알약 모양 */
 .cloud-nav {
   position: fixed;
@@ -135,6 +505,14 @@
   border: 1.5px solid rgba(47, 58, 57, 0.3);
   border-radius: 16px 18px 15px 17px;
   box-shadow: 0 14px 30px -20px rgba(47, 58, 57, 0.7);
+}
+/* 덱으로 바뀌면서 앵커가 아니라 버튼이 됐다 — 기본 버튼 모양만 지운다 */
+.cloud-nav-brand,
+.cloud-nav-link {
+  font-family: inherit;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
 }
 .cloud-nav-brand {
   font-weight: 900;
@@ -163,6 +541,9 @@
   color: #243130;
 }
 .cloud-nav-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   font-weight: 700;
   font-size: 13px;
   color: #fbfbf7;
@@ -170,6 +551,11 @@
   padding: 8px 14px;
   border-radius: 11px 12px 10px 12px;
   margin-left: 4px;
+}
+.cloud-nav-cta-icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
 }
 
 /* 이메일 복사 토스트 — CopyEmailButton.tsx */
@@ -239,37 +625,47 @@
   margin-bottom: 26px;
 }
 .cloud-sechead h2 {
+  font-family: var(--font-hand), var(--font-sans);
   margin: 0;
   font-size: 32px;
   letter-spacing: -0.8px;
   color: #243130;
 }
 .cloud-sectag {
-  font-size: 11px;
-  letter-spacing: 1.8px;
+  font-family: var(--font-hand), var(--font-sans);
+  font-size: 15px;
+  letter-spacing: 0.5px;
   color: #fbfbf7;
 }
 
-/* 구름 베일 — 좌우에서 갈라지며 콘텐츠를 드러낸다. 뼈대(둥근 사각형 + 3개
-   원)는 모든 섹션이 같고, 원의 위치·크기만 섹션마다 달라 인라인 스타일로 받는다
-   (CloudVeils.tsx 참고). */
+/* 구름 베일이 섹션 전체가 아니라 실제 글이 놓인 콘텐츠 박스만 감싸도록,
+   .cloud-content(또는 .cloud-hero-content)와 같은 크기를 갖는 래퍼를 하나 더
+   둔다 — 래퍼 안에 콘텐츠만 정상 흐름으로 넣으면 래퍼 높이가 콘텐츠 높이와
+   똑같아지고, 베일은 그 래퍼 기준으로 살짝만 여유를 두고 덮는다. */
+.cloud-veilwrap {
+  position: relative;
+}
+/* 구름 베일 — 좌우에서 갈라지며 콘텐츠를 드러낸다. 뼈대(둥근 사각형 + 뭉게구름
+   여러 덩이)는 모든 섹션이 같고, 구름의 위치·크기만 섹션마다 달라 인라인
+   스타일로 받는다 (CloudVeils.tsx · CloudPuff.tsx 참고). 참고 이미지처럼 크게
+   뭉친 원 실루엣 + 크림/세이지 두 톤이라 흐릿하게 블러 처리할 필요가 없다. */
 .cloud-veil {
   position: absolute;
   z-index: 3;
-  top: 24px;
-  bottom: 24px;
+  top: -22px;
+  bottom: -22px;
   pointer-events: none;
-  filter: blur(6px);
   will-change: transform;
-  border-radius: 70px;
+  border-radius: 46px;
+  filter: drop-shadow(0 10px 18px rgba(47, 58, 57, 0.16));
 }
 .cloud-veil.l {
-  left: max(12px, calc(50% - 545px));
-  right: calc(50% - 40px);
+  left: -22px;
+  right: calc(50% - 6px);
 }
 .cloud-veil.r {
-  right: max(12px, calc(50% - 545px));
-  left: calc(50% - 40px);
+  right: -22px;
+  left: calc(50% - 6px);
 }
 .cloud-veil-base {
   position: absolute;
@@ -277,24 +673,31 @@
 }
 .cloud-veil.l .cloud-veil-base {
   inset: 0 22% 0 0;
-  border-radius: 70px 0 0 70px;
+  border-radius: 46px 0 0 46px;
 }
 .cloud-veil.r .cloud-veil-base {
   inset: 0 0 0 22%;
-  border-radius: 0 70px 70px 0;
+  border-radius: 0 46px 46px 0;
 }
 .cloud-veil-blob {
   position: absolute;
-  background: #fbfbf7;
-  border-radius: 50%;
+}
+.cloud-veil-blob svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
 }
 
 /* 히어로 */
 .cloud-eyebrow {
   display: inline-block;
   margin: 0 0 18px;
-  font-size: 12px;
-  letter-spacing: 2.5px;
+  font-family: var(--font-hand), var(--font-sans);
+  font-size: 15px;
+  letter-spacing: 1px;
   color: #c8443c;
   background: #fbfbf7;
   padding: 7px 14px;
@@ -303,9 +706,11 @@
 }
 .cloud-name {
   margin: 0 0 14px;
-  font-size: clamp(52px, 9vw, 104px);
-  line-height: 1.05;
-  letter-spacing: -3px;
+  font-family: var(--font-hand), var(--font-sans);
+  font-weight: 400;
+  font-size: clamp(58px, 10vw, 116px);
+  line-height: 1.15;
+  letter-spacing: 0;
   color: #fbfbf7;
   text-shadow: 0 10px 30px rgba(47, 58, 57, 0.35);
   text-wrap: balance;
@@ -332,11 +737,19 @@
   flex-wrap: wrap;
 }
 .cloud-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   font-weight: 700;
   font-size: 15px;
   padding: 12px 22px;
   border-radius: 12px 13px 11px 13px;
   border: 1.5px solid transparent;
+}
+.cloud-btn-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
 }
 .cloud-btn.dark {
   color: #fbfbf7;
@@ -367,9 +780,38 @@
   align-items: center;
   background: linear-gradient(135deg, #fbfbf7 0%, #eaf6f3 100%);
   border: 1.5px solid rgba(47, 58, 57, 0.3);
-  border-radius: 22px 24px 20px 23px;
-  padding: 34px 36px;
+  /* 아래는 평평, 위쪽만 둥근 봉우리 여러 개가 겹쳐 이어진 뭉게구름 윤곽 —
+     .cloud-cloudtop 참고. */
+  border-radius: 0 0 26px 26px;
+  --bump: 30px;
+  --bump-tile: 44px;
+  padding: 64px 40px 34px;
   box-shadow: 0 18px 44px -24px rgba(47, 58, 57, 0.6);
+}
+
+/* 카드를 뭉게구름 윤곽으로 깎아내는 마스크 — 아래는 원래 사각형(테두리·배경)
+   그대로 두고, 위쪽 가장자리만 반원 봉우리를 --bump-tile 간격으로 반복 타일링해
+   서로 겹치게 만든다(지름 2×--bump 보다 타일 폭이 좁아야 겹친다). border도
+   mask에 같이 걸려서 봉우리 윤곽을 따라 테두리가 그려진다. 각 카드는 자기
+   블록에서 --bump/--bump-tile 값만 다르게 정의한다. 위쪽 여백(padding-top)을
+   --bump만큼 넉넉히 늘려 둬야 봉우리가 잘리지 않는다. */
+.cloud-about-card,
+.cloud-tl-inner,
+.cloud-proj-card {
+  mask-image:
+    linear-gradient(#000 0 0),
+    radial-gradient(circle at var(--bump) var(--bump), #000 var(--bump), transparent calc(var(--bump) + 0.5px));
+  mask-repeat: no-repeat, repeat-x;
+  mask-position: top left, top left;
+  mask-size: 100% 100%, var(--bump-tile) calc(var(--bump) * 2);
+  mask-composite: add;
+  -webkit-mask-image:
+    linear-gradient(#000 0 0),
+    radial-gradient(circle at var(--bump) var(--bump), #000 var(--bump), transparent calc(var(--bump) + 0.5px));
+  -webkit-mask-repeat: no-repeat, repeat-x;
+  -webkit-mask-position: top left, top left;
+  -webkit-mask-size: 100% 100%, var(--bump-tile) calc(var(--bump) * 2);
+  -webkit-mask-composite: source-over;
 }
 .cloud-about-photo {
   width: 100%;
@@ -458,8 +900,11 @@
   max-width: 420px;
   background: #fbfbf7;
   border: 1.5px solid rgba(47, 58, 57, 0.3);
-  border-radius: 16px 18px 15px 17px;
-  padding: 20px 22px;
+  /* 아래는 평평, 위쪽만 봉우리 — .cloud-about-card 바로 아래의 공용 mask 규칙 참고 */
+  border-radius: 0 0 18px 18px;
+  --bump: 20px;
+  --bump-tile: 30px;
+  padding: 46px 22px 20px;
   box-shadow: 0 14px 30px -20px rgba(47, 58, 57, 0.6);
   text-align: left;
 }
@@ -590,10 +1035,41 @@
   gap: 10px;
 }
 .cloud-skillitem {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
   background: #fbfbf7;
   border: 1.3px solid rgba(47, 58, 57, 0.18);
   border-radius: 11px 12px 10px 12px;
   padding: 14px 16px;
+}
+.cloud-skillitem-body {
+  min-width: 0;
+  flex: 1;
+}
+/* 스킬 아이콘 — 이중 원 뱃지. 링 색은 브랜드 컬러를 옅게 탄 값을 인라인으로 받는다
+   (SkillIconBadge.tsx). */
+.cloud-skillicon-ring {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1.5px solid;
+  display: grid;
+  place-items: center;
+  padding: 3px;
+}
+.cloud-skillicon-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 1.5px solid;
+  display: grid;
+  place-items: center;
+}
+.cloud-skillicon-inner svg {
+  width: 22px;
+  height: 22px;
 }
 .cloud-skillitem-name {
   margin: 0 0 5px;
@@ -675,16 +1151,100 @@
   position: relative;
   background: #fff;
   border: 1.5px solid rgba(47, 58, 57, 0.3);
-  border-radius: 18px 20px 16px 19px;
-  padding: 28px 30px;
+  /* 아래는 평평, 위쪽만 봉우리 — .cloud-about-card 위의 공용 mask 규칙 참고 */
+  border-radius: 0 0 22px 22px;
+  --bump: 32px;
+  --bump-tile: 46px;
+  padding: 74px 38px 34px;
   box-shadow: 0 16px 38px -22px rgba(47, 58, 57, 0.6);
 }
 .cloud-proj-card.minor {
   background: rgba(251, 251, 247, 0.7);
   border: 1.3px dashed rgba(47, 58, 57, 0.35);
-  border-radius: 16px 18px 15px 17px;
-  padding: 20px 24px;
+  border-radius: 0 0 16px 16px;
+  --bump: 22px;
+  --bump-tile: 32px;
+  padding: 54px 28px 24px;
   box-shadow: none;
+}
+.cloud-proj-inner {
+  display: flex;
+  align-items: flex-start;
+  gap: 26px;
+}
+.cloud-proj-body {
+  flex: 1;
+  min-width: 0;
+}
+.cloud-proj-shot {
+  flex-shrink: 0;
+  width: 172px;
+}
+/* 실제 폰처럼 보이도록 감싸는 다크 베젤 프레임 */
+.cloud-proj-phone {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 9 / 18.6;
+  background: linear-gradient(160deg, #35393a 0%, #131515 62%, #050606 100%);
+  border-radius: 32px;
+  padding: 9px 7px;
+  box-shadow:
+    0 18px 34px -16px rgba(47, 58, 57, 0.7),
+    inset 0 0 0 1.5px rgba(255, 255, 255, 0.1),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.6);
+}
+.cloud-proj-phone-notch {
+  position: absolute;
+  z-index: 2;
+  top: 13px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 42px;
+  height: 6px;
+  border-radius: 4px;
+  background: #050606;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+.cloud-proj-phone-btn {
+  position: absolute;
+  background: #232626;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+.cloud-proj-phone-btn.power {
+  right: -2.5px;
+  top: 26%;
+  width: 3px;
+  height: 15%;
+  border-radius: 0 3px 3px 0;
+}
+.cloud-proj-phone-btn.vol-up {
+  left: -2.5px;
+  top: 20%;
+  width: 3px;
+  height: 9%;
+  border-radius: 3px 0 0 3px;
+}
+.cloud-proj-phone-btn.vol-down {
+  left: -2.5px;
+  top: 31%;
+  width: 3px;
+  height: 9%;
+  border-radius: 3px 0 0 3px;
+}
+.cloud-proj-screen {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 24px;
+  background: #000;
+}
+.cloud-proj-screen img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  /* 상태바 · 주소창(상단 크롬)을 잘라내고 실제 화면만 보이게 아래쪽 기준으로 자른다 */
+  object-position: center bottom;
 }
 .cloud-proj-top {
   display: flex;
@@ -717,6 +1277,9 @@
   margin-left: auto;
 }
 .cloud-proj-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
   font-size: 12.5px;
   font-weight: 700;
   border-radius: 14px;
@@ -731,6 +1294,11 @@
   color: #fbfbf7;
   background: #24292f;
   border: 1.3px solid #24292f;
+}
+.cloud-proj-link-icon {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
 }
 .cloud-ptag-row {
   display: flex;
@@ -897,9 +1465,19 @@
   .cloud-proj-links {
     margin-left: 0;
   }
+  .cloud-proj-shot {
+    width: 136px;
+  }
 }
 @media (max-width: 640px) {
   .cloud-nav {
     top: 10px;
+  }
+  .cloud-proj-inner {
+    flex-direction: column;
+  }
+  .cloud-proj-shot {
+    width: 148px;
+    margin: 0 auto;
   }
 }

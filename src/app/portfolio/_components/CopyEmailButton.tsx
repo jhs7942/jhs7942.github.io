@@ -89,7 +89,7 @@ export function CopyEmailButton({ email, className }: { email: string; className
       >
         <span ref={labelRef}>{email}</span>
       </a>
-      <div className={`cloud-toast${toast ? " show" : ""}${toast?.warn ? " warn" : ""}`} role="status" aria-live="polite">
+      <div className={`cloud-toast${toast ? " show" : ""}${toast?.warn ? " warn" : ""} top-50`} role="status" aria-live="polite">
         {toast?.message}
       </div>
     </>
