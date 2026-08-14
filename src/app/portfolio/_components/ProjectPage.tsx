@@ -1,6 +1,20 @@
+"use client";
+
 import type { Project } from "../_data/projects";
-import { CloudCharacterDecor } from "./CloudCharacterDecor";
 import { GitHubIcon } from "./GitHubIcon";
+
+const skillGroupRules = [
+  { label: "프론트엔드", test: /React|TypeScript|Zustand|Tailwind|Vite|TanStack/i },
+  { label: "백엔드", test: /Express|Socket|Zod/i },
+  { label: "데이터베이스", test: /Supabase|PostgreSQL/i },
+  { label: "인프라", test: /Vercel|Render/i },
+] as const;
+
+function groupProjectSkills(tags: string[]) {
+  return skillGroupRules
+    .map((group) => ({ ...group, tags: tags.filter((tag) => group.test.test(tag)) }))
+    .filter((group) => group.tags.length > 0);
+}
 
 /**
  * 프로젝트 하나가 페이지(장) 하나를 통째로 차지한다 — 예전엔 ProjectsSection
@@ -10,6 +24,15 @@ import { GitHubIcon } from "./GitHubIcon";
  * 맞춰 이 컴포넌트를 하나씩 렌더링한다).
  */
 export function ProjectPage({ project, index, total }: { project: Project; index: number; total: number }) {
+  const skillGroups = groupProjectSkills(project.tags);
+  const hasVisitUrl = Boolean(project.visitUrl);
+
+  const openVisitSite = () => {
+    if (project.visitUrl) {
+      window.open(project.visitUrl, "_blank", "noopener,noreferrer");
+    }
+  };
+
   return (
     <section id={`project-${project.slug}`} data-cloud-section className="cloud-section">
       <div className="cloud-content">
@@ -20,25 +43,40 @@ export function ProjectPage({ project, index, total }: { project: Project; index
           </span>
         </div>
 
-        <div className="cloud-proj-list">
-          <article className={`cloud-proj-card${project.minor ? " minor" : ""}`}>
-            <CloudCharacterDecor characters={project.characters} />
-
-            <div className="cloud-proj-inner">
-              {project.mobileShot && (
-                <div className="cloud-proj-shot">
-                  <div className="cloud-proj-phone">
-                    <span className="cloud-proj-phone-notch" aria-hidden />
-                    <span className="cloud-proj-phone-btn power" aria-hidden />
-                    <span className="cloud-proj-phone-btn vol-up" aria-hidden />
-                    <span className="cloud-proj-phone-btn vol-down" aria-hidden />
-                    <div className="cloud-proj-screen">
-                      {/* eslint-disable-next-line @next/next/no-img-element -- 고정 표시폭이라 next/image 최적화 이득이 없다 */}
-                      <img src={project.mobileShot.src} alt={project.mobileShot.alt} width={220} height={476} />
-                    </div>
-                  </div>
+        <div className="cloud-proj-layout">
+          {project.mobileShot && (
+            <div className="cloud-proj-shot">
+              <div className="cloud-proj-phone">
+                <span className="cloud-proj-phone-notch" aria-hidden />
+                <span className="cloud-proj-phone-btn power" aria-hidden />
+                <span className="cloud-proj-phone-btn vol-up" aria-hidden />
+                <span className="cloud-proj-phone-btn vol-down" aria-hidden />
+                <div className="cloud-proj-screen">
+                  {/* eslint-disable-next-line @next/next/no-img-element -- 고정 표시폭이라 next/image 최적화 이득이 없다 */}
+                  <img src={project.mobileShot.src} alt={project.mobileShot.alt} width={220} height={476} />
                 </div>
-              )}
+              </div>
+            </div>
+          )}
+          <div className="cloud-proj-list">
+            <article
+              className={`cloud-skillpanel cloud-proj-card${project.minor ? " minor" : ""}${hasVisitUrl ? " is-clickable" : ""}`}
+              role={hasVisitUrl ? "link" : undefined}
+              tabIndex={hasVisitUrl ? 0 : undefined}
+              aria-label={hasVisitUrl ? `${project.title} 배포 사이트 열기` : undefined}
+              onClick={hasVisitUrl ? openVisitSite : undefined}
+              onKeyDown={
+                hasVisitUrl
+                  ? (event) => {
+                      if (event.key === "Enter" || event.key === " ") {
+                        event.preventDefault();
+                        openVisitSite();
+                      }
+                    }
+                  : undefined
+              }
+            >
+              <div className="cloud-proj-inner">
               <div className="cloud-proj-body">
                 <div className="cloud-proj-top">
                   <h3 className="cloud-proj-title">{project.title}</h3>
@@ -54,26 +92,34 @@ export function ProjectPage({ project, index, total }: { project: Project; index
                         </span>
                       )}
                   <div className="cloud-proj-links">
-                    {project.visitUrl && (
-                      <a className="cloud-proj-link visit" href={project.visitUrl} target="_blank" rel="noopener">
-                        배포 사이트 ↗
-                      </a>
-                    )}
                     {project.githubUrl && (
-                      <a className="cloud-proj-link gh" href={project.githubUrl} target="_blank" rel="noopener">
+                      <a
+                        className="cloud-proj-link gh"
+                        href={project.githubUrl}
+                        target="_blank"
+                        rel="noopener"
+                        onClick={(event) => event.stopPropagation()}
+                      >
                         <GitHubIcon className="cloud-proj-link-icon" />
-                        GitHub
+                        상세보기
                       </a>
                     )}
                   </div>
                 </div>
 
-                {!project.minor && project.tags.length > 0 && (
-                  <div className="cloud-ptag-row">
-                    {project.tags.map((tag) => (
-                      <span key={tag} className="cloud-ptag">
-                        {tag}
-                      </span>
+                {!project.minor && skillGroups.length > 0 && (
+                  <div className="cloud-proj-skillgroups">
+                    {skillGroups.map((group) => (
+                      <div key={group.label} className="cloud-proj-skillgroup">
+                        <span className="cloud-proj-skillgroup-label">{group.label}</span>
+                        <div className="cloud-ptag-row">
+                          {group.tags.map((tag) => (
+                            <span key={tag} className="cloud-ptag">
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
                     ))}
                   </div>
                 )}
@@ -94,13 +140,20 @@ export function ProjectPage({ project, index, total }: { project: Project; index
                 )}
 
                 {project.newsUrl && (
-                  <a className="cloud-proj-newslink" href={project.newsUrl} target="_blank" rel="noopener">
+                  <a
+                    className="cloud-proj-newslink"
+                    href={project.newsUrl}
+                    target="_blank"
+                    rel="noopener"
+                    onClick={(event) => event.stopPropagation()}
+                  >
                     관련 뉴스 ↗
                   </a>
                 )}
               </div>
-            </div>
-          </article>
+              </div>
+            </article>
+          </div>
         </div>
       </div>
     </section>

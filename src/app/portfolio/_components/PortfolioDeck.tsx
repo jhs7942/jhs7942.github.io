@@ -18,7 +18,7 @@ import { Nav } from "./Nav";
  * id · 라벨을 붙인다(page.tsx 참고). 한 장에 다 안 들어가는 긴 섹션은 그 장
  * 안에서만 세로로 스크롤된다.
  */
-export function PortfolioDeck({ githubUrl, children }: { githubUrl: string; children: ReactNode }) {
+export function PortfolioDeck({ children }: { children: ReactNode }) {
   const nodes = Children.toArray(children);
   const count = nodes.length;
   const [index, setIndex] = useState(0);
@@ -84,7 +84,7 @@ export function PortfolioDeck({ githubUrl, children }: { githubUrl: string; chil
 
   return (
     <>
-      <Nav pages={portfolioPages} activeIndex={index} onSelect={goTo} githubUrl={githubUrl} />
+      <Nav pages={portfolioPages} activeIndex={index} onSelect={goTo} />
 
       <div className="cloud-deck">
         <div className="cloud-deck-track" style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}>

@@ -4,7 +4,7 @@ import type { PortfolioPageMeta } from "../_data/pages";
 import { GitHubIcon } from "./GitHubIcon";
 
 /**
- * 화면 중앙 상단에 뜬 알약 모양 내비게이션.
+ * 포트폴리오 왼쪽에 고정되는 사이드 내비게이션.
  *
  * 이 페이지는 사이트 공용 헤더(SiteHeader)를 쓰지 않는다 — 전면 그라디언트
  * 히어로 위에 얹히는 이 nav 자체가 /portfolio 전용 헤더 역할을 한다
@@ -18,40 +18,59 @@ export function Nav({
   pages,
   activeIndex,
   onSelect,
-  githubUrl,
 }: {
   pages: PortfolioPageMeta[];
   activeIndex: number;
   onSelect: (index: number) => void;
-  githubUrl: string;
 }) {
+  const sectionPages = pages.slice(1).filter((page) => !page.id.startsWith("project-"));
+  const projectPages = pages.slice(1).filter((page) => page.id.startsWith("project-"));
+
   return (
     <nav className="cloud-nav">
       <button type="button" className="cloud-nav-brand" onClick={() => onSelect(0)}>
-        jhs7942
+        히어로
       </button>
       <span className="cloud-nav-divider" />
-      {/* 0번(홈)은 위 브랜드 버튼이 대신하므로 목록에서는 뺀다 */}
-      {pages.slice(1).map((page, i) => {
-        const pageIndex = i + 1;
-        const active = pageIndex === activeIndex;
-        return (
-          <button
-            key={page.id}
-            type="button"
-            onClick={() => onSelect(pageIndex)}
-            data-active={active}
-            aria-current={active ? "page" : undefined}
-            className="cloud-nav-link"
-          >
-            {page.label}
-          </button>
-        );
-      })}
-      <a href={githubUrl} target="_blank" rel="noopener" className="cloud-nav-cta">
-        <GitHubIcon className="cloud-nav-cta-icon" />
-        GitHub
-      </a>
+      <div className="cloud-nav-links">
+        {sectionPages.map((page) => {
+          const pageIndex = pages.findIndex((item) => item.id === page.id);
+          const active = pageIndex === activeIndex;
+          return (
+            <button
+              key={page.id}
+              type="button"
+              onClick={() => onSelect(pageIndex)}
+              data-active={active}
+              aria-current={active ? "page" : undefined}
+              className="cloud-nav-link"
+            >
+              {page.label}
+            </button>
+          );
+        })}
+        {projectPages.length > 0 && (
+          <div className="cloud-nav-projects">
+            <span className="cloud-nav-group-label">프로젝트</span>
+            {projectPages.map((page) => {
+              const pageIndex = pages.findIndex((item) => item.id === page.id);
+              const active = pageIndex === activeIndex;
+              return (
+                <button
+                  key={page.id}
+                  type="button"
+                  onClick={() => onSelect(pageIndex)}
+                  data-active={active}
+                  aria-current={active ? "page" : undefined}
+                  className="cloud-nav-link cloud-nav-project-link"
+                >
+                  {page.label}
+                </button>
+              );
+            })}
+          </div>
+        )}
+      </div>
     </nav>
   );
 }

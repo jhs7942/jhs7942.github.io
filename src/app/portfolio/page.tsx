@@ -39,7 +39,7 @@ export default function PortfolioPage() {
     <div className={`cloud ${handFont.variable}`}>
       <CloudDriftLayer />
       {/* 아래 섹션 순서는 _data/pages.ts 의 portfolioPages 와 반드시 같아야 한다 */}
-      <PortfolioDeck githubUrl={profile.githubUrl}>
+      <PortfolioDeck>
         <Hero />
         <AboutSection />
         <CareerSection />

@@ -39,7 +39,7 @@ export const careerTimeline: CareerEntry[] = [
     title: "삼성 청년 SW 아카데미 15기",
     sub: "마이스터고 트랙 · 서울 캠퍼스",
     subColor: "#5E7449",
-    desc: "Python · 알고리즘 · 웹 · AI/데이터 분석 · DB 설계 과정 이수.",
+    desc: "Python · 알고리즘 · 웹 · AI/데이터 분석 · DB 설계 과정을 이수했습니다.",
     tint: true,
   },
   {
@@ -47,7 +47,7 @@ export const careerTimeline: CareerEntry[] = [
     kindColor: "#243130",
     when: "2022.03 – 2024.03",
     title: "제타럭스시스템",
-    desc: "지자체 SI 프로젝트 3건에 참여해 지도 · 관제 · 배포를 두루 경험했습니다.",
+    desc: "지자체 SI 프로젝트 3건에 참여해 웹개발의 전반을 두루 경험했습니다.",
     subProjects: [
       {
         when: "2022.12 – 2023.08 · 8인",
@@ -86,7 +86,7 @@ export const careerTimeline: CareerEntry[] = [
     when: "2021",
     title: "정보처리 산업기사 과정",
     subColor: "#5E7449",
-    desc: "HTML/CSS/JavaScript, Java, JSP,  CS 기초를 이수.",
+    desc: "HTML/CSS/JavaScript, Java, JSP,  CS 기초를 이수했습니다.",
     tint: true,
   },
 ];
