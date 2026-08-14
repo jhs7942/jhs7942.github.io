@@ -104,6 +104,17 @@ export function ProjectPage({ project, index, total }: { project: Project; index
                         상세보기
                       </a>
                     )}
+                    {project.newsUrl && (
+                      <a
+                        className="cloud-proj-link news"
+                        href={project.newsUrl}
+                        target="_blank"
+                        rel="noopener"
+                        onClick={(event) => event.stopPropagation()}
+                      >
+                        관련 뉴스
+                      </a>
+                    )}
                   </div>
                 </div>
 
@@ -139,17 +150,6 @@ export function ProjectPage({ project, index, total }: { project: Project; index
                   </div>
                 )}
 
-                {project.newsUrl && (
-                  <a
-                    className="cloud-proj-newslink"
-                    href={project.newsUrl}
-                    target="_blank"
-                    rel="noopener"
-                    onClick={(event) => event.stopPropagation()}
-                  >
-                    관련 뉴스 ↗
-                  </a>
-                )}
               </div>
               </div>
             </article>

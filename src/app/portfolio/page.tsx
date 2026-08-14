@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { absoluteUrl } from "@/lib/site";
+import { absoluteUrl, SITE } from "@/lib/site";
 import "./portfolio.css";
 import { profile } from "./_data/profile";
 import { projects } from "./_data/projects";
@@ -29,9 +29,35 @@ import { handFont } from "./_lib/fonts";
  * content/pages/portfolio/*.html 조각으로 남겨 뒀다(_lib/loadFragment.ts 참고).
  */
 export const metadata: Metadata = {
-  title: "포트폴리오",
-  description: "요구사항 협의부터 개발·납품·운영까지 담당해온 경력 2년 개발자입니다.",
+  title: { absolute: "정현승 | 웹 개발자 포트폴리오" },
+  description:
+    "공공·지자체 SI 프로젝트부터 개인 서비스까지, React·TypeScript를 중심으로 프론트엔드·백엔드·인프라를 경험한 웹 개발자 정현승의 포트폴리오입니다.",
+  keywords: ["정현승", "웹 개발자", "프론트엔드 개발자", "React", "TypeScript", "SI", "포트폴리오"],
   alternates: { canonical: absoluteUrl("/portfolio/") },
+  openGraph: {
+    type: "website",
+    locale: SITE.locale,
+    url: absoluteUrl("/portfolio/"),
+    siteName: SITE.title,
+    title: "정현승 | 웹 개발자 포트폴리오",
+    description:
+      "공공·지자체 SI 프로젝트부터 개인 서비스까지, React·TypeScript를 중심으로 프론트엔드·백엔드·인프라를 경험한 웹 개발자 정현승의 포트폴리오입니다.",
+    images: [
+      {
+        url: absoluteUrl("/portfolio/og-portfolio.png"),
+        width: 1200,
+        height: 630,
+        alt: "정현승 웹 개발자 포트폴리오 히어로 화면",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "정현승 | 웹 개발자 포트폴리오",
+    description:
+      "공공·지자체 SI 프로젝트부터 개인 서비스까지, React·TypeScript를 중심으로 프론트엔드·백엔드·인프라를 경험한 웹 개발자 정현승의 포트폴리오입니다.",
+    images: [absoluteUrl("/portfolio/og-portfolio.png")],
+  },
 };
 
 export default function PortfolioPage() {

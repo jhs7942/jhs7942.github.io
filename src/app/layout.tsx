@@ -12,6 +12,45 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: { default: SITE.title, template: `%s | ${SITE.title}` },
   description: SITE.description,
+  applicationName: "정현승 포트폴리오",
+  keywords: ["정현승", "웹 개발자", "프론트엔드", "React", "TypeScript", "포트폴리오", "기술 블로그"],
+  authors: [{ name: SITE.author, url: SITE.url }],
+  creator: SITE.author,
+  publisher: SITE.author,
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    locale: SITE.locale,
+    url: "/",
+    siteName: SITE.title,
+    title: SITE.title,
+    description: SITE.description,
+    images: [
+      {
+        url: "/portfolio/og-portfolio.png",
+        width: 1200,
+        height: 630,
+        alt: "정현승 웹 개발자 포트폴리오 히어로 화면",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE.title,
+    description: SITE.description,
+    images: ["/portfolio/og-portfolio.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

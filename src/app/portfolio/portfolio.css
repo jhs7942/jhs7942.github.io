@@ -1317,6 +1317,30 @@ body.cloud-deck-lock {
   letter-spacing: -0.1px;
   color: #243130;
 }
+/* AI 기록의 설명은 경험 타임라인과 같은 구름 윤곽 안에 둔다. 산출물 SVG는
+   별도 카드에 남겨 가로 스크롤과 설명 영역이 서로 영향을 주지 않게 했다. */
+.cloud-ai-record-intro {
+  position: relative;
+  width: min(100%, 630px);
+  margin: 0 auto;
+  padding: 96px 74px 82px 106px;
+}
+.cloud-ai-record-shape {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  filter: drop-shadow(0 12px 18px rgba(47, 58, 57, 0.22));
+}
+.cloud-ai-record-body {
+  position: relative;
+  z-index: 1;
+}
+.cloud-ai-record-body .cloud-proj-subhead {
+  margin-bottom: 10px;
+}
 
 /* 프로젝트 */
 .cloud-proj-layout {
@@ -1527,6 +1551,11 @@ body.cloud-deck-lock {
   background: #24292f;
   border: 1.3px solid #24292f;
 }
+.cloud-proj-link.news {
+  color: #43573a;
+  background: #eaf6f3;
+  border: 1.3px solid rgba(94, 116, 73, 0.38);
+}
 .cloud-proj-link-icon {
   width: 13px;
   height: 13px;
@@ -1629,11 +1658,6 @@ body.cloud-deck-lock {
 .cloud-stat b {
   color: #c8443c;
 }
-.cloud-proj-newslink {
-  font-size: 12.5px;
-  font-weight: 700;
-}
-
 /* 푸터 */
 .cloud-footer {
   margin-top: 70px;
@@ -1855,5 +1879,8 @@ body.cloud-deck-lock {
   .cloud-tl-desc {
     font-size: 13px;
     line-height: 1.75;
+  }
+  .cloud-ai-record-intro {
+    padding: 58px 30px 50px 46px;
   }
 }

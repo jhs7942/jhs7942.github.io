@@ -8,9 +8,10 @@
  */
 export const SITE = {
   url: "https://jhs7942.github.io",
-  title: "jhs7942",
-  description: "제약을 좁혀 도달을 만드는 프론트엔드 개발자의 기술 블로그",
-  author: "jhs7942",
+  title: "정현승 | 웹 개발자 포트폴리오",
+  description:
+    "React·TypeScript를 중심으로 프론트엔드부터 백엔드·인프라까지 경험한 웹 개발자 정현승의 포트폴리오와 기술 기록입니다.",
+  author: "정현승",
   locale: "ko_KR",
 } as const;
 
