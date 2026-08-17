@@ -1,41 +1,46 @@
-import { profile } from "../_data/profile";
-import { CloudVeils } from "./CloudVeils";
-import { CopyEmailButton } from "./CopyEmailButton";
-import { GitHubIcon } from "./GitHubIcon";
+import { CloudShape } from "./CloudShape";
 
 export function Hero() {
   return (
     <header id="top" data-cloud-section className="cloud-section hero">
       <div className="cloud-veilwrap">
-        <div data-content className="cloud-hero-content">
-          <p className="cloud-role">{profile.job}</p>
-          <h1 className="cloud-name">{profile.name}</h1>
-          <p className="cloud-role">{profile.role}</p>
-          <p className="cloud-rolesub">{profile.heroTagline}</p>
-          <div className="cloud-cta-row">
-            <a className="cloud-btn dark" href={profile.githubUrl} target="_blank" rel="noopener">
-              <GitHubIcon className="cloud-btn-icon" />
-              GitHub
-            </a>
-            <CopyEmailButton email={profile.email} className="cloud-btn ghost" />
-            {/* <a className="cloud-btn ghost" href={profile.blogUrl} target="_blank" rel="noopener">
-              BLOG
-            </a> */}
+        <div data-content className="cloud-hero-content" aria-live="polite">
+          <div className="cloud-greeting-panel cloud-greeting-panel--morning">
+            <div className="cloud-greeting-cloud">
+              <CloudShape fillId="heroGreetingCloudMorning" />
+              <div className="cloud-greeting-body">
+                <h1 className="cloud-greeting-title">좋은 아침이에요.</h1>
+                <p className="cloud-greeting-message">
+                  오늘도 더 나은 경험을 하나씩 만들어가고 있습니다.
+                </p>
+              </div>
+            </div>
           </div>
-          {/* <p className="cloud-scroll-hint">SCROLL ↓</p> */}
+          <div className="cloud-greeting-panel cloud-greeting-panel--day">
+            <div className="cloud-greeting-cloud">
+              <CloudShape fillId="heroGreetingCloudDay" />
+              <div className="cloud-greeting-body">
+                <h1 className="cloud-greeting-title cloud-greeting-title--day">
+                  좋은 하루 보내고 계신가요?
+                </h1>
+                <p className="cloud-greeting-message">
+                  제가 만든 작업들을 천천히 둘러보세요.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="cloud-greeting-panel cloud-greeting-panel--evening">
+            <div className="cloud-greeting-cloud">
+              <CloudShape fillId="heroGreetingCloudEvening" />
+              <div className="cloud-greeting-body">
+                <h1 className="cloud-greeting-title">오늘도 수고하셨습니다.</h1>
+                <p className="cloud-greeting-message">
+                  피곤한 와중에도 제 작업을 확인해 주셔서 감사합니다.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
-        {/* <CloudVeils
-          left={[
-            { right: 6, top: 6, width: 44 },
-            { right: 14, top: 38, width: 52 },
-            { right: 2, bottom: 4, width: 38 },
-          ]}
-          right={[
-            { left: 6, top: 14, width: 46 },
-            { left: 16, top: 46, width: 50 },
-            { left: 3, bottom: 2, width: 36 },
-          ]}
-        /> */}
       </div>
     </header>
   );

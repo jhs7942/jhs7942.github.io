@@ -1,5 +1,7 @@
 import { about, profile } from "../_data/profile";
 import { CloudVeils } from "./CloudVeils";
+import { CopyEmailButton } from "./CopyEmailButton";
+import { GitHubIcon } from "./GitHubIcon";
 
 export function AboutSection() {
   return (
@@ -23,21 +25,35 @@ export function AboutSection() {
             </div>
             <div className="cloud-about-card">
               <span className="cloud-about-cloud" aria-hidden="true" />
-              <span className="cloud-about-cloud cloud-about-cloud--top" aria-hidden="true" />
-              <span className="cloud-about-cloud cloud-about-cloud--left" aria-hidden="true" />
+              <span
+                className="cloud-about-cloud cloud-about-cloud--top"
+                aria-hidden="true"
+              />
+              <span
+                className="cloud-about-cloud cloud-about-cloud--left"
+                aria-hidden="true"
+              />
               <div className="cloud-about-text">
-                {/* <p className="cloud-about-lead">{about.lead}</p> */}
+                <p className="cloud-about-lead">{profile.role}</p>
                 {about.paragraphs.map((p, i) => (
                   <p key={i} className="cloud-about-p">
                     {p}
                   </p>
                 ))}
-                <div className="cloud-tag-row">
-                  {about.tags.map((tag) => (
-                    <span key={tag} className="cloud-tag">
-                      {tag}
-                    </span>
-                  ))}
+                <div className="cloud-about-actions">
+                  <a
+                    className="cloud-btn dark"
+                    href={profile.githubUrl}
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    <GitHubIcon className="cloud-btn-icon" />
+                    GitHub
+                  </a>
+                  <CopyEmailButton
+                    email={profile.email}
+                    className="cloud-btn ghost"
+                  />
                 </div>
               </div>
             </div>

@@ -47,7 +47,7 @@ export const careerTimeline: CareerEntry[] = [
     kindColor: "#243130",
     when: "2022.03 – 2024.03",
     title: "제타럭스시스템",
-    desc: "지자체 SI 프로젝트 3건에 참여해 웹개발의 전반을 두루 경험했습니다.",
+    desc: "지자체 SI 프로젝트 3건에 참여해 웹개발의 전반을 경험했습니다.",
     subProjects: [
       {
         when: "2022.12 – 2023.08 · 8인",

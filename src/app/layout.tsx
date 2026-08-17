@@ -4,6 +4,7 @@ import { notoSansKR } from "@/lib/fonts";
 import { SITE } from "@/lib/site";
 import { RoughFilters, SiteHeader, SiteFooter } from "./_components/Chrome";
 import { RouteChrome } from "./_components/RouteChrome";
+import { TimeTheme } from "./_components/TimeTheme";
 import "./globals.css";
 
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
@@ -57,6 +58,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="ko" className={`${notoSansKR.variable} ${geistMono.variable} antialiased`}>
       <body>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(() => { const h = new Date().getHours(); const root = document.documentElement; root.dataset.theme = h >= 6 && h < 17 ? "day" : h >= 17 && h < 20 ? "sunset" : "night"; root.dataset.greeting = h >= 6 && h < 12 ? "morning" : h >= 12 && h < 18 ? "day" : "evening"; })();`,
+          }}
+        />
+        <TimeTheme />
         <RoughFilters />
         <div className="grain" aria-hidden />
         <RouteChrome>

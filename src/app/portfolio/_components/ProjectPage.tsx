@@ -26,12 +26,26 @@ function groupProjectSkills(tags: string[]) {
 export function ProjectPage({ project, index, total }: { project: Project; index: number; total: number }) {
   const skillGroups = groupProjectSkills(project.tags);
   const hasVisitUrl = Boolean(project.visitUrl);
+  const mobileShot = project.mobileShot;
 
   const openVisitSite = () => {
     if (project.visitUrl) {
       window.open(project.visitUrl, "_blank", "noopener,noreferrer");
     }
   };
+
+  const phonePreview = mobileShot ? (
+    <div className="cloud-proj-phone">
+      <span className="cloud-proj-phone-notch" aria-hidden />
+      <span className="cloud-proj-phone-btn power" aria-hidden />
+      <span className="cloud-proj-phone-btn vol-up" aria-hidden />
+      <span className="cloud-proj-phone-btn vol-down" aria-hidden />
+      <div className="cloud-proj-screen">
+        {/* eslint-disable-next-line @next/next/no-img-element -- 고정 표시폭이라 next/image 최적화 이득이 없다 */}
+        <img src={mobileShot.src} alt={mobileShot.alt} width={220} height={476} />
+      </div>
+    </div>
+  ) : null;
 
   return (
     <section id={`project-${project.slug}`} data-cloud-section className="cloud-section">
@@ -44,20 +58,20 @@ export function ProjectPage({ project, index, total }: { project: Project; index
         </div>
 
         <div className="cloud-proj-layout">
-          {project.mobileShot && (
-            <div className="cloud-proj-shot">
-              <div className="cloud-proj-phone">
-                <span className="cloud-proj-phone-notch" aria-hidden />
-                <span className="cloud-proj-phone-btn power" aria-hidden />
-                <span className="cloud-proj-phone-btn vol-up" aria-hidden />
-                <span className="cloud-proj-phone-btn vol-down" aria-hidden />
-                <div className="cloud-proj-screen">
-                  {/* eslint-disable-next-line @next/next/no-img-element -- 고정 표시폭이라 next/image 최적화 이득이 없다 */}
-                  <img src={project.mobileShot.src} alt={project.mobileShot.alt} width={220} height={476} />
-                </div>
-              </div>
-            </div>
-          )}
+          {phonePreview &&
+            (project.visitUrl ? (
+              <a
+                className="cloud-proj-shot is-clickable"
+                href={project.visitUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${project.title} 배포 사이트 열기`}
+              >
+                {phonePreview}
+              </a>
+            ) : (
+              <div className="cloud-proj-shot">{phonePreview}</div>
+            ))}
           <div className="cloud-proj-list">
             <article
               className={`cloud-skillpanel cloud-proj-card${project.minor ? " minor" : ""}${hasVisitUrl ? " is-clickable" : ""}`}

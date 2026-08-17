@@ -21,9 +21,150 @@
 
   --code-bg: #282c34;
 
+  /* 의미 기반 디자인 토큰 — 시간대 테마는 이 값을 교체한다. */
+  --surface-page: var(--cream);
+  --surface-raised: #ffffff;
+  --surface-muted: var(--mint-light);
+  --text-primary: var(--ink);
+  --text-strong: var(--ink-strong);
+  --text-muted: var(--muted);
+  --border-default: var(--line);
+  --border-subtle: var(--line-soft);
+  --focus-ring: var(--accent);
+
+  /* 공용 투명도 토큰 */
+  --ink-12: rgb(47 58 57 / 0.12);
+  --ink-28: rgb(47 58 57 / 0.28);
+  --accent-08: rgb(200 68 60 / 0.08);
+  --surface-cloud: #ffffff;
+  --cloud-text: #182120;
+  --cloud-border: rgb(24 33 32 / 0.32);
+  --cloud-shadow-fill: #dce8e1;
+  --hero-cloud-bg: var(--surface-cloud);
+  --hero-cloud-text: var(--cloud-text);
+  --surface-overlay-strong: rgb(251 251 247 / 0.94);
+  --surface-overlay: rgb(251 251 247 / 0.86);
+  --surface-overlay-soft: rgb(251 251 247 / 0.7);
+  --surface-tag: #eaf3ee;
+  --surface-callout: #d8f0eb;
+  --surface-active-hover: #a9ddd5;
+  --cloud-float-shadow: rgb(107 156 169 / 0.18);
+  --cloud-depth-shadow: rgb(198 229 237 / 0.52);
+  --text-on-strong: #fbfbf7;
+  --control-strong-bg: #243130;
+  --control-strong-text: #fbfbf7;
+  --control-strong-muted: #c8e9e4;
+  --border-strong: rgb(47 58 57 / 0.45);
+  --border-medium: rgb(47 58 57 / 0.3);
+  --border-softest: rgb(47 58 57 / 0.18);
+  --accent-border: rgb(200 68 60 / 0.4);
+  --forest-border: rgb(94 116 73 / 0.38);
+  --shadow-rgb: 47 58 57;
+  --grain-blend-mode: multiply;
+  --grain-opacity: 0.07;
+
   /* 손으로 그린 듯 모서리를 조금씩 어긋나게. 테마 전반의 서명이다. */
   --radius-hand: 18px 20px 17px 19px;
   --radius-hand-sm: 10px 12px 9px 11px;
+}
+
+/* 시간대 테마 — 구조와 컴포넌트는 유지하고 색상 토큰만 교체한다. */
+:root[data-theme="sunset"] {
+  --mint: #d98268;
+  --mint-light: #f1b28b;
+  --mint-pale: #fff0df;
+  --cream: #fff8ee;
+  --ink: #553b3b;
+  --ink-strong: #3d292d;
+  --accent: #b84f3e;
+  --sage: #aa8060;
+  --muted: #9f8176;
+  --line: rgb(85 59 59 / 0.28);
+  --line-soft: rgb(85 59 59 / 0.14);
+  --surface-raised: #fffaf2;
+  --focus-ring: #b84f3e;
+  --ink-12: rgb(85 59 59 / 0.12);
+  --ink-28: rgb(85 59 59 / 0.28);
+  --accent-08: rgb(184 79 62 / 0.08);
+  --hero-cloud-bg: var(--surface-cloud);
+  --hero-cloud-text: var(--cloud-text);
+  --surface-overlay-strong: rgb(255 250 242 / 0.94);
+  --surface-overlay: rgb(255 250 242 / 0.86);
+  --surface-overlay-soft: rgb(255 248 238 / 0.72);
+  --surface-tag: #f5dfce;
+  --surface-callout: #f3c6a5;
+  --surface-active-hover: #eaa07d;
+  --cloud-float-shadow: rgb(162 92 72 / 0.2);
+  --cloud-depth-shadow: rgb(241 178 139 / 0.52);
+  --text-on-strong: #fff8ee;
+  --control-strong-bg: #3d292d;
+  --control-strong-text: #fff8ee;
+  --control-strong-muted: #f1b28b;
+  --border-strong: rgb(85 59 59 / 0.48);
+  --border-medium: rgb(85 59 59 / 0.32);
+  --border-softest: rgb(85 59 59 / 0.2);
+  --accent-border: rgb(184 79 62 / 0.48);
+  --forest-border: rgb(114 83 62 / 0.42);
+  --shadow-rgb: 85 59 59;
+  --grain-blend-mode: multiply;
+  --grain-opacity: 0.06;
+  --portfolio-sky-deep: #c6655a;
+  --portfolio-sky-light: #f0a77d;
+  --portfolio-accent-dark: #87372f;
+  --portfolio-forest: #72533e;
+  --portfolio-forest-light: #8a694f;
+}
+
+:root[data-theme="night"] {
+  --mint: #132f3b;
+  --mint-light: #1c4851;
+  --mint-pale: #234f56;
+  --cream: #10242e;
+  --ink: #d5e4df;
+  --ink-strong: #f1f7f2;
+  --accent: #f08a70;
+  --sage: #91b69f;
+  --muted: #91aaa8;
+  --line: rgb(213 228 223 / 0.28);
+  --line-soft: rgb(213 228 223 / 0.14);
+  --surface-raised: #18333d;
+  --focus-ring: #f08a70;
+  --ink-12: rgb(213 228 223 / 0.12);
+  --ink-28: rgb(213 228 223 / 0.28);
+  --accent-08: rgb(240 138 112 / 0.08);
+  --hero-cloud-bg: var(--surface-cloud);
+  --hero-cloud-text: var(--cloud-text);
+  --surface-overlay-strong: rgb(24 51 61 / 0.96);
+  --surface-overlay: rgb(24 51 61 / 0.9);
+  --surface-overlay-soft: rgb(28 72 81 / 0.78);
+  --surface-tag: #244751;
+  --surface-callout: #315b62;
+  --surface-active-hover: #2d6269;
+  --cloud-float-shadow: rgb(0 0 0 / 0.28);
+  --cloud-depth-shadow: rgb(102 150 157 / 0.34);
+  --text-on-strong: #f1f7f2;
+  --control-strong-bg: #081c24;
+  --control-strong-text: #f1f7f2;
+  --control-strong-muted: #9fd0ca;
+  --border-strong: rgb(213 228 223 / 0.5);
+  --border-medium: rgb(213 228 223 / 0.32);
+  --border-softest: rgb(213 228 223 / 0.2);
+  --accent-border: rgb(240 138 112 / 0.55);
+  --forest-border: rgb(183 215 194 / 0.45);
+  --shadow-rgb: 0 0 0;
+  --grain-blend-mode: soft-light;
+  --grain-opacity: 0.05;
+  --portfolio-sky-deep: #173d4a;
+  --portfolio-sky-light: #27606a;
+  --portfolio-accent-dark: #ffab8d;
+  --portfolio-forest: #b7d7c2;
+  --portfolio-forest-light: #a9cbb5;
+  --portfolio-dark: #0b1b23;
+  --portfolio-dark-deep: #061017;
+  --portfolio-dark-mid: #102a32;
+  --portfolio-white: #eaf5f0;
+  --portfolio-shadow: rgb(0 0 0 / 0.38);
+  color-scheme: dark;
 }
 
 @theme inline {
@@ -71,8 +212,8 @@ body {
   inset: 0;
   z-index: 9998;
   pointer-events: none;
-  mix-blend-mode: multiply;
-  opacity: 0.07;
+  mix-blend-mode: var(--grain-blend-mode);
+  opacity: var(--grain-opacity);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
