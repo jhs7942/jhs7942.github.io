@@ -34,7 +34,9 @@ export function AboutSection() {
                 aria-hidden="true"
               />
               <div className="cloud-about-text">
-                <p className="cloud-about-lead">{profile.role}</p>
+                <h3 className="cloud-about-name">{profile.name}</h3>
+                <p className="cloud-about-lead">{profile.tagline}</p>
+                <p className="cloud-about-sub">{profile.role}</p>
                 {about.paragraphs.map((p, i) => (
                   <p key={i} className="cloud-about-p">
                     {p}

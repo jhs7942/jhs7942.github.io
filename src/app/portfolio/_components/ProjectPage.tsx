@@ -25,12 +25,12 @@ function groupProjectSkills(tags: string[]) {
  */
 export function ProjectPage({ project, index, total }: { project: Project; index: number; total: number }) {
   const skillGroups = groupProjectSkills(project.tags);
-  const hasVisitUrl = Boolean(project.visitUrl);
+  const hasGitHubUrl = Boolean(project.githubUrl);
   const mobileShot = project.mobileShot;
 
-  const openVisitSite = () => {
-    if (project.visitUrl) {
-      window.open(project.visitUrl, "_blank", "noopener,noreferrer");
+  const openGitHubSite = () => {
+    if (project.githubUrl) {
+      window.open(project.githubUrl, "_blank", "noopener,noreferrer");
     }
   };
 
@@ -74,22 +74,28 @@ export function ProjectPage({ project, index, total }: { project: Project; index
             ))}
           <div className="cloud-proj-list">
             <article
-              className={`cloud-skillpanel cloud-proj-card${project.minor ? " minor" : ""}${hasVisitUrl ? " is-clickable" : ""}`}
-              role={hasVisitUrl ? "link" : undefined}
-              tabIndex={hasVisitUrl ? 0 : undefined}
-              aria-label={hasVisitUrl ? `${project.title} 배포 사이트 열기` : undefined}
-              onClick={hasVisitUrl ? openVisitSite : undefined}
+              className={`cloud-skillpanel cloud-proj-card${project.minor ? " minor" : ""}${hasGitHubUrl ? " is-clickable" : ""}`}
+              role={hasGitHubUrl ? "link" : undefined}
+              tabIndex={hasGitHubUrl ? 0 : undefined}
+              aria-label={hasGitHubUrl ? `${project.title} GitHub 상세 페이지 열기` : undefined}
+              onClick={hasGitHubUrl ? openGitHubSite : undefined}
               onKeyDown={
-                hasVisitUrl
+                hasGitHubUrl
                   ? (event) => {
                       if (event.key === "Enter" || event.key === " ") {
                         event.preventDefault();
-                        openVisitSite();
+                        openGitHubSite();
                       }
                     }
                   : undefined
               }
             >
+              {hasGitHubUrl && (
+                <span className="cloud-proj-card-action" aria-hidden="true">
+                  <GitHubIcon className="cloud-proj-card-action-icon" />
+                  깃허브 이동
+                </span>
+              )}
               <div className="cloud-proj-inner">
               <div className="cloud-proj-body">
                 <div className="cloud-proj-top">
@@ -106,18 +112,6 @@ export function ProjectPage({ project, index, total }: { project: Project; index
                         </span>
                       )}
                   <div className="cloud-proj-links">
-                    {project.githubUrl && (
-                      <a
-                        className="cloud-proj-link gh"
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noopener"
-                        onClick={(event) => event.stopPropagation()}
-                      >
-                        <GitHubIcon className="cloud-proj-link-icon" />
-                        상세보기
-                      </a>
-                    )}
                     {project.newsUrl && (
                       <a
                         className="cloud-proj-link news"

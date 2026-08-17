@@ -32,7 +32,15 @@ export const metadata: Metadata = {
   title: { absolute: "정현승 | 웹 개발자 포트폴리오" },
   description:
     "공공·지자체 SI 프로젝트부터 개인 서비스까지, React·TypeScript를 중심으로 프론트엔드·백엔드·인프라를 경험한 웹 개발자 정현승의 포트폴리오입니다.",
-  keywords: ["정현승", "웹 개발자", "프론트엔드 개발자", "React", "TypeScript", "SI", "포트폴리오"],
+  keywords: [
+    "정현승",
+    "웹 개발자",
+    "프론트엔드 개발자",
+    "React",
+    "TypeScript",
+    "SI",
+    "포트폴리오",
+  ],
   alternates: { canonical: absoluteUrl("/portfolio/") },
   openGraph: {
     type: "website",
@@ -70,9 +78,14 @@ export default function PortfolioPage() {
         <AboutSection />
         <CareerSection />
         <SkillsSection />
-        <AiSection />
+        {/* <AiSection /> */}
         {projects.map((project, i) => (
-          <ProjectPage key={project.slug} project={project} index={i} total={projects.length} />
+          <ProjectPage
+            key={project.slug}
+            project={project}
+            index={i}
+            total={projects.length}
+          />
         ))}
       </PortfolioDeck>
       <CloudMotion />

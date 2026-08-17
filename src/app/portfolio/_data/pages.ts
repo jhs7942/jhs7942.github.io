@@ -23,6 +23,6 @@ export const portfolioPages: PortfolioPageMeta[] = [
   { id: "about", label: "소개" },
   { id: "career", label: "경험" },
   { id: "skills", label: "스킬" },
-  { id: "ai-work", label: "AI" },
+  // { id: "ai-work", label: "AI" },
   ...projects.map((p) => ({ id: `project-${p.slug}`, label: p.title })),
 ];

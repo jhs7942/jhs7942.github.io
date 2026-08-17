@@ -39,7 +39,7 @@ export const careerTimeline: CareerEntry[] = [
     title: "삼성 청년 SW 아카데미 15기",
     sub: "마이스터고 트랙 · 서울 캠퍼스",
     subColor: "#5E7449",
-    desc: "Python · 알고리즘 · 웹 · AI/데이터 분석 · DB 설계 과정을 이수했습니다.",
+    desc: "Python · 알고리즘 · 웹 · AI/데이터 분석 과정을 이수했습니다.",
     tint: true,
   },
   {

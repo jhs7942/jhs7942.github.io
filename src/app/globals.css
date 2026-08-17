@@ -48,6 +48,10 @@
   --surface-tag: #eaf3ee;
   --surface-callout: #d8f0eb;
   --surface-active-hover: #a9ddd5;
+  --skill-card-bg: var(--surface-page);
+  --skill-card-text: var(--text-primary);
+  --skill-card-title: var(--text-strong);
+  --skill-card-border: var(--border-softest);
   --cloud-float-shadow: rgb(107 156 169 / 0.18);
   --cloud-depth-shadow: rgb(198 229 237 / 0.52);
   --text-on-strong: #fbfbf7;
@@ -140,6 +144,10 @@
   --surface-tag: #244751;
   --surface-callout: #315b62;
   --surface-active-hover: #2d6269;
+  --skill-card-bg: var(--surface-cloud);
+  --skill-card-text: var(--cloud-text);
+  --skill-card-title: var(--cloud-text);
+  --skill-card-border: var(--cloud-border);
   --cloud-float-shadow: rgb(0 0 0 / 0.28);
   --cloud-depth-shadow: rgb(102 150 157 / 0.34);
   --text-on-strong: #f1f7f2;

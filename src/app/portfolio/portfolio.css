@@ -516,6 +516,71 @@ body.cloud-deck-lock {
   }
 }
 
+/* 오른쪽 상단 테마 선택기 — 시간대 자동 테마보다 사용자의 직접 선택을 우선한다. */
+.time-theme-switcher {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 80;
+  display: flex;
+  gap: 4px;
+  padding: 6px;
+  border: 1.5px solid var(--border-medium);
+  border-radius: 15px 17px 14px 16px;
+  background: var(--surface-overlay-strong);
+  box-shadow: 0 14px 30px -18px rgb(var(--shadow-rgb) / 0.75);
+  backdrop-filter: blur(12px);
+}
+.time-theme-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 36px;
+  padding: 8px 11px;
+  border: 0;
+  border-radius: 10px 12px 9px 11px;
+  color: var(--text-primary);
+  background: transparent;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 800;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    color 160ms ease,
+    background 160ms ease,
+    transform 160ms ease;
+}
+.time-theme-option:hover {
+  background: var(--mint-pale);
+  transform: translateY(-1px);
+}
+.time-theme-option:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+.time-theme-option[aria-pressed="true"] {
+  color: var(--control-strong-text);
+  background: var(--control-strong-bg);
+}
+.time-theme-swatch {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+  border: 1px solid rgb(24 33 32 / 0.24);
+  border-radius: 50% 46% 52% 44%;
+  box-shadow: inset 0 -2px 0 rgb(0 0 0 / 0.12);
+}
+.time-theme-swatch--day {
+  background: #83cfc9;
+}
+.time-theme-swatch--sunset {
+  background: #d98268;
+}
+.time-theme-swatch--night {
+  background: #132f3b;
+}
+
 /* 상단 고정 내비게이션 — 화면 중앙에 뜬 알약 모양 */
 .cloud-nav {
   position: fixed;
@@ -1401,8 +1466,9 @@ body.cloud-deck-lock {
   display: flex;
   align-items: flex-start;
   gap: 19px;
-  background: var(--surface-page);
-  border: 1.3px solid var(--border-softest);
+  color: var(--skill-card-text);
+  background: var(--skill-card-bg);
+  border: 1.3px solid var(--skill-card-border);
   border-radius: 11px 12px 10px 12px;
   padding: 20px 23px;
 }
@@ -1438,7 +1504,7 @@ body.cloud-deck-lock {
   margin: 0 0 5px;
   font-size: 19px;
   font-weight: 700;
-  color: var(--text-strong);
+  color: var(--skill-card-title);
 }
 .cloud-skillitem-desc {
   margin: 0;
@@ -1557,21 +1623,23 @@ body.cloud-deck-lock {
     box-shadow 0.18s ease,
     border-color 0.18s ease;
 }
-.cloud-proj-card.is-clickable::after {
-  content: "배포 사이트 이동";
+.cloud-proj-card-action {
   position: absolute;
   top: 14px;
   left: 50%;
   z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   padding: 12px 22px 11px;
   border-radius: 46% 56% 44% 52% / 68% 72% 58% 62%;
-  background: var(--surface-callout);
+  background: #24292f;
   box-shadow:
-    -18px 2px 0 -4px var(--surface-callout),
-    17px -8px 0 -4px var(--surface-callout),
-    37px 2px 0 -8px var(--surface-callout),
+    -18px 2px 0 -4px #24292f,
+    17px -8px 0 -4px #24292f,
+    37px 2px 0 -8px #24292f,
     0 10px 18px -12px rgb(var(--shadow-rgb) / 0.7);
-  color: var(--text-strong);
+  color: var(--text-on-strong);
   font-size: 13px;
   font-weight: 800;
   letter-spacing: -0.1px;
@@ -1583,19 +1651,20 @@ body.cloud-deck-lock {
     opacity 0.18s ease,
     transform 0.18s ease;
 }
+.cloud-proj-card-action-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
 .cloud-proj-card.is-clickable:hover:not(:has(.cloud-proj-link:hover)),
-.cloud-proj-card.is-clickable:focus-visible,
-.cloud-proj-layout:has(.cloud-proj-shot.is-clickable:hover) .cloud-proj-card.is-clickable,
-.cloud-proj-layout:has(.cloud-proj-shot.is-clickable:focus-visible) .cloud-proj-card.is-clickable {
+.cloud-proj-card.is-clickable:focus-visible {
   transform: translateY(-3px);
   border-color: var(--border-strong);
   box-shadow: 0 20px 32px -22px rgb(var(--shadow-rgb) / 0.74);
   outline: none;
 }
-.cloud-proj-card.is-clickable:hover:not(:has(.cloud-proj-link:hover))::after,
-.cloud-proj-card.is-clickable:focus-visible::after,
-.cloud-proj-layout:has(.cloud-proj-shot.is-clickable:hover) .cloud-proj-card.is-clickable::after,
-.cloud-proj-layout:has(.cloud-proj-shot.is-clickable:focus-visible) .cloud-proj-card.is-clickable::after {
+.cloud-proj-card.is-clickable:hover:not(:has(.cloud-proj-link:hover)) .cloud-proj-card-action,
+.cloud-proj-card.is-clickable:focus-visible .cloud-proj-card-action {
   opacity: 1;
   transform: translate(-50%, 0);
 }
@@ -1626,6 +1695,36 @@ body.cloud-deck-lock {
 }
 .cloud-proj-shot.is-clickable {
   cursor: pointer;
+}
+.cloud-proj-shot.is-clickable::after {
+  content: "배포 사이트 이동";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 3;
+  padding: 11px 17px 10px;
+  border-radius: 46% 56% 44% 52% / 68% 72% 58% 62%;
+  background: var(--surface-callout);
+  box-shadow:
+    -13px 2px 0 -4px var(--surface-callout),
+    13px -7px 0 -4px var(--surface-callout),
+    0 10px 18px -12px rgb(var(--shadow-rgb) / 0.7);
+  color: var(--text-strong);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: -0.1px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, calc(-50% + 6px));
+  transition:
+    opacity 0.18s ease,
+    transform 0.18s ease;
+}
+.cloud-proj-shot.is-clickable:hover::after,
+.cloud-proj-shot.is-clickable:focus-visible::after {
+  opacity: 1;
+  transform: translate(-50%, -50%);
 }
 .cloud-proj-shot.is-clickable:focus-visible {
   outline: 2px solid var(--mint-light);
@@ -1940,13 +2039,23 @@ body.cloud-deck-lock {
   }
 }
 @media (max-width: 640px) {
+  .time-theme-switcher {
+    top: 72px;
+    right: 10px;
+    max-width: calc(100vw - 20px);
+  }
+  .time-theme-option {
+    gap: 5px;
+    padding: 7px 8px;
+    font-size: 11px;
+  }
   /* 데스크톱용 섹션 좌우 여백(최소 64px)을 그대로 쓰면 320px 화면에서
      본문 폭이 192px까지 줄어든다. 상단 가로 내비게이션 아래에만 여유를
      두고, 본문은 화면 폭을 충분히 쓰도록 모바일 전용 값으로 다시 잡는다. */
   .cloud-deck .cloud-section,
   .cloud-deck .cloud-section.hero {
     justify-content: flex-start;
-    padding: 92px 20px 52px;
+    padding: 160px 20px 52px;
   }
   .cloud-deck .cloud-section.hero {
     min-height: 100%;

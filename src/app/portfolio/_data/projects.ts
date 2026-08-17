@@ -67,13 +67,24 @@ export const projects: Project[] = [
     badgeColor: "#C8443C",
     visitUrl: "https://ai-quiz-xi-livid.vercel.app/",
     githubUrl: "https://github.com/jhs7942/ai-quiz",
-    mobileShot: { src: "/portfolio/aiquiz-mobile.jpg", alt: "AI Quiz 모바일 화면 — 인공지능 포함 관계를 묻는 객관식 문제" },
-    tags: ["React 19", "TypeScript", "Zustand", "Tailwind CSS", "Vite", "Supabase / PostgreSQL", "Vercel"],
+    mobileShot: {
+      src: "/portfolio/aiquiz-mobile.jpg",
+      alt: "AI Quiz 모바일 화면 — 인공지능 포함 관계를 묻는 객관식 문제",
+    },
+    tags: [
+      "React 19",
+      "TypeScript",
+      "Zustand",
+      "Tailwind CSS",
+      "Vite",
+      "Supabase / PostgreSQL",
+      "Vercel",
+    ],
     descHtml:
-      "같은 시험 범위를 1,000명이 각자 만드는 중복 낭비를 없애기 위해, 기획 · 배포까지 4시간을 기한으로 잡고 만든 시험 대비 퀴즈 서비스입니다. 서울 캠퍼스 기획이 전국으로 확산돼 문제 풀이 92,329회 · 세션 6,343건을 기록했습니다.",
+      "기획 · 배포까지 4시간을 기한으로 잡고 만든 시험 대비 퀴즈 서비스입니다. ",
     stats: [
-      { label: "문제 풀이", value: "92,329회" },
-      { label: "문제은행", value: "1,160문제" },
+      { label: "총 이용자", value: "826명" },
+      { label: "재시도 정답률", value: "67% → 75%" },
       { label: "피드백 반영", value: "약 90%" },
     ],
     characters: [
@@ -113,10 +124,21 @@ export const projects: Project[] = [
     visitUrl: "https://telepathy.my/",
     githubUrl: "https://github.com/MoonEunSeo/telepathy-app/tree/v3",
     newsUrl: "https://platum.kr/archives/272577",
-    mobileShot: { src: "/portfolio/telepathy-mobile.jpg", alt: "텔레파시 모바일 화면 — 현재 접속자 수와 관심 단어 선택 화면" },
-    tags: ["React 19", "TypeScript", "TanStack Query", "Express 5", "Socket.IO 4", "Zod", "Supabase / PostgreSQL", "Render"],
-    descHtml:
-      "15초의 한 턴 안에 같은 단어를 고른 사용자끼리 연결되는 관심 단어 기반 랜덤채팅 서비스입니다. 기획자가 AI 코딩 도구로 만들어 운영하던 코드베이스를 넘겨받아 TypeScript로 마이그레이션하며 개발을 단독으로 맡고 있습니다.",
+    mobileShot: {
+      src: "/portfolio/telepathy-mobile.jpg",
+      alt: "텔레파시 모바일 화면 — 현재 접속자 수와 관심 단어 선택 화면",
+    },
+    tags: [
+      "React 19",
+      "TypeScript",
+      "TanStack Query",
+      "Express 5",
+      "Socket.IO 4",
+      "Zod",
+      "Supabase / PostgreSQL",
+      "Render",
+    ],
+    descHtml: "기존 JS코드에서 TS로 마이그레이션한 랜덤채팅 서비스입니다.",
     characters: [
       {
         variant: "float2",
