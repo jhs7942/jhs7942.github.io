@@ -1116,14 +1116,6 @@ body.cloud-deck-lock {
 .cloud-about-text {
   min-width: 0;
 }
-.cloud-about-kicker {
-  margin: 0 0 4px;
-  font-family: var(--font-hand), var(--font-sans);
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  color: var(--accent);
-}
 .cloud-about-name {
   margin: 0 0 14px;
   font-family: var(--font-hand), var(--font-sans);
@@ -1429,6 +1421,7 @@ body.cloud-deck-lock {
   gap: 14px;
 }
 .cloud-skillitem {
+  position: relative;
   display: flex;
   align-items: flex-start;
   gap: 19px;
@@ -1488,77 +1481,42 @@ body.cloud-deck-lock {
   padding: 2px 9px;
   border-radius: 20px;
 }
-
-/* AI 섹션 안의 소단원(AI 워크플로우 / AI 기록) — content/pages/portfolio/ai-*.html
-   조각이 쓰는 클래스. 그 조각은 손그림 SVG 파이프라인 다이어그램이 많아 JSX로
-   재작성하지 않고 신뢰 가능한 HTML 파일로 남겨 뒀다(loadFragment.ts 참고). */
-.cloud-subsec + .cloud-subsec {
-  margin-top: 40px;
+.cloud-skillitem:has(.cloud-live-link) {
+  padding-top: 58px;
 }
-.cloud-subsechead {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 18px;
-}
-.cloud-subsechead h3 {
-  margin: 0;
-  font-size: 22px;
-  letter-spacing: -0.5px;
-  color: var(--text-strong);
-}
-.cloud-figs {
-  display: grid;
-  gap: 18px;
-}
-.cloud-fig {
-  background: var(--surface-page);
-  border: 1.4px solid var(--ink-28);
-  border-radius: 14px 16px 12px 15px;
-  padding: 12px 12px 10px;
-  min-width: 0;
-}
-.cloud-figbody {
-  overflow-x: auto;
-}
-.cloud-figbody svg {
-  min-width: 640px;
-}
-.cloud-figcap {
-  display: block;
-  margin: 0 0 10px;
-  font-weight: 700;
-  font-size: 13.5px;
-  line-height: 1.5;
-  letter-spacing: -0.1px;
-  color: var(--text-strong);
-}
-/* AI 기록의 설명은 경험 타임라인과 같은 구름 윤곽 안에 둔다. 산출물 SVG는
-   별도 카드에 남겨 가로 스크롤과 설명 영역이 서로 영향을 주지 않게 했다. */
-.cloud-ai-record-intro {
-  position: relative;
-  width: min(100%, 630px);
-  margin: 0 auto;
-  padding: 96px 74px 82px 106px;
-}
-.cloud-ai-record-shape {
+.cloud-skillitem-src.cloud-live-link {
   position: absolute;
-  inset: 0;
-  z-index: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  filter: drop-shadow(0 12px 18px rgb(var(--shadow-rgb) / 0.22));
-}
-.cloud-ai-record-body {
-  position: relative;
+  top: 14px;
+  right: 18px;
   z-index: 1;
-  color: var(--cloud-text);
+  display: inline-flex;
+  align-items: center;
+  margin: 0;
+  padding: 11px 17px 10px;
+  border-radius: 46% 56% 44% 52% / 68% 72% 58% 62%;
+  background: var(--surface-callout);
+  box-shadow:
+    -13px 2px 0 -4px var(--surface-callout),
+    13px -7px 0 -4px var(--surface-callout),
+    0 10px 18px -12px rgb(var(--shadow-rgb) / 0.7);
+  color: var(--text-strong);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: -0.1px;
+  white-space: nowrap;
+  text-decoration: none;
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease;
 }
-.cloud-ai-record-body .cloud-proj-subhead {
-  margin-bottom: 10px;
-  color: var(--cloud-text);
+.cloud-skillitem-src.cloud-live-link:hover,
+.cloud-skillitem-src.cloud-live-link:focus-visible {
+  transform: translateY(-2px);
+  box-shadow:
+    -13px 2px 0 -4px var(--surface-callout),
+    13px -7px 0 -4px var(--surface-callout),
+    0 14px 20px -12px rgb(var(--shadow-rgb) / 0.78);
+  outline: none;
 }
 
 /* 프로젝트 */
@@ -2183,8 +2141,5 @@ body.cloud-deck-lock {
   .cloud-tl-desc {
     font-size: 17.5px;
     line-height: 1.75;
-  }
-  .cloud-ai-record-intro {
-    padding: 58px 30px 50px 46px;
   }
 }

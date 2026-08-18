@@ -6,9 +6,7 @@ import { CLOUD_PUFF_MARKUP, CLOUD_PUFF_VIEWBOX } from "../_lib/cloudPuffMarkup";
  * 실제 모양은 cloudPuffMarkup.ts 에 한 군데만 정의돼 있다 — CloudCursorTrail.tsx
  * 도 같은 데이터를 쓴다.
  *
- * CloudVeils.tsx 가 이 아이콘을 기존 CloudBlob 위치(top/bottom/left/right/width)
- * 박스 안에 100% 채워 넣는다 — 위치·크기 데이터는 그대로 두고 모양만 원에서
- * 구름으로 바뀐다.
+ * DeckTransitionClouds.tsx가 이 아이콘을 전환 구름 위치와 크기에 맞춰 채워 넣는다.
  */
 export function CloudPuff() {
   return (

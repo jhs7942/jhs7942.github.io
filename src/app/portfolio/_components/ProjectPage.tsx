@@ -23,7 +23,7 @@ function groupProjectSkills(tags: string[]) {
  * (_data/pages.ts 가 projects 배열 길이만큼 장을 늘리고, page.tsx 가 그 순서에
  * 맞춰 이 컴포넌트를 하나씩 렌더링한다).
  */
-export function ProjectPage({ project, index, total }: { project: Project; index: number; total: number }) {
+export function ProjectPage({ project }: { project: Project }) {
   const skillGroups = groupProjectSkills(project.tags);
   const hasGitHubUrl = Boolean(project.githubUrl);
   const mobileShot = project.mobileShot;
@@ -52,9 +52,6 @@ export function ProjectPage({ project, index, total }: { project: Project; index
       <div className="cloud-content">
         <div className="cloud-sechead">
           <h2>프로젝트</h2>
-          <span className="cloud-sectag">
-            PROJECTS · {index + 1}/{total}
-          </span>
         </div>
 
         <div className="cloud-proj-layout">

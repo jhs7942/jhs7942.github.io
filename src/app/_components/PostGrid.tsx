@@ -57,7 +57,7 @@ export function PostGrid({ posts, heading = "최근 글" }: { posts: CardPost[];
             <article key={post.slug} className="post-card reveal">
               <div className="card-wobble" />
               <div className="card-thumb">
-                <span className="thumb-note">// thumbnail</span>
+                <span className="thumb-note">{"// thumbnail"}</span>
               </div>
               <div className="card-body">
                 {post.labels.map((label, i) => (

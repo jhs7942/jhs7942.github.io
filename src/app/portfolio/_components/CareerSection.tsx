@@ -9,11 +9,10 @@ const educationEntries = careerTimeline.filter((entry) => entry.kind === "EDUCAT
 type TimelineSectionProps = {
   id: "career" | "education";
   title: string;
-  tag: string;
   entries: CareerEntry[];
 };
 
-function TimelineSection({ id, title, tag, entries }: TimelineSectionProps) {
+function TimelineSection({ id, title, entries }: TimelineSectionProps) {
   // 모든 항목을 구름 요약 뒤에 가로형 상세 패널이 이어지는 한 방향 흐름으로 배치한다.
   return (
     <section id={id} data-cloud-section className="cloud-section">
@@ -21,7 +20,6 @@ function TimelineSection({ id, title, tag, entries }: TimelineSectionProps) {
         <div data-content className="cloud-content">
           <div className="cloud-sechead">
             <h2>{title}</h2>
-            <span className="cloud-sectag">{tag}</span>
           </div>
 
           {entries.map((entry, i) => {
@@ -90,7 +88,12 @@ function TimelineSection({ id, title, tag, entries }: TimelineSectionProps) {
                                 ))}
                               </ul>
                               {sp.link && (
-                                <a className="cloud-skillitem-src" href={sp.link.href} target="_blank" rel="noopener">
+                                <a
+                                  className="cloud-skillitem-src cloud-live-link"
+                                  href={sp.link.href}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                >
                                   {sp.link.label}
                                 </a>
                               )}
@@ -111,9 +114,9 @@ function TimelineSection({ id, title, tag, entries }: TimelineSectionProps) {
 }
 
 export function CareerSection() {
-  return <TimelineSection id="career" title="경력" tag="CAREER" entries={careerEntries} />;
+  return <TimelineSection id="career" title="경력" entries={careerEntries} />;
 }
 
 export function EducationSection() {
-  return <TimelineSection id="education" title="교육" tag="EDUCATION" entries={educationEntries} />;
+  return <TimelineSection id="education" title="교육" entries={educationEntries} />;
 }

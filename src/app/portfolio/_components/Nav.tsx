@@ -1,7 +1,6 @@
 "use client";
 
 import type { PortfolioPageMeta } from "../_data/pages";
-import { GitHubIcon } from "./GitHubIcon";
 
 /**
  * 포트폴리오 왼쪽에 고정되는 사이드 내비게이션.

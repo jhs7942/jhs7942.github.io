@@ -22,8 +22,7 @@ import { handFont } from "./_lib/fonts";
  * 위에 뜨는 Nav가 헤더 역할을 대신한다(RouteChrome.tsx 참고).
  *
  * 대부분의 섹션은 장식이 전부 CSS 도형이라 데이터 + JSX로 옮겼다(_data/*.ts
- * 참고). 예외는 AI 섹션 — 손그림 SVG 파이프라인 다이어그램이 많아 이전처럼
- * content/pages/portfolio/*.html 조각으로 남겨 뒀다(_lib/loadFragment.ts 참고).
+ * 참고).
  */
 export const metadata: Metadata = {
   title: { absolute: "정현승 | 웹 개발자 포트폴리오" },
@@ -76,13 +75,10 @@ export default function PortfolioPage() {
         <CareerSection />
         <EducationSection />
         <SkillsSection />
-        {/* <AiSection /> */}
-        {projects.map((project, i) => (
+        {projects.map((project) => (
           <ProjectPage
             key={project.slug}
             project={project}
-            index={i}
-            total={projects.length}
           />
         ))}
       </PortfolioDeck>

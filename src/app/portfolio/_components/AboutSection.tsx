@@ -9,7 +9,6 @@ export function AboutSection() {
         <div data-content className="cloud-content">
           <div className="cloud-sechead">
             <h2>소개</h2>
-            <span className="cloud-sectag">ABOUT</span>
           </div>
           <div className="cloud-about-layout">
             <div className="cloud-about-media">

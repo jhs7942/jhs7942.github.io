@@ -44,7 +44,6 @@ export function SkillsSection() {
         <div data-content className="cloud-content">
           <div className="cloud-sechead">
             <h2>스킬</h2>
-            <span className="cloud-sectag">SKILLS</span>
           </div>
           <div className="cloud-skillwrap">
             <div
