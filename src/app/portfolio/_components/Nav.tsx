@@ -28,7 +28,7 @@ export function Nav({
   return (
     <nav className="cloud-nav">
       <button type="button" className="cloud-nav-brand" onClick={() => onSelect(0)}>
-        히어로
+        인사
       </button>
       <span className="cloud-nav-divider" />
       <div className="cloud-nav-links">

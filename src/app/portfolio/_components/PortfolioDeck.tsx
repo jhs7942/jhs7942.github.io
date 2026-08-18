@@ -33,6 +33,19 @@ export function PortfolioDeck({ children }: { children: ReactNode }) {
   useEffect(() => {
     indexRef.current = index;
   }, [index]);
+
+  // 인사 페이지에서는 보조 UI를 모두 보여 주고, 그 밖의 페이지에서는 화면
+  // 가장자리로 접는다. TimeTheme은 루트 레이아웃에 있어 덱의 자식이 아니므로
+  // 문서 속성으로 현재 상태를 공유한다.
+  useEffect(() => {
+    document.documentElement.dataset.portfolioChrome = index === 0 ? "hero" : "collapsed";
+  }, [index]);
+  useEffect(
+    () => () => {
+      delete document.documentElement.dataset.portfolioChrome;
+    },
+    [],
+  );
   const [gust, setGust] = useState<{ key: number; direction: 1 | -1 }>({ key: 0, direction: 1 });
 
   // 셋 다 참조가 고정돼야 한다 — DeckEdge 의 1초 타이머가 매 렌더마다 리셋되면 안 된다.

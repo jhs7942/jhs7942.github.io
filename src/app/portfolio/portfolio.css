@@ -529,6 +529,11 @@ body.cloud-deck-lock {
   background: var(--surface-overlay-strong);
   box-shadow: 0 14px 30px -18px rgb(var(--shadow-rgb) / 0.75);
   backdrop-filter: blur(12px);
+  transition:
+    right 360ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 260ms ease,
+    transform 360ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: right, transform;
 }
 .time-theme-option {
   display: inline-flex;
@@ -599,6 +604,62 @@ body.cloud-deck-lock {
   border: 1.5px solid var(--border-medium);
   border-radius: 16px 18px 15px 17px;
   box-shadow: 0 14px 30px -20px rgb(var(--shadow-rgb) / 0.7);
+  transition:
+    left 360ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 260ms ease,
+    transform 360ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: left, transform;
+}
+
+/* 인사 페이지를 벗어나면 콘텐츠를 가리지 않도록 양쪽 가장자리로 접는다.
+   14px짜리 손잡이 영역은 남겨 두어 마우스를 올리거나 키보드 포커스가 들어오면
+   다시 원래 위치로 펼쳐진다. 터치 화면은 hover가 없어 아래 동작을 적용하지 않는다. */
+@media (min-width: 641px) and (hover: hover) and (pointer: fine) {
+  :root[data-portfolio-chrome="collapsed"] .cloud-nav::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 100%;
+    bottom: 0;
+    width: 22px;
+  }
+  :root[data-portfolio-chrome="collapsed"] .cloud-nav {
+    left: 0;
+    opacity: 0.46;
+    transform: translate(calc(-100% + 14px), -50%);
+  }
+  :root[data-portfolio-chrome="collapsed"] .cloud-nav:hover,
+  :root[data-portfolio-chrome="collapsed"] .cloud-nav:focus-within {
+    left: 22px;
+    opacity: 1;
+    transform: translateY(-50%);
+  }
+  :root[data-portfolio-chrome="collapsed"] .time-theme-switcher {
+    right: 0;
+    opacity: 0.46;
+    transform: translateX(calc(100% - 14px));
+  }
+  :root[data-portfolio-chrome="collapsed"] .time-theme-switcher::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 100%;
+    width: 18px;
+  }
+  :root[data-portfolio-chrome="collapsed"] .time-theme-switcher:hover,
+  :root[data-portfolio-chrome="collapsed"] .time-theme-switcher:focus-within {
+    right: 18px;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cloud-nav,
+  .time-theme-switcher {
+    transition-duration: 1ms;
+  }
 }
 /* 덱으로 바뀌면서 앵커가 아니라 버튼이 됐다 — 기본 버튼 모양만 지운다 */
 .cloud-nav-brand,
@@ -1482,7 +1543,7 @@ body.cloud-deck-lock {
   border-radius: 20px;
 }
 .cloud-skillitem:has(.cloud-live-link) {
-  padding-top: 58px;
+  padding-right: 180px;
 }
 .cloud-skillitem-src.cloud-live-link {
   position: absolute;
