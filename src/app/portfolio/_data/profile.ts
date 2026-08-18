@@ -2,7 +2,7 @@ export const profile = {
   name: "정현승",
   tagline: "사용자의 경험을 고려하며 꾸준히 성장합니다.",
   role: "웹개발 전반에 기여한 경험을 가지고 있습니다.",
-  photoSrc: "/portfolio/profile.jpg",
+  photoSrc: "/portfolio/profile.png",
   photoAlt: "정현승 프로필 사진",
   githubUrl: "https://github.com/jhs7942",
   email: "saver7942@gmail.com",

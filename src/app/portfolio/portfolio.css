@@ -1198,8 +1198,11 @@ body.cloud-deck-lock {
 }
 .cloud-about-photo {
   width: min(100%, 320px);
+  aspect-ratio: 5 / 6;
   height: auto;
   display: block;
+  object-fit: cover;
+  object-position: center;
   border-radius: 16px 18px 14px 17px;
   border: 1.5px solid var(--border-medium);
   box-shadow: 0 14px 30px -16px rgb(var(--shadow-rgb) / 0.7);
