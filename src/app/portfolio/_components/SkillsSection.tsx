@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import { skillCategories } from "../_data/skills";
-import { CloudVeils } from "./CloudVeils";
 import { SkillIconBadge } from "./SkillIconBadge";
 
 export function SkillsSection() {
@@ -100,18 +99,6 @@ export function SkillsSection() {
             </div>
           </div>
         </div>
-        <CloudVeils
-          left={[
-            { right: 6, top: 8, width: 42 },
-            { right: 15, top: 40, width: 50 },
-            { right: 2, bottom: 2, width: 36 },
-          ]}
-          right={[
-            { left: 5, top: 16, width: 45 },
-            { left: 17, top: 48, width: 48 },
-            { left: 3, bottom: 0, width: 34 },
-          ]}
-        />
       </div>
     </section>
   );

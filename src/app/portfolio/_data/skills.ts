@@ -48,6 +48,10 @@ export const skillCategories: SkillCategory[] = [
         descHtml: "컴포넌트 단위로 상태와 렌더링 흐름을 설계하고, 커스텀 훅으로 로직을 재사용 가능한 단위로 분리합니다.",
       },
       {
+        name: "Next.js",
+        descHtml: "서버·클라이언트 렌더링의 차이를 이해하고, 페이지 특성에 맞춰 렌더링 전략과 라우팅 구조를 설계합니다.",
+      },
+      {
         name: "Zustand",
         descHtml: "전역 상태를 스토어 단위로 나누고, persist 같은 미들웨어를 상황에 맞게 조합해 사용합니다.",
       },
@@ -131,6 +135,10 @@ export const skillCategories: SkillCategory[] = [
       {
         name: "Render",
         descHtml: "브랜치 push에 맞춰 자동으로 빌드·배포되는 파이프라인을 구성합니다.",
+      },
+      {
+        name: "Docker",
+        descHtml: "컨테이너 기반 실행 환경을 구성하고, 개발·배포 환경의 차이를 줄일 수 있도록 이미지와 설정을 관리합니다.",
       },
       {
         name: "Nginx",

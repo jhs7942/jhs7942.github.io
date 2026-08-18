@@ -1,24 +1,32 @@
 "use client";
 
-import { careerTimeline } from "../_data/career";
+import { careerTimeline, type CareerEntry } from "../_data/career";
 import { CloudShape } from "./CloudShape";
-import { CloudVeils } from "./CloudVeils";
 
-export function CareerSection() {
-  // 제타럭스시스템처럼 subProjects를 가진 카드만 토글 대상 — index로 열림 상태를 추적한다.
+const careerEntries = careerTimeline.filter((entry) => entry.kind !== "EDUCATION");
+const educationEntries = careerTimeline.filter((entry) => entry.kind === "EDUCATION");
+
+type TimelineSectionProps = {
+  id: "career" | "education";
+  title: string;
+  tag: string;
+  entries: CareerEntry[];
+};
+
+function TimelineSection({ id, title, tag, entries }: TimelineSectionProps) {
+  // 모든 항목을 구름 요약 뒤에 가로형 상세 패널이 이어지는 한 방향 흐름으로 배치한다.
   return (
-    <section id="career" data-cloud-section className="cloud-section">
+    <section id={id} data-cloud-section className="cloud-section">
       <div className="cloud-veilwrap">
         <div data-content className="cloud-content">
           <div className="cloud-sechead">
-            <h2>경험</h2>
-            <span className="cloud-sectag">CAREER &amp; EDUCATION</span>
+            <h2>{title}</h2>
+            <span className="cloud-sectag">{tag}</span>
           </div>
 
-          {careerTimeline.map((entry, i) => {
-            const isLeft = i % 2 === 0;
-            const isLast = i === careerTimeline.length - 1;
-            const fillId = `tlCloudFill-${i}`;
+          {entries.map((entry, i) => {
+            const isLast = i === entries.length - 1;
+            const fillId = `${id}-tlCloudFill-${i}`;
             const card = (
               <div
                 className={`cloud-tl-inner${entry.tint ? " tint" : ""}`}
@@ -50,56 +58,62 @@ export function CareerSection() {
             );
             return (
               <div key={entry.title}>
-                <div className={`cloud-tl-row${isLeft ? " side-left" : ""}${isLast ? " last" : ""}`}>
+                <div className={`cloud-tl-row${isLast ? " last" : ""}`}>
                   <div className="cloud-tl-card">{card}</div>
-                </div>
-                {/* "업무 보기"를 누르면 하위 SI 프로젝트 3건이 카드 하나 안에 항목별로
-                    나열된다 — 새로 만들지 않고 스킬 섹션의 카드(.cloud-skillpanel/
-                    .cloud-skillitem)를 그대로 재사용했다. 트리거가 된 카드와 같은 쪽
-                    (side-left 여부)에 붙여서 "이 카드에서 펼쳐졌다"는 연관성을 보여준다. */}
-                {entry.subProjects && (
-                  <div className={`cloud-skillpanel cloud-tl-subpanel${isLeft ? " side-left" : ""}`}>
-                    <div className="cloud-skillitems">
-                      {entry.subProjects.map((sp) => (
-                        <div key={sp.title} className="cloud-skillitem">
-                          <div className="cloud-skillitem-body">
-                            <p className="cloud-skillitem-name">
-                              {sp.title}
-                              <span className="cloud-tl-subwhen">{sp.when}</span>
-                            </p>
-                            <ul className="cloud-tl-subdesc-list">
-                              {sp.desc.map((line) => (
-                                <li key={line}>{line}</li>
-                              ))}
-                            </ul>
-                            {sp.link && (
-                              <a className="cloud-skillitem-src" href={sp.link.href} target="_blank" rel="noopener">
-                                {sp.link.label}
-                              </a>
-                            )}
+                  {(entry.details || entry.subProjects) && (
+                    <div
+                      className={`cloud-skillpanel cloud-tl-subpanel${entry.kind === "EDUCATION" ? " education" : ""}`}
+                    >
+                      <div className="cloud-skillitems">
+                        {entry.kind === "EDUCATION" && entry.details && (
+                          <div className="cloud-skillitem">
+                            <div className="cloud-skillitem-body">
+                              <p className="cloud-skillitem-name">교육 상세</p>
+                              <ul className="cloud-tl-subdesc-list">
+                                {entry.details.map((line) => (
+                                  <li key={line}>{line}</li>
+                                ))}
+                              </ul>
+                            </div>
                           </div>
-                        </div>
-                      ))}
+                        )}
+                        {entry.subProjects?.map((sp) => (
+                          <div key={sp.title} className="cloud-skillitem">
+                            <div className="cloud-skillitem-body">
+                              <p className="cloud-skillitem-name">
+                                {sp.title}
+                                <span className="cloud-tl-subwhen">{sp.when}</span>
+                              </p>
+                              <ul className="cloud-tl-subdesc-list">
+                                {sp.desc.map((line) => (
+                                  <li key={line}>{line}</li>
+                                ))}
+                              </ul>
+                              {sp.link && (
+                                <a className="cloud-skillitem-src" href={sp.link.href} target="_blank" rel="noopener">
+                                  {sp.link.label}
+                                </a>
+                              )}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                )}
+                  )}
+                </div>
               </div>
             );
           })}
         </div>
-        <CloudVeils
-          left={[
-            { right: 6, top: 10, width: 40 },
-            { right: 14, top: 42, width: 48 },
-            { right: 2, bottom: 4, width: 34 },
-          ]}
-          right={[
-            { left: 5, top: 12, width: 44 },
-            { left: 16, top: 44, width: 46 },
-            { left: 3, bottom: 2, width: 32 },
-          ]}
-        />
       </div>
     </section>
   );
+}
+
+export function CareerSection() {
+  return <TimelineSection id="career" title="경력" tag="CAREER" entries={careerEntries} />;
+}
+
+export function EducationSection() {
+  return <TimelineSection id="education" title="교육" tag="EDUCATION" entries={educationEntries} />;
 }

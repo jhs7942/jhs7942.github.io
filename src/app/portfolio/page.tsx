@@ -1,17 +1,14 @@
 import type { Metadata } from "next";
 import { absoluteUrl, SITE } from "@/lib/site";
 import "./portfolio.css";
-import { profile } from "./_data/profile";
 import { projects } from "./_data/projects";
 import { CloudCursorTrail } from "./_components/CloudCursorTrail";
 import { CloudDriftLayer } from "./_components/CloudDriftLayer";
-import { CloudMotion } from "./_components/CloudMotion";
 import { PortfolioDeck } from "./_components/PortfolioDeck";
 import { Hero } from "./_components/Hero";
 import { AboutSection } from "./_components/AboutSection";
-import { CareerSection } from "./_components/CareerSection";
+import { CareerSection, EducationSection } from "./_components/CareerSection";
 import { SkillsSection } from "./_components/SkillsSection";
-import { AiSection } from "./_components/AiSection";
 import { ProjectPage } from "./_components/ProjectPage";
 import { handFont } from "./_lib/fonts";
 
@@ -77,6 +74,7 @@ export default function PortfolioPage() {
         <Hero />
         <AboutSection />
         <CareerSection />
+        <EducationSection />
         <SkillsSection />
         {/* <AiSection /> */}
         {projects.map((project, i) => (
@@ -88,7 +86,6 @@ export default function PortfolioPage() {
           />
         ))}
       </PortfolioDeck>
-      <CloudMotion />
       <CloudCursorTrail />
     </div>
   );

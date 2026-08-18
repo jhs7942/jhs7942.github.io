@@ -21,7 +21,8 @@ export type PortfolioPageMeta = {
 export const portfolioPages: PortfolioPageMeta[] = [
   { id: "top", label: "홈" },
   { id: "about", label: "소개" },
-  { id: "career", label: "경험" },
+  { id: "career", label: "경력" },
+  { id: "education", label: "교육" },
   { id: "skills", label: "스킬" },
   // { id: "ai-work", label: "AI" },
   ...projects.map((p) => ({ id: `project-${p.slug}`, label: p.title })),

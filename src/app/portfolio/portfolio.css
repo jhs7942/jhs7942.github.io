@@ -2,10 +2,9 @@
  * 포트폴리오 전용 스타일 — "구름" 테마.
  *
  * Claude Design(claude.ai/design)에서 만든 handoff 목업(Portfolio.dc.html)을
- * 그대로 이식했다. 배경 그라디언트 위에 구름 모양 베일이 스크롤에 맞춰 갈라지며
- * 콘텐츠를 드러내는 게 이 테마의 핵심이다 — 시각 효과 수치는 원본 그대로 옮기고,
- * 인터랙션(스킬 탭 전환·스크롤 반응)은 리액트 컴포넌트로 다시 짰다
- * (CloudMotion.tsx · SkillsSection.tsx 참고). 반복되는 배지·태그·카드류는
+ * 그대로 이식했다. 배경 그라디언트와 구름 모양 카드로 테마를 구성하고,
+ * 인터랙션(스킬 탭 전환·스크롤 반응)은 리액트 컴포넌트로 다시 짰다.
+ * 반복되는 배지·태그·카드류는
  * 인라인 스타일 그대로 옮기지 않고 클래스로 묶었다 — 값은 원본과 동일하다.
  *
  * 폰트는 globals.css 의 --font-sans(자체 호스팅 Noto Sans KR)를 그대로 쓴다.
@@ -765,7 +764,8 @@ body.cloud-deck-lock {
    뷰포트(스크롤바 뺀 폭)보다 살짝 크게 잡히기 때문에, 좁은 화면에서
    이 계산식을 그대로 쓰면 원래(override 없는) 동작보다 오히려 더
    좁아지는 역효과가 난다. */
-#career .cloud-content {
+#career .cloud-content,
+#education .cloud-content {
   max-width: min(
     1584px,
     max(1000px, calc(100vw - 2 * clamp(64px, 7vw, 112px) - 24px))
@@ -807,57 +807,9 @@ body.cloud-deck-lock {
   color: var(--text-on-strong);
 }
 
-/* 구름 베일이 섹션 전체가 아니라 실제 글이 놓인 콘텐츠 박스만 감싸도록,
-   .cloud-content(또는 .cloud-hero-content)와 같은 크기를 갖는 래퍼를 하나 더
-   둔다 — 래퍼 안에 콘텐츠만 정상 흐름으로 넣으면 래퍼 높이가 콘텐츠 높이와
-   똑같아지고, 베일은 그 래퍼 기준으로 살짝만 여유를 두고 덮는다. */
+/* 섹션 콘텐츠의 상대 위치 기준을 유지하는 공통 래퍼. */
 .cloud-veilwrap {
   position: relative;
-}
-/* 구름 베일 — 좌우에서 갈라지며 콘텐츠를 드러낸다. 뼈대(둥근 사각형 + 뭉게구름
-   여러 덩이)는 모든 섹션이 같고, 구름의 위치·크기만 섹션마다 달라 인라인
-   스타일로 받는다 (CloudVeils.tsx · CloudPuff.tsx 참고). 참고 이미지처럼 크게
-   뭉친 원 실루엣 + 흰색/옅은 청록 두 톤이라 흐릿하게 블러 처리할 필요가 없다. */
-.cloud-veil {
-  position: absolute;
-  z-index: 3;
-  top: -22px;
-  bottom: -22px;
-  pointer-events: none;
-  will-change: transform;
-  border-radius: 46px;
-  filter: drop-shadow(0 10px 18px rgb(var(--shadow-rgb) / 0.16));
-}
-.cloud-veil.l {
-  left: -22px;
-  right: calc(50% - 6px);
-}
-.cloud-veil.r {
-  right: -22px;
-  left: calc(50% - 6px);
-}
-.cloud-veil-base {
-  position: absolute;
-  background: var(--surface-cloud);
-}
-.cloud-veil.l .cloud-veil-base {
-  inset: 0 22% 0 0;
-  border-radius: 46px 0 0 46px;
-}
-.cloud-veil.r .cloud-veil-base {
-  inset: 0 0 0 22%;
-  border-radius: 0 46px 46px 0;
-}
-.cloud-veil-blob {
-  position: absolute;
-}
-.cloud-veil-blob svg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  display: block;
-  overflow: visible;
 }
 
 /* 히어로 */
@@ -1054,7 +1006,7 @@ body.cloud-deck-lock {
    구름은 SVG path 한 개로 그려 내부 이음매 없이 매끈한 윤곽을 유지한다. */
 .cloud-about-layout {
   display: grid;
-  grid-template-columns: clamp(240px, 27vw, 330px) minmax(0, 1fr);
+  grid-template-columns: clamp(210px, 23vw, 280px) minmax(0, 1fr);
   gap: clamp(24px, 3.4vw, 48px);
   align-items: center;
   /* .cloud-content가 1000px에서 가운데 정렬되고 나면 좌우로 남는 여백이
@@ -1199,6 +1151,22 @@ body.cloud-deck-lock {
   border: 1.5px solid var(--border-medium);
   box-shadow: 0 14px 30px -16px rgb(var(--shadow-rgb) / 0.7);
 }
+@media (min-width: 641px) {
+  .cloud-about-layout {
+    align-items: stretch;
+  }
+  .cloud-about-media {
+    min-height: 0;
+  }
+  .cloud-about-photo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+}
 .cloud-about-lead {
   margin: 0 0 8px;
   font-size: 18px;
@@ -1247,22 +1215,25 @@ body.cloud-deck-lock {
   font-size: 13px;
 }
 
-/* 경험 타임라인 — 카드 사이를 잇던 연결선+점(.cloud-tl-line/.cloud-tl-dot)은
-   삭제했다. 가운데 전용 칸이 필요 없어져 grid-template-columns도 2칸으로 줄였다. */
+/* 경험 타임라인 — 모든 항목을 구름 요약과 가로형 상세 카드가 위아래로 이어지는
+   동일한 구조로 보여준다. */
 .cloud-tl-row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  align-items: start;
+  margin-bottom: clamp(44px, 6vw, 72px);
 }
 .cloud-tl-card {
-  grid-column: 2;
-}
-.cloud-tl-row.side-left .cloud-tl-card {
   grid-column: 1;
-  text-align: right;
+  grid-row: 1;
+  width: min(100%, 840px);
 }
-.cloud-tl-row.last .cloud-tl-card {
-  padding-bottom: 4px;
+.cloud-tl-row.last {
+  margin-bottom: 0;
+}
+#education .cloud-tl-row:not(.last) {
+  margin-bottom: clamp(16px, 2vw, 24px);
 }
 /* 경험 카드 구름 — 소개 카드는 이제 일반 카드(.cloud-about-card)로 바뀌었지만,
    이 타임라인 카드는 기존 구름 path(.cloud-tl-shape)를 그대로 쓴다. 안쪽 여백
@@ -1276,6 +1247,7 @@ body.cloud-deck-lock {
 .cloud-tl-inner {
   position: relative;
   display: block;
+  width: 100%;
   max-width: 840px;
   padding: 139px 82px 118px 139px;
   text-align: left;
@@ -1293,9 +1265,6 @@ body.cloud-deck-lock {
   position: relative;
   z-index: 1;
   color: var(--cloud-text);
-}
-.cloud-tl-row.side-left .cloud-tl-inner {
-  text-align: left;
 }
 .cloud-tl-meta {
   display: flex;
@@ -1339,21 +1308,18 @@ body.cloud-deck-lock {
   font-size: 17px;
   font-weight: 700;
 }
-/* "업무 보기"를 누르면 펼쳐지는 하위 SI 프로젝트 목록 — 새 카드 스타일을 만들지
-   않고 스킬 섹션의 .cloud-skillpanel/.cloud-skillitem을 그대로 재사용한다(카드
-   하나 안에 항목을 하나씩 나열하는 모양이 이미 거기 있었다). .cloud-tl-subpanel은
-   스킬 패널 전용으로 잡혀 있던 min-height(420px, 그리드 옆칸 높이 맞춤용)만
-   이 문맥에 맞게 걷어내는 보정용 클래스다.
-   너비·정렬은 .cloud-tl-row의 grid-template-columns(1fr 14px 1fr)와 같은 계산식을
-   써서 트리거 카드가 있던 쪽(오른쪽 기본, side-left면 왼쪽) 바로 아래에 붙인다 —
-   "이 카드에서 펼쳐졌다"는 연관성이 보이도록. */
+/* 경력·교육 상세 패널 — 스킬 섹션의 카드 스타일을 재사용하고, 구름 아래에서
+   콘텐츠 폭을 전부 사용해 긴 설명도 여유 있게 읽히도록 한다. */
 .cloud-tl-subpanel {
+  grid-column: 1;
+  grid-row: 2;
   min-height: 0;
-  width: calc((100% - 14px) / 2);
-  margin: -2px 0 28px auto;
+  width: 100%;
+  margin: 0;
 }
-.cloud-tl-subpanel.side-left {
-  margin: -2px auto 28px 0;
+.cloud-tl-subpanel.education {
+  min-height: 0;
+  margin-bottom: 150px;
 }
 .cloud-tl-subwhen {
   margin-left: 6px;
@@ -2008,10 +1974,16 @@ body.cloud-deck-lock {
 @media (max-width: 900px) {
   .cloud-tl-row {
     grid-template-columns: 1fr;
+    gap: 6px;
+    margin-bottom: 40px;
   }
-  .cloud-tl-card,
-  .cloud-tl-row.side-left .cloud-tl-card {
+  .cloud-tl-row.last {
+    margin-bottom: 0;
+  }
+  .cloud-tl-card {
     grid-column: 1;
+    grid-row: 1;
+    width: 100%;
     text-align: left;
     /* padding: 0 0 0px; */
   }
@@ -2021,12 +1993,11 @@ body.cloud-deck-lock {
   .cloud-tl-inner {
     padding: 70px 29px 55px 48px;
   }
-  /* 타임라인이 1열로 쌓이면 좌우 절반 폭 공식(calc((100% - 14px) / 2))이
-     의미 없어진다 — 카드와 마찬가지로 꽉 채운다. */
-  .cloud-tl-subpanel,
-  .cloud-tl-subpanel.side-left {
-    width: auto;
-    margin: 6px 0 34px;
+  .cloud-tl-subpanel {
+    grid-column: 1;
+    grid-row: 2;
+    width: 100%;
+    margin: 0;
   }
   .cloud-skillwrap {
     grid-template-columns: 1fr;
@@ -2060,7 +2031,8 @@ body.cloud-deck-lock {
   .cloud-deck .cloud-section.hero {
     min-height: 100%;
   }
-  #career .cloud-content {
+  #career .cloud-content,
+  #education .cloud-content {
     max-width: none;
   }
   #skills .cloud-content,
