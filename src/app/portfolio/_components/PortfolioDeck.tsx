@@ -74,17 +74,6 @@ export function PortfolioDeck({ children }: { children: ReactNode }) {
     pageRefs.current[index]?.scrollTo({ top: 0 });
   }, [index]);
 
-  // 덱은 화면에 고정돼 있으므로 문서 자체의 스크롤은 잠근다.
-  useEffect(() => {
-    const { documentElement: html, body } = document;
-    html.classList.add("cloud-deck-lock");
-    body.classList.add("cloud-deck-lock");
-    return () => {
-      html.classList.remove("cloud-deck-lock");
-      body.classList.remove("cloud-deck-lock");
-    };
-  }, []);
-
   useEffect(() => {
     function onKeyDown(e: KeyboardEvent) {
       if (e.altKey || e.ctrlKey || e.metaKey) return;

@@ -174,8 +174,10 @@
    섹션을 세로로 잇지 않고 가로로 늘어놓은 뒤 현재 장만큼 밀어서 보여준다.
    문서 스크롤은 잠그고, 한 장에 안 들어가는 긴 섹션만 그 장 안에서 세로로
    스크롤된다 (PortfolioDeck.tsx 참고). */
-html.cloud-deck-lock,
-body.cloud-deck-lock {
+/* :has()는 서버가 보낸 첫 HTML부터 적용된다. hydration 뒤 class를 붙이던 방식은
+   스크롤바 폭만큼 viewport가 바뀌면서 900px 반응형 경계를 넘나들 수 있었다. */
+html:has(.cloud-deck),
+body:has(.cloud-deck) {
   height: 100%;
   overflow: hidden;
   overscroll-behavior: none;

@@ -9,6 +9,8 @@ import localFont from "next/font/local";
 export const handFont = localFont({
   src: "../_fonts/ongeulip-handwriting.ttf",
   variable: "--font-hand",
-  display: "swap",
-  preload: false,
+  // 첫 페인트 뒤 대체 폰트에서 손글씨체로 교체되며 제목 크기가 튀지 않도록
+  // 포트폴리오 HTML에서 바로 선로딩하고, 준비된 글꼴만 화면에 그린다.
+  display: "block",
+  preload: true,
 });
