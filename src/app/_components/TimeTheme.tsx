@@ -2,9 +2,10 @@
 
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
+import { CloudShape } from "../portfolio/_components/CloudShape";
 
 type ThemeName = "day" | "sunset" | "night";
-type GreetingPeriod = "morning" | "day" | "evening";
+type GreetingPeriod = "morning" | "afternoon" | "evening" | "night";
 
 const THEME_STORAGE_KEY = "portfolio-theme";
 const THEME_OPTIONS: ReadonlyArray<{ value: ThemeName; label: string }> = [
@@ -25,8 +26,9 @@ function getTheme(hour: number): ThemeName {
 
 function getGreetingPeriod(hour: number): GreetingPeriod {
   if (hour >= 6 && hour < 12) return "morning";
-  if (hour >= 12 && hour < 18) return "day";
-  return "evening";
+  if (hour >= 12 && hour < 17) return "afternoon";
+  if (hour >= 17 && hour < 20) return "evening";
+  return "night";
 }
 
 function getNextBoundary(boundaryHours: readonly number[]) {
@@ -64,7 +66,7 @@ export function TimeTheme() {
       document.documentElement.dataset.greeting = getGreetingPeriod(new Date().getHours());
       greetingTimeoutRef.current = window.setTimeout(
         applyGreeting,
-        getNextBoundary([6, 12, 18]),
+        getNextBoundary([6, 12, 17, 20]),
       );
     };
 
@@ -119,14 +121,12 @@ export function TimeTheme() {
           key={option.value}
           type="button"
           className="time-theme-option"
+          data-theme={option.value}
           aria-pressed={selectedTheme === option.value}
           onClick={() => selectTheme(option.value)}
         >
-          <span
-            className={`time-theme-swatch time-theme-swatch--${option.value}`}
-            aria-hidden="true"
-          />
-          <span>{option.label}</span>
+          <CloudShape fillId={`themeControlCloud-${option.value}`} />
+          <span className="time-theme-label">{option.label}</span>
         </button>
       ))}
     </div>

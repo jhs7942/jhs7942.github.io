@@ -27,7 +27,7 @@ export function Nav({
 
   return (
     <nav className="cloud-nav">
-      <button type="button" className="cloud-nav-brand" onClick={() => onSelect(0)}>
+      <button type="button" className="cloud-nav-link" onClick={() => onSelect(0)}>
         인사
       </button>
       <span className="cloud-nav-divider" />
