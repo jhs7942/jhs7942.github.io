@@ -814,7 +814,7 @@ body:has(.cloud-deck) {
 .cloud-nav-group-label {
   display: block;
   padding: 2px 8px 1px;
-  font-family: var(--font-hand), var(--font-sans);
+  font-family: var(--font-sans);
   font-size: 13px;
   font-weight: 900;
   letter-spacing: 0.4px;

@@ -50,7 +50,6 @@ export function Nav({
         })}
         {projectPages.length > 0 && (
           <div className="cloud-nav-projects">
-            <span className="cloud-nav-group-label">프로젝트</span>
             {projectPages.map((page) => {
               const pageIndex = pages.findIndex((item) => item.id === page.id);
               const active = pageIndex === activeIndex;
