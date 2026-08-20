@@ -111,20 +111,24 @@ export function TimeTheme() {
   };
 
   return (
-    <div className="time-theme-switcher" role="group" aria-label="화면 테마 선택">
-      {THEME_OPTIONS.map((option) => (
-        <button
-          key={option.value}
-          type="button"
-          className="time-theme-option"
-          data-theme={option.value}
-          aria-pressed={selectedTheme === option.value}
-          onClick={() => selectTheme(option.value)}
-        >
-          <CloudShape fillId={`themeControlCloud-${option.value}`} />
-          <span className="time-theme-label">{option.label}</span>
-        </button>
-      ))}
+    <div className="time-theme-trigger-zone">
+      <div className="time-theme-switcher" role="group" aria-label="화면 테마 선택">
+        {THEME_OPTIONS.map((option) => (
+          <button
+            key={option.value}
+            type="button"
+            className="time-theme-option"
+            data-theme={option.value}
+            aria-pressed={selectedTheme === option.value}
+            onClick={() => selectTheme(option.value)}
+          >
+            <span className="time-theme-cloudlet" aria-hidden="true">
+              <CloudShape fillId={`themeCloudlet-${option.value}`} />
+            </span>
+            <span>{option.label}</span>
+          </button>
+        ))}
+      </div>
     </div>
   );
 }

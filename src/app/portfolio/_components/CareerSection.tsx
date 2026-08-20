@@ -29,9 +29,6 @@ function TimelineSection({ id, title, entries }: TimelineSectionProps) {
               <div
                 className={`cloud-tl-inner${entry.tint ? " tint" : ""}`}
               >
-                {/* 소개 카드와 똑같은 구름 path — 크기만 카드에 맞게 줄었다.
-                    자세한 이유는 portfolio.css의 .cloud-tl-shape 주석 참고. */}
-                <CloudShape fillId={fillId} />
                 <div className="cloud-tl-body">
                   <div className="cloud-tl-meta">
                     <span className="cloud-tl-kind" style={{ background: entry.kindColor }}>

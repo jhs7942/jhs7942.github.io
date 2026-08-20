@@ -517,16 +517,31 @@ body:has(.cloud-deck) {
   }
 }
 
-/* 오른쪽 상단 테마 선택기 — 히어로와 같은 SVG 구름을 각 버튼의 바탕으로 쓴다.
-   CSS 타원 여러 개를 겹치는 방식보다 외곽선과 비대칭 곡선이 또렷하게 보인다. */
-.time-theme-switcher {
+/* 오른쪽 상단 테마 선택기 — 바깥 영역은 접힌 상태에서도 펼친 폭을 유지해,
+   이미지처럼 테마 이름들이 놓이는 범위 안에서만 다시 열리게 한다. */
+.time-theme-trigger-zone {
   position: fixed;
   top: 18px;
   right: 18px;
   z-index: 80;
+  width: max-content;
+  min-height: 30px;
+}
+.time-theme-trigger-zone::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: -100%;
+  z-index: 0;
+}
+.time-theme-switcher {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
-  gap: 2px;
+  gap: 11px;
   padding: 0;
   border: 0;
   background: transparent;
@@ -535,89 +550,72 @@ body:has(.cloud-deck) {
     right 360ms cubic-bezier(0.22, 1, 0.36, 1),
     opacity 260ms ease,
     transform 360ms cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: right, transform;
+  will-change: transform;
 }
 .time-theme-option {
-  --theme-cloud-fill: var(--surface-overlay-strong);
-  --theme-cloud-hover: var(--mint-pale);
-  --theme-cloud-text: var(--text-primary);
-  --surface-cloud: var(--theme-cloud-fill);
   position: relative;
   display: inline-flex;
   align-items: center;
-  justify-content: center;
   gap: 7px;
-  width: 130px;
-  min-height: 50px;
-  padding: 7px 15px 2px;
+  min-height: 30px;
+  padding: 4px 2px;
   border: 0;
-  color: var(--theme-cloud-text);
+  border-radius: 0;
+  color: var(--text-primary);
   background: transparent;
   font-family: inherit;
   font-size: 11.5px;
   font-weight: 800;
+  opacity: 0.66;
   white-space: nowrap;
   cursor: pointer;
   transition:
     color 160ms ease,
+    background 160ms ease,
     transform 180ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 .time-theme-option[data-theme="day"] {
-  --theme-cloud-fill: #c8e9e4;
-  --theme-cloud-hover: #eaf6f3;
-  --theme-cloud-text: #243130;
+  --surface-cloud: #83cfc9;
 }
 .time-theme-option[data-theme="sunset"] {
-  --theme-cloud-fill: #f3c6a5;
-  --theme-cloud-hover: #fff0df;
-  --theme-cloud-text: #553b3b;
+  --surface-cloud: #d98268;
 }
 .time-theme-option[data-theme="night"] {
-  --theme-cloud-fill: #18333d;
-  --theme-cloud-hover: #234f56;
-  --theme-cloud-text: #f1f7f2;
+  --surface-cloud: #132f3b;
 }
-.time-theme-option > .cloud-tl-shape {
+.time-theme-option:hover {
+  background: transparent;
+  opacity: 0.82;
+  transform: translateY(-1px);
+}
+.time-theme-option:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+.time-theme-option[aria-pressed="true"] {
+  color: var(--text-primary);
+  background: transparent;
+  opacity: 1;
+}
+.time-theme-option[aria-pressed="true"] .time-theme-cloudlet {
+  transform: scale(1.08);
+  filter: drop-shadow(0 3px 3px rgb(var(--shadow-rgb) / 0.2));
+}
+.time-theme-cloudlet {
+  position: relative;
+  display: block;
+  width: 28px;
+  height: 18px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.time-theme-cloudlet > .cloud-tl-shape {
+  position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  filter: drop-shadow(0 8px 7px rgb(var(--shadow-rgb) / 0.2));
-  transform: scale(1.04);
-  transition:
-    filter 180ms ease,
-    transform 180ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-.time-theme-option > :not(.cloud-tl-shape) {
-  position: relative;
-  z-index: 1;
-}
-.time-theme-option:hover {
-  --surface-cloud: var(--theme-cloud-hover);
-  transform: translateY(-2px);
-}
-.time-theme-option:hover > .cloud-tl-shape {
-  filter: drop-shadow(0 10px 8px rgb(var(--shadow-rgb) / 0.24));
-  transform: scale(1.08) rotate(-0.8deg);
-}
-.time-theme-option:focus-visible {
-  outline: none;
-}
-.time-theme-option:focus-visible > .cloud-tl-shape {
-  filter:
-    drop-shadow(0 0 1px var(--focus-ring))
-    drop-shadow(0 0 3px var(--focus-ring));
-}
-.time-theme-option[aria-pressed="true"] {
-  --surface-cloud: var(--theme-cloud-fill);
-  color: var(--theme-cloud-text);
-}
-.time-theme-option[aria-pressed="true"] > .cloud-tl-shape {
-  filter: drop-shadow(0 10px 8px rgb(var(--shadow-rgb) / 0.28));
-  transform: scale(1.08);
-}
-.time-theme-label {
-  display: inline-block;
-  transform: translateY(-3px);
+  filter: drop-shadow(0 2px 2px rgb(var(--shadow-rgb) / 0.18));
+  transform: none;
 }
 /* 왼쪽 내비게이션 — 긴 캡슐 패널을 없애고 메뉴 하나하나를 작은 구름으로 만든다. */
 .cloud-nav {
@@ -670,21 +668,11 @@ body:has(.cloud-deck) {
     transform: translateY(-50%);
   }
   :root[data-portfolio-chrome="collapsed"] .time-theme-switcher {
-    right: 0;
     opacity: 0.46;
     transform: translateX(calc(100% - 14px));
   }
-  :root[data-portfolio-chrome="collapsed"] .time-theme-switcher::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 100%;
-    width: 18px;
-  }
-  :root[data-portfolio-chrome="collapsed"] .time-theme-switcher:hover,
-  :root[data-portfolio-chrome="collapsed"] .time-theme-switcher:focus-within {
-    right: 18px;
+  :root[data-portfolio-chrome="collapsed"] .time-theme-trigger-zone:hover .time-theme-switcher,
+  :root[data-portfolio-chrome="collapsed"] .time-theme-trigger-zone:focus-within .time-theme-switcher {
     opacity: 1;
     transform: none;
   }
@@ -718,11 +706,6 @@ body:has(.cloud-deck) {
     filter 180ms ease,
     transform 180ms cubic-bezier(0.22, 1, 0.36, 1);
 }
-.cloud-nav-label {
-  position: relative;
-  z-index: 1;
-  display: block;
-}
 .cloud-nav-brand {
   min-height: 58px;
   font-weight: 900;
@@ -733,13 +716,12 @@ body:has(.cloud-deck) {
   letter-spacing: -0.6px;
   text-align: center;
   transition:
-    color 0.18s ease,
+    opacity 0.15s ease,
     transform 0.18s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .cloud-nav-brand:hover,
 .cloud-nav-brand:focus-visible {
   --surface-cloud: var(--mint-pale);
-  color: var(--accent);
   outline: none;
   transform: translateY(-1px);
 }
@@ -779,15 +761,18 @@ body:has(.cloud-deck) {
   padding: 8px 18px 4px;
   text-align: center;
   transition:
-    color 0.15s ease,
+    opacity 0.15s ease,
     transform 0.18s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .cloud-nav-link:hover,
 .cloud-nav-link:focus-visible {
   --surface-cloud: var(--mint-pale);
-  color: var(--accent);
   outline: none;
   transform: translateX(2px);
+}
+.cloud-nav-brand:hover,
+.cloud-nav-link:hover {
+  opacity: 0.55;
 }
 .cloud-nav-link:hover > .cloud-tl-shape,
 .cloud-nav-link:focus-visible > .cloud-tl-shape {
@@ -1142,14 +1127,14 @@ body:has(.cloud-deck) {
   display: block;
   min-height: 0;
   padding: clamp(30px, 4vw, 48px) clamp(28px, 4vw, 56px) clamp(56px, 5vw, 68px);
-  background: linear-gradient(
+  /* background: linear-gradient(
     135deg,
     var(--surface-page) 0%,
     var(--mint-pale) 100%
-  );
-  border: 1.5px solid var(--border-medium);
+  ); */
+  /* border: 1.5px solid var(--border-medium);
   border-radius: 22px 26px 20px 24px;
-  box-shadow: 0 18px 38px -20px rgb(var(--shadow-rgb) / 0.55);
+  box-shadow: 0 18px 38px -20px rgb(var(--shadow-rgb) / 0.55); */
   overflow: visible;
 }
 .cloud-about-media,
@@ -2078,7 +2063,7 @@ body:has(.cloud-deck) {
   }
 }
 @media (max-width: 640px) {
-  .time-theme-switcher {
+  .time-theme-trigger-zone {
     top: 72px;
     right: 10px;
     max-width: calc(100vw - 20px);
