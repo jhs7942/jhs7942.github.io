@@ -122,7 +122,7 @@ export const projects: Project[] = [
     badge: "2026.07 ~ · 개발 단독 · 개발 중",
     badgeColor: "#35804C",
     visitUrl: "https://telepathy.my/",
-    githubUrl: "https://github.com/MoonEunSeo/telepathy-app/tree/v3",
+    githubUrl: "https://github.com/MoonEunSeo/telepathy-app/",
     newsUrl: "https://platum.kr/archives/272577",
     mobileShot: {
       src: "/portfolio/telepathy-mobile.jpg",
