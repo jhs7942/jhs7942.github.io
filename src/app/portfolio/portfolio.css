@@ -936,7 +936,7 @@ body:has(.cloud-deck) {
   margin-bottom: 26px;
 }
 .cloud-sechead h2 {
-  font-family: var(--font-hand), var(--font-sans);
+  font-family: var(--font-sans);
   margin: 0;
   font-size: 32px;
   letter-spacing: -0.8px;

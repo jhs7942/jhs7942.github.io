@@ -10,7 +10,7 @@ export const SITE = {
   url: "https://jhs7942.github.io",
   title: "정현승 | 웹 개발자 포트폴리오",
   description:
-    "React·TypeScript를 중심으로 프론트엔드부터 백엔드·인프라까지 경험한 웹 개발자 정현승의 포트폴리오와 기술 기록입니다.",
+    "React·TypeScript를 중심으로 프론트엔드부터 백엔드·인프라까지 경험한 웹 개발자 정현승의 포트폴리오입니다.",
   author: "정현승",
   locale: "ko_KR",
 } as const;

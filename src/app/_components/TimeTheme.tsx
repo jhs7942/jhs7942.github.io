@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { usePathname } from "next/navigation";
 import { CloudShape } from "../portfolio/_components/CloudShape";
 
 type ThemeName = "day" | "sunset" | "night";
@@ -56,7 +55,6 @@ function applyDocumentTheme(theme: ThemeName) {
 }
 
 export function TimeTheme() {
-  const pathname = usePathname();
   const [selectedTheme, setSelectedTheme] = useState<ThemeName | null>(null);
   const themeTimeoutRef = useRef<number | null>(null);
   const greetingTimeoutRef = useRef<number | null>(null);
@@ -111,8 +109,6 @@ export function TimeTheme() {
       // 저장소를 사용할 수 없어도 현재 화면의 테마 전환은 유지한다.
     }
   };
-
-  if (!pathname.startsWith("/portfolio")) return null;
 
   return (
     <div className="time-theme-switcher" role="group" aria-label="화면 테마 선택">
