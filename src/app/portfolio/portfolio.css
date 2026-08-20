@@ -582,6 +582,10 @@ body:has(.cloud-deck) {
 }
 .time-theme-option[data-theme="night"] {
   --surface-cloud: #132f3b;
+  color: #f1f7f2;
+}
+.time-theme-option[data-theme="night"][aria-pressed="true"] {
+  color: #f1f7f2;
 }
 .time-theme-option:hover {
   background: transparent;
@@ -1300,6 +1304,18 @@ body:has(.cloud-deck) {
 .cloud-about-actions .cloud-btn {
   padding: 9px 16px;
   font-size: 13px;
+  transition: opacity 0.15s ease;
+}
+.cloud-about-actions .cloud-btn.dark:hover,
+.cloud-about-actions .cloud-btn.dark:focus-visible {
+  color: var(--control-strong-text);
+}
+.cloud-about-actions .cloud-btn.ghost:hover,
+.cloud-about-actions .cloud-btn.ghost:focus-visible {
+  color: var(--text-primary);
+}
+.cloud-about-actions .cloud-btn:hover {
+  opacity: 0.55;
 }
 
 /* 경험 타임라인 — 모든 항목을 구름 요약과 가로형 상세 카드가 위아래로 이어지는
