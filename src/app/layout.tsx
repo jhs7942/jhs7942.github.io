@@ -63,7 +63,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body>
         <script
           dangerouslySetInnerHTML={{
-            __html: `(() => { const h = new Date().getHours(); const root = document.documentElement; let saved = null; try { saved = localStorage.getItem("portfolio-theme"); } catch {} root.dataset.theme = ["day", "sunset", "night"].includes(saved) ? saved : h >= 6 && h < 17 ? "day" : h >= 17 && h < 20 ? "sunset" : "night"; root.dataset.greeting = h >= 6 && h < 12 ? "morning" : h >= 12 && h < 17 ? "afternoon" : h >= 17 && h < 20 ? "evening" : "night"; })();`,
+            __html: `(() => { const h = new Date().getHours(); const root = document.documentElement; root.dataset.theme = h >= 6 && h < 17 ? "day" : h >= 17 && h < 20 ? "sunset" : "night"; root.dataset.greeting = h >= 6 && h < 12 ? "morning" : h >= 12 && h < 17 ? "afternoon" : h >= 17 && h < 20 ? "evening" : "night"; })();`,
           }}
         />
         <TimeTheme />

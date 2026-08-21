@@ -6,16 +6,11 @@ import { CloudShape } from "../portfolio/_components/CloudShape";
 type ThemeName = "day" | "sunset" | "night";
 type GreetingPeriod = "morning" | "afternoon" | "evening" | "night";
 
-const THEME_STORAGE_KEY = "portfolio-theme";
 const THEME_OPTIONS: ReadonlyArray<{ value: ThemeName; label: string }> = [
   { value: "day", label: "기본 테마" },
   { value: "sunset", label: "노을 테마" },
   { value: "night", label: "저녁 테마" },
 ];
-
-function isThemeName(value: string | null): value is ThemeName {
-  return value === "day" || value === "sunset" || value === "night";
-}
 
 function getTheme(hour: number): ThemeName {
   if (hour >= 6 && hour < 17) return "day";
@@ -39,15 +34,6 @@ function getNextBoundary(boundaryHours: readonly number[]) {
   nextBoundary.setHours(boundaryHour ?? boundaryHours[0], 0, 0, 0);
 
   return Math.max(nextBoundary.getTime() - now.getTime(), 1000);
-}
-
-function readSavedTheme(): ThemeName | null {
-  try {
-    const savedTheme = window.localStorage.getItem(THEME_STORAGE_KEY);
-    return isThemeName(savedTheme) ? savedTheme : null;
-  } catch {
-    return null;
-  }
 }
 
 function applyDocumentTheme(theme: ThemeName) {
@@ -79,14 +65,7 @@ export function TimeTheme() {
     };
 
     applyGreeting();
-
-    const savedTheme = readSavedTheme();
-    if (savedTheme) {
-      applyDocumentTheme(savedTheme);
-      window.queueMicrotask(() => setSelectedTheme(savedTheme));
-    } else {
-      applyAutomaticTheme();
-    }
+    applyAutomaticTheme();
 
     return () => {
       if (themeTimeoutRef.current !== null) window.clearTimeout(themeTimeoutRef.current);
@@ -102,12 +81,6 @@ export function TimeTheme() {
 
     applyDocumentTheme(theme);
     setSelectedTheme(theme);
-
-    try {
-      window.localStorage.setItem(THEME_STORAGE_KEY, theme);
-    } catch {
-      // 저장소를 사용할 수 없어도 현재 화면의 테마 전환은 유지한다.
-    }
   };
 
   return (

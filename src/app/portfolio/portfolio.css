@@ -1331,6 +1331,23 @@ body:has(.cloud-deck) {
   grid-column: 1;
   grid-row: 1;
   width: min(100%, 840px);
+  margin-inline: auto;
+  text-align: left;
+}
+#career .cloud-tl-meta,
+#education .cloud-tl-meta {
+  justify-content: flex-start;
+}
+#career .cloud-tl-card,
+#education .cloud-tl-card {
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
+}
+#career .cloud-tl-inner,
+#education .cloud-tl-inner {
+  max-width: none;
+  padding: 38px 41px 48px;
 }
 .cloud-tl-row.last {
   margin-bottom: 0;
@@ -2240,6 +2257,10 @@ body:has(.cloud-deck) {
     width: 100%;
     max-width: none;
     padding: 65px 34px 55px 50px;
+  }
+  #career .cloud-tl-inner,
+  #education .cloud-tl-inner {
+    padding: 40px 20px 32px;
   }
   .cloud-tl-meta {
     flex-wrap: wrap;
