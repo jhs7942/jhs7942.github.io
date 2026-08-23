@@ -14,3 +14,12 @@ export const handFont = localFont({
   display: "block",
   preload: true,
 });
+
+/** 스킬·교육 편지 카드의 설명에 쓰는 온글잎 보현체. */
+export const noteFont = localFont({
+  src: "../_fonts/ongeulip-bohyun.ttf",
+  variable: "--font-note",
+  display: "swap",
+  // 크기가 큰 한글 폰트이고 첫 장에서는 쓰지 않으므로 초기 선로딩은 하지 않는다.
+  preload: false,
+});

@@ -1,7 +1,6 @@
 "use client";
 
 import { careerTimeline, type CareerEntry } from "../_data/career";
-import { CloudShape } from "./CloudShape";
 
 const careerEntries = careerTimeline.filter((entry) => entry.kind !== "EDUCATION");
 const educationEntries = careerTimeline.filter((entry) => entry.kind === "EDUCATION");
@@ -24,7 +23,6 @@ function TimelineSection({ id, title, entries }: TimelineSectionProps) {
 
           {entries.map((entry, i) => {
             const isLast = i === entries.length - 1;
-            const fillId = `${id}-tlCloudFill-${i}`;
             const card = (
               <div
                 className={`cloud-tl-inner${entry.tint ? " tint" : ""}`}

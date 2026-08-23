@@ -83,16 +83,19 @@ export function SkillsSection() {
               <h3 className="cloud-skillpanel-name">{active.name}</h3>
               <div className="cloud-skillitems">
                 {active.items.map((item) => (
-                  <div key={item.name} className="cloud-skillitem">
+                  <article key={item.name} className="cloud-skillitem cloud-letter-card">
                     <SkillIconBadge name={item.name} />
-                    <div className="cloud-skillitem-body">
-                      <p className="cloud-skillitem-name">{item.name}</p>
+                    <div className="cloud-skillitem-body cloud-letter-sheet">
+                      {/* <span className="cloud-letter-label">
+                        NOTE · {String(index + 1).padStart(2, "0")}
+                      </span> */}
+                      <h4 className="cloud-skillitem-name">{item.name}</h4>
                       <p
                         className="cloud-skillitem-desc"
                         dangerouslySetInnerHTML={{ __html: item.descHtml }}
                       />
                     </div>
-                  </div>
+                  </article>
                 ))}
               </div>
             </div>

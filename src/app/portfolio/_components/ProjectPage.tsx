@@ -34,16 +34,10 @@ export function ProjectPage({ project }: { project: Project }) {
     }
   };
 
-  const phonePreview = mobileShot ? (
-    <div className="cloud-proj-phone">
-      <span className="cloud-proj-phone-notch" aria-hidden />
-      <span className="cloud-proj-phone-btn power" aria-hidden />
-      <span className="cloud-proj-phone-btn vol-up" aria-hidden />
-      <span className="cloud-proj-phone-btn vol-down" aria-hidden />
-      <div className="cloud-proj-screen">
-        {/* eslint-disable-next-line @next/next/no-img-element -- 고정 표시폭이라 next/image 최적화 이득이 없다 */}
-        <img src={mobileShot.src} alt={mobileShot.alt} width={220} height={476} />
-      </div>
+  const letterPreview = mobileShot ? (
+    <div className="cloud-proj-letter-shot">
+      {/* eslint-disable-next-line @next/next/no-img-element -- 고정 표시폭이라 next/image 최적화 이득이 없다 */}
+      <img src={mobileShot.src} alt={mobileShot.alt} width={220} height={476} />
     </div>
   ) : null;
 
@@ -55,7 +49,7 @@ export function ProjectPage({ project }: { project: Project }) {
         </div>
 
         <div className="cloud-proj-layout">
-          {phonePreview &&
+          {letterPreview &&
             (project.visitUrl ? (
               <a
                 className="cloud-proj-shot is-clickable"
@@ -64,10 +58,10 @@ export function ProjectPage({ project }: { project: Project }) {
                 rel="noopener noreferrer"
                 aria-label={`${project.title} 배포 사이트 열기`}
               >
-                {phonePreview}
+                {letterPreview}
               </a>
             ) : (
-              <div className="cloud-proj-shot">{phonePreview}</div>
+              <div className="cloud-proj-shot">{letterPreview}</div>
             ))}
           <div className="cloud-proj-list">
             <article

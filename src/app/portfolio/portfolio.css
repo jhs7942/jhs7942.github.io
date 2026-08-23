@@ -26,6 +26,17 @@
 }
 
 .cloud {
+  --hand-drawn-frame: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M2.6 3.1 Q25 2.8 49.5 3.2 T97.4 3 Q97.7 27 97.5 50.5 T97.9 97.1 Q74 97.5 50 97.2 T2.7 97.4 Q2.4 74 2.7 49.5 T2.6 3.1 Z' fill='none' stroke='%23182120' stroke-opacity='.64' stroke-width='1.75' vector-effect='non-scaling-stroke' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  --letter-paper-edge: polygon(
+    0.8% 0.8%, 7% 0.3%, 13% 0.7%, 15% 0.1%, 22% 0.5%, 29% 0.2%,
+    36% 0.8%, 43% 0.3%, 51% 0.6%, 58% 0.1%, 65% 0.7%, 73% 0.2%,
+    81% 0.6%, 89% 0.2%, 99.2% 0.7%, 99.7% 9%, 99.3% 18%, 99.8% 27%,
+    99.4% 36%, 99.9% 45%, 99.3% 55%, 99.8% 65%, 99.4% 75%, 99.8% 86%,
+    99.2% 99.2%, 91% 99.7%, 84% 99.1%, 76% 99.8%, 68% 99.3%,
+    61% 99.9%, 53% 99.2%, 45% 99.7%, 37% 99.1%, 29% 99.8%, 21% 99.2%,
+    14% 99.7%, 7% 99.1%, 0.8% 99.5%, 0.3% 89%, 0.7% 78%, 0.2% 67%,
+    0.8% 56%, 0.3% 45%, 0.7% 34%, 0.2% 23%, 0.7% 12%
+  );
   position: relative;
   font-family: var(--font-sans), "Apple SD Gothic Neo", sans-serif;
   color: var(--text-primary);
@@ -77,6 +88,49 @@
     filter: blur(0);
   }
 }
+@keyframes skillLetterIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.99);
+    filter: blur(6px) drop-shadow(4px 5px 0 rgb(var(--shadow-rgb) / 0.04));
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter:
+      blur(0)
+      drop-shadow(8px 10px 0 rgb(var(--shadow-rgb) / 0.09))
+      drop-shadow(0 16px 14px rgb(var(--shadow-rgb) / 0.12));
+  }
+}
+@keyframes whiteSkillLetterIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.99);
+    filter: blur(6px) drop-shadow(4px 5px 0 rgb(24 33 32 / 0.04));
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter:
+      blur(0)
+      drop-shadow(8px 10px 0 rgb(24 33 32 / 0.09))
+      drop-shadow(0 16px 14px rgb(24 33 32 / 0.12));
+  }
+}
+@keyframes highlighterSwipe {
+  0% {
+    opacity: 0;
+    transform: rotate(-1.6deg) skewX(-5deg) scaleX(0);
+  }
+  18% {
+    opacity: 0.78;
+  }
+  100% {
+    opacity: 0.78;
+    transform: rotate(-1.6deg) skewX(-5deg) scaleX(1);
+  }
+}
 @keyframes bob {
   0%,
   100% {
@@ -107,6 +161,9 @@
 @media (prefers-reduced-motion: reduce) {
   .cloud * {
     animation: none !important;
+  }
+  .cloud-cat-btn.active .cloud-cat-name::before {
+    animation: none;
   }
 }
 
@@ -554,18 +611,19 @@ body:has(.cloud-deck) {
 }
 .time-theme-option {
   position: relative;
+  isolation: isolate;
   display: inline-flex;
   align-items: center;
   gap: 7px;
   min-height: 30px;
-  padding: 4px 2px;
+  padding: 7px 10px 6px;
   border: 0;
   border-radius: 0;
   color: var(--text-primary);
   background: transparent;
-  font-family: inherit;
-  font-size: 11.5px;
-  font-weight: 800;
+  font-family: var(--font-hand), var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
   opacity: 0.66;
   white-space: nowrap;
   cursor: pointer;
@@ -573,6 +631,29 @@ body:has(.cloud-deck) {
     color 160ms ease,
     background 160ms ease,
     transform 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.time-theme-option::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: var(--hand-drawn-frame);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+  opacity: 0.48;
+  pointer-events: none;
+  transform: rotate(-0.08deg);
+  transition:
+    opacity 160ms ease,
+    transform 180ms ease;
+}
+.time-theme-option:nth-child(even)::before {
+  transform: rotate(0.08deg) scaleX(0.998);
+}
+:root[data-theme="night"] .time-theme-option::before {
+  filter: invert(1);
+  opacity: 0.6;
 }
 .time-theme-option[data-theme="day"] {
   --surface-cloud: #83cfc9;
@@ -591,6 +672,15 @@ body:has(.cloud-deck) {
   background: transparent;
   opacity: 0.82;
   transform: translateY(-1px);
+}
+.time-theme-option:hover::before,
+.time-theme-option[aria-pressed="true"]::before {
+  opacity: 0.9;
+  transform: rotate(-0.04deg) scale(1.015);
+}
+:root[data-theme="night"] .time-theme-option:hover::before,
+:root[data-theme="night"] .time-theme-option[aria-pressed="true"]::before {
+  opacity: 0.92;
 }
 .time-theme-option:focus-visible {
   outline: 2px solid var(--focus-ring);
@@ -906,6 +996,7 @@ body:has(.cloud-deck) {
   width: min(1416px, calc(100vw - 2 * clamp(64px, 7vw, 112px) - 24px));
   max-width: 1416px;
 }
+#about .cloud-content,
 [id^="project-"] .cloud-content {
   width: min(1416px, calc(100vw - 2 * clamp(64px, 7vw, 112px) - 24px));
   max-width: 1416px;
@@ -1102,29 +1193,17 @@ body:has(.cloud-deck) {
    구름은 SVG path 한 개로 그려 내부 이음매 없이 매끈한 윤곽을 유지한다. */
 .cloud-about-layout {
   display: grid;
-  grid-template-columns: clamp(210px, 23vw, 280px) minmax(0, 1fr);
+  grid-template-columns: clamp(260px, 25vw, 320px) minmax(0, 1fr);
   gap: clamp(24px, 3.4vw, 48px);
   align-items: center;
-  /* .cloud-content가 1000px에서 가운데 정렬되고 나면 좌우로 남는 여백이
-     생긴다(섹션 자체 폭은 그보다 넓다 — .cloud-deck .cloud-section의
-     padding 참고). 왼쪽은 다른 섹션 제목과 줄을 맞추려고 그대로 두고,
-     오른쪽 여백만 이 레이아웃 폭에 얹어 구름 카드가 오른쪽으로 더
-     늘어나게 한다. --about-section-inner는 섹션의 실제 padding 공식과
-     동일하게 계산한 "섹션 안쪽 폭"이다.
-     - 화면이 좁아 섹션 안쪽 폭이 1000px보다 좁으면(= .cloud-content에 애초에
-       여백이 없으면) 그 폭을 그대로 쓴다 — min()의 첫 항.
-     - 화면이 넓어 여백이 있으면 1000px + (여백의 절반)까지만 늘린다 — 왼쪽
-       여백은 그대로 두고 오른쪽 여백만 가져오는 식.
-     둘 중 항상 더 작은 쪽을 쓰므로 어떤 화면 폭에서도 섹션의
-     overflow:hidden 경계를 넘지 않는다. 실측해 보니 데크 슬라이드 폭이
-     100vw보다 스크롤바만큼(약 15px) 좁아서 24px를 더 뺀 여유값을 둔다. */
+  /* 섹션 안쪽 폭을 넘지 않으면서 다른 편지 카드와 같은 중앙축에 둔다. */
   --about-section-inner: calc(100vw - 2 * clamp(64px, 7vw, 112px) - 24px);
   width: min(
-    1300px,
+    1380px,
     var(--about-section-inner),
-    calc(500px + var(--about-section-inner) / 2)
+    calc(610px + var(--about-section-inner) / 2)
   );
-  margin: 0 auto 0 0;
+  margin: 0 auto;
 }
 .cloud-about-card {
   position: relative;
@@ -1233,7 +1312,7 @@ body:has(.cloud-deck) {
 }
 .cloud-about-photo {
   width: min(100%, 320px);
-  aspect-ratio: 5 / 6;
+  aspect-ratio: 3 / 4;
   height: auto;
   display: block;
   object-fit: cover;
@@ -1244,17 +1323,17 @@ body:has(.cloud-deck) {
 }
 @media (min-width: 641px) {
   .cloud-about-layout {
-    align-items: stretch;
+    align-items: center;
   }
   .cloud-about-media {
-    min-height: 0;
+    align-items: center;
+    min-height: 100%;
   }
   .cloud-about-photo {
-    position: absolute;
-    inset: 0;
+    position: static;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
+    object-fit: contain;
     object-position: center top;
   }
 }
@@ -1463,6 +1542,409 @@ body:has(.cloud-deck) {
   margin-top: 4px;
 }
 
+/* 교육 페이지 — 스킬 패널과 같은 찢어진 공책 종이 위에 요약과 상세를 적는다. */
+#education {
+  --education-paper-edge: polygon(
+    0.8% 0.8%, 7% 0.3%, 13% 0.7%, 15% 0.1%, 22% 0.5%, 29% 0.2%,
+    36% 0.8%, 43% 0.3%, 51% 0.6%, 58% 0.1%, 65% 0.7%, 73% 0.2%,
+    81% 0.6%, 89% 0.2%, 99.2% 0.7%, 99.7% 9%, 99.3% 18%, 99.8% 27%,
+    99.4% 36%, 99.9% 45%, 99.3% 55%, 99.8% 65%, 99.4% 75%, 99.8% 86%,
+    99.2% 99.2%, 91% 99.7%, 84% 99.1%, 76% 99.8%, 68% 99.3%,
+    61% 99.9%, 53% 99.2%, 45% 99.7%, 37% 99.1%, 29% 99.8%, 21% 99.2%,
+    14% 99.7%, 7% 99.1%, 0.8% 99.5%, 0.3% 89%, 0.7% 78%, 0.2% 67%,
+    0.8% 56%, 0.3% 45%, 0.7% 34%, 0.2% 23%, 0.7% 12%
+  );
+}
+#education .cloud-tl-inner,
+#education .cloud-tl-subpanel.education {
+  overflow: hidden;
+  color: var(--cloud-text);
+  background:
+    repeating-linear-gradient(96deg, transparent 0 38px, rgb(var(--shadow-rgb) / 0.012) 39px, transparent 40px 78px),
+    linear-gradient(rgb(var(--shadow-rgb) / 0.035) 1px, transparent 1px) 0 45px / 100% 33px,
+    var(--surface-page);
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  clip-path: var(--education-paper-edge);
+  -webkit-mask: radial-gradient(circle at 4px 18px, transparent 0 4px, #000 4.5px) 0 0 / 100% 31px repeat-y;
+  mask: radial-gradient(circle at 4px 18px, transparent 0 4px, #000 4.5px) 0 0 / 100% 31px repeat-y;
+  filter:
+    drop-shadow(8px 10px 0 rgb(var(--shadow-rgb) / 0.08))
+    drop-shadow(0 16px 14px rgb(var(--shadow-rgb) / 0.1));
+}
+#education .cloud-tl-inner {
+  padding: 39px 43px 45px 50px;
+  transform: rotate(-0.12deg);
+}
+#education .cloud-tl-row:nth-child(even) .cloud-tl-inner {
+  transform: rotate(0.16deg);
+}
+#education .cloud-tl-subpanel.education {
+  padding: 31px 38px 39px 48px;
+  animation-name: skillLetterIn;
+}
+#education .cloud-tl-kind {
+  isolation: isolate;
+  position: relative;
+  padding: 2px 4px;
+  font-family: var(--font-hand), var(--font-sans);
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--cloud-text);
+  background: transparent !important;
+  transform: rotate(-1.1deg);
+}
+#education .cloud-tl-kind::before {
+  content: "";
+  position: absolute;
+  right: -5px;
+  bottom: 0;
+  left: -4px;
+  z-index: -1;
+  height: 0.64em;
+  border-radius: 3px 6px 3px 5px;
+  background: #eaff63;
+  opacity: 0.65;
+  transform: rotate(-1.4deg) skewX(-5deg);
+}
+#education .cloud-tl-when {
+  font-family: var(--font-hand), var(--font-sans);
+  font-size: 18px;
+  font-weight: 500;
+  transform: rotate(0.4deg);
+}
+#education .cloud-tl-title {
+  display: inline-block;
+  position: relative;
+  margin: 3px 0 10px;
+  font-family: var(--font-hand), var(--font-sans);
+  font-size: 34px;
+  font-weight: 500;
+  line-height: 1.12;
+  transform: rotate(-0.55deg);
+}
+#education .cloud-tl-title::after,
+#education .cloud-tl-subpanel .cloud-skillitem-name::after {
+  content: "";
+  position: absolute;
+  right: -6px;
+  bottom: -5px;
+  left: -3px;
+  height: 6px;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  opacity: 0.3;
+  transform: rotate(-1.1deg);
+}
+#education .cloud-tl-sub {
+  font-family: var(--font-hand), var(--font-sans);
+  font-size: 20px;
+  font-weight: 500;
+}
+#education .cloud-tl-subpanel .cloud-skillitems {
+  gap: 0;
+}
+#education .cloud-tl-subpanel .cloud-skillitem {
+  display: block;
+  padding: 8px 10px 10px;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+}
+#education .cloud-tl-subpanel .cloud-skillitem-name {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 13px;
+  font-family: var(--font-hand), var(--font-sans);
+  font-size: 27px;
+  font-weight: 500;
+  transform: rotate(-0.6deg);
+}
+#education .cloud-tl-subdesc-list li::marker {
+  color: var(--accent);
+}
+#education .cloud-tl-desc,
+#education .cloud-tl-subdesc-list li {
+  font-family: var(--font-note), var(--font-sans);
+  font-size: 35px;
+  font-weight: 400;
+  letter-spacing: 0.1px;
+}
+
+/* 경력·교육의 요약과 상세를 따로 된 카드가 아닌 한 장의 공책 종이로 묶는다. */
+#career,
+#education {
+  --timeline-paper-edge: polygon(
+    0.8% 0.8%, 7% 0.3%, 13% 0.7%, 15% 0.1%, 22% 0.5%, 29% 0.2%,
+    36% 0.8%, 43% 0.3%, 51% 0.6%, 58% 0.1%, 65% 0.7%, 73% 0.2%,
+    81% 0.6%, 89% 0.2%, 99.2% 0.7%, 99.7% 9%, 99.3% 18%, 99.8% 27%,
+    99.4% 36%, 99.9% 45%, 99.3% 55%, 99.8% 65%, 99.4% 75%, 99.8% 86%,
+    99.2% 99.2%, 91% 99.7%, 84% 99.1%, 76% 99.8%, 68% 99.3%,
+    61% 99.9%, 53% 99.2%, 45% 99.7%, 37% 99.1%, 29% 99.8%, 21% 99.2%,
+    14% 99.7%, 7% 99.1%, 0.8% 99.5%, 0.3% 89%, 0.7% 78%, 0.2% 67%,
+    0.8% 56%, 0.3% 45%, 0.7% 34%, 0.2% 23%, 0.7% 12%
+  );
+}
+#career .cloud-tl-row,
+#education .cloud-tl-row {
+  gap: 0;
+  overflow: hidden;
+  color: var(--cloud-text);
+  background:
+    repeating-linear-gradient(96deg, transparent 0 38px, rgb(24 33 32 / 0.012) 39px, transparent 40px 78px),
+    linear-gradient(rgb(24 33 32 / 0.035) 1px, transparent 1px) 0 45px / 100% 33px,
+    #ffffff;
+  clip-path: var(--timeline-paper-edge);
+  -webkit-mask: radial-gradient(circle at 4px 18px, transparent 0 4px, #000 4.5px) 0 0 / 100% 31px repeat-y;
+  mask: radial-gradient(circle at 4px 18px, transparent 0 4px, #000 4.5px) 0 0 / 100% 31px repeat-y;
+  filter:
+    drop-shadow(8px 10px 0 rgb(24 33 32 / 0.08))
+    drop-shadow(0 16px 14px rgb(24 33 32 / 0.1));
+}
+#career .cloud-tl-inner,
+#education .cloud-tl-inner,
+#career .cloud-tl-subpanel,
+#education .cloud-tl-subpanel.education {
+  overflow: visible;
+  color: var(--cloud-text);
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  clip-path: none;
+  -webkit-mask: none;
+  mask: none;
+  filter: none;
+  transform: none;
+}
+#career .cloud-tl-inner,
+#education .cloud-tl-inner {
+  padding: 39px 43px 27px 50px;
+}
+#career .cloud-tl-subpanel,
+#education .cloud-tl-subpanel.education {
+  position: relative;
+  min-height: 0;
+  margin: 0;
+  padding: 25px 41px 43px 50px;
+  animation: none;
+}
+#career .cloud-tl-subpanel::before,
+#education .cloud-tl-subpanel.education::before {
+  content: "";
+  position: absolute;
+  top: 4px;
+  right: 42px;
+  left: 48px;
+  height: 7px;
+  border-top: 1.5px solid rgb(24 33 32 / 0.28);
+  border-radius: 50%;
+  opacity: 0.72;
+  transform: rotate(-0.18deg);
+}
+#career .cloud-tl-subpanel::before,
+#education .cloud-tl-subpanel.education::before {
+  display: none;
+}
+#career .cloud-tl-kind,
+#education .cloud-tl-kind {
+  isolation: isolate;
+  position: relative;
+  padding: 2px 4px;
+  font-family: var(--font-hand), var(--font-sans);
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--cloud-text);
+  background: transparent !important;
+  transform: rotate(-1.1deg);
+}
+#career .cloud-tl-kind::before,
+#education .cloud-tl-kind::before {
+  content: "";
+  position: absolute;
+  right: -5px;
+  bottom: 0;
+  left: -4px;
+  z-index: -1;
+  height: 0.64em;
+  border-radius: 3px 6px 3px 5px;
+  background: #eaff63;
+  opacity: 0.65;
+  transform: rotate(-1.4deg) skewX(-5deg);
+}
+#career .cloud-tl-when,
+#education .cloud-tl-when {
+  font-family: var(--font-hand), var(--font-sans);
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--cloud-text);
+  transform: rotate(0.4deg);
+}
+#career .cloud-tl-title,
+#education .cloud-tl-title {
+  display: inline-block;
+  position: relative;
+  margin: 3px 0 10px;
+  font-family: var(--font-hand), var(--font-sans);
+  font-size: 34px;
+  font-weight: 500;
+  line-height: 1.12;
+  color: var(--cloud-text);
+  transform: rotate(-0.55deg);
+}
+#career .cloud-tl-title::after,
+#education .cloud-tl-title::after,
+#career .cloud-tl-subpanel .cloud-skillitem-name::after,
+#education .cloud-tl-subpanel .cloud-skillitem-name::after {
+  content: "";
+  position: absolute;
+  right: -6px;
+  bottom: -5px;
+  left: -3px;
+  height: 6px;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  opacity: 0.3;
+  transform: rotate(-1.1deg);
+}
+#education .cloud-tl-subpanel .cloud-skillitem-name::after {
+  display: none;
+}
+#career .cloud-tl-sub,
+#education .cloud-tl-sub {
+  font-family: var(--font-hand), var(--font-sans);
+  font-size: 20px;
+  font-weight: 500;
+}
+#career .cloud-tl-desc,
+#career .cloud-tl-subdesc-list li,
+#education .cloud-tl-desc,
+#education .cloud-tl-subdesc-list li {
+  font-family: var(--font-note), var(--font-sans);
+  font-size: 35px;
+  font-weight: 400;
+  letter-spacing: 0.1px;
+}
+#career .cloud-tl-subpanel .cloud-skillitems,
+#education .cloud-tl-subpanel .cloud-skillitems {
+  gap: 18px;
+}
+#career .cloud-tl-subpanel .cloud-skillitems,
+#education .cloud-tl-subpanel .cloud-skillitems {
+  gap: clamp(40px, 4vw, 58px);
+}
+#career .cloud-tl-subpanel .cloud-skillitem,
+#education .cloud-tl-subpanel .cloud-skillitem {
+  position: relative;
+  isolation: isolate;
+  display: block;
+  padding: 24px 25px 27px;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+}
+#career .cloud-tl-subpanel .cloud-skillitem:has(.cloud-live-link) {
+  padding-right: 180px;
+}
+#career .cloud-tl-subpanel .cloud-skillitem-body,
+#education .cloud-tl-subpanel .cloud-skillitem-body {
+  position: relative;
+  z-index: 1;
+}
+#career .cloud-tl-subpanel .cloud-skillitem::before,
+#education .cloud-tl-subpanel .cloud-skillitem::before,
+#career .cloud-tl-subpanel .cloud-skillitem::after,
+#education .cloud-tl-subpanel .cloud-skillitem::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+  pointer-events: none;
+}
+#career .cloud-tl-subpanel .cloud-skillitem::before,
+#career .cloud-tl-subpanel .cloud-skillitem::after,
+#education .cloud-tl-subpanel .cloud-skillitem::before,
+#education .cloud-tl-subpanel .cloud-skillitem::after {
+  display: none;
+}
+#career .cloud-tl-subpanel .cloud-skillitem::before,
+#education .cloud-tl-subpanel .cloud-skillitem::before {
+  inset: 1px 0 0 1px;
+  background-image: var(--hand-drawn-frame);
+  transform: rotate(-0.045deg);
+}
+#career .cloud-tl-subpanel .cloud-skillitem::after,
+#education .cloud-tl-subpanel .cloud-skillitem::after {
+  inset: 4px 3px 3px 4px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M3.1 3.8 Q27 3.4 50 3.7 T96.9 3.5 Q97.2 28 97 51 T97.3 96.5 Q73 96.9 49 96.6 T3.2 96.8 Q2.9 72 3.2 49 T3.1 3.8 Z' fill='none' stroke='%23182120' stroke-opacity='.42' stroke-width='.8' vector-effect='non-scaling-stroke' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  opacity: 0.14;
+  transform: rotate(0.05deg);
+}
+#career .cloud-tl-subpanel .cloud-skillitem:nth-child(even)::before,
+#education .cloud-tl-subpanel .cloud-skillitem:nth-child(even)::before {
+  transform: rotate(0.055deg);
+}
+#career .cloud-tl-subpanel .cloud-skillitem:nth-child(even)::after,
+#education .cloud-tl-subpanel .cloud-skillitem:nth-child(even)::after {
+  transform: rotate(-0.06deg);
+}
+#career .cloud-tl-subpanel .cloud-skillitem:nth-child(3n)::before,
+#education .cloud-tl-subpanel .cloud-skillitem:nth-child(3n)::before {
+  inset: 0 2px 1px 0;
+  transform: rotate(-0.07deg);
+}
+#career .cloud-tl-subpanel .cloud-skillitem-name,
+#education .cloud-tl-subpanel .cloud-skillitem-name {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 13px;
+  font-family: var(--font-hand), var(--font-sans);
+  font-size: 27px;
+  font-weight: 500;
+  color: var(--cloud-text);
+  transform: rotate(-0.6deg);
+}
+#career .cloud-tl-subdesc-list li::marker,
+#education .cloud-tl-subdesc-list li::marker {
+  color: var(--accent);
+}
+
+/* 상세 항목의 점도 인쇄된 정원이 아니라 펜으로 한 번씩 찍어 그린 표시처럼 보이게 한다. */
+#career .cloud-tl-subdesc-list,
+#education .cloud-tl-subdesc-list {
+  padding-left: 1.18em;
+  list-style: none;
+}
+#career .cloud-tl-subdesc-list li,
+#education .cloud-tl-subdesc-list li {
+  position: relative;
+}
+#career .cloud-tl-subdesc-list li::before,
+#education .cloud-tl-subdesc-list li::before {
+  content: "";
+  position: absolute;
+  top: 0.61em;
+  left: -1.03em;
+  width: 0.43em;
+  height: 0.43em;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12.1 2.7C16 2.5 20.5 5.7 21 10.1c.5 4.3-2.1 9.1-6.5 10.5-4.2 1.3-9.2-.6-10.8-4.7C2 11.8 3.6 6.5 7.4 4.2c1.5-.9 3.1-1.4 4.7-1.5Z' fill='%23182120'/%3E%3Cpath d='M11.8 3.1c4-.2 8.2 3 8.6 7.2.5 4.1-2 8.6-6.1 9.8-4 1.2-8.6-.6-10.1-4.5C2.7 11.8 4.1 6.9 7.7 4.7c1.3-.8 2.7-1.3 4.1-1.6Z' fill='none' stroke='%230b1110' stroke-opacity='.48' stroke-width='.75' stroke-linecap='round'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  transform: rotate(-8deg) scale(1.04, 0.94);
+  transform-origin: center;
+}
+#career .cloud-tl-subdesc-list li:nth-child(even)::before,
+#education .cloud-tl-subdesc-list li:nth-child(even)::before {
+  left: -1.06em;
+  transform: rotate(7deg) scale(0.94, 1.06);
+}
+#career .cloud-tl-subdesc-list li:nth-child(3n)::before,
+#education .cloud-tl-subdesc-list li:nth-child(3n)::before {
+  top: 0.58em;
+  transform: rotate(-3deg) scale(1.08, 0.91);
+}
+
 /* 스킬 */
 .cloud-skillwrap {
   display: grid;
@@ -1476,48 +1958,90 @@ body:has(.cloud-deck) {
   gap: 12px;
 }
 .cloud-cat-btn {
+  position: relative;
+  isolation: isolate;
+  overflow: visible;
+  z-index: 1;
   text-align: left;
-  font-family: inherit;
+  font-family: var(--font-hand), var(--font-sans);
   cursor: pointer;
-  background: var(--surface-page);
-  border: 1.5px solid var(--border-medium);
-  border-radius: 13px 14px 12px 14px;
-  padding: 20px 23px;
-  box-shadow: 0 10px 22px -18px rgb(var(--shadow-rgb) / 0.7);
+  background:
+    repeating-linear-gradient(97deg, transparent 0 27px, rgb(var(--shadow-rgb) / 0.016) 28px, transparent 29px 55px),
+    #ffffff;
+  border: 1.5px solid rgb(var(--shadow-rgb) / 0.28);
+  border-radius: 3px 7px 4px 6px;
+  padding: 18px 23px;
+  box-shadow: 1px 5px 8px rgb(var(--shadow-rgb) / 0.13);
+  transform: rotate(-0.45deg);
   transition:
-    transform 0.16s ease,
-    background 0.16s ease,
-    border-color 0.16s ease;
+    transform 0.18s ease,
+    box-shadow 0.18s ease;
+}
+.cloud-cat-btn:nth-child(even) {
+  border-radius: 7px 3px 6px 4px;
+  transform: rotate(0.38deg);
+}
+.cloud-cat-btn::before {
+  content: "";
+  position: absolute;
+  inset: 4px 5px 5px 4px;
+  z-index: -1;
+  border: 1px solid rgb(var(--shadow-rgb) / 0.13);
+  border-radius: 5px 3px 6px 4px;
+  pointer-events: none;
 }
 .cloud-cat-btn:hover {
-  transform: translateX(3px);
+  transform: translate(3px, -3px) rotate(-0.75deg);
+  box-shadow: 2px 8px 11px rgb(var(--shadow-rgb) / 0.16);
+}
+.cloud-cat-btn:nth-child(even):hover {
+  transform: translate(3px, -3px) rotate(0.65deg);
 }
 .cloud-cat-btn:focus-visible {
   outline: 2px solid var(--mint-light);
   outline-offset: 3px;
 }
 .cloud-cat-btn.active {
-  background: var(--control-strong-bg);
-  border-color: var(--control-strong-bg);
+  border-color: rgb(var(--shadow-rgb) / 0.32);
 }
 .cloud-cat-name {
-  display: block;
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--text-strong);
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  font-size: 25px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  color: var(--cloud-text);
+  transform: rotate(-0.65deg);
 }
-.cloud-cat-btn.active .cloud-cat-name {
-  color: var(--control-strong-text);
+.cloud-cat-btn.active .cloud-cat-name::before {
+  content: "";
+  position: absolute;
+  right: -7px;
+  bottom: 0.02em;
+  left: -5px;
+  z-index: -1;
+  height: 0.68em;
+  border-radius: 3px 6px 3px 5px;
+  background: #eaff63;
+  opacity: 0.78;
+  transform-origin: left center;
+  transform: rotate(-1.6deg) skewX(-5deg);
+  animation: highlighterSwipe 420ms 70ms cubic-bezier(0.22, 0.72, 0.2, 1) both;
 }
 .cloud-cat-en {
   display: block;
   margin-top: 3px;
-  font-size: 13.5px;
+  font-family: var(--font-hand), var(--font-sans);
+  font-size: 14px;
   letter-spacing: 1.4px;
-  color: var(--portfolio-forest-light);
+  color: var(--cloud-text);
+  opacity: 0.58;
+  transform: rotate(0.35deg);
 }
 .cloud-cat-btn.active .cloud-cat-en {
-  color: var(--control-strong-muted);
+  opacity: 0.66;
+  transform: rotate(0.8deg);
 }
 .cloud-skillpanel {
   background: linear-gradient(
@@ -1532,6 +2056,85 @@ body:has(.cloud-deck) {
   min-height: 564px;
   animation: skillIn 0.45s ease both;
 }
+#skills .cloud-skillpanel {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  color: var(--cloud-text);
+  background:
+    repeating-linear-gradient(96deg, transparent 0 38px, rgb(24 33 32 / 0.012) 39px, transparent 40px 78px),
+    linear-gradient(rgb(24 33 32 / 0.035) 1px, transparent 1px) 0 46px / 100% 34px,
+    #ffffff;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  clip-path: polygon(
+    0.8% 0.8%,
+    7% 0.3%,
+    13% 0.7%,
+    15% 0.1%,
+    22% 0.5%,
+    29% 0.2%,
+    36% 0.8%,
+    43% 0.3%,
+    51% 0.6%,
+    58% 0.1%,
+    65% 0.7%,
+    73% 0.2%,
+    81% 0.6%,
+    89% 0.2%,
+    99.2% 0.7%,
+    99.7% 9%,
+    99.3% 18%,
+    99.8% 27%,
+    99.4% 36%,
+    99.9% 45%,
+    99.3% 55%,
+    99.8% 65%,
+    99.4% 75%,
+    99.8% 86%,
+    99.2% 99.2%,
+    91% 99.7%,
+    84% 99.1%,
+    76% 99.8%,
+    68% 99.3%,
+    61% 99.9%,
+    53% 99.2%,
+    45% 99.7%,
+    37% 99.1%,
+    29% 99.8%,
+    21% 99.2%,
+    14% 99.7%,
+    7% 99.1%,
+    0.8% 99.5%,
+    0.3% 89%,
+    0.7% 78%,
+    0.2% 67%,
+    0.8% 56%,
+    0.3% 45%,
+    0.7% 34%,
+    0.2% 23%,
+    0.7% 12%
+  );
+  -webkit-mask: radial-gradient(circle at 4px 18px, transparent 0 4px, #000 4.5px) 0 0 / 100% 31px repeat-y;
+  mask: radial-gradient(circle at 4px 18px, transparent 0 4px, #000 4.5px) 0 0 / 100% 31px repeat-y;
+  animation-name: whiteSkillLetterIn;
+}
+#skills .cloud-skillpanel::before {
+  display: none;
+}
+#skills .cloud-skillpanel::after {
+  /* content: "OPEN LETTERS"; */
+  position: absolute;
+  top: 27px;
+  right: 34px;
+  font-family: var(--font-hand), var(--font-sans);
+  font-size: 13px;
+  letter-spacing: 1.7px;
+  color: var(--cloud-text);
+  opacity: 0.46;
+  transform: rotate(1.8deg);
+}
 .cloud-skillpanel-en {
   margin: 0 0 4px;
   font-size: 14px;
@@ -1542,6 +2145,17 @@ body:has(.cloud-deck) {
   margin: 0 0 18px;
   font-size: 31px;
   color: var(--text-strong);
+}
+#skills .cloud-skillpanel-name {
+  display: inline-block;
+  margin-bottom: 24px;
+  padding: 0 5px 5px 1px;
+  font-family: var(--font-hand), var(--font-sans);
+  font-size: 34px;
+  line-height: 1;
+  color: var(--cloud-text);
+  /* border-bottom: 2px solid var(--border-strong); */
+  transform: rotate(-0.7deg);
 }
 .cloud-skillitems {
   display: flex;
@@ -1563,29 +2177,110 @@ body:has(.cloud-deck) {
   min-width: 0;
   flex: 1;
 }
+
+/* 스킬 카드 — 레퍼런스의 비대칭 외곽선·V자 접힘·손글씨를 편지지 형태로 적용한다. */
+#skills .cloud-skillitems {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px 18px;
+}
+.cloud-letter-card {
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr);
+  align-items: start;
+  gap: 15px;
+  min-height: 184px;
+  padding: 14px 12px 20px;
+  overflow: visible;
+  color: var(--skill-card-text);
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  transform: rotate(-0.28deg);
+  transition:
+    transform 180ms ease,
+    opacity 180ms ease;
+}
+.cloud-letter-card:nth-child(even) {
+  transform: rotate(0.34deg) translateY(3px);
+}
+.cloud-letter-card:hover {
+  transform: translate(2px, -2px) rotate(-0.5deg);
+  opacity: 0.88;
+}
+.cloud-letter-card:nth-child(even):hover {
+  transform: translate(2px, 1px) rotate(0.5deg);
+}
+.cloud-letter-label {
+  display: block;
+  margin: 1px 0 4px;
+  font-family: var(--font-hand), var(--font-sans);
+  font-size: 12px;
+  line-height: 1;
+  letter-spacing: 1.7px;
+  color: var(--cloud-text);
+  opacity: 0.5;
+  transform: rotate(-1deg);
+}
+.cloud-letter-sheet {
+  position: relative;
+  min-width: 0;
+  padding: 0 4px 0 0;
+}
 /* 스킬 아이콘 — 이중 원 뱃지. 링 색은 브랜드 컬러를 옅게 탄 값을 인라인으로 받는다
    (SkillIconBadge.tsx). */
 .cloud-skillicon-ring {
   flex-shrink: 0;
-  width: 65px;
-  height: 65px;
-  border-radius: 50%;
-  border: 1.5px solid;
+  width: 48px;
+  height: 48px;
+  color: var(--skill-card-text);
+  border-radius: 47% 53% 45% 55% / 51% 46% 54% 49%;
+  border: 1.8px solid currentColor;
   display: grid;
   place-items: center;
   padding: 3px;
+  transform: rotate(3deg);
 }
 .cloud-skillicon-inner {
   width: 100%;
   height: 100%;
-  border-radius: 50%;
-  border: 1.5px solid;
+  border-radius: 54% 46% 52% 48% / 45% 53% 47% 55%;
+  border: 1px dashed currentColor;
   display: grid;
   place-items: center;
 }
 .cloud-skillicon-inner svg {
-  width: 30px;
-  height: 30px;
+  width: 23px;
+  height: 23px;
+  fill: currentColor;
+}
+.cloud-letter-card .cloud-skillitem-name {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 10px;
+  font-family: var(--font-hand), var(--font-sans);
+  font-size: 25px;
+  line-height: 1.05;
+  letter-spacing: 0.2px;
+  transform: rotate(-0.55deg);
+}
+.cloud-letter-card .cloud-skillitem-name::after {
+  content: "";
+  position: absolute;
+  right: -5px;
+  bottom: -5px;
+  left: -2px;
+  height: 6px;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  opacity: 0.34;
+  transform: rotate(-1.2deg);
+}
+.cloud-letter-card .cloud-skillitem-desc {
+  font-family: var(--font-note), var(--font-sans);
+  font-size: 30px;
+  line-height: 1.72;
 }
 .cloud-skillitem-name {
   margin: 0 0 5px;
@@ -1781,78 +2476,42 @@ body:has(.cloud-deck) {
 .cloud-proj-shot.is-clickable:focus-visible {
   outline: 2px solid var(--mint-light);
   outline-offset: 5px;
-  border-radius: 32px;
+  border-radius: 6px;
 }
-/* 실제 폰처럼 보이도록 감싸는 다크 베젤 프레임 */
-.cloud-proj-phone {
+/* 소개 사진과 같은 흰 테두리 인화 사진 스타일로 통일한다. */
+.cloud-proj-letter-shot {
   position: relative;
   width: 100%;
-  aspect-ratio: 9 / 18.6;
-  background: linear-gradient(
-    160deg,
-    var(--portfolio-dark) 0%,
-    var(--portfolio-dark-mid) 62%,
-    var(--portfolio-dark-deep) 100%
-  );
-  border-radius: 32px;
-  padding: 9px 7px;
-  box-shadow:
-    0 18px 34px -16px rgb(var(--shadow-rgb) / 0.7),
-    inset 0 0 0 1.5px rgba(255, 255, 255, 0.1),
-    inset 0 -1px 2px rgba(0, 0, 0, 0.6);
-}
-.cloud-proj-phone-notch {
-  position: absolute;
-  z-index: 2;
-  top: 13px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 42px;
-  height: 6px;
-  border-radius: 4px;
-  background: var(--portfolio-dark-deep);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
-}
-.cloud-proj-phone-btn {
-  position: absolute;
-  background: var(--portfolio-dark-mid);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
-}
-.cloud-proj-phone-btn.power {
-  right: -2.5px;
-  top: 26%;
-  width: 3px;
-  height: 15%;
-  border-radius: 0 3px 3px 0;
-}
-.cloud-proj-phone-btn.vol-up {
-  left: -2.5px;
-  top: 20%;
-  width: 3px;
-  height: 9%;
-  border-radius: 3px 0 0 3px;
-}
-.cloud-proj-phone-btn.vol-down {
-  left: -2.5px;
-  top: 31%;
-  width: 3px;
-  height: 9%;
-  border-radius: 3px 0 0 3px;
-}
-.cloud-proj-screen {
-  width: 100%;
-  height: 100%;
+  aspect-ratio: 648 / 1177;
   overflow: hidden;
-  border-radius: 24px;
-  background: var(--portfolio-dark-deep);
+  padding: 0;
+  background: #ffffff;
+  border: 5px solid #ffffff;
+  border-radius: 3px 7px 4px 6px;
+  box-shadow:
+    0 0 0 1.5px rgb(24 33 32 / 0.42),
+    8px 11px 0 rgb(24 33 32 / 0.09),
+    0 16px 23px -13px rgb(24 33 32 / 0.42);
+  transform: rotate(-1.1deg);
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
 }
-.cloud-proj-screen img {
+.cloud-proj-letter-shot img {
+  display: block;
   width: 100%;
   height: 100%;
-  display: block;
   object-fit: cover;
-  /* 상태바 · 주소창(상단 크롬)을 잘라내고 실제 화면만 보이게 아래쪽 기준으로 자른다 */
-  object-position: center bottom;
+  /* 상태바·주소창과 갤럭시 내비게이션 영역을 제외한 앱 화면만 남긴다. */
+  object-position: center 62%;
+}
+.cloud-proj-shot.is-clickable:hover .cloud-proj-letter-shot,
+.cloud-proj-shot.is-clickable:focus-visible .cloud-proj-letter-shot {
+  box-shadow:
+    0 0 0 1.5px rgb(24 33 32 / 0.48),
+    10px 14px 0 rgb(24 33 32 / 0.1),
+    0 20px 27px -13px rgb(24 33 32 / 0.48);
+  transform: translateY(-4px) rotate(-0.55deg);
 }
 .cloud-proj-top {
   display: flex;
@@ -2017,6 +2676,160 @@ body:has(.cloud-deck) {
 .cloud-stat b {
   color: var(--accent);
 }
+
+/* 소개·프로젝트 — 경력과 교육에 사용한 한 장짜리 공책 편지지를 이어 쓴다. */
+#about .cloud-about-layout,
+[id^="project-"] .cloud-proj-layout {
+  isolation: isolate;
+  overflow: hidden;
+  color: #182120;
+  background:
+    repeating-linear-gradient(96deg, transparent 0 38px, rgb(24 33 32 / 0.012) 39px, transparent 40px 78px),
+    linear-gradient(rgb(24 33 32 / 0.04) 1px, transparent 1px) 0 45px / 100% 33px,
+    #ffffff;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  clip-path: var(--letter-paper-edge);
+  -webkit-mask: radial-gradient(circle at 4px 18px, transparent 0 4px, #000 4.5px) 0 0 / 100% 31px repeat-y;
+  mask: radial-gradient(circle at 4px 18px, transparent 0 4px, #000 4.5px) 0 0 / 100% 31px repeat-y;
+  filter:
+    drop-shadow(8px 10px 0 rgb(24 33 32 / 0.08))
+    drop-shadow(0 16px 14px rgb(24 33 32 / 0.1));
+  animation-name: whiteSkillLetterIn;
+}
+#about .cloud-about-layout {
+  min-height: clamp(460px, 54vh, 560px);
+  padding: clamp(28px, 3.2vw, 42px) clamp(26px, 3.5vw, 46px) clamp(32px, 3.6vw, 48px);
+}
+#about .cloud-about-card,
+[id^="project-"] .cloud-proj-card,
+[id^="project-"] .cloud-proj-card.minor {
+  overflow: visible;
+  min-height: 0;
+  padding: 0;
+  color: #182120;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  clip-path: none;
+  -webkit-mask: none;
+  mask: none;
+  filter: none;
+  animation-name: none;
+}
+#about .cloud-about-card {
+  padding: 0;
+}
+#about .cloud-about-layout {
+  column-gap: clamp(38px, 5vw, 72px);
+}
+#about .cloud-about-cloud {
+  display: none;
+}
+#about .cloud-about-name,
+#about .cloud-about-lead,
+#about .cloud-about-sub,
+#about .cloud-about-p {
+  color: #182120;
+}
+#about .cloud-about-name {
+  position: relative;
+  display: inline-block;
+  transform: rotate(-0.65deg);
+}
+#about .cloud-about-name::after,
+[id^="project-"] .cloud-proj-title::after {
+  content: "";
+  position: absolute;
+  right: -7px;
+  bottom: -7px;
+  left: -3px;
+  height: 7px;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  opacity: 0.28;
+  transform: rotate(-1.1deg);
+}
+#about .cloud-about-lead,
+#about .cloud-about-sub {
+  font-family: var(--font-hand), var(--font-sans);
+}
+#about .cloud-about-name {
+  margin-bottom: 19px;
+}
+#about .cloud-about-lead {
+  margin-bottom: 12px;
+}
+#about .cloud-about-sub {
+  margin-bottom: 26px;
+}
+#about .cloud-about-p {
+  margin-bottom: 22px;
+  font-family: var(--font-note), var(--font-sans);
+  font-size: 29px;
+  line-height: 1.62;
+  letter-spacing: 0.1px;
+}
+#about .cloud-about-actions {
+  margin-top: 26px;
+}
+#about .cloud-about-photo {
+  border: 5px solid #ffffff;
+  border-radius: 2px 4px 3px 2px;
+  box-shadow:
+    0 0 0 1.5px rgb(24 33 32 / 0.42),
+    8px 11px 0 rgb(24 33 32 / 0.09),
+    0 16px 23px -13px rgb(24 33 32 / 0.42);
+  transform: rotate(-1.1deg);
+}
+[id^="project-"] .cloud-proj-layout {
+  width: 100%;
+  min-height: 0;
+  gap: clamp(44px, 4.5vw, 64px);
+  padding: clamp(27px, 3vw, 39px) clamp(27px, 3.2vw, 43px) clamp(31px, 3.2vw, 43px);
+}
+[id^="project-"] .cloud-proj-card.is-clickable:hover:not(:has(.cloud-proj-link:hover)),
+[id^="project-"] .cloud-proj-card.is-clickable:focus-visible {
+  transform: none;
+  box-shadow: none;
+  filter: none;
+}
+[id^="project-"] .cloud-proj-title {
+  position: relative;
+  display: inline-block;
+  font-family: var(--font-hand), var(--font-sans);
+  font-weight: 500;
+  color: #182120;
+  transform: rotate(-0.55deg);
+}
+[id^="project-"] .cloud-proj-badge,
+[id^="project-"] .cloud-proj-skillgroup-label,
+[id^="project-"] .cloud-ptag,
+[id^="project-"] .cloud-stat,
+[id^="project-"] .cloud-proj-link {
+  font-family: var(--font-hand), var(--font-sans);
+}
+[id^="project-"] .cloud-proj-desc {
+  font-family: var(--font-note), var(--font-sans);
+  font-size: 31px;
+  line-height: 1.65;
+  color: #182120;
+}
+[id^="project-"] .cloud-proj-skillgroups {
+  margin-bottom: 28px;
+  border-top: 0;
+}
+[id^="project-"] .cloud-proj-top {
+  margin-bottom: 24px;
+}
+[id^="project-"] .cloud-proj-desc {
+  margin-bottom: 31px;
+}
+[id^="project-"] .cloud-stat-row {
+  gap: 12px;
+}
 /* 푸터 */
 .cloud-footer {
   margin-top: 70px;
@@ -2125,6 +2938,42 @@ body:has(.cloud-deck) {
   [id^="project-"] .cloud-content {
     width: 100%;
     max-width: none;
+  }
+  .cloud-skillwrap {
+    gap: 22px;
+  }
+  .cloud-cat-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .cloud-cat-btn {
+    padding: 13px 14px;
+  }
+  .cloud-cat-name {
+    font-size: 16px;
+  }
+  .cloud-cat-en {
+    font-size: 10px;
+    letter-spacing: 0.8px;
+  }
+  .cloud-skillpanel {
+    min-height: 0;
+    padding: 26px 18px;
+  }
+  .cloud-skillpanel-name {
+    font-size: 26px;
+  }
+  #skills .cloud-skillitems {
+    gap: 16px;
+  }
+  .cloud-letter-card {
+    min-height: 0;
+    padding: 20px;
+  }
+  .cloud-letter-card .cloud-skillitem-desc {
+    font-size: 15px;
+    line-height: 1.65;
   }
   .cloud-sechead {
     align-items: flex-start;
@@ -2273,5 +3122,63 @@ body:has(.cloud-deck) {
   .cloud-tl-desc {
     font-size: 17.5px;
     line-height: 1.75;
+  }
+}
+
+/* 편지 카드는 설명을 포함하므로 중간 폭 이하에서 한 열로 전환한다. */
+@media (max-width: 1100px) {
+  #skills .cloud-skillitems {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  #about .cloud-about-layout {
+    min-height: 0;
+    padding: 24px 18px 28px 23px;
+  }
+  #about .cloud-about-p {
+    font-size: 24px;
+    line-height: 1.58;
+  }
+  [id^="project-"] .cloud-proj-layout {
+    gap: 43px;
+    padding: 25px 18px 29px 23px;
+  }
+  [id^="project-"] .cloud-proj-desc {
+    font-size: 26px;
+    line-height: 1.6;
+  }
+  .cloud-cat-btn {
+    padding: 13px 14px;
+  }
+  #career .cloud-tl-subpanel,
+  #education .cloud-tl-subpanel.education {
+    padding: 27px 20px 31px 29px;
+  }
+  #career .cloud-tl-title,
+  #education .cloud-tl-title {
+    font-size: 29px;
+  }
+  #career .cloud-tl-subpanel .cloud-skillitem-name,
+  #education .cloud-tl-subpanel .cloud-skillitem-name {
+    font-size: 24px;
+  }
+  #career .cloud-tl-subpanel .cloud-skillitem:has(.cloud-live-link) {
+    padding: 20px 18px 22px;
+  }
+  #career .cloud-tl-subpanel .cloud-skillitem,
+  #education .cloud-tl-subpanel .cloud-skillitem {
+    padding: 20px 18px 22px;
+  }
+  #career .cloud-tl-subpanel .cloud-live-link {
+    position: static;
+    margin-top: 10px;
+  }
+  #skills .cloud-skillpanel::after {
+    display: none;
+  }
+  #skills .cloud-skillpanel-name {
+    font-size: 29px;
   }
 }

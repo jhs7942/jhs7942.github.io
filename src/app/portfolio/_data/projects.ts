@@ -55,7 +55,7 @@ export type Project = {
   stats?: ProjectStat[];
   characters: CloudCharacterSpec[];
   minor?: boolean;
-  /** 카드 왼쪽에 넣는 실제 모바일 화면 스크린샷 */
+  /** 카드 왼쪽 편지 사진 프레임에 넣는 프로젝트 화면 */
   mobileShot?: ProjectShot;
 };
 
