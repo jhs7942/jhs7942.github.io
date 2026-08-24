@@ -17,6 +17,16 @@ export type SkillIcon = {
 };
 
 export const SKILL_ICONS: Record<string, SkillIcon> = {
+  "HTML · CSS": {
+    viewBox: "0 0 24 24",
+    color: "#E34F26",
+    inner: `<path d="M2 1.5h20l-1.8 20.2L12 24l-8.2-2.3L2 1.5Zm4.1 4.1.3 3.1h11.2l-.3 3.2H6.7l.3 3.1h10l-.4 3.7-4.6 1.2-4.6-1.2-.3-2.4H4l.5 4.9 7.5 2.1 7.5-2.1 1.4-15.6H6.1Z"/>`,
+  },
+  "접근성 · UI 품질": {
+    viewBox: "0 0 24 24",
+    color: "#1261A0",
+    inner: `<path d="M12 1.5a2.25 2.25 0 1 1 0 4.5 2.25 2.25 0 0 1 0-4.5ZM3 7h18v2.2h-6.8v3.1l3.3 9.2-2.4.8-3.1-7-3.1 7-2.4-.8 3.3-9.2V9.2H3V7Z"/>`,
+  },
   "TypeScript": {
     viewBox: "0 0 24 24",
     color: "#3178C6",
