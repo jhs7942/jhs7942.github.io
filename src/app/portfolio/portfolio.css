@@ -1945,6 +1945,429 @@ body:has(.cloud-deck) {
   transform: rotate(-3deg) scale(1.08, 0.91);
 }
 
+/* 경력 프로젝트 — 카드 전체를 편지의 봉투처럼 누를 수 있게 하고, 자세한 회고는
+   브라우저 최상단 레이어의 dialog에 띄워 가로형 페이지 전환과 겹치지 않게 한다. */
+#career .cloud-tl-subpanel .cloud-skillitem.is-letter {
+  overflow: hidden;
+  padding: 0;
+  border: 1.5px solid rgb(24 33 32 / 0.2);
+  border-radius: 3px 6px 4px 5px;
+  background: rgb(255 255 255 / 0.44);
+  box-shadow: 6px 7px 0 rgb(24 33 32 / 0.055);
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+#career .cloud-tl-subpanel .cloud-skillitem.is-letter:has(.cloud-live-link) {
+  padding-right: 0;
+}
+#career .cloud-tl-subpanel .cloud-skillitem.is-letter:hover,
+#career .cloud-tl-subpanel .cloud-skillitem.is-letter:focus-within {
+  border-color: rgb(24 33 32 / 0.42);
+  box-shadow: 9px 11px 0 rgb(24 33 32 / 0.075);
+  transform: translateY(-3px) rotate(-0.08deg);
+}
+.cloud-career-project-button {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 24px 25px 27px;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+.cloud-career-project-button.has-photo {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(360px, 34%, 430px);
+  grid-template-rows: auto auto auto;
+  column-gap: clamp(32px, 4vw, 56px);
+  row-gap: 0;
+  align-items: start;
+}
+.cloud-career-project-copy {
+  display: block;
+  min-width: 0;
+}
+.cloud-career-project-button.has-photo .cloud-career-project-copy {
+  display: contents;
+}
+.cloud-career-project-button.has-photo .cloud-skillitem-name {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  width: fit-content;
+  margin-bottom: 18px;
+}
+.cloud-career-project-button.has-photo .cloud-tl-subdesc-list {
+  grid-column: 1;
+  grid-row: 2;
+}
+.cloud-career-project-button.has-photo .cloud-career-open-hint {
+  grid-column: 1;
+  grid-row: 3;
+  width: fit-content;
+}
+.cloud-career-project-photo {
+  position: relative;
+  grid-column: 2;
+  grid-row: 2 / 4;
+  align-self: center;
+  display: block;
+  width: 100%;
+  padding: 9px 9px 34px;
+  background: #ffffff;
+  border: 1px solid rgb(24 33 32 / 0.4);
+  border-radius: 2px 4px 3px 2px;
+  box-shadow:
+    7px 9px 0 rgb(24 33 32 / 0.08),
+    0 15px 24px -13px rgb(24 33 32 / 0.46);
+  transform: rotate(1.25deg);
+  transition:
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+.cloud-career-project-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid rgb(24 33 32 / 0.18);
+}
+.cloud-career-project-photo.is-portrait {
+  width: min(100%, 230px);
+  justify-self: center;
+  transform: rotate(-0.85deg);
+}
+.cloud-career-photo-tape {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  z-index: 2;
+  width: 108px;
+  height: 27px;
+  background:
+    repeating-linear-gradient(96deg, transparent 0 12px, rgb(24 33 32 / 0.035) 13px 14px),
+    rgb(223 219 186 / 0.82);
+  clip-path: polygon(2% 8%, 98% 0, 95% 94%, 4% 100%);
+  box-shadow: 0 2px 3px rgb(24 33 32 / 0.08);
+  transform: translateX(-50%) rotate(-2.5deg);
+}
+.cloud-career-photo-caption {
+  position: absolute;
+  bottom: 7px;
+  left: 13px;
+  font-family: var(--font-hand), var(--font-sans);
+  font-size: 16px;
+  color: #243130;
+  transform: rotate(-0.7deg);
+}
+.cloud-career-photo-mark {
+  position: absolute;
+  right: 12px;
+  bottom: 10px;
+  font-family: var(--font-sans);
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  color: #bc5d4d;
+  opacity: 0.72;
+  transform: rotate(1.4deg);
+}
+.cloud-career-project-button:hover .cloud-career-project-photo,
+.cloud-career-project-button:focus-visible .cloud-career-project-photo {
+  box-shadow:
+    9px 12px 0 rgb(24 33 32 / 0.1),
+    0 19px 28px -13px rgb(24 33 32 / 0.5);
+  transform: translateY(-3px) rotate(0.55deg);
+}
+.cloud-career-project-button:hover .cloud-career-project-photo.is-portrait,
+.cloud-career-project-button:focus-visible .cloud-career-project-photo.is-portrait {
+  transform: translateY(-3px) rotate(-0.25deg);
+}
+.cloud-skillitem:has(.cloud-live-link) .cloud-career-project-button {
+  padding-right: 190px;
+}
+.cloud-career-project-button::after {
+  content: "";
+  position: absolute;
+  right: -1px;
+  bottom: -1px;
+  width: 34px;
+  height: 34px;
+  background: linear-gradient(135deg, rgb(24 33 32 / 0.04) 49%, #fff 50%);
+  border-left: 1px solid rgb(24 33 32 / 0.18);
+  border-top: 1px solid rgb(24 33 32 / 0.18);
+  transform: translate(17px, 17px) rotate(45deg);
+  transition: transform 180ms ease;
+}
+.cloud-career-project-button:hover::after,
+.cloud-career-project-button:focus-visible::after {
+  transform: translate(11px, 11px) rotate(45deg);
+}
+.cloud-career-project-button:focus-visible {
+  outline: 3px solid #5e7449;
+  outline-offset: -5px;
+}
+.cloud-career-project-button:disabled {
+  cursor: default;
+}
+.cloud-career-project-button .cloud-skillitem-name {
+  display: inline-block;
+}
+.cloud-career-project-button .cloud-tl-subdesc-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding-left: 1.18em;
+}
+.cloud-career-project-button .cloud-tl-subdesc-list > span {
+  position: relative;
+  font-family: var(--font-note), var(--font-sans);
+  font-size: 35px;
+  font-weight: 400;
+  line-height: 1.75;
+  letter-spacing: 0.1px;
+  opacity: 0.88;
+}
+.cloud-career-project-button .cloud-tl-subdesc-list > span::before {
+  content: "";
+  position: absolute;
+  top: 0.61em;
+  left: -1.03em;
+  width: 0.43em;
+  height: 0.43em;
+  background: #182120;
+  border-radius: 47% 53% 45% 55%;
+  transform: rotate(-8deg) scale(0.72);
+}
+.cloud-career-open-hint {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: 14px;
+  padding: 0 3px;
+  font-family: var(--font-hand), var(--font-sans);
+  font-size: 18px;
+  color: #425638;
+  border-bottom: 1.5px solid currentColor;
+}
+.cloud-career-open-hint::after {
+  content: "→";
+  margin-left: 8px;
+  transition: transform 180ms ease;
+}
+.cloud-career-project-button:hover .cloud-career-open-hint::after,
+.cloud-career-project-button:focus-visible .cloud-career-open-hint::after {
+  transform: translateX(5px);
+}
+
+@media (max-width: 1100px) {
+  .cloud-career-project-button.has-photo {
+    display: block;
+  }
+  .cloud-career-project-button.has-photo .cloud-career-project-copy {
+    display: block;
+  }
+  .cloud-career-project-button.has-photo .cloud-skillitem-name {
+    width: auto;
+    margin-bottom: 13px;
+  }
+  .cloud-career-project-photo {
+    width: min(100%, 620px);
+    margin: 32px auto 4px;
+    transform: rotate(0.7deg);
+  }
+  .cloud-career-project-photo.is-portrait {
+    width: min(78%, 280px);
+    transform: rotate(-0.5deg);
+  }
+}
+
+.cloud-career-dialog {
+  width: min(920px, calc(100vw - 32px));
+  max-width: none;
+  max-height: calc(100dvh - 32px);
+  margin: auto;
+  padding: 0;
+  overflow: visible;
+  color: #182120;
+  background: transparent;
+  border: 0;
+}
+.cloud-career-dialog::backdrop {
+  background: rgb(24 33 32 / 0.68);
+  backdrop-filter: blur(7px) saturate(0.75);
+}
+.cloud-career-letter {
+  position: relative;
+  display: flex;
+  max-height: calc(100dvh - 32px);
+  flex-direction: column;
+  overflow: hidden;
+  background:
+    linear-gradient(90deg, transparent 45px, rgb(189 75 65 / 0.22) 46px, transparent 47px),
+    linear-gradient(rgb(24 33 32 / 0.055) 1px, transparent 1px) 0 132px / 100% 34px,
+    #fffefb;
+  border: 1px solid rgb(24 33 32 / 0.34);
+  border-radius: 3px 7px 4px 6px;
+  box-shadow:
+    18px 22px 0 rgb(24 33 32 / 0.13),
+    0 34px 70px rgb(0 0 0 / 0.34);
+  animation: careerLetterOpen 360ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.cloud-career-letter-edge {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 3;
+  height: 8px;
+  background: repeating-linear-gradient(135deg, #5e7449 0 16px, #fffefb 16px 31px, #bc5d4d 31px 47px, #fffefb 47px 62px);
+  pointer-events: none;
+}
+.cloud-career-letter-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 24px;
+  align-items: center;
+  padding: 32px 76px 22px 48px;
+  border-bottom: 1px dashed rgb(24 33 32 / 0.28);
+}
+.cloud-career-letter-kicker {
+  margin: 0 0 7px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.6px;
+  color: #5e7449;
+}
+.cloud-career-letter-header h3 {
+  margin: 0;
+  font-family: var(--font-hand), var(--font-sans);
+  font-size: clamp(29px, 4vw, 43px);
+  font-weight: 500;
+  line-height: 1.18;
+}
+.cloud-career-postmark {
+  display: grid;
+  width: 92px;
+  aspect-ratio: 1;
+  place-content: center;
+  color: #bc5d4d;
+  text-align: center;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  opacity: 0.78;
+  transform: rotate(8deg);
+}
+.cloud-career-postmark span {
+  font-family: var(--font-hand), var(--font-sans);
+  font-size: 25px;
+  line-height: 1;
+}
+.cloud-career-postmark small {
+  margin-top: 4px;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: -0.2px;
+}
+.cloud-career-letter-scroll {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 26px 48px 42px;
+  scrollbar-color: #748867 transparent;
+  scrollbar-width: thin;
+}
+.cloud-career-letter-lead {
+  max-width: 690px;
+  margin: 0 0 30px;
+  font-family: var(--font-note), var(--font-sans);
+  font-size: 27px;
+  line-height: 1.6;
+}
+.cloud-career-letter-sections {
+  display: grid;
+  gap: 0;
+}
+.cloud-career-letter-section {
+  display: grid;
+  grid-template-columns: 126px minmax(0, 1fr);
+  gap: 22px;
+  padding: 23px 0 25px;
+  border-top: 1px solid rgb(24 33 32 / 0.22);
+}
+.cloud-career-letter-section > p {
+  margin: 2px 0 0;
+  font-family: var(--font-hand), var(--font-sans);
+  font-size: 19px;
+  color: #5e7449;
+  transform: rotate(-1deg);
+}
+.cloud-career-letter-section h4 {
+  margin: 0 0 7px;
+  font-family: var(--font-sans);
+  font-size: 19px;
+  line-height: 1.45;
+}
+.cloud-career-letter-section div > p {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 15.5px;
+  line-height: 1.8;
+  color: rgb(24 33 32 / 0.84);
+}
+.cloud-career-letter-signoff {
+  width: fit-content;
+  margin: 22px 0 0 auto;
+  font-family: var(--font-hand), var(--font-sans);
+  font-size: 20px;
+  color: #425638;
+  transform: rotate(-1deg);
+}
+.cloud-career-letter-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  z-index: 5;
+  display: grid;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  place-items: center;
+  color: #182120;
+  background: #fffefb;
+  border: 1.5px solid rgb(24 33 32 / 0.36);
+  border-radius: 50%;
+  box-shadow: 3px 4px 0 rgb(24 33 32 / 0.1);
+  cursor: pointer;
+}
+.cloud-career-letter-close span {
+  margin-top: -4px;
+  font-family: var(--font-sans);
+  font-size: 32px;
+  font-weight: 300;
+  line-height: 1;
+}
+.cloud-career-letter-close:hover {
+  color: #fff;
+  background: #243130;
+}
+.cloud-career-letter-close:focus-visible {
+  outline: 3px solid #eaff63;
+  outline-offset: 3px;
+}
+@keyframes careerLetterOpen {
+  from {
+    opacity: 0;
+    transform: translateY(22px) rotate(-1.2deg) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(0) scale(1);
+  }
+}
+
 /* 스킬 */
 .cloud-skillwrap {
   display: grid;
@@ -3180,5 +3603,79 @@ body:has(.cloud-deck) {
   }
   #skills .cloud-skillpanel-name {
     font-size: 29px;
+  }
+}
+
+@media (max-width: 640px) {
+  .cloud-skillitem:has(.cloud-live-link) .cloud-career-project-button {
+    padding-right: 18px;
+  }
+  #career .cloud-tl-subpanel .cloud-skillitem.is-letter {
+    padding: 0;
+  }
+  .cloud-career-project-button {
+    padding: 20px 18px 22px;
+  }
+  .cloud-career-project-button .cloud-tl-subdesc-list > span {
+    font-size: 27px;
+    line-height: 1.68;
+  }
+  #career .cloud-tl-subpanel .cloud-skillitem.is-letter .cloud-live-link {
+    margin: 0 18px 20px;
+  }
+  .cloud-career-dialog {
+    width: calc(100vw - 20px);
+    max-height: calc(100dvh - 20px);
+  }
+  .cloud-career-letter {
+    max-height: calc(100dvh - 20px);
+    box-shadow:
+      8px 10px 0 rgb(24 33 32 / 0.13),
+      0 24px 50px rgb(0 0 0 / 0.3);
+  }
+  .cloud-career-letter-header {
+    grid-template-columns: 1fr;
+    padding: 28px 62px 18px 26px;
+  }
+  .cloud-career-letter-header h3 {
+    font-size: 29px;
+  }
+  .cloud-career-postmark {
+    display: none;
+  }
+  .cloud-career-letter-scroll {
+    padding: 22px 26px 34px;
+  }
+  .cloud-career-letter-lead {
+    font-size: 23px;
+    line-height: 1.55;
+  }
+  .cloud-career-letter-section {
+    grid-template-columns: 1fr;
+    gap: 7px;
+    padding: 20px 0 22px;
+  }
+  .cloud-career-letter-section > p {
+    font-size: 18px;
+  }
+  .cloud-career-letter-section h4 {
+    font-size: 17px;
+  }
+  .cloud-career-letter-section div > p {
+    font-size: 15px;
+    line-height: 1.75;
+  }
+  .cloud-career-letter-signoff {
+    font-size: 18px;
+    line-height: 1.45;
+    text-align: right;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #career .cloud-tl-subpanel .cloud-skillitem.is-letter,
+  .cloud-career-project-button::after,
+  .cloud-career-open-hint::after {
+    transition-duration: 1ms;
   }
 }

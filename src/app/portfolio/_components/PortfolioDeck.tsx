@@ -83,6 +83,7 @@ export function PortfolioDeck({ children }: { children: ReactNode }) {
   useEffect(() => {
     function onKeyDown(e: KeyboardEvent) {
       if (e.altKey || e.ctrlKey || e.metaKey) return;
+      if (document.querySelector("dialog[open]")) return;
       if (e.key === "ArrowRight") goNext();
       else if (e.key === "ArrowLeft") goPrev();
     }
