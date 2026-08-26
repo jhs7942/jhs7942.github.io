@@ -6,7 +6,6 @@ import { careerTimeline, type CareerEntry, type CareerSubProject } from "../_dat
 
 const careerEntries = careerTimeline.filter((entry) => entry.kind !== "EDUCATION");
 const educationEntries = careerTimeline.filter((entry) => entry.kind === "EDUCATION");
-
 type TimelineSectionProps = {
   id: "career" | "education";
   title: string;
@@ -37,13 +36,13 @@ function TimelineSection({ id, title, entries }: TimelineSectionProps) {
     return () => window.removeEventListener("keydown", handleEscape);
   }, [openProject]);
 
-  function openLetter(project: CareerSubProject, button: HTMLButtonElement) {
-    if (!project.letter) return;
+  function openPortfolio(project: CareerSubProject, button: HTMLButtonElement) {
+    if (!project.portfolio) return;
     openerRef.current = button;
     setOpenProject(project);
   }
 
-  function closeLetter() {
+  function closePortfolio() {
     dialogRef.current?.close();
   }
 
@@ -53,7 +52,7 @@ function TimelineSection({ id, title, entries }: TimelineSectionProps) {
   }
 
   function handleBackdropClick(event: MouseEvent<HTMLDialogElement>) {
-    if (event.target === event.currentTarget) closeLetter();
+    if (event.target === event.currentTarget) closePortfolio();
   }
 
   // 모든 항목을 요약 뒤에 상세 패널이 이어지는 한 방향 흐름으로 배치한다.
@@ -116,15 +115,15 @@ function TimelineSection({ id, title, entries }: TimelineSectionProps) {
                         {entry.subProjects?.map((project) => (
                           <article
                             key={project.title}
-                            className={`cloud-skillitem${project.letter ? " is-letter" : ""}`}
+                            className={`cloud-skillitem${project.portfolio ? " is-letter" : ""}`}
                           >
                             <button
                               type="button"
                               className={`cloud-career-project-button${project.image ? " has-photo" : ""}`}
-                              disabled={!project.letter}
-                              aria-haspopup={project.letter ? "dialog" : undefined}
-                              aria-label={project.letter ? `${project.title} 회고 편지 열기` : undefined}
-                              onClick={(event) => openLetter(project, event.currentTarget)}
+                              disabled={!project.portfolio}
+                              aria-haspopup={project.portfolio ? "dialog" : undefined}
+                              aria-label={project.portfolio ? `${project.title} 프로젝트 상세 열기` : undefined}
+                              onClick={(event) => openPortfolio(project, event.currentTarget)}
                             >
                               <span className="cloud-career-project-copy">
                                 <span className="cloud-skillitem-name">
@@ -136,7 +135,7 @@ function TimelineSection({ id, title, entries }: TimelineSectionProps) {
                                     <span key={line}>{line}</span>
                                   ))}
                                 </span>
-                                {project.letter && <span className="cloud-career-open-hint">회고 편지 열기</span>}
+                                {project.portfolio && <span className="cloud-career-open-hint">프로젝트 상세 보기</span>}
                               </span>
                               {project.image && (
                                 <span
@@ -186,47 +185,62 @@ function TimelineSection({ id, title, entries }: TimelineSectionProps) {
         onClose={handleDialogClose}
         onCancel={(event) => {
           event.preventDefault();
-          closeLetter();
+          closePortfolio();
         }}
         onClick={handleBackdropClick}
       >
-        {openProject?.letter && (
-          <div className="cloud-career-letter">
-            <div className="cloud-career-letter-edge" aria-hidden="true" />
-            <header className="cloud-career-letter-header">
-              <div>
-                <p className="cloud-career-letter-kicker">PROJECT NOTE · {openProject.when || "MAINTENANCE"}</p>
-                <h3 id="career-letter-title">{openProject.title}</h3>
-              </div>
-              <div className="cloud-career-postmark" aria-hidden="true">
-                <span>회고</span>
-                <small>다시 쓰는 기록</small>
-              </div>
-            </header>
+        {openProject?.portfolio && (
+          <div className="cloud-career-letter cloud-skillitem cloud-letter-card">
+            <div className="cloud-letter-sheet">
+              <header className="cloud-career-letter-header">
+                <div>
+                  <p className="cloud-career-letter-kicker">PROJECT PORTFOLIO · {openProject.when || "MAINTENANCE"}</p>
+                  <h3 id="career-letter-title">{openProject.title}</h3>
+                </div>
+              </header>
 
-            <div className="cloud-career-letter-scroll">
-              <p id="career-letter-lead" className="cloud-career-letter-lead">
-                {openProject.letter.lead}
-              </p>
-              <div className="cloud-career-letter-sections">
-                {openProject.letter.sections.map((section) => (
-                  <section key={section.label} className="cloud-career-letter-section">
-                    <p>{section.label}</p>
+              <div className="cloud-career-letter-scroll">
+                <div className="cloud-career-letter-sections">
+                  <section className="cloud-career-letter-section cloud-career-letter-overview">
+                    <h4>프로젝트 개요</h4>
                     <div>
-                      <h4>{section.title}</h4>
-                      <p>{section.body}</p>
+                      <p id="career-letter-lead" className="cloud-career-letter-lead">
+                        {openProject.portfolio.summary}
+                      </p>
                     </div>
                   </section>
-                ))}
+                  <section className="cloud-career-letter-section">
+                    <h4>담당 역할</h4>
+                    <div>
+                      <p>{openProject.portfolio.role}</p>
+                    </div>
+                  </section>
+                  <section className="cloud-career-letter-section cloud-career-letter-tech">
+                    <h4>기술 스택</h4>
+                    <div className="cloud-career-tech-list" aria-label="기술 스택">
+                      {openProject.portfolio.tech.map((technology) => (
+                        <span key={technology}>{technology}</span>
+                      ))}
+                    </div>
+                  </section>
+                  {openProject.portfolio.sections.map((section) => (
+                    <section key={section.label} className="cloud-career-letter-section">
+                      <h4>{section.label}</h4>
+                      <div>
+                        <h5>{section.title}</h5>
+                        <p>{section.body}</p>
+                      </div>
+                    </section>
+                  ))}
+                </div>
               </div>
-              <p className="cloud-career-letter-signoff">그때의 선택을 기록하고, 다음 선택을 더 나아지게 합니다.</p>
             </div>
 
             <button
               type="button"
               className="cloud-career-letter-close"
-              onClick={closeLetter}
-              aria-label="프로젝트 회고 편지 닫기"
+              onClick={closePortfolio}
+              aria-label="프로젝트 상세 닫기"
             >
               <span aria-hidden="true">×</span>
             </button>
