@@ -17,6 +17,23 @@ export type SkillCategory = {
 };
 
 export const skillCategories: SkillCategory[] = [
+    {
+    id: "lang",
+    name: "언어",
+    en: "LANGUAGES",
+    items: [
+      {
+        name: "TypeScript",
+        descHtml:
+          "strict 모드에서 도메인 모델과 API 계약을 정의하고, 제네릭·유틸리티 타입·판별 유니온으로 상태와 분기 조건을 표현합니다. 외부 입력은 런타임 검증과 조합해 타입 경계를 안전하게 관리합니다.",
+      },
+      {
+        name: "JavaScript",
+        descHtml:
+          "실행 컨텍스트·클로저·프로토타입·이벤트 루프의 동작을 이해합니다. Promise 기반 비동기 흐름과 불변 데이터 처리를 활용해 예측 가능한 브라우저 로직을 작성합니다.",
+      },
+    ],
+  },
   {
     id: "front",
     name: "프론트엔드",
@@ -41,6 +58,11 @@ export const skillCategories: SkillCategory[] = [
         name: "접근성 · UI 품질",
         descHtml:
           "키보드 탐색, 포커스 흐름, ARIA 관계, 명도 대비와 reduced-motion을 함께 점검합니다. 다양한 화면 크기와 입력 방식에서도 기능과 정보 위계가 유지되도록 구현합니다.",
+      },
+      {
+        name: "SEO",
+        descHtml:
+          "시맨틱 HTML과 페이지별 메타데이터를 설계합니다. canonical·Open Graph·sitemap·robots를 함께 관리해 검색 엔진의 크롤링 경로와 서비스 정보 전달을 일관되게 유지합니다.",
       },
       {
         name: "TanStack Query",
@@ -71,23 +93,6 @@ export const skillCategories: SkillCategory[] = [
         name: "ECharts",
         descHtml:
           "데이터의 비교·추세·분포 목적에 맞춰 차트 유형을 선택하고 dataset·series·axis 옵션을 구성합니다. 반응형 크기 변경과 큰 데이터셋의 렌더링 비용도 고려합니다.",
-      },
-    ],
-  },
-  {
-    id: "lang",
-    name: "언어",
-    en: "LANGUAGES",
-    items: [
-      {
-        name: "TypeScript",
-        descHtml:
-          "strict 모드에서 도메인 모델과 API 계약을 정의하고, 제네릭·유틸리티 타입·판별 유니온으로 상태와 분기 조건을 표현합니다. 외부 입력은 런타임 검증과 조합해 타입 경계를 안전하게 관리합니다.",
-      },
-      {
-        name: "JavaScript",
-        descHtml:
-          "실행 컨텍스트·클로저·프로토타입·이벤트 루프의 동작을 이해합니다. Promise 기반 비동기 흐름과 불변 데이터 처리를 활용해 예측 가능한 브라우저 로직을 작성합니다.",
       },
     ],
   },
