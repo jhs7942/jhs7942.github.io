@@ -190,10 +190,8 @@
   animation-duration: 58s;
 }
 
-/* 마우스 포인터를 따라다니며 태어났다 사라지는 작은 구름들 — CloudCursorTrail.tsx
-   가 이 레이어 안에 .cloud-trail-puff 를 직접 붙였다 뗀다. 촘촘한 간격(작은
-   SPAWN_DISTANCE)으로 자주 낳고, 옅은 최고 불투명도(0.4)로 그려서 서로 겹치며
-   한 줄로 이어지는 연한 리본처럼 보이게 한다. */
+/* 포인터의 이전·현재 좌표를 CSS 그라데이션 구간으로 직접 연결한다. 개별 구름
+   도형 대신 양 끝이 둥근 구간을 겹치고 블러 처리해 하나의 안개 리본으로 보인다. */
 .cloud-trail-layer {
   position: fixed;
   inset: 0;
@@ -201,29 +199,158 @@
   pointer-events: none;
   overflow: hidden;
 }
-.cloud-trail-puff {
+.cloud-trail-segment {
   position: absolute;
   opacity: 0;
-  filter: drop-shadow(0 3px 6px var(--ink-12));
-  animation: cloudTrailPuff 750ms ease-out forwards;
+  border-radius: 999px;
+  background:
+    radial-gradient(ellipse at 18% 50%, rgb(255 255 255 / 0.38) 0 13%, transparent 42%),
+    radial-gradient(ellipse at 50% 42%, rgb(255 255 255 / 0.3) 0 18%, transparent 52%),
+    radial-gradient(ellipse at 82% 55%, rgb(255 255 255 / 0.34) 0 13%, transparent 43%),
+    linear-gradient(
+      90deg,
+      transparent,
+      color-mix(in srgb, var(--surface-cloud) 24%, #fff 76%) 14%,
+      color-mix(in srgb, var(--surface-cloud) 32%, #fff 68%) 50%,
+      color-mix(in srgb, var(--surface-cloud) 24%, #fff 76%) 86%,
+      transparent
+    );
+  filter: blur(3px) drop-shadow(0 2px 6px var(--ink-12));
+  will-change: opacity, filter;
+  animation: cloudTrailRibbon 1100ms ease-out forwards;
 }
-.cloud-trail-puff svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-@keyframes cloudTrailPuff {
+@keyframes cloudTrailRibbon {
   0% {
     opacity: 0;
-    transform: scale(0.4) translateY(0);
+    filter: blur(2px) drop-shadow(0 2px 6px var(--ink-12));
   }
-  22% {
-    opacity: 0.4;
-    transform: scale(1) translateY(-1px);
+  16% {
+    opacity: 0.2;
+    filter: blur(3px) drop-shadow(0 2px 6px var(--ink-12));
+  }
+  58% {
+    opacity: 0.14;
   }
   100% {
     opacity: 0;
-    transform: scale(1.08) translateY(-10px);
+    filter: blur(8px) drop-shadow(0 1px 10px transparent);
+  }
+}
+.cloud-click-donut {
+  position: absolute;
+  isolation: isolate;
+  opacity: 0;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 10%, rgb(255 255 255 / 0.92) 0 9%, transparent 27%),
+    radial-gradient(circle at 84% 31%, rgb(255 255 255 / 0.72) 0 10%, transparent 29%),
+    radial-gradient(circle at 88% 67%, rgb(255 255 255 / 0.58) 0 9%, transparent 28%),
+    radial-gradient(circle at 53% 90%, rgb(255 255 255 / 0.68) 0 10%, transparent 30%),
+    radial-gradient(circle at 15% 68%, rgb(255 255 255 / 0.54) 0 9%, transparent 28%),
+    radial-gradient(circle at 16% 31%, rgb(255 255 255 / 0.76) 0 10%, transparent 29%),
+    radial-gradient(circle, color-mix(in srgb, var(--surface-cloud) 36%, #fff 64%) 0 62%, transparent 76%);
+  -webkit-mask: radial-gradient(
+    circle,
+    transparent 0 25%,
+    rgb(0 0 0 / 0.28) 32%,
+    #000 43% 57%,
+    rgb(0 0 0 / 0.48) 66%,
+    transparent 77%
+  );
+  mask: radial-gradient(
+    circle,
+    transparent 0 25%,
+    rgb(0 0 0 / 0.28) 32%,
+    #000 43% 57%,
+    rgb(0 0 0 / 0.48) 66%,
+    transparent 77%
+  );
+  filter: blur(2.4px) drop-shadow(0 3px 9px var(--ink-12));
+  animation:
+    cloudClickDonutExpand 2200ms cubic-bezier(0.16, 0.62, 0.22, 1) forwards,
+    cloudClickDonutFade 2200ms ease-in-out forwards,
+    cloudClickDonutDiffuse 2200ms ease-out forwards;
+}
+.cloud-click-donut::before,
+.cloud-click-donut::after {
+  content: "";
+  position: absolute;
+  inset: -7%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    transparent 0 34%,
+    rgb(255 255 255 / 0.64) 47%,
+    color-mix(in srgb, var(--surface-cloud) 22%, transparent) 58%,
+    transparent 72%
+  );
+  filter: blur(5px);
+  opacity: 0.48;
+  animation: cloudClickMistDissolve 2200ms ease-out forwards;
+}
+.cloud-click-donut::after {
+  inset: 10%;
+  background: radial-gradient(
+    circle,
+    transparent 0 28%,
+    rgb(255 255 255 / 0.78) 43%,
+    color-mix(in srgb, var(--cloud-border) 12%, transparent) 57%,
+    transparent 70%
+  );
+  filter: blur(3px);
+  opacity: 0.38;
+}
+@keyframes cloudClickDonutExpand {
+  from {
+    transform: scale(0.16);
+  }
+  to {
+    transform: scale(3.4);
+  }
+}
+@keyframes cloudClickDonutFade {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.62;
+  }
+  38% {
+    opacity: 0.52;
+  }
+  62% {
+    opacity: 0.3;
+  }
+  82% {
+    opacity: 0.1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes cloudClickDonutDiffuse {
+  0%,
+  38% {
+    filter: blur(2.4px) drop-shadow(0 3px 9px var(--ink-12));
+  }
+  100% {
+    filter: blur(8px) drop-shadow(0 1px 15px transparent);
+  }
+}
+@keyframes cloudClickMistDissolve {
+  0% {
+    opacity: 0;
+    transform: scale(0.86);
+  }
+  16% {
+    opacity: 0.48;
+  }
+  55% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.22);
   }
 }
 
