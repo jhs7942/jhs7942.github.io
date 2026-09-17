@@ -1,7 +1,6 @@
 /**
- * 스킬은 프론트엔드 채용 담당자가 핵심 역량을 먼저 확인할 수 있도록
- * 직무 연관성 순으로 배치한다. 설명은 특정 프로젝트 성과를 반복하기보다,
- * 기술을 선택하고 적용할 때 사용하는 판단 기준을 중심으로 작성한다.
+ * 기술 스택은 프론트엔드 채용 담당자가 사용 기술을 빠르게 확인할 수 있도록
+ * 언어·프론트엔드·백엔드·데이터베이스·인프라 순으로 배치한다.
  */
 
 export type SkillItem = {
@@ -17,7 +16,7 @@ export type SkillCategory = {
 };
 
 export const skillCategories: SkillCategory[] = [
-    {
+  {
     id: "lang",
     name: "언어",
     en: "LANGUAGES",
@@ -55,16 +54,6 @@ export const skillCategories: SkillCategory[] = [
           "시맨틱 마크업을 기반으로 Grid·Flexbox·컨테이너 특성을 조합해 반응형 레이아웃을 구성합니다. 디자인 토큰과 명확한 스타일 책임 범위로 화면의 일관성과 유지보수성을 관리합니다.",
       },
       {
-        name: "접근성 · UI 품질",
-        descHtml:
-          "키보드 탐색, 포커스 흐름, ARIA 관계, 명도 대비와 reduced-motion을 함께 점검합니다. 다양한 화면 크기와 입력 방식에서도 기능과 정보 위계가 유지되도록 구현합니다.",
-      },
-      {
-        name: "SEO",
-        descHtml:
-          "시맨틱 HTML과 페이지별 메타데이터를 설계합니다. canonical·Open Graph·sitemap·robots를 함께 관리해 검색 엔진의 크롤링 경로와 서비스 정보 전달을 일관되게 유지합니다.",
-      },
-      {
         name: "TanStack Query",
         descHtml:
           "쿼리 키와 staleTime을 데이터 수명에 맞게 설계하고, mutation 이후의 캐시 무효화·낙관적 업데이트·오류 복구 흐름을 구분해 서버 상태를 관리합니다.",
@@ -75,9 +64,19 @@ export const skillCategories: SkillCategory[] = [
           "서버 상태와 분리해야 하는 전역 UI 상태를 작은 스토어로 구성합니다. selector와 persist 미들웨어를 필요한 범위에 적용해 불필요한 렌더링과 저장소 결합을 줄입니다.",
       },
       {
+        name: "Recoil",
+        descHtml:
+          "atom으로 공유 상태를 작게 나누고 selector로 파생 상태를 구성합니다. 컴포넌트가 필요한 상태만 구독하도록 설계해 전역 상태 변경에 따른 불필요한 렌더링을 줄입니다.",
+      },
+      {
         name: "Tailwind CSS v4",
         descHtml:
           "유틸리티 클래스로 반응형 UI를 빠르게 구성하면서 테마 변수와 디자인 토큰을 확장합니다. 반복되는 패턴은 컴포넌트 경계로 묶어 클래스 중복과 임의 값을 관리합니다.",
+      },
+      {
+        name: "styled-components",
+        descHtml:
+          "컴포넌트 단위로 스타일 책임을 나누고 props 기반 변형과 ThemeProvider를 활용해 공통 디자인 토큰을 관리합니다. 동적 스타일과 DOM 전달 props의 범위도 함께 제어합니다.",
       },
       {
         name: "Vite",
@@ -107,6 +106,11 @@ export const skillCategories: SkillCategory[] = [
           "라우팅을 도메인 단위로 나누고 미들웨어 체인으로 인증·입력 검증·에러 처리를 구성합니다. 비동기 오류가 일관된 응답 형식으로 수렴하도록 경계를 설계합니다.",
       },
       {
+        name: "WebSocket",
+        descHtml:
+          "지속 연결 기반의 양방향 통신 흐름을 구성하고 메시지 타입과 연결 상태를 관리합니다. heartbeat·재연결·중복 메시지 처리까지 고려해 실시간 기능을 구현합니다.",
+      },
+      {
         name: "Socket.IO 4",
         descHtml:
           "연결·재연결과 실시간 이벤트 흐름을 설계하고, 룸·네임스페이스로 브로드캐스트 범위를 제어합니다. 중복 이벤트와 연결 해제 시 정리 과정도 함께 다룹니다.",
@@ -117,14 +121,9 @@ export const skillCategories: SkillCategory[] = [
           "외부 입력 스키마를 단일 기준으로 정의해 런타임 검증과 TypeScript 타입 추론을 연결합니다. 오류 경로를 사용자와 로그가 이해할 수 있는 형태로 변환합니다.",
       },
       {
-        name: "JWT · 인증",
+        name: "JWT",
         descHtml:
           "액세스·갱신 토큰의 수명과 재발급 흐름을 구분하고, 쿠키·헤더의 보안 속성과 CSRF·XSS 위험을 고려해 저장·전달 방식을 선택합니다.",
-      },
-      {
-        name: "결제 · SMS 인증",
-        descHtml:
-          "외부 API의 요청·콜백·웹훅 상태를 검증하고 멱등성을 고려해 중복 처리를 방지합니다. 인증번호와 결제 정보 등 민감 데이터는 수명과 암호화 경계를 명확히 관리합니다.",
       },
     ],
   },
@@ -144,12 +143,7 @@ export const skillCategories: SkillCategory[] = [
           "RLS 정책으로 데이터 접근 범위를 제한하고, 여러 변경의 원자성이 필요하면 RPC와 데이터베이스 함수로 처리 경계를 내립니다.",
       },
       {
-        name: "데이터 가용성 설계",
-        descHtml:
-          "핵심 기능과 부가 기능의 의존성을 구분하고 타임아웃·재시도·대체 응답 범위를 정합니다. 일부 데이터 소스의 실패가 전체 화면 장애로 번지지 않도록 설계합니다.",
-      },
-      {
-        name: "QGIS · 공간 데이터",
+        name: "QGIS",
         descHtml:
           "공간 데이터의 좌표계와 지오메트리 구조를 이해하고, 목적 좌표계로 변환·가공한 결과를 웹 지도에서 사용할 수 있는 형식으로 연결합니다.",
       },
@@ -184,28 +178,6 @@ export const skillCategories: SkillCategory[] = [
         name: "Tomcat",
         descHtml:
           "WAR 배포 구조와 컨텍스트 경로, 내부망 환경의 서버 설정을 이해하고 프론트엔드 산출물과 Java 애플리케이션의 배포 경계를 다룹니다.",
-      },
-    ],
-  },
-  {
-    id: "ai",
-    name: "AI",
-    en: "AI WORKFLOW",
-    items: [
-      {
-        name: "Claude Code",
-        descHtml:
-          "커스텀 커맨드·훅·MCP를 조합해 기획부터 구현·검증·리뷰까지 이어지는 개발 흐름을 구성하고, 반복 작업을 재현 가능한 절차로 만듭니다.",
-      },
-      {
-        name: "AI 기록",
-        descHtml:
-          "프롬프트보다 요구사항·판단 근거·검증 결과를 중심으로 작업 기록을 남깁니다. 이후 변경에서 결정 배경을 추적하고 같은 오류를 반복하지 않는 문맥으로 활용합니다.",
-      },
-      {
-        name: "Linear 연동",
-        descHtml:
-          "요구사항·구현·리뷰 상태를 이슈 흐름으로 연결하고, 완료 조건과 변경 근거가 코드 작업과 함께 추적되도록 협업 구조를 구성합니다.",
       },
     ],
   },

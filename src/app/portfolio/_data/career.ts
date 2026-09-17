@@ -76,10 +76,6 @@ export const careerTimeline: CareerEntry[] = [
           "프론트엔드·모바일 개발: jQuery·Chart.js·카카오맵 기반 화면과 Android·iOS 앱 빌드·스토어 배포",
           "서버 배포: 공주시청·부여군청 내부망에 Tomcat WAR 배포 후 운영 안정화",
         ],
-        link: {
-          label: "운영 중인 서비스",
-          href: "https://gjsmart.gongju.go.kr/",
-        },
       },
       {
         when: "2022.08 – 2023.07 · 3인",

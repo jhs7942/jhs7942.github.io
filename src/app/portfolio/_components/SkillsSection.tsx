@@ -47,7 +47,7 @@ export function SkillsSection() {
       <div className="cloud-veilwrap">
         <div data-content className="cloud-content">
           <div className="cloud-sechead">
-            <h2>스킬</h2>
+            <h2>기술 스택</h2>
           </div>
           {/* 눈에 보이는 스타일은 전부 portfolio.css 의 .cloud-* 클래스가 쥐고 있다.
               (레이어 없는 CSS라 Tailwind 유틸보다 우선한다)
@@ -61,7 +61,7 @@ export function SkillsSection() {
             <TabsList
               variant="line"
               className="cloud-cat-list"
-              aria-label="스킬 카테고리"
+              aria-label="기술 스택 카테고리"
             >
               {skillCategories.map((cat, index) => (
                 <TabsTrigger
