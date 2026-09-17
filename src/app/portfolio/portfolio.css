@@ -162,7 +162,7 @@
   .cloud * {
     animation: none !important;
   }
-  .cloud-cat-btn.active .cloud-cat-name::before {
+  .cloud-cat-btn[data-active] .cloud-cat-name::before {
     animation: none;
   }
 }
@@ -746,12 +746,14 @@ body:has(.cloud-deck) {
   padding: 7px 10px 6px;
   border: 0;
   border-radius: 0;
-  color: var(--text-primary);
+  color: var(--text-strong);
   background: transparent;
   font-family: var(--font-hand), var(--font-sans);
   font-size: 13px;
   font-weight: 500;
-  opacity: 0.66;
+  /* 하늘 배경 위에 얹히는 글자다. 0.66 이면 day 3.17:1 로 AA 미달이라
+     선택 상태(1.0)와의 구분을 유지하는 선에서 바닥을 올렸다. */
+  opacity: 0.85;
   white-space: nowrap;
   cursor: pointer;
   transition:
@@ -797,7 +799,7 @@ body:has(.cloud-deck) {
 }
 .time-theme-option:hover {
   background: transparent;
-  opacity: 0.82;
+  opacity: 0.93;
   transform: translateY(-1px);
 }
 .time-theme-option:hover::before,
@@ -814,7 +816,7 @@ body:has(.cloud-deck) {
   outline-offset: 2px;
 }
 .time-theme-option[aria-pressed="true"] {
-  color: var(--text-primary);
+  color: var(--text-strong);
   background: transparent;
   opacity: 1;
 }
@@ -2128,7 +2130,7 @@ body:has(.cloud-deck) {
   outline: 2px solid var(--mint-light);
   outline-offset: 3px;
 }
-.cloud-cat-btn.active {
+.cloud-cat-btn[data-active] {
   border-color: rgb(var(--shadow-rgb) / 0.32);
 }
 .cloud-cat-name {
@@ -2141,7 +2143,7 @@ body:has(.cloud-deck) {
   color: var(--cloud-text);
   transform: rotate(-0.65deg);
 }
-.cloud-cat-btn.active .cloud-cat-name::before {
+.cloud-cat-btn[data-active] .cloud-cat-name::before {
   content: "";
   position: absolute;
   right: -7px;
@@ -2163,10 +2165,10 @@ body:has(.cloud-deck) {
   font-size: 14px;
   letter-spacing: 1.4px;
   color: var(--cloud-text);
-  opacity: 0.58;
+  opacity: 0.62;
   transform: rotate(0.35deg);
 }
-.cloud-cat-btn.active .cloud-cat-en {
+.cloud-cat-btn[data-active] .cloud-cat-en {
   opacity: 0.66;
   transform: rotate(0.8deg);
 }
@@ -2991,7 +2993,7 @@ body:has(.cloud-deck) {
 }
 .cloud-footer-copy {
   margin: 26px 0 0;
-  font-size: 11.5px;
+  font-size: 12px;
   letter-spacing: 1.5px;
   color: var(--text-on-strong);
   opacity: 0.9;
@@ -3044,7 +3046,7 @@ body:has(.cloud-deck) {
   .time-theme-option {
     gap: 5px;
     padding: 7px 8px;
-    font-size: 11px;
+    font-size: 12px;
   }
   /* 데스크톱용 섹션 좌우 여백(최소 64px)을 그대로 쓰면 320px 화면에서
      본문 폭이 192px까지 줄어든다. 상단 가로 내비게이션 아래에만 여유를
@@ -3081,7 +3083,7 @@ body:has(.cloud-deck) {
     font-size: 16px;
   }
   .cloud-cat-en {
-    font-size: 10px;
+    font-size: 12px;
     letter-spacing: 0.8px;
   }
   .cloud-skillpanel {
