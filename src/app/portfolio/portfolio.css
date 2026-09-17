@@ -2703,6 +2703,10 @@ body:has(.cloud-deck) {
   background: var(--mint-pale);
   border: 1.3px solid var(--forest-border);
 }
+/* 인쇄본에만 나오는 링크 — PDF에서 클릭해 깃허브로 가도록 실제 앵커로 둔다. */
+.print-only {
+  display: none;
+}
 .cloud-proj-link-icon {
   width: 18px;
   height: 18px;
@@ -3251,6 +3255,396 @@ body:has(.cloud-deck) {
   .cloud-tl-desc {
     font-size: 17.5px;
     line-height: 1.75;
+  }
+}
+
+/* PDF·종이 출력에서는 가로 덱을 문서 흐름으로 펼쳐 필요한 장을 순서대로 담는다. */
+@media print {
+  @page {
+    size: A4 landscape;
+    margin: 0;
+  }
+
+  html:has(.cloud-deck),
+  body:has(.cloud-deck) {
+    width: auto;
+    height: auto;
+    overflow: visible;
+  }
+
+  body {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .cloud {
+    min-height: 0;
+    overflow: visible;
+  }
+
+  .cloud-nav,
+  .cloud-edge,
+  .cloud-gust-layer,
+  .cloud-trail-layer,
+  .cloud-onboarding,
+  .time-theme-trigger-zone,
+  .grain {
+    display: none !important;
+  }
+
+  .cloud-drift-layer {
+    position: absolute;
+  }
+
+  .cloud-deck {
+    position: static;
+    overflow: visible;
+  }
+
+  .cloud-deck-track {
+    display: block;
+    width: auto;
+    height: auto;
+    transform: none !important;
+    transition: none;
+  }
+
+  /* 한 장(章)을 정확히 A4 한 페이지에 담아 잘림도 빈 페이지도 만들지 않는다. */
+  .cloud-page {
+    width: 297mm;
+    height: 210mm;
+    min-height: 0;
+    overflow: hidden;
+    break-after: page;
+    page-break-after: always;
+  }
+
+  .cloud-page:last-child {
+    break-after: auto;
+    page-break-after: auto;
+  }
+
+  .cloud-page:has(#skills) {
+    display: none;
+  }
+
+  :root {
+    /* 편지 카드 높이 — 이 값만 바꾸면 표지 외 장의 카드 비율이 함께 조정된다. */
+    --print-letter-height: 150mm;
+    /* 편지지 안쪽 여백 — 찢긴 가장자리와 본문 사이 간격. */
+    --print-letter-pad: 7mm 8mm;
+  }
+
+  /* 찢긴 가장자리를 화면보다 깊게 판다 — 화면 폴리곤(진폭 1% 남짓)은 A4로 축소되면
+     1mm도 안 돼 그냥 사각형으로 보인다. */
+  .cloud,
+  #career,
+  #education {
+    --letter-paper-edge: polygon(
+      1.2% 1.7%, 7% 0.6%, 13% 2.4%, 19% 0.9%, 26% 2.7%, 33% 1.0%,
+      40% 2.3%, 47% 0.7%, 54% 2.5%, 61% 1.1%, 68% 2.8%, 75% 0.8%,
+      82% 2.2%, 89% 1.0%, 98.6% 2.1%, 99.4% 9%, 98.1% 18%, 99.5% 27%,
+      97.9% 36%, 99.3% 45%, 97.8% 55%, 99.4% 65%, 98.0% 75%, 99.5% 86%,
+      98.7% 98.1%, 91% 99.4%, 84% 97.5%, 76% 99.3%, 68% 97.7%,
+      61% 99.5%, 53% 97.6%, 45% 99.2%, 37% 97.8%, 29% 99.4%, 21% 97.7%,
+      14% 99.3%, 7% 97.9%, 1.3% 98.6%, 0.5% 89%, 2.0% 78%, 0.4% 67%,
+      2.1% 56%, 0.6% 45%, 1.9% 34%, 0.5% 23%, 1.8% 12%
+    );
+    --timeline-paper-edge: polygon(
+      1.2% 1.7%, 7% 0.6%, 13% 2.4%, 19% 0.9%, 26% 2.7%, 33% 1.0%,
+      40% 2.3%, 47% 0.7%, 54% 2.5%, 61% 1.1%, 68% 2.8%, 75% 0.8%,
+      82% 2.2%, 89% 1.0%, 98.6% 2.1%, 99.4% 9%, 98.1% 18%, 99.5% 27%,
+      97.9% 36%, 99.3% 45%, 97.8% 55%, 99.4% 65%, 98.0% 75%, 99.5% 86%,
+      98.7% 98.1%, 91% 99.4%, 84% 97.5%, 76% 99.3%, 68% 97.7%,
+      61% 99.5%, 53% 97.6%, 45% 99.2%, 37% 97.8%, 29% 99.4%, 21% 97.7%,
+      14% 99.3%, 7% 97.9%, 1.3% 98.6%, 0.5% 89%, 2.0% 78%, 0.4% 67%,
+      2.1% 56%, 0.6% 45%, 1.9% 34%, 0.5% 23%, 1.8% 12%
+    );
+  }
+
+  /* 여백을 줄이고 본문 카드가 남은 높이를 모두 채우도록 세로 플로우로 편다. */
+  .cloud-deck .cloud-section,
+  .cloud-deck .cloud-section.hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-height: 0;
+    height: 210mm;
+    padding: 5mm 7mm;
+  }
+
+  .cloud-deck .cloud-section.hero {
+    justify-content: center;
+  }
+
+  /* 섹션과 본문 사이의 래퍼도 함께 늘어나야 카드가 남은 높이를 받는다. */
+  .cloud-deck .cloud-veilwrap {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    width: 100%;
+    min-height: 0;
+  }
+
+  .cloud-deck .cloud-section.hero .cloud-veilwrap {
+    flex: 0 0 auto;
+  }
+
+  .cloud-deck .cloud-content,
+  .cloud-deck .cloud-hero-content {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: none;
+    min-height: 0;
+  }
+
+  .cloud-deck .cloud-section.hero .cloud-hero-content {
+    flex: 0 0 auto;
+    justify-content: center;
+  }
+
+  /* 편지 카드는 페이지를 꽉 채우지 않고 지면 비율에 맞춰 눕힌 뒤 남는 위아래를 나눠 갖는다. */
+  #about .cloud-about-layout,
+  [id^="project-"] .cloud-proj-layout {
+    flex: 0 1 auto;
+    height: 100%;
+    max-height: var(--print-letter-height);
+    min-height: 0;
+    margin-block: auto;
+    padding: var(--print-letter-pad);
+    /* Chrome은 filter가 걸린 요소 안의 <a>를 PDF 링크로 내보내지 않는다.
+       인쇄에서는 종이 그림자를 포기하고 링크를 살린다. */
+    filter: none;
+  }
+
+  .print-only {
+    display: inline-flex;
+  }
+
+  [id^="project-"] .cloud-proj-link.gh {
+    padding: 2mm 4mm;
+    font-size: 17px;
+  }
+
+  .cloud-sechead {
+    margin-bottom: 4mm;
+  }
+
+  /* 화면은 시간대별 인사말을 그대로 두고, 인쇄 표지만 고정 문구로 바꾼다. */
+  .cloud-greeting-panel {
+    display: none !important;
+  }
+
+  .cloud-greeting-panel--print {
+    display: block !important;
+  }
+
+  #career .cloud-content,
+  #education .cloud-content {
+    width: 100%;
+    max-width: none;
+  }
+
+  /* 타임라인 묶음은 내용 높이대로 두고, 남는 위아래를 균등하게 나눠 갖는다. */
+  #career .cloud-content > *:not(.cloud-sechead),
+  #education .cloud-content > *:not(.cloud-sechead) {
+    display: flex;
+    flex: 0 1 auto;
+    flex-direction: column;
+    gap: 5mm;
+    min-height: 0;
+  }
+
+  /* 제목은 위에 붙여 두고, 본문 묶음 전체를 한 덩어리로 세로 가운데에 놓는다. */
+  #career .cloud-content,
+  #education .cloud-content {
+    row-gap: 5mm;
+  }
+
+  #career .cloud-content > *:nth-child(2),
+  #education .cloud-content > *:nth-child(2) {
+    margin-top: auto;
+  }
+
+  #career .cloud-content > *:last-child,
+  #education .cloud-content > *:last-child {
+    margin-bottom: auto;
+  }
+
+  #career .cloud-tl-row,
+  #education .cloud-tl-row {
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+
+  #career .cloud-tl-card {
+    flex: 0 0 auto;
+  }
+
+  #career .cloud-tl-subpanel {
+    flex: 1 1 auto;
+  }
+
+  #career .cloud-tl-subpanel .cloud-skillitems {
+    height: 100%;
+  }
+
+  /* 화면과 같이 한 장(章)의 편지지 위에 내용을 얹는다 — 인쇄에서 흰 사각형
+     여러 개로 쪼개면 편지 느낌이 사라진다. 찢긴 가장자리(--timeline-paper-edge)와
+     왼쪽 펀치 구멍 마스크, 종이 그림자는 화면 규칙(1818행)을 그대로 물려받는다. */
+  #career .cloud-tl-row,
+  #education .cloud-tl-row {
+    display: block;
+    margin-bottom: 0;
+    overflow: hidden;
+    /* 찢긴 가장자리에 글이 닿지 않도록 편지지 안쪽에 여백을 둔다. */
+    padding: var(--print-letter-pad);
+  }
+
+  #career .cloud-tl-row {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #career .cloud-tl-card,
+  #education .cloud-tl-card,
+  #career .cloud-tl-subpanel,
+  #education .cloud-tl-subpanel.education {
+    width: 100%;
+  }
+
+  /* 안쪽 요소는 편지지 위의 구역일 뿐이라 배경·테두리를 지운다. */
+  #career .cloud-tl-inner,
+  #education .cloud-tl-inner,
+  #career .cloud-tl-subpanel .cloud-skillitem,
+  #education .cloud-tl-subpanel .cloud-skillitem {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    color: #182120;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    clip-path: none;
+    -webkit-mask: none;
+    mask: none;
+    filter: none;
+  }
+
+  #career .cloud-tl-inner,
+  #education .cloud-tl-inner {
+    padding: 3mm 4mm 3mm;
+  }
+
+  #career .cloud-tl-subpanel,
+  #education .cloud-tl-subpanel.education {
+    padding: 3mm 0 0;
+  }
+
+  #career .cloud-tl-subpanel .cloud-skillitems,
+  #education .cloud-tl-subpanel .cloud-skillitems {
+    display: block;
+  }
+
+  #career .cloud-tl-subpanel .cloud-skillitems {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 3mm;
+  }
+
+  #career .cloud-tl-subpanel .cloud-skillitem:has(.cloud-live-link) {
+    padding-right: 8mm;
+  }
+
+  #career .cloud-tl-subpanel .cloud-live-link {
+    position: static;
+    margin-top: 2mm;
+  }
+
+  #education .cloud-tl-row {
+    display: grid;
+    grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+    grid-auto-rows: 1fr;
+    align-content: stretch;
+    align-items: stretch;
+    gap: 4mm;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  #education .cloud-tl-card,
+  #education .cloud-tl-subpanel.education {
+    width: auto;
+  }
+
+  #education .cloud-tl-card {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  #education .cloud-tl-subpanel.education {
+    grid-column: 2;
+    grid-row: 1;
+    padding-top: 0;
+  }
+
+  /* 좌우 카드가 늘어난 행 높이를 그대로 채우게 한다. */
+  #education .cloud-tl-card,
+  #education .cloud-tl-subpanel.education,
+  #education .cloud-tl-subpanel .cloud-skillitems {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #education .cloud-tl-inner,
+  #education .cloud-tl-subpanel .cloud-skillitems {
+    flex: 1 1 auto;
+  }
+
+  #career .cloud-tl-subpanel .cloud-skillitem,
+  #education .cloud-tl-subpanel .cloud-skillitem {
+    margin-bottom: 4mm;
+    padding: 5mm 8mm;
+  }
+
+  #education .cloud-tl-subpanel .cloud-skillitem {
+    height: 100%;
+    margin-bottom: 0;
+  }
+
+  #career .cloud-tl-subpanel .cloud-skillitem {
+    padding: 3mm 4mm;
+  }
+
+  #career .cloud-tl-title,
+  #education .cloud-tl-title {
+    font-size: 27px;
+  }
+
+  #career .cloud-tl-desc,
+  #career .cloud-tl-subdesc-list li,
+  #education .cloud-tl-desc,
+  #education .cloud-tl-subdesc-list li {
+    font-size: 25px;
+    line-height: 1.48;
+  }
+
+  #career .cloud-tl-desc,
+  #career .cloud-tl-subdesc-list li {
+    font-size: 17px;
+    line-height: 1.3;
+  }
+
+  #career .cloud-tl-subpanel .cloud-skillitem-name,
+  #education .cloud-tl-subpanel .cloud-skillitem-name {
+    margin-bottom: 2mm;
+    font-size: 23px;
+  }
+
+  #career .cloud-tl-subpanel .cloud-skillitem-name {
+    font-size: 19px;
   }
 }
 

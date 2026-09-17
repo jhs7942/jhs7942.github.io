@@ -108,6 +108,18 @@ export function ProjectPage({ project }: { project: Project }) {
                         </span>
                       )}
                   <div className="cloud-proj-links">
+                    {/* 카드 전체 클릭은 스크립트라 PDF에 남지 않는다 — 인쇄본에는 실제 앵커를 따로 둔다. */}
+                    {project.githubUrl && (
+                      <a
+                        className="cloud-proj-link gh print-only"
+                        href={project.githubUrl}
+                        target="_blank"
+                        rel="noopener"
+                        onClick={(event) => event.stopPropagation()}
+                      >
+                        트러블슈팅 확인하기
+                      </a>
+                    )}
                     {project.newsUrl && (
                       <a
                         className="cloud-proj-link news"

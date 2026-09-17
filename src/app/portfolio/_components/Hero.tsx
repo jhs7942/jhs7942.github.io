@@ -41,6 +41,16 @@ export function Hero() {
               </div>
             </div>
           </div>
+          {/* PDF 표지는 내보낸 시간대와 무관하게 늘 같은 문구가 나오도록 인쇄 전용으로 둔다. */}
+          <div className="cloud-greeting-panel cloud-greeting-panel--print">
+            <div className="cloud-greeting-cloud">
+              <div className="cloud-greeting-body">
+                <h1 className="cloud-greeting-title" aria-label="Hello, world!">
+                  <CloudAlphabetGreeting text="HELLO, WORLD!" />
+                </h1>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </header>
