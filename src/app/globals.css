@@ -1,5 +1,11 @@
 @import "tailwindcss";
 @import "./animations.css";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+/*
+ ---break---
+ */
+@custom-variant dark (&:is(:root[data-theme="night"] *));
 
 /*
  * 팔레트·치수는 라이브 테마 theme/custom-theme.xml 의 <b:skin> 에서 그대로 가져왔다.
@@ -70,6 +76,47 @@
   /* 손으로 그린 듯 모서리를 조금씩 어긋나게. 테마 전반의 서명이다. */
   --radius-hand: 18px 20px 17px 19px;
   --radius-hand-sm: 10px 12px 9px 11px;
+  /* ── shadcn/ui 시맨틱 토큰 ────────────────────────────────────────────
+   * 값을 직접 들고 있지 않고 위의 디자인 토큰을 가리킨다. 그래서
+   * :root[data-theme="sunset"|"night"] 이 팔레트를 갈아끼우면
+   * bg-primary·text-muted-foreground 같은 shadcn 유틸도 같이 따라간다.
+   * 여기를 오클라치 리터럴로 되돌리면 시간대 테마가 끊긴다. */
+  --background: var(--surface-page);
+  --foreground: var(--text-primary);
+  --card: var(--surface-raised);
+  --card-foreground: var(--text-primary);
+  --popover: var(--surface-overlay-strong);
+  --popover-foreground: var(--text-primary);
+  --primary: var(--control-strong-bg);
+  --primary-foreground: var(--control-strong-text);
+  --secondary: var(--surface-muted);
+  --secondary-foreground: var(--text-strong);
+  /* shadcn 의 muted 는 "흐린 면(surface)"이다 — 이 프로젝트의 --muted(흐린 글자색)와
+     이름만 같고 뜻이 다르다. 둘을 그대로 이으면 bg-muted 와 text-muted-foreground 가
+     같은 색이 돼 글자가 사라진다. 면은 --surface-muted, 글자는 --text-strong 으로 가른다. */
+  --muted-foreground: var(--text-strong);
+  --accent-foreground: var(--text-on-strong);
+  --destructive: #c8443c;
+  --border: var(--border-default);
+  --input: var(--border-medium);
+  --ring: var(--focus-ring);
+  --chart-1: var(--mint);
+  --chart-2: var(--sage);
+  --chart-3: var(--accent);
+  --chart-4: var(--mint-light);
+  --chart-5: var(--ink-strong);
+
+  /* 손그림 모서리(--radius-hand)는 네 값짜리라 calc() 에 못 넣는다.
+   * shadcn 파생 스케일용으로 18px 한 값만 따로 둔다. */
+  --radius: 1.125rem;
+  --sidebar: var(--surface-raised);
+  --sidebar-foreground: var(--text-primary);
+  --sidebar-primary: var(--control-strong-bg);
+  --sidebar-primary-foreground: var(--control-strong-text);
+  --sidebar-accent: var(--surface-muted);
+  --sidebar-accent-foreground: var(--text-strong);
+  --sidebar-border: var(--border-default);
+  --sidebar-ring: var(--focus-ring);
 }
 
 /* 시간대 테마 — 구조와 컴포넌트는 유지하고 색상 토큰만 교체한다. */
@@ -184,12 +231,49 @@
   --color-ink-strong: var(--ink-strong);
   --color-accent: var(--accent);
   --color-sage: var(--sage);
-  --color-muted: var(--muted);
+  --color-muted: var(--surface-muted);
   --color-line: var(--line);
   --color-line-soft: var(--line-soft);
 
   --font-sans: var(--font-sans), "Apple SD Gothic Neo", sans-serif;
   --font-mono: var(--font-geist-mono), monospace;
+  --font-heading: var(--font-sans);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
 }
 
 * {
@@ -561,4 +645,18 @@ body {
   font-weight: 700;
   color: var(--ink);
   opacity: 0.6;
+}
+/*
+ ---break---
+ */
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
 }

@@ -5,6 +5,8 @@ import { SITE } from "@/lib/site";
 import { RoughFilters } from "./_components/Chrome";
 import { TimeTheme } from "./_components/TimeTheme";
 import "./globals.css";
+import { cn } from "@/lib/utils";
+import { Toaster } from "@/components/ui/toast";
 
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
@@ -57,7 +59,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="ko"
-      className={`${notoSansKR.variable} ${geistMono.variable} antialiased`}
+      className={cn("antialiased", "font-sans", notoSansKR.variable, geistMono.variable)}
       suppressHydrationWarning
     >
       <body>
@@ -69,7 +71,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <TimeTheme />
         <RoughFilters />
         <div className="grain" aria-hidden />
-        {children}
+        {/* 토스트 매니저 — CopyEmailButton 등이 toast.add() 로 띄운다. */}
+        <Toaster>{children}</Toaster>
       </body>
     </html>
   );
