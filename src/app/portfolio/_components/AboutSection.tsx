@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { about, profile } from "../_data/profile";
 import { CopyEmailButton } from "./CopyEmailButton";
 import { GitHubIcon } from "./GitHubIcon";
@@ -41,18 +42,20 @@ export function AboutSection() {
                   </p>
                 ))}
                 <div className="cloud-about-actions">
-                  <a
-                    className="cloud-btn dark"
-                    href={profile.githubUrl}
-                    target="_blank"
-                    rel="noopener"
+                  <Button
+                    variant="hand"
+                    size="hand-sm"
+                    render={
+                      <a href={profile.githubUrl} target="_blank" rel="noopener" />
+                    }
                   >
-                    <GitHubIcon className="cloud-btn-icon" />
+                    <GitHubIcon data-icon="inline-start" />
                     GitHub
-                  </a>
+                  </Button>
                   <CopyEmailButton
                     email={profile.email}
-                    className="cloud-btn ghost"
+                    variant="hand-ghost"
+                    size="hand-sm"
                   />
                 </div>
               </div>

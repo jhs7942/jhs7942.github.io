@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { DeckEdgeButton } from "./DeckEdgeButton";
+import { cn } from "@/lib/utils";
 
 /** 안내를 이미 봤는지 기억하는 키 — 다시 보고 싶으면 브라우저 저장소에서 이 값을 지우면 된다 */
 const SEEN_KEY = "portfolio-deck-guide-seen";
@@ -94,17 +95,17 @@ export function DeckOnboarding() {
 
   return (
     <div className="cloud-guide" aria-hidden>
-      <p className={`cloud-guide-toast${phase === "out" ? " out" : ""}`}>
+      <p className={cn("cloud-guide-toast", phase === "out" && "out")}>
         화면 <b>왼쪽 · 오른쪽 끝</b>에 마우스를 올리면 페이지가 넘어갑니다.
         <span>1초를 기다리거나, 나타난 버튼을 바로 눌러도 됩니다.</span>
       </p>
 
-      <span className={`cloud-guide-slot${phase === "out" ? " out" : ""}`}>
+      <span className={cn("cloud-guide-slot", phase === "out" && "out")}>
         <DeckEdgeButton side="right" armNonce={phase === "dwell" || phase === "out" ? 1 : 0} />
       </span>
 
       <svg
-        className={`cloud-guide-ghost${atEdge ? " at-edge" : ""}${phase === "out" ? " out" : ""}`}
+        className={cn("cloud-guide-ghost", atEdge && "at-edge", phase === "out" && "out")}
         viewBox="0 0 24 24"
         focusable="false"
       >

@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { profile } from "../_data/profile";
 import { CopyEmailButton } from "./CopyEmailButton";
 
@@ -10,13 +11,17 @@ export function Footer() {
     <footer className="cloud-footer">
       <p className="cloud-footer-lead">배우고 만든 것을 빠짐없이 남기는 개발 기록.</p>
       <div className="cloud-footer-links">
-        <CopyEmailButton email={profile.email} className="cloud-footer-link ghost" />
-        <a className="cloud-footer-link dark" href={profile.blogUrl} target="_blank" rel="noopener">
+        <CopyEmailButton email={profile.email} variant="hand-outline" size="hand" />
+        <Button
+          variant="hand-solid"
+          size="hand"
+          render={<a href={profile.blogUrl} target="_blank" rel="noopener" />}
+        >
           BLOG
-        </a>
-        <a className="cloud-footer-link ghost" href="#top">
+        </Button>
+        <Button variant="hand-outline" size="hand" render={<a href="#top" />}>
           맨 위로 ↑
-        </a>
+        </Button>
       </div>
       <p className="cloud-footer-copy">© 2026 JHS7942</p>
     </footer>

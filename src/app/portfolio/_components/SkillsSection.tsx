@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { skillCategories } from "../_data/skills";
 import { SkillIconBadge } from "./SkillIconBadge";
 
@@ -18,6 +19,9 @@ export function SkillsSection() {
     categoryRefs.current[normalizedIndex]?.focus();
   };
 
+  // Base UI 탭은 탭 목록에 포커스가 있을 때만 화살표 키를 처리한다.
+  // 이 페이지는 카드 어디에 있든 ↑↓ 로 카테고리를 넘길 수 있어야 해서
+  // 창 전역 리스너를 그대로 유지한다.
   useEffect(() => {
     const handleKeyDown = (event: globalThis.KeyboardEvent) => {
       if (event.key !== "ArrowDown" && event.key !== "ArrowUp") return;
@@ -45,40 +49,41 @@ export function SkillsSection() {
           <div className="cloud-sechead">
             <h2>스킬</h2>
           </div>
-          <div className="cloud-skillwrap">
-            <div
+          {/* 눈에 보이는 스타일은 전부 portfolio.css 의 .cloud-* 클래스가 쥐고 있다.
+              (레이어 없는 CSS라 Tailwind 유틸보다 우선한다)
+              여기 className 은 그 스타일과 충돌하는 유틸만 되돌린다. */}
+          <Tabs
+            value={activeId}
+            onValueChange={(value) => setActiveId(value as string)}
+            orientation="vertical"
+            className="cloud-skillwrap"
+          >
+            <TabsList
+              variant="line"
               className="cloud-cat-list"
-              role="tablist"
               aria-label="스킬 카테고리"
-              aria-orientation="vertical"
             >
               {skillCategories.map((cat, index) => (
-                <button
+                <TabsTrigger
                   key={cat.id}
+                  value={cat.id}
                   ref={(element) => {
                     categoryRefs.current[index] = element;
                   }}
-                  id={`skill-tab-${cat.id}`}
-                  type="button"
-                  onClick={() => setActiveId(cat.id)}
-                  className={`cloud-cat-btn${cat.id === activeId ? " active" : ""}`}
-                  role="tab"
-                  aria-selected={cat.id === activeId}
-                  aria-controls={`skill-panel-${cat.id}`}
-                  tabIndex={cat.id === activeId ? 0 : -1}
+                  // flex-1·h-[calc(100%-1px)] 은 손그림 카드 높이를 무너뜨리고,
+                  // after: 인디케이터는 형광펜 효과와 겹친다.
+                  className="cloud-cat-btn h-auto flex-none after:hidden"
                 >
                   <span className="cloud-cat-name">{cat.name}</span>
                   <span className="cloud-cat-en">{cat.en}</span>
-                </button>
+                </TabsTrigger>
               ))}
-            </div>
+            </TabsList>
             {/* key로 카테고리 전환마다 remount시켜 skillIn 애니메이션이 매번 다시 재생되게 한다 */}
-            <div
+            <TabsContent
               key={active.id}
-              id={`skill-panel-${active.id}`}
+              value={active.id}
               className="cloud-skillpanel"
-              role="tabpanel"
-              aria-labelledby={`skill-tab-${active.id}`}
             >
               <h3 className="cloud-skillpanel-name">{active.name}</h3>
               <div className="cloud-skillitems">
@@ -86,9 +91,6 @@ export function SkillsSection() {
                   <article key={item.name} className="cloud-skillitem cloud-letter-card">
                     <SkillIconBadge name={item.name} />
                     <div className="cloud-skillitem-body cloud-letter-sheet">
-                      {/* <span className="cloud-letter-label">
-                        NOTE · {String(index + 1).padStart(2, "0")}
-                      </span> */}
                       <h4 className="cloud-skillitem-name">{item.name}</h4>
                       <p
                         className="cloud-skillitem-desc"
@@ -98,8 +100,8 @@ export function SkillsSection() {
                   </article>
                 ))}
               </div>
-            </div>
-          </div>
+            </TabsContent>
+          </Tabs>
         </div>
       </div>
     </section>

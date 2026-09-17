@@ -11,6 +11,7 @@ import { CareerSection, EducationSection } from "./portfolio/_components/CareerS
 import { SkillsSection } from "./portfolio/_components/SkillsSection";
 import { ProjectPage } from "./portfolio/_components/ProjectPage";
 import { handFont, noteFont } from "./portfolio/_lib/fonts";
+import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: { absolute: "정현승 | 웹 개발자 포트폴리오" },
@@ -39,7 +40,7 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div className={`cloud ${handFont.variable} ${noteFont.variable}`}>
+    <div className={cn("cloud", handFont.variable, noteFont.variable)}>
       <CloudDriftLayer />
       <PortfolioDeck>
         <Hero />

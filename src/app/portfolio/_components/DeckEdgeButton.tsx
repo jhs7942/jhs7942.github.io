@@ -9,11 +9,13 @@
  * 1 이상이면 무장 상태다. 값이 바뀔 때마다 진행 링 <circle> 이 remount 돼
  * CSS 애니메이션이 처음부터 다시 돈다(같은 값이면 재시작되지 않는다).
  */
+import { cn } from "@/lib/utils";
+
 export function DeckEdgeButton({ side, armNonce }: { side: "left" | "right"; armNonce: number }) {
   const armed = armNonce > 0;
 
   return (
-    <span className={`cloud-edge-btn${armed ? " armed" : ""}`}>
+    <span className={cn("cloud-edge-btn", armed && "armed")}>
       <svg className="cloud-edge-ring" viewBox="0 0 60 60" aria-hidden focusable="false">
         <circle className="cloud-edge-ring-track" cx="30" cy="30" r="26" />
         {armed && <circle key={armNonce} className="cloud-edge-ring-fill" cx="30" cy="30" r="26" />}

@@ -1,5 +1,6 @@
 import type { CSSProperties } from "react";
 import { CloudPuff } from "./CloudPuff";
+import { cn } from "@/lib/utils";
 
 /**
  * 세로 위치(%) · 너비(px) · 시작 지연(ms) · 전체 재생 시간(ms)에 더해, 손으로
@@ -38,7 +39,7 @@ export function DeckTransitionClouds({ gustKey, direction }: { gustKey: number; 
   if (gustKey === 0) return null;
 
   return (
-    <div key={gustKey} className={`cloud-gust-layer${direction === -1 ? " prev" : ""}`} aria-hidden>
+    <div key={gustKey} className={cn("cloud-gust-layer", direction === -1 && "prev")} aria-hidden>
       {GUST_LAYOUT.map((spec, i) => (
         <span
           key={i}

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { DeckEdgeButton } from "./DeckEdgeButton";
+import { cn } from "@/lib/utils";
 
 /** 마우스를 올린 채 이만큼 기다리면 자동으로 넘어간다 — portfolio.css 의 cloudEdgeRing 길이와 맞춰야 한다 */
 const DWELL_MS = 1500;
@@ -52,7 +53,7 @@ export function DeckEdge({
   return (
     <button
       type="button"
-      className={`cloud-edge ${side}`}
+      className={cn("cloud-edge", side)}
       aria-label={label}
       disabled={disabled}
       onPointerEnter={(e) => {

@@ -1,29 +1,28 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
+import type { VariantProps } from "class-variance-authority";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { toast } from "@/components/ui/toast";
 
 /**
- * 이메일 복사 버튼 + 토스트.
+ * 이메일 복사 버튼.
  *
  * 원본(portfolio.html)은 바닐라 스크립트로 클립보드 API → execCommand → 수동 선택
- * 순서로 폴백했다. 같은 폴백을 리액트 상태로 옮겼다 — DOM을 직접 만들던 토스트 엘리먼트를
- * 컴포넌트 상태로 대체한 것 외에는 동작이 같다.
+ * 순서로 폴백했다. 같은 폴백을 그대로 유지한다.
+ *
+ * 알림은 직접 만들던 .cloud-toast <div> 대신 shadcn 토스트 매니저에 넘긴다 —
+ * 레이아웃의 <Toaster> 가 aria-live·스택·스와이프 해제까지 맡는다.
  */
-export function CopyEmailButton({ email, className }: { email: string; className: string }) {
-  const [toast, setToast] = useState<{ message: string; warn: boolean } | null>(null);
+export function CopyEmailButton({
+  email,
+  variant = "hand-ghost",
+  size = "hand",
+}: { email: string } & VariantProps<typeof buttonVariants>) {
   const labelRef = useRef<HTMLSpanElement>(null);
-  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  useEffect(() => {
-    return () => {
-      if (timerRef.current) clearTimeout(timerRef.current);
-    };
-  }, []);
 
   function say(message: string, warn = false) {
-    setToast({ message, warn });
-    if (timerRef.current) clearTimeout(timerRef.current);
-    timerRef.current = setTimeout(() => setToast(null), 1900);
+    toast.add({ title: message, type: warn ? "warning" : "success", timeout: 1900 });
   }
 
   function legacyCopy(value: string): boolean {
@@ -54,7 +53,7 @@ export function CopyEmailButton({ email, className }: { email: string; className
         sel?.removeAllRanges();
         sel?.addRange(range);
       } catch {
-        // 선택 불가 환경 — 토스트 안내만 남긴다
+        // 선택 불가 환경 — 안내만 남긴다
       }
     }
     say("복사가 막혔습니다. Ctrl+C를 눌러 주세요", true);
@@ -79,19 +78,15 @@ export function CopyEmailButton({ email, className }: { email: string; className
   }
 
   return (
-    <>
-      <a
-        className={className}
-        href={`mailto:${email}`}
-        aria-label={`${email} 복사`}
-        title="클릭하면 주소가 복사됩니다"
-        onClick={handleClick}
-      >
-        <span ref={labelRef}>{email}</span>
-      </a>
-      <div className={`cloud-toast${toast ? " show" : ""}${toast?.warn ? " warn" : ""} top-50`} role="status" aria-live="polite">
-        {toast?.message}
-      </div>
-    </>
+    <Button
+      variant={variant}
+      size={size}
+      onClick={handleClick}
+      aria-label={`${email} 복사`}
+      title="클릭하면 주소가 복사됩니다"
+      render={<a href={`mailto:${email}`} />}
+    >
+      <span ref={labelRef}>{email}</span>
+    </Button>
   );
 }

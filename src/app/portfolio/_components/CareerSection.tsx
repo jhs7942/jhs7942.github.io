@@ -1,6 +1,7 @@
 "use client";
 
 import { careerTimeline, type CareerEntry } from "../_data/career";
+import { cn } from "@/lib/utils";
 
 const careerEntries = careerTimeline.filter((entry) => entry.kind !== "EDUCATION");
 const educationEntries = careerTimeline.filter((entry) => entry.kind === "EDUCATION");
@@ -25,7 +26,7 @@ function TimelineSection({ id, title, entries }: TimelineSectionProps) {
             const isLast = i === entries.length - 1;
             const card = (
               <div
-                className={`cloud-tl-inner${entry.tint ? " tint" : ""}`}
+                className={cn("cloud-tl-inner", entry.tint && "tint")}
               >
                 <div className="cloud-tl-body">
                   <div className="cloud-tl-meta">
@@ -51,11 +52,14 @@ function TimelineSection({ id, title, entries }: TimelineSectionProps) {
             );
             return (
               <div key={entry.title}>
-                <div className={`cloud-tl-row${isLast ? " last" : ""}`}>
+                <div className={cn("cloud-tl-row", isLast && "last")}>
                   <div className="cloud-tl-card">{card}</div>
                   {(entry.details || entry.subProjects) && (
                     <div
-                      className={`cloud-skillpanel cloud-tl-subpanel${entry.kind === "EDUCATION" ? " education" : ""}`}
+                      className={cn(
+                        "cloud-skillpanel cloud-tl-subpanel",
+                        entry.kind === "EDUCATION" && "education",
+                      )}
                     >
                       <div className="cloud-skillitems">
                         {entry.kind === "EDUCATION" && entry.details && (

@@ -2,6 +2,7 @@
 
 import type { Project } from "../_data/projects";
 import { GitHubIcon } from "./GitHubIcon";
+import { cn } from "@/lib/utils";
 
 const skillGroupRules = [
   { label: "프론트엔드", test: /React|TypeScript|Zustand|Tailwind|Vite|TanStack/i },
@@ -65,7 +66,11 @@ export function ProjectPage({ project }: { project: Project }) {
             ))}
           <div className="cloud-proj-list">
             <article
-              className={`cloud-skillpanel cloud-proj-card${project.minor ? " minor" : ""}${hasGitHubUrl ? " is-clickable" : ""}`}
+              className={cn(
+                "cloud-skillpanel cloud-proj-card",
+                project.minor && "minor",
+                hasGitHubUrl && "is-clickable",
+              )}
               role={hasGitHubUrl ? "link" : undefined}
               tabIndex={hasGitHubUrl ? 0 : undefined}
               aria-label={hasGitHubUrl ? `${project.title} GitHub 상세 페이지 열기` : undefined}
@@ -135,7 +140,7 @@ export function ProjectPage({ project }: { project: Project }) {
                 )}
 
                 <p
-                  className={`cloud-proj-desc${project.minor ? " minor" : ""}`}
+                  className={cn("cloud-proj-desc", project.minor && "minor")}
                   dangerouslySetInnerHTML={{ __html: project.descHtml }}
                 />
 
