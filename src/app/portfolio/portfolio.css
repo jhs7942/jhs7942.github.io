@@ -1126,6 +1126,8 @@ body:has(.cloud-deck) {
   max-width: 1416px;
 }
 #about .cloud-content,
+#team-intro .cloud-content,
+#team-proof .cloud-content,
 [id^="project-"] .cloud-content {
   width: min(1416px, calc(100vw - 2 * clamp(64px, 7vw, 112px) - 24px));
   max-width: 1416px;
@@ -2963,6 +2965,236 @@ body:has(.cloud-deck) {
 [id^="project-"] .cloud-stat-row {
   gap: 12px;
 }
+
+/* 싸피 팀원 구직 소개 — 기존 소개 편지의 골격을 복제하되, 프로필 소개보다
+   역할 제안이 먼저 읽히도록 제목과 행동 버튼의 대비를 키운다. */
+#team-intro .cloud-about-layout {
+  isolation: isolate;
+  min-height: clamp(460px, 54vh, 560px);
+  overflow: hidden;
+  padding: clamp(28px, 3.2vw, 42px) clamp(26px, 3.5vw, 46px) clamp(32px, 3.6vw, 48px);
+  column-gap: clamp(38px, 5vw, 72px);
+  color: #182120;
+  background:
+    repeating-linear-gradient(96deg, transparent 0 38px, rgb(24 33 32 / 0.012) 39px, transparent 40px 78px),
+    linear-gradient(rgb(24 33 32 / 0.04) 1px, transparent 1px) 0 45px / 100% 33px,
+    #ffffff;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  clip-path: var(--letter-paper-edge);
+  -webkit-mask: radial-gradient(circle at 4px 18px, transparent 0 4px, #000 4.5px) 0 0 / 100% 31px repeat-y;
+  mask: radial-gradient(circle at 4px 18px, transparent 0 4px, #000 4.5px) 0 0 / 100% 31px repeat-y;
+  filter:
+    drop-shadow(8px 10px 0 rgb(24 33 32 / 0.08))
+    drop-shadow(0 16px 14px rgb(24 33 32 / 0.1));
+  animation-name: whiteSkillLetterIn;
+}
+#team-intro .cloud-about-card {
+  overflow: visible;
+  min-height: 0;
+  padding: 0;
+  color: #182120;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+#team-intro .cloud-about-name,
+#team-intro .cloud-about-lead,
+#team-intro .cloud-about-sub,
+#team-intro .cloud-about-p {
+  color: #182120;
+}
+#team-intro .cloud-about-name {
+  position: relative;
+  display: inline-block;
+  max-width: 11em;
+  margin-bottom: 19px;
+  transform: rotate(-0.65deg);
+}
+#team-intro .cloud-about-name::after {
+  content: "";
+  position: absolute;
+  right: -7px;
+  bottom: -7px;
+  left: -3px;
+  height: 7px;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  opacity: 0.28;
+  transform: rotate(-1.1deg);
+}
+#team-intro .cloud-about-lead,
+#team-intro .cloud-about-sub {
+  font-family: var(--font-hand), var(--font-sans);
+}
+#team-intro .cloud-about-lead {
+  margin-bottom: 12px;
+}
+#team-intro .cloud-about-sub {
+  margin-bottom: 26px;
+}
+#team-intro .cloud-about-p {
+  margin-bottom: 18px;
+  font-family: var(--font-note), var(--font-sans);
+  font-size: 29px;
+  line-height: 1.55;
+  letter-spacing: 0.1px;
+}
+#team-intro .cloud-about-actions {
+  margin-top: 24px;
+}
+#team-intro .cloud-about-photo {
+  border: 5px solid #ffffff;
+  border-radius: 2px 4px 3px 2px;
+  box-shadow:
+    0 0 0 1.5px rgb(24 33 32 / 0.42),
+    8px 11px 0 rgb(24 33 32 / 0.09),
+    0 16px 23px -13px rgb(24 33 32 / 0.42);
+  transform: rotate(1.2deg);
+}
+
+/* 합류 이유 — 경력 페이지의 한 장짜리 공책을 복제해 주장과 근거를 한 행에
+   짝지었다. 카드를 잘게 쪼개지 않아 팀원이 빠르게 훑어도 논리가 끊기지 않는다. */
+.cloud-proof-board {
+  isolation: isolate;
+  overflow: hidden;
+  padding: clamp(34px, 4vw, 58px) clamp(28px, 5vw, 72px) clamp(42px, 5vw, 68px);
+  color: #182120;
+  background:
+    repeating-linear-gradient(96deg, transparent 0 38px, rgb(24 33 32 / 0.012) 39px, transparent 40px 78px),
+    linear-gradient(rgb(24 33 32 / 0.04) 1px, transparent 1px) 0 45px / 100% 33px,
+    #ffffff;
+  clip-path: var(--letter-paper-edge);
+  -webkit-mask: radial-gradient(circle at 4px 18px, transparent 0 4px, #000 4.5px) 0 0 / 100% 31px repeat-y;
+  mask: radial-gradient(circle at 4px 18px, transparent 0 4px, #000 4.5px) 0 0 / 100% 31px repeat-y;
+  filter:
+    drop-shadow(8px 10px 0 rgb(24 33 32 / 0.08))
+    drop-shadow(0 16px 14px rgb(24 33 32 / 0.1));
+  animation-name: whiteSkillLetterIn;
+}
+.cloud-proof-intro {
+  max-width: 980px;
+  margin-bottom: clamp(30px, 4vw, 48px);
+}
+.cloud-proof-kicker {
+  display: inline-block;
+  position: relative;
+  isolation: isolate;
+  margin: 0 0 10px;
+  padding-inline: 3px;
+  font-family: var(--font-hand), var(--font-sans);
+  font-size: 19px;
+}
+.cloud-proof-kicker::before,
+.cloud-proof-label::before {
+  content: "";
+  position: absolute;
+  right: -5px;
+  bottom: 0;
+  left: -4px;
+  z-index: -1;
+  height: 0.65em;
+  border-radius: 3px 6px 3px 5px;
+  background: #eaff63;
+  opacity: 0.65;
+  transform: rotate(-1.4deg) skewX(-5deg);
+}
+.cloud-proof-intro h3 {
+  display: block;
+  position: relative;
+  width: fit-content;
+  margin: 0 0 12px;
+  font-family: var(--font-hand), var(--font-sans);
+  font-size: clamp(34px, 4vw, 51px);
+  font-weight: 500;
+  line-height: 1.13;
+  transform: rotate(-0.45deg);
+}
+.cloud-proof-intro h3::after {
+  content: "";
+  position: absolute;
+  right: -7px;
+  bottom: -7px;
+  left: -3px;
+  height: 7px;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  opacity: 0.28;
+  transform: rotate(-1deg);
+}
+.cloud-proof-intro > p:last-child {
+  margin: 10px 0 0;
+  font-family: var(--font-note), var(--font-sans);
+  font-size: 29px;
+  line-height: 1.55;
+}
+.cloud-proof-list {
+  border-top: 1.5px solid rgb(24 33 32 / 0.26);
+}
+.cloud-proof-item {
+  display: grid;
+  grid-template-columns: minmax(210px, 0.72fr) minmax(0, 1.7fr);
+  gap: clamp(24px, 4vw, 58px);
+  padding: clamp(27px, 3.2vw, 42px) 0;
+  border-bottom: 1.5px solid rgb(24 33 32 / 0.18);
+}
+.cloud-proof-heading {
+  align-self: start;
+}
+.cloud-proof-label {
+  display: inline-block;
+  position: relative;
+  isolation: isolate;
+  margin-bottom: 10px;
+  padding-inline: 3px;
+  font-family: var(--font-hand), var(--font-sans);
+  font-size: 16px;
+}
+.cloud-proof-heading h4 {
+  margin: 0;
+  font-family: var(--font-hand), var(--font-sans);
+  font-size: clamp(25px, 2.7vw, 34px);
+  font-weight: 500;
+  line-height: 1.25;
+}
+.cloud-proof-copy > p,
+.cloud-proof-copy li {
+  font-family: var(--font-note), var(--font-sans);
+  font-size: 27px;
+  line-height: 1.55;
+}
+.cloud-proof-copy > p {
+  margin: 0 0 11px;
+  font-weight: 600;
+}
+.cloud-proof-copy ul {
+  margin: 0;
+  padding-left: 1.08em;
+}
+.cloud-proof-copy li + li {
+  margin-top: 4px;
+}
+.cloud-proof-copy li::marker {
+  color: var(--accent);
+}
+.cloud-proof-copy a {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 8px 14px;
+  font-family: var(--font-hand), var(--font-sans);
+  font-size: 16px;
+  font-weight: 700;
+  color: #182120;
+  border: 1.5px solid rgb(24 33 32 / 0.45);
+  border-radius: 8px 10px 7px 9px;
+}
+.cloud-proof-copy a:hover,
+.cloud-proof-copy a:focus-visible {
+  color: #182120;
+  background: #eaff63;
+}
 /* 푸터 */
 .cloud-footer {
   margin-top: 70px;
@@ -3068,6 +3300,8 @@ body:has(.cloud-deck) {
     max-width: none;
   }
   #skills .cloud-content,
+  #team-intro .cloud-content,
+  #team-proof .cloud-content,
   [id^="project-"] .cloud-content {
     width: 100%;
     max-width: none;
@@ -3660,9 +3894,29 @@ body:has(.cloud-deck) {
     min-height: 0;
     padding: 24px 18px 28px 23px;
   }
+  #team-intro .cloud-about-layout {
+    min-height: 0;
+    padding: 24px 18px 28px 23px;
+  }
   #about .cloud-about-p {
     font-size: 24px;
     line-height: 1.58;
+  }
+  #team-intro .cloud-about-p {
+    font-size: 24px;
+    line-height: 1.58;
+  }
+  .cloud-proof-board {
+    padding: 29px 20px 36px 27px;
+  }
+  .cloud-proof-intro > p:last-child,
+  .cloud-proof-copy > p,
+  .cloud-proof-copy li {
+    font-size: 24px;
+  }
+  .cloud-proof-item {
+    grid-template-columns: 1fr;
+    gap: 14px;
   }
   [id^="project-"] .cloud-proj-layout {
     gap: 43px;
